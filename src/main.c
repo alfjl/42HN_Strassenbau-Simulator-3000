@@ -18,6 +18,8 @@ static void static_create_player_img()
 		}
 		y++;
 	}
+	data()->imgs[PLAYER_IMG].width = PLAYER_SIZE;
+	data()->imgs[PLAYER_IMG].height = PLAYER_SIZE;
 }
 
 static void	static_paint_cell(t_img *img, int img_y, int img_x)
@@ -60,6 +62,8 @@ static void static_create_minimap_img()
 		}
 		y++;
 	}
+	data()->imgs[MINIMAP_IMG].width = data()->window.width;
+	data()->imgs[MINIMAP_IMG].height = data()->window.height;
 }
 
 static void	static_initialize_data(void)
@@ -67,11 +71,11 @@ static void	static_initialize_data(void)
 	data()->mlx = mlx_init();
 	data()->window.width = data()->grid.width * GRID_SIZE;
 	data()->window.height = data()->grid.height * GRID_SIZE;
-	data()->player.x = 0;
-	data()->player.y = 0;
-	data()->player.dx = cos(data()->player.angle);
-	data()->player.dy = sin(data()->player.angle);
-	data()->player.angle = 0;
+	data()->player.x = 1.5;
+	data()->player.y = 1.5;
+	data()->player.angle = PI/2;
+	data()->player.dx = cos(data()->player.angle) * STEP;
+	data()->player.dy = sin(data()->player.angle) * STEP;
 	static_create_minimap_img();
 	static_create_player_img();
 }

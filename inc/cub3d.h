@@ -6,9 +6,9 @@
 #include <math.h>
 
 # define GRID_SIZE 32
-# define STEP 5
-# define STEP_A 0.1
-# define NOSE 3
+# define STEP 0.2
+# define STEP_A 0.2
+# define NOSE 100
 # define PLAYER_SIZE 5
 # define PI 3.1415926535
 
@@ -89,8 +89,8 @@ typedef enum e_color
 typedef struct s_img
 {
 	void	*ptr;
-	// int		iwidth;
-	// int		iheight;
+	int		width;
+	int		height;
 	void	*addr;
 	int		bits_per_pixel;
 	int		line_length;
@@ -106,6 +106,15 @@ typedef struct s_player
 	float		angle;
 	int		side;
 }				t_player;
+
+typedef struct s_ray
+{
+	float		x;
+	float		y;
+	float		dx;
+	float		dy;
+	float		angle;
+}				t_ray;
 
 typedef struct s_enemy
 {
