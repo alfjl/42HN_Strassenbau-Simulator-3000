@@ -6,6 +6,9 @@
 #include <math.h>
 
 # define GRID_SIZE 32
+# define STEP 5
+# define STEP_A 0.1
+# define PI 3.1415926535
 
 
 typedef enum e_x11events
@@ -94,8 +97,11 @@ typedef struct s_img
 
 typedef struct s_player
 {
-	int		x;
-	int		y;
+	float		x;
+	float		y;
+	float		dx;
+	float		dy;
+	float		angle;
 	int		side;
 }				t_player;
 
@@ -157,7 +163,7 @@ typedef struct s_data
 
 t_data	*data(void);
 void	read_map(char *filepath);
-void	minimap(void);
+int		minimap(void);
 void	mlx(void);
 int		exit_program(void);
 //utils
