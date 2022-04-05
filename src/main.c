@@ -2,12 +2,22 @@
 
 static void static_create_player_img()
 {
-	data()->imgs[PLAYER_IMG].ptr = mlx_new_image(data()->mlx, 2, 2);
+	int	x;
+	int y;
+	data()->imgs[PLAYER_IMG].ptr = mlx_new_image(data()->mlx, PLAYER_SIZE, PLAYER_SIZE);
 	data()->imgs[PLAYER_IMG].addr = mlx_get_data_addr(data()->imgs[PLAYER_IMG].ptr, &data()->imgs[PLAYER_IMG].bits_per_pixel, &data()->imgs[PLAYER_IMG].line_length, &data()->imgs[PLAYER_IMG].endian);
-	my_pixel_put(&data()->imgs[PLAYER_IMG], 0, 0, YELLOW);
-	my_pixel_put(&data()->imgs[PLAYER_IMG], 1, 0, YELLOW);
-	my_pixel_put(&data()->imgs[PLAYER_IMG], 0, 1, YELLOW);
-	my_pixel_put(&data()->imgs[PLAYER_IMG], 1, 1, YELLOW);
+	
+	y = 0;
+	while (y < PLAYER_SIZE)
+	{
+		x = 0;
+		while (x < PLAYER_SIZE)
+		{
+			my_pixel_put(&data()->imgs[PLAYER_IMG], x, y, YELLOW);
+			x++;
+		}
+		y++;
+	}
 }
 
 static void	static_paint_cell(t_img *img, int img_y, int img_x)
@@ -59,6 +69,8 @@ static void	static_initialize_data(void)
 	data()->window.height = data()->grid.height * GRID_SIZE;
 	data()->player.x = 0;
 	data()->player.y = 0;
+	data()->player.dx = cos(data()->player.angle);
+	data()->player.dy = sin(data()->player.angle);
 	data()->player.angle = 0;
 	static_create_minimap_img();
 	static_create_player_img();

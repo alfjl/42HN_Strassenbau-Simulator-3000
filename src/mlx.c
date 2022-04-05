@@ -32,7 +32,9 @@ static int	static_key_hook(int keycode)
 		if (data()->player.angle > 2 * PI)
 			data()->player.angle -= 2 * PI;
 		data()->player.dx = cos(data()->player.angle) * STEP;
-		data()->player.dy = sin(data()->player.angle) * STEP;	}
+		data()->player.dy = sin(data()->player.angle) * STEP;
+	}
+	// minimap();
 	return (EXIT_SUCCESS);
 }
 

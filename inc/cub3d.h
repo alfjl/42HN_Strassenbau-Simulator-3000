@@ -8,6 +8,8 @@
 # define GRID_SIZE 32
 # define STEP 5
 # define STEP_A 0.1
+# define NOSE 3
+# define PLAYER_SIZE 5
 # define PI 3.1415926535
 
 
@@ -118,6 +120,12 @@ typedef struct s_frame
 	int		width;
 }				t_frame;
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}				t_point;
+
 typedef enum e_imgnr
 {
 	PLAYER_IMG,
@@ -168,4 +176,6 @@ void	mlx(void);
 int		exit_program(void);
 //utils
 void	my_pixel_put(t_img *img, int x, int y, int color);
+void	draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
+// void	plot_line (t_point a, t_point b, t_img *img, int color);
 #endif
