@@ -73,7 +73,7 @@ static void	static_initialize_data(void)
 	data()->window.height = data()->grid.height * GRID_SIZE;
 	data()->player.x = 1.5;
 	data()->player.y = 1.5;
-	data()->player.angle = PI/2;
+	data()->player.angle = PI / 2;
 	data()->player.dx = cos(data()->player.angle) * STEP;
 	data()->player.dy = sin(data()->player.angle) * STEP;
 	static_create_minimap_img();
