@@ -13,7 +13,7 @@ static void	static_display_ray_v()
 	nTan = -tan(ray.angle);
 	if (ray.angle > PI1 && ray.angle < PI3) //looking left
 	{
-		ray.x = trunc(data()->player.x);
+		ray.x = trunc(data()->player.x) - EDGE;
 		ray.y = (data()->player.x - ray.x) * nTan + data()->player.y;
 		ray.dx = -1;
 		ray.dy = ray.x * nTan;
@@ -79,7 +79,7 @@ static void	static_display_ray_h()
 	aTan = -1 / tan(ray.angle);
 	if (ray.angle > PI) //looking up
 	{
-		ray.y = trunc(data()->player.y);
+		ray.y = trunc(data()->player.y) - EDGE;
 		ray.x = (data()->player.y - ray.y) * aTan + data()->player.x;
 		ray.dy = -1;
 		ray.dx = ray.y * aTan;
@@ -114,15 +114,11 @@ static void	static_display_ray_h()
 	{
 		p.x = ray.x * GRID_SIZE;
 		p.y = ray.y * GRID_SIZE;
-		// ft_printf("p_x: %d, p_y: %d\n", p.x, p.y);
 		t_img	img;
 		t_point	a;
-		// t_point	b;
 
 		a.x = data()->player.x * GRID_SIZE;
 		a.y = data()->player.y * GRID_SIZE;
-		// b.x = data()->player.x * GRID_SIZE + data()->player.dx * NOSE;
-		// b.y = data()->player.y * GRID_SIZE + data()->player.dy * NOSE;
 		img.ptr = mlx_new_image_alpha(data()->mlx, data()->window.width, data()->window.height);
 		img.addr = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
 		draw_line_a_to_b(&img, a, p, RED);

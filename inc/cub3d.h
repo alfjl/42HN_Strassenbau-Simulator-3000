@@ -13,6 +13,7 @@
 # define PI 3.1415926535
 # define PI1 PI/2
 # define PI3 3*PI1
+# define EDGE 0.0001
 
 
 typedef enum e_x11events
