@@ -1,12 +1,12 @@
 # include "cub3d.h"
 
-static t_ray	static_calculate_ray_v()
+static t_ray	static_calculate_ray_v(float angle)
 {
 	t_ray	ray;
 	float	nTan;
 	int		depthoffield;
 	
-	ray.angle = data()->player.angle;
+	ray.angle = angle;
 	//vertical
 	depthoffield = 0;
 	nTan = -tan(ray.angle);
@@ -46,13 +46,13 @@ static t_ray	static_calculate_ray_v()
 	return (ray);
 }
 
-static t_ray	static_calcualte_ray_h()
+static t_ray	static_calcualte_ray_h(float angle)
 {
 	t_ray	ray;
 	float	aTan;
 	int		depthoffield;
 	
-	ray.angle = data()->player.angle;
+	ray.angle = angle;
 	//horizontal
 	depthoffield = 0;
 	aTan = -1 / tan(ray.angle);
@@ -92,15 +92,15 @@ static t_ray	static_calcualte_ray_h()
 	return (ray);
 }
 
-static void	static_display_ray()
+static void	static_draw_ray(float angle)
 {
 	
 	t_ray	rays[2];
 	t_ray	ray;
 	t_point	p;
 
-	rays[0] = static_calcualte_ray_h();
-	rays[1] = static_calculate_ray_v();
+	rays[0] = static_calcualte_ray_h(angle);
+	rays[1] = static_calculate_ray_v(angle);
 	printf("h: %f, v: %f\n", rays[0].len, rays[1].len); //remove
 	if (rays[0].len < rays[1].len)
 		ray = rays[0];
@@ -121,6 +121,29 @@ static void	static_display_ray()
 		draw_line_a_to_b(&img, a, p, RED);
 		mlx_put_image_to_window(data()->mlx, data()->win, img.ptr, 0, 0);
 		mlx_destroy_image(data()->mlx, img.ptr);
+	}
+}
+
+static void	static_display_rays()
+{
+	int		i;
+	float	angle;
+	
+	i = 0;
+	angle = data()->player.angle - NUMBER_OF_RAYS / 2 * DR;
+	if (angle < 0)
+		angle += 2 * PI;
+	if (angle > 2 * PI)
+		angle -= 2 * PI;
+	while (i < NUMBER_OF_RAYS)
+	{
+		static_draw_ray(angle);
+		angle += DR;
+		if (angle < 0)
+			angle += 2 * PI;
+		if (angle > 2 * PI)
+			angle -= 2 * PI;
+		i++;
 	}
 }
 
@@ -145,7 +168,7 @@ static void	static_display_player()
 int	minimap(void)
 {
 	mlx_put_image_to_window(data()->mlx, data()->win, data()->imgs[MINIMAP_IMG].ptr, 0, 0);
-	static_display_ray();
+	static_display_rays();
 	static_display_player();
 	return (EXIT_SUCCESS);
 }
