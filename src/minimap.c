@@ -44,7 +44,13 @@ static t_ray	static_calculate_ray_v(float angle)
 	}
 	ray.orientation = VERTICAL;
 	ray.len = sqrt((ray.x - data()->player.x) * (ray.x - data()->player.x) + (ray.y - data()->player.y) * (ray.y - data()->player.y));
-	ray.dist = ray.len;
+	float	delta;
+	delta = data()->player.angle - ray.angle;
+	if (delta < 0)
+		delta += 2 * PI;
+	if (delta > 2 * PI)
+		delta -= 2 * PI;
+	ray.dist = ray.len * cos(delta);
 	return (ray);
 }
 
@@ -92,7 +98,13 @@ static t_ray	static_calcualte_ray_h(float angle)
 	}
 	ray.orientation = HORIZONTAL;
 	ray.len = sqrt((ray.x - data()->player.x) * (ray.x - data()->player.x) + (ray.y - data()->player.y) * (ray.y - data()->player.y));
-	ray.dist = ray.len;
+	float	delta;
+	delta = data()->player.angle - ray.angle;
+	if (delta < 0)
+		delta += 2 * PI;
+	if (delta > 2 * PI)
+		delta -= 2 * PI;
+	ray.dist = ray.len * cos(delta);
 	return (ray);
 }
 
