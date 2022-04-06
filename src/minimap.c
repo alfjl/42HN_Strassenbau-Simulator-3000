@@ -13,17 +13,17 @@ static void	static_display_ray_v()
 	nTan = -tan(ray.angle);
 	if (ray.angle > PI1 && ray.angle < PI3) //looking left
 	{
-		ray.x = trunc(data()->player.x) - EDGE;
+		ray.x = (float)trunc(data()->player.x) - EDGE;
 		ray.y = (data()->player.x - ray.x) * nTan + data()->player.y;
 		ray.dx = -1;
-		ray.dy = ray.x * nTan;
+		ray.dy = -ray.dx * nTan;
 	}
 	if (ray.angle < PI1 || ray.angle > PI3) //looking right
 	{
-		ray.x = ceil(data()->player.x);
+		ray.x = (float)ceil(data()->player.x);
 		ray.y = (data()->player.x - ray.x) * nTan + data()->player.y;
 		ray.dx = 1;
-		ray.dy = -ray.x * nTan;
+		ray.dy = -ray.dx * nTan;
 	}
 	if (ray.angle == 0 || ray.angle == PI)
 	{
@@ -79,17 +79,17 @@ static void	static_display_ray_h()
 	aTan = -1 / tan(ray.angle);
 	if (ray.angle > PI) //looking up
 	{
-		ray.y = trunc(data()->player.y) - EDGE;
+		ray.y = (float)trunc(data()->player.y) - EDGE;
 		ray.x = (data()->player.y - ray.y) * aTan + data()->player.x;
 		ray.dy = -1;
-		ray.dx = ray.y * aTan;
+		ray.dx = -ray.dy * aTan;
 	}
 	if (ray.angle < PI) //looking down
 	{
-		ray.y = ceil(data()->player.y);
+		ray.y = (float)ceil(data()->player.y);
 		ray.x = (data()->player.y - ray.y) * aTan + data()->player.x;
 		ray.dy = 1;
-		ray.dx = -ray.y * aTan;
+		ray.dx = -ray.dy * aTan;
 	}
 	if (ray.angle == 0 || ray.angle == PI)
 	{
@@ -109,7 +109,8 @@ static void	static_display_ray_h()
 			depthoffield++;
 		}
 	}
-	printf("r_a: %f, r_x: %f, r_y: %f, r_dx: %f, r_dy: %f\n", ray.angle, ray.x, ray.y, ray.dx, ray.dy);
+
+	printf("r_a: %f, p_a: %f, r_x: %f, r_y: %f, r_dx: %f, p_dx: %f, r_dy: %f, p_dy: %f\n", ray.angle, data()->player.angle, ray.x, ray.y, ray.dx, data()->player.dx, ray.dy, data()->player.dy);
 	if (ray.y >= 0 && ray.x >= 0 && ray.y < data()->grid.height && ray.x < data()->grid.width)
 	{
 		p.x = ray.x * GRID_SIZE;

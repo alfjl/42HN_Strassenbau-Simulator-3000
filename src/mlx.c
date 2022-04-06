@@ -6,13 +6,13 @@ static int	static_key_hook(int keycode)
 		exit_program();
 	else if (keycode == W_KEY || keycode == UP_KEY)
 	{
-		ft_printf("W\n");
+		ft_printf("W\n"); //remove
 		data()->player.x += data()->player.dx;
 		data()->player.y += data()->player.dy;
 	}
 	else if (keycode == A_KEY || keycode == LEFT_KEY)
 	{
-		ft_printf("A\n");
+		ft_printf("A\n"); //remove
 		data()->player.angle -= STEP_A;
 		if (data()->player.angle < 0)
 			data()->player.angle += 2 * PI;
@@ -21,13 +21,13 @@ static int	static_key_hook(int keycode)
 	}
 	else if (keycode == S_KEY || keycode == DOWN_KEY)
 	{
-		ft_printf("S\n");
+		ft_printf("S\n"); //remove
 		data()->player.x -= data()->player.dx;
 		data()->player.y -= data()->player.dy;
 	}
 	else if (keycode == D_KEY || keycode == RIGHT_KEY)
 	{
-		ft_printf("D\n");
+		ft_printf("D\n"); //remove
 		data()->player.angle += STEP_A;
 		if (data()->player.angle > 2 * PI)
 			data()->player.angle -= 2 * PI;
