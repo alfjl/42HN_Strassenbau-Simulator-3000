@@ -42,11 +42,15 @@ void	mlx(void)
 {
 	data()->win = mlx_new_window(data()->mlx, data()->window.width,
 			data()->window.height, "cub3d");
+	data()->win3D = mlx_new_window(data()->mlx, data()->window.width,
+		data()->window.height, "cub3D");
 	mlx_do_key_autorepeaton(data()->mlx);
 	// minimap();
 	mlx_hook(data()->win, DestroyNotify,
 		StructureNotifyMask, exit_program, NULL);
 	mlx_hook(data()->win, KeyPress, KeyPressMask, static_key_hook, NULL);
 	mlx_loop_hook(data()->mlx, minimap, NULL);
+	// mlx_loop_hook(data()->mlx, game, NULL);
+	// game();
 	mlx_loop(data()->mlx);
 }

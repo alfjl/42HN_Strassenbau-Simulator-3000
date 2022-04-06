@@ -7,6 +7,7 @@ SRCS :=	main.c \
 		minimap.c \
 		mlx.c \
 		utils.c \
+		game.c \
 		exit.c
 OBJS := $(patsubst %.c,$(OBJ_DIR)%.o,$(SRCS))
 HEADERS := $(HEADER_DIR)*.h

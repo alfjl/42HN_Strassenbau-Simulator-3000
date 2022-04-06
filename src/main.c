@@ -1,5 +1,31 @@
 # include "cub3d.h"
 
+static void static_create_3Dbackground()
+{
+	int		x;
+	int		y;
+
+	data()->imgs[BACKGROUND_IMG].ptr = mlx_new_image(data()->mlx, data()->window.width, data()->window.height);
+	data()->imgs[BACKGROUND_IMG].addr = mlx_get_data_addr(data()->imgs[BACKGROUND_IMG].ptr, &data()->imgs[BACKGROUND_IMG].bits_per_pixel, &data()->imgs[BACKGROUND_IMG].line_length, &data()->imgs[BACKGROUND_IMG].endian);
+	
+	y = 0;
+	while (y < data()->window.height)
+	{
+		x = 0;
+		while (x < data()->window.width)
+		{
+			if (y < data()->window.height / 2)
+				my_pixel_put(&data()->imgs[BACKGROUND_IMG], x, y, CYAN);
+			else
+				my_pixel_put(&data()->imgs[BACKGROUND_IMG], x, y, BLACK);
+			x++;
+		}
+		y++;
+	}
+	data()->imgs[BACKGROUND_IMG].width = data()->window.width;
+	data()->imgs[BACKGROUND_IMG].height = data()->window.height;
+}
+
 static void static_create_player_img()
 {
 	int	x;
@@ -97,6 +123,7 @@ static void	static_initialize_data(void)
 	data()->player.dx = cos(data()->player.angle) * STEP;
 	data()->player.dy = sin(data()->player.angle) * STEP;
 	static_create_minimap_img();
+	static_create_3Dbackground();
 	static_create_player_img();
 }
 

@@ -170,5 +170,6 @@ int	minimap(void)
 	mlx_put_image_to_window(data()->mlx, data()->win, data()->imgs[MINIMAP_IMG].ptr, 0, 0);
 	static_display_rays();
 	static_display_player();
+	game();
 	return (EXIT_SUCCESS);
 }

@@ -161,6 +161,7 @@ typedef enum e_imgnr
 {
 	PLAYER_IMG,
 	MINIMAP_IMG,
+	BACKGROUND_IMG,
 	IMAGES,
 }	t_imgnr;
 
@@ -173,6 +174,7 @@ typedef struct s_data
 	struct s_frame	grid;
 	void			*mlx;
 	void			*win;
+	void			*win3D;
 	struct s_frame	window;
 	t_img			imgs[IMAGES];
 	int				img_size;
@@ -202,11 +204,11 @@ typedef struct s_data
 
 t_data	*data(void);
 void	read_map(char *filepath);
-int		minimap(void);
 void	mlx(void);
+int		minimap(void);
+int		game(void);
 int		exit_program(void);
 //utils
 void	my_pixel_put(t_img *img, int x, int y, int color);
 void	draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
-// void	plot_line (t_point a, t_point b, t_img *img, int color);
 #endif
