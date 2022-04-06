@@ -133,6 +133,7 @@ typedef struct s_ray
 	float		dx;
 	float		dy;
 	float		angle;
+	float		len;
 }				t_ray;
 
 typedef struct s_enemy

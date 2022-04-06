@@ -1,9 +1,8 @@
 # include "cub3d.h"
 
-static void	static_display_ray_v()
+static t_ray	static_calculate_ray_v()
 {
 	t_ray	ray;
-	t_point	p;
 	float	nTan;
 	int		depthoffield;
 	
@@ -43,33 +42,13 @@ static void	static_display_ray_v()
 			depthoffield++;
 		}
 	}
-	printf("r_a: %f, r_x: %f, r_y: %f\n", ray.angle, ray.x, ray.y);
-	if (ray.y >= 0 && ray.x >= 0 && ray.y < data()->grid.height && ray.x < data()->grid.width)
-	{
-		p.x = ray.x * GRID_SIZE;
-		p.y = ray.y * GRID_SIZE;
-		// ft_printf("p_x: %d, p_y: %d\n", p.x, p.y);
-		t_img	img;
-		t_point	a;
-		// t_point	b;
-
-		a.x = data()->player.x * GRID_SIZE;
-		a.y = data()->player.y * GRID_SIZE;
-		// b.x = data()->player.x * GRID_SIZE + data()->player.dx * NOSE;
-		// b.y = data()->player.y * GRID_SIZE + data()->player.dy * NOSE;
-		img.ptr = mlx_new_image_alpha(data()->mlx, data()->window.width, data()->window.height);
-		img.addr = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
-		
-		draw_line_a_to_b(&img, a, p, BLUE);
-		mlx_put_image_to_window(data()->mlx, data()->win, img.ptr, 0, 0);
-		mlx_destroy_image(data()->mlx, img.ptr);
-	}
+	ray.len = sqrt((ray.x - data()->player.x) * (ray.x - data()->player.x) + (ray.y - data()->player.y) * (ray.y - data()->player.y));
+	return (ray);
 }
 
-static void	static_display_ray_h()
+static t_ray	static_calcualte_ray_h()
 {
 	t_ray	ray;
-	t_point	p;
 	float	aTan;
 	int		depthoffield;
 	
@@ -109,7 +88,24 @@ static void	static_display_ray_h()
 			depthoffield++;
 		}
 	}
+	ray.len = sqrt((ray.x - data()->player.x) * (ray.x - data()->player.x) + (ray.y - data()->player.y) * (ray.y - data()->player.y));
+	return (ray);
+}
 
+static void	static_display_ray()
+{
+	
+	t_ray	rays[2];
+	t_ray	ray;
+	t_point	p;
+
+	rays[0] = static_calcualte_ray_h();
+	rays[1] = static_calculate_ray_v();
+	printf("h: %f, v: %f\n", rays[0].len, rays[1].len); //remove
+	if (rays[0].len < rays[0].len)
+		ray = rays[0];
+	else
+		ray = rays[1];
 	printf("r_a: %f, p_a: %f, r_x: %f, r_y: %f, r_dx: %f, p_dx: %f, r_dy: %f, p_dy: %f\n", ray.angle, data()->player.angle, ray.x, ray.y, ray.dx, data()->player.dx, ray.dy, data()->player.dy);
 	if (ray.y >= 0 && ray.x >= 0 && ray.y < data()->grid.height && ray.x < data()->grid.width)
 	{
@@ -149,8 +145,7 @@ static void	static_display_player()
 int	minimap(void)
 {
 	mlx_put_image_to_window(data()->mlx, data()->win, data()->imgs[MINIMAP_IMG].ptr, 0, 0);
-	static_display_ray_h();
-	static_display_ray_v();
+	static_display_ray();
 	static_display_player();
 	return (EXIT_SUCCESS);
 }
