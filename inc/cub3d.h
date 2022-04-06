@@ -128,6 +128,12 @@ typedef struct s_player
 	int		side;
 }				t_player;
 
+typedef enum e_orientation
+{
+	HORIZONTAL,
+	VERTICAL,
+}	t_orientation;
+
 typedef struct s_ray
 {
 	float		x;
@@ -136,6 +142,8 @@ typedef struct s_ray
 	float		dy;
 	float		angle;
 	float		len;
+	float		dist;
+	int			orientation;
 }				t_ray;
 
 typedef struct s_enemy
@@ -208,6 +216,7 @@ void	mlx(void);
 int		minimap(void);
 int		game(void);
 int		exit_program(void);
+void	draw_3Dwallsegment(t_ray ray, int i);
 //utils
 void	my_pixel_put(t_img *img, int x, int y, int color);
 void	draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);

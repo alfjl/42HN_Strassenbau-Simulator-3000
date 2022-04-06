@@ -42,7 +42,9 @@ static t_ray	static_calculate_ray_v(float angle)
 			depthoffield++;
 		}
 	}
+	ray.orientation = VERTICAL;
 	ray.len = sqrt((ray.x - data()->player.x) * (ray.x - data()->player.x) + (ray.y - data()->player.y) * (ray.y - data()->player.y));
+	ray.dist = ray.len;
 	return (ray);
 }
 
@@ -88,11 +90,13 @@ static t_ray	static_calcualte_ray_h(float angle)
 			depthoffield++;
 		}
 	}
+	ray.orientation = HORIZONTAL;
 	ray.len = sqrt((ray.x - data()->player.x) * (ray.x - data()->player.x) + (ray.y - data()->player.y) * (ray.y - data()->player.y));
+	ray.dist = ray.len;
 	return (ray);
 }
 
-static void	static_draw_ray(float angle)
+static t_ray	static_draw_ray(float angle)
 {
 	
 	t_ray	rays[2];
@@ -122,6 +126,7 @@ static void	static_draw_ray(float angle)
 		mlx_put_image_to_window(data()->mlx, data()->win, img.ptr, 0, 0);
 		mlx_destroy_image(data()->mlx, img.ptr);
 	}
+	return (ray);
 }
 
 static void	static_display_rays()
@@ -137,7 +142,7 @@ static void	static_display_rays()
 		angle -= 2 * PI;
 	while (i < NUMBER_OF_RAYS)
 	{
-		static_draw_ray(angle);
+		draw_3Dwallsegment(static_draw_ray(angle), i);
 		angle += DR;
 		if (angle < 0)
 			angle += 2 * PI;
@@ -168,8 +173,8 @@ static void	static_display_player()
 int	minimap(void)
 {
 	mlx_put_image_to_window(data()->mlx, data()->win, data()->imgs[MINIMAP_IMG].ptr, 0, 0);
+	game();
 	static_display_rays();
 	static_display_player();
-	game();
 	return (EXIT_SUCCESS);
 }
