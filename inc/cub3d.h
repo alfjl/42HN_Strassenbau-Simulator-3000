@@ -71,19 +71,35 @@ typedef enum e_map
 	WEST = 'W',
 }	t_map;
 
+//mac
+// typedef enum e_color
+// {
+// 	RED = 0x00FF0000,
+// 	ORANGE = 0x00FF8000,
+// 	YELLOW = 0x00FFFF00,
+// 	GREEN = 0x0000FF00,
+// 	CYAN = 0x0000FFFF,
+// 	BLUE = 0x000000FF,
+// 	MAGENTA = 0x00FF00FF,
+// 	BLACK = 0x00000000,
+// 	GREY = 0x00808080,
+// 	WHITE = 0x00FFFFFF,
+// }	t_color;
 
+//linux
 typedef enum e_color
 {
-	RED = 0x00FF0000,
-	ORANGE = 0x00FF8000,
-	YELLOW = 0x00FFFF00,
-	GREEN = 0x0000FF00,
-	CYAN = 0x0000FFFF,
-	BLUE = 0x000000FF,
-	MAGENTA = 0x00FF00FF,
-	BLACK = 0x00000000,
-	GREY = 0x00808080,
-	WHITE = 0x00FFFFFF,
+	RED = 0xFFFF0000,
+	ORANGE = 0xFFFF8000,
+	YELLOW = 0xFFFFFF00,
+	GREEN = 0xFF00FF00,
+	CYAN = 0xFF00FFFF,
+	BLUE = 0xFF0000FF,
+	MAGENTA = 0xFFFF00FF,
+	BLACK = 0xFF000000,
+	GREY = 0xFF808080,
+	WHITE = 0xFFFFFFFF,
+	TRANSPARENT = 0x00000000,
 }	t_color;
 
 typedef struct s_img

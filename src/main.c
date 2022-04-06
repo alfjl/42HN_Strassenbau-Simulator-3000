@@ -22,6 +22,25 @@ static void static_create_player_img()
 	data()->imgs[PLAYER_IMG].height = PLAYER_SIZE;
 }
 
+static void	static_paint_borders(t_img *img, int img_y, int img_x)
+{
+	int		x;
+	int		y;
+
+	y = 0;
+	while (y < GRID_SIZE)
+	{
+		x = 0;
+		while (x < GRID_SIZE)
+		{
+			if ((y == 0 || y == GRID_SIZE - 1) || (x == 0 || x == GRID_SIZE -1))
+				my_pixel_put(img, img_x * GRID_SIZE + x, img_y * GRID_SIZE + y, BLACK);
+			x++;
+		}
+		y++;
+	}
+}
+
 static void	static_paint_cell(t_img *img, int img_y, int img_x)
 {
 	int		x;
@@ -41,6 +60,7 @@ static void	static_paint_cell(t_img *img, int img_y, int img_x)
 		}
 		y++;
 	}
+	static_paint_borders(img, img_y, img_x);
 }
 
 static void static_create_minimap_img()

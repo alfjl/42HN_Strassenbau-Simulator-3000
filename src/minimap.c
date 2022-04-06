@@ -1,5 +1,5 @@
 # include "cub3d.h"
-
+/*
 static void	static_display_ray()
 {
 	t_ray	ray;
@@ -67,7 +67,7 @@ static void	static_display_ray()
 		mlx_destroy_image(data()->mlx, img.ptr);
 	}
 }
-
+*/
 static void	static_display_player()
 {
 	mlx_put_image_to_window(data()->mlx, data()->win, data()->imgs[PLAYER_IMG].ptr, data()->player.x * GRID_SIZE - PLAYER_SIZE / 2, data()->player.y * GRID_SIZE - PLAYER_SIZE / 2);
@@ -77,6 +77,6 @@ int	minimap(void)
 {
 	mlx_put_image_to_window(data()->mlx, data()->win, data()->imgs[MINIMAP_IMG].ptr, 0, 0);
 	static_display_player();
-	static_display_ray();
+	// static_display_ray();
 	return (EXIT_SUCCESS);
 }
