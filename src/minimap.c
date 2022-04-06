@@ -1,5 +1,5 @@
 # include "cub3d.h"
-/*
+
 static void	static_display_ray()
 {
 	t_ray	ray;
@@ -60,14 +60,15 @@ static void	static_display_ray()
 		a.y = data()->player.y * GRID_SIZE;
 		// b.x = data()->player.x * GRID_SIZE + data()->player.dx * NOSE;
 		// b.y = data()->player.y * GRID_SIZE + data()->player.dy * NOSE;
-		img.ptr = mlx_new_image(data()->mlx, data()->window.width, data()->window.height);
+		img.ptr = mlx_new_image_alpha(data()->mlx, data()->window.width, data()->window.height);
 		img.addr = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
+		
 		draw_line_a_to_b(&img, a, p, RED);
 		mlx_put_image_to_window(data()->mlx, data()->win, img.ptr, 0, 0);
 		mlx_destroy_image(data()->mlx, img.ptr);
 	}
 }
-*/
+
 static void	static_display_player()
 {
 	mlx_put_image_to_window(data()->mlx, data()->win, data()->imgs[PLAYER_IMG].ptr, data()->player.x * GRID_SIZE - PLAYER_SIZE / 2, data()->player.y * GRID_SIZE - PLAYER_SIZE / 2);
@@ -77,6 +78,6 @@ int	minimap(void)
 {
 	mlx_put_image_to_window(data()->mlx, data()->win, data()->imgs[MINIMAP_IMG].ptr, 0, 0);
 	static_display_player();
-	// static_display_ray();
+	static_display_ray();
 	return (EXIT_SUCCESS);
 }
