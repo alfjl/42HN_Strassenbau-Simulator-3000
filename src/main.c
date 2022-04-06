@@ -13,7 +13,7 @@ static void static_create_player_img()
 		x = 0;
 		while (x < PLAYER_SIZE)
 		{
-			my_pixel_put(&data()->imgs[PLAYER_IMG], x, y, YELLOW);
+			my_pixel_put(&data()->imgs[PLAYER_IMG], x, y, BLACK);
 			x++;
 		}
 		y++;
