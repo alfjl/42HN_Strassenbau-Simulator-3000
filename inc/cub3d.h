@@ -6,8 +6,8 @@
 #include <math.h>
 
 # define GRID_SIZE 32
-# define STEP 0.2
-# define STEP_A 0.01
+# define STEP 0.1
+# define STEP_A 0.02
 # define NOSE 50
 # define PLAYER_SIZE 5
 # define PI 3.1415926535

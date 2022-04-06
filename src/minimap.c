@@ -102,7 +102,7 @@ static void	static_display_ray()
 	rays[0] = static_calcualte_ray_h();
 	rays[1] = static_calculate_ray_v();
 	printf("h: %f, v: %f\n", rays[0].len, rays[1].len); //remove
-	if (rays[0].len < rays[0].len)
+	if (rays[0].len < rays[1].len)
 		ray = rays[0];
 	else
 		ray = rays[1];
