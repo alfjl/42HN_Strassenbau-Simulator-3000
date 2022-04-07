@@ -117,12 +117,12 @@ static t_ray	static_draw_ray(float angle)
 
 	rays[0] = static_calcualte_ray_h(angle);
 	rays[1] = static_calculate_ray_v(angle);
-	printf("h: %f, v: %f\n", rays[0].len, rays[1].len); //remove
+	// printf("h: %f, v: %f\n", rays[0].len, rays[1].len); //remove
 	if (rays[0].len < rays[1].len)
 		ray = rays[0];
 	else
 		ray = rays[1];
-	printf("r_a: %f, p_a: %f, r_x: %f, r_y: %f, r_dx: %f, p_dx: %f, r_dy: %f, p_dy: %f\n", ray.angle, data()->player.angle, ray.x, ray.y, ray.dx, data()->player.dx, ray.dy, data()->player.dy);
+	// printf("r_a: %f, p_a: %f, r_x: %f, r_y: %f, r_dx: %f, p_dx: %f, r_dy: %f, p_dy: %f\n", ray.angle, data()->player.angle, ray.x, ray.y, ray.dx, data()->player.dx, ray.dy, data()->player.dy);
 	if (ray.y >= 0 && ray.x >= 0 && ray.y < data()->grid.height && ray.x < data()->grid.width)
 	{
 		p.x = ray.x * GRID_SIZE;
@@ -154,7 +154,9 @@ static void	static_display_rays()
 		angle -= 2 * PI;
 	while (i < NUMBER_OF_RAYS)
 	{
-		draw_3Dwallsegment(static_draw_ray(angle), i);
+		data()->rays[i] = static_draw_ray(angle);
+		data()->rays[i].lineH = (data()->window.height / data()->rays[i].dist);
+		// draw_3Dwallsegment(i);
 		angle += DR;
 		if (angle < 0)
 			angle += 2 * PI;
@@ -188,5 +190,6 @@ int	minimap(void)
 	game();
 	static_display_rays();
 	static_display_player();
+	display_3Dwalls();
 	return (EXIT_SUCCESS);
 }

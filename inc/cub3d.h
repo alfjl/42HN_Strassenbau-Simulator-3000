@@ -5,7 +5,7 @@
 // # include <stdlib.h>
 #include <math.h>
 
-# define GRID_SIZE 32
+# define GRID_SIZE 64
 # define STEP 0.1
 # define STEP_A 0.02
 # define NOSE 50
@@ -15,7 +15,7 @@
 # define PI3 3*PI1
 # define EDGE 0.0001
 # define DR 0.0174533
-# define NUMBER_OF_RAYS 60
+# define NUMBER_OF_RAYS 64
 
 
 typedef enum e_x11events
@@ -143,6 +143,7 @@ typedef struct s_ray
 	float		angle;
 	float		len;
 	float		dist;
+	float		lineH;
 	int			orientation;
 }				t_ray;
 
@@ -187,6 +188,7 @@ typedef struct s_data
 	t_img			imgs[IMAGES];
 	int				img_size;
 	struct s_player	player;
+	struct s_ray	rays[NUMBER_OF_RAYS];
 	struct s_enemy	enemy;
 	int				dx;
 	int				dy;
@@ -216,7 +218,7 @@ void	mlx(void);
 int		minimap(void);
 int		game(void);
 int		exit_program(void);
-void	draw_3Dwallsegment(t_ray ray, int i);
+void	display_3Dwalls(void);
 //utils
 void	my_pixel_put(t_img *img, int x, int y, int color);
 void	draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
