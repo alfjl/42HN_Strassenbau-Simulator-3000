@@ -14,8 +14,8 @@
 # define PI1 PI/2
 # define PI3 3*PI1
 # define EDGE 0.0001
-# define DR 0.0174533
-# define NUMBER_OF_RAYS 64
+# define DR 0.0174533/2
+# define NUMBER_OF_RAYS 128
 
 
 typedef enum e_x11events
