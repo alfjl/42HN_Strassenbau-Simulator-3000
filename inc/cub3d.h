@@ -5,7 +5,7 @@
 // # include <stdlib.h>
 #include <math.h>
 
-# define GRID_SIZE 64
+# define GRID_SIZE 32
 # define STEP 0.1
 # define STEP_A 0.02
 # define NOSE 50

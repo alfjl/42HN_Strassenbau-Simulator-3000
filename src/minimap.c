@@ -108,7 +108,7 @@ static t_ray	static_calcualte_ray_h(float angle)
 	return (ray);
 }
 
-static t_ray	static_draw_ray(float angle)
+static t_ray	static_draw_ray(float angle, int index)
 {
 	
 	t_ray	rays[2];
@@ -123,6 +123,8 @@ static t_ray	static_draw_ray(float angle)
 	else
 		ray = rays[1];
 	// printf("r_a: %f, p_a: %f, r_x: %f, r_y: %f, r_dx: %f, p_dx: %f, r_dy: %f, p_dy: %f\n", ray.angle, data()->player.angle, ray.x, ray.y, ray.dx, data()->player.dx, ray.dy, data()->player.dy);
+	if (index != 0 && index != NUMBER_OF_RAYS -1)
+		return (ray);
 	if (ray.y >= 0 && ray.x >= 0 && ray.y < data()->grid.height && ray.x < data()->grid.width)
 	{
 		p.x = ray.x * GRID_SIZE;
@@ -154,7 +156,7 @@ static void	static_display_rays()
 		angle -= 2 * PI;
 	while (i < NUMBER_OF_RAYS)
 	{
-		data()->rays[i] = static_draw_ray(angle);
+		data()->rays[i] = static_draw_ray(angle, i);
 		data()->rays[i].lineH = (data()->window.height / data()->rays[i].dist);
 		// draw_3Dwallsegment(i);
 		angle += DR;
