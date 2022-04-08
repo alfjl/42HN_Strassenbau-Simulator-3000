@@ -1,48 +1,8 @@
 # include "cub3d.h"
 
-static t_ray	static_calculate_ray_v(float angle)
+static t_ray	static_fill_ray_struct(t_ray ray, int orientation)
 {
-	t_ray	ray;
-	float	nTan;
-	int		depthoffield;
-	
-	ray.angle = angle;
-	//vertical
-	depthoffield = 0;
-	nTan = -tan(ray.angle);
-	if (ray.angle > PI1 && ray.angle < PI3) //looking left
-	{
-		ray.x = (float)trunc(data()->player.x) - EDGE;
-		ray.y = (data()->player.x - ray.x) * nTan + data()->player.y;
-		ray.dx = -1;
-		ray.dy = -ray.dx * nTan;
-	}
-	if (ray.angle < PI1 || ray.angle > PI3) //looking right
-	{
-		ray.x = (float)ceil(data()->player.x);
-		ray.y = (data()->player.x - ray.x) * nTan + data()->player.y;
-		ray.dx = 1;
-		ray.dy = -ray.dx * nTan;
-	}
-	if (ray.angle == 0 || ray.angle == PI)
-	{
-		ray.x = data()->player.x;
-		ray.y = data()->player.y;
-		depthoffield = 8; //magicnumber
-	}
-	while (depthoffield < 8) //magicnumber
-	{
-		// ft_printf("r_x: %d, r_y: %d\n", ray.x, ray.y);
-		if (ray.y >= 0 && ray.x >= 0 && ray.y < data()->grid.height && ray.x < data()->grid.width && data()->map[(int)ray.y][(int)ray.x] == WALL)
-			depthoffield = 8; //magicnumber or break?
-		else
-		{
-			ray.x += ray.dx;
-			ray.y += ray.dy;
-			depthoffield++;
-		}
-	}
-	ray.orientation = VERTICAL;
+	ray.orientation = orientation;
 	ray.len = sqrt((ray.x - data()->player.x) * (ray.x - data()->player.x) + (ray.y - data()->player.y) * (ray.y - data()->player.y));
 	float	delta;
 	delta = data()->player.angle - ray.angle;
@@ -54,15 +14,61 @@ static t_ray	static_calculate_ray_v(float angle)
 	return (ray);
 }
 
+static void		static_iterate(t_ray *ray)
+{
+	int i = 0;
+	while (i < DEPTH_OF_FIELD)
+	{
+		if ((*ray).y >= 0 && (*ray).x >= 0 && (*ray).y < data()->grid.height && (*ray).x < data()->grid.width && data()->map[(int)(*ray).y][(int)(*ray).x] == WALL)
+			break ;
+		else
+		{
+			(*ray).x += (*ray).dx;
+			(*ray).y += (*ray).dy;
+			i++;
+		}
+	}
+}
+
+static t_ray	static_calculate_ray_v(float angle)
+{
+	t_ray	ray;
+	float	nTan;
+
+	ray.angle = angle;
+	//vertical
+	nTan = -tan(ray.angle);
+	if (ray.angle > PI1 && ray.angle < PI3) //looking left
+	{
+		ray.x = (float)trunc(data()->player.x) - EDGE;
+		ray.y = (data()->player.x - ray.x) * nTan + data()->player.y;
+		ray.dx = -1;
+		ray.dy = -ray.dx * nTan;
+		static_iterate(&ray);
+	}
+	else if (ray.angle < PI1 || ray.angle > PI3) //looking right
+	{
+		ray.x = (float)ceil(data()->player.x);
+		ray.y = (data()->player.x - ray.x) * nTan + data()->player.y;
+		ray.dx = 1;
+		ray.dy = -ray.dx * nTan;
+		static_iterate(&ray);
+	}
+	else// (ray.angle == 0 || ray.angle == PI) //looking vertical
+	{
+		ray.x = data()->player.x;
+		ray.y = data()->player.y;
+	}
+	return (static_fill_ray_struct(ray, VERTICAL));
+}
+
 static t_ray	static_calcualte_ray_h(float angle)
 {
 	t_ray	ray;
 	float	aTan;
-	int		depthoffield;
 	
 	ray.angle = angle;
 	//horizontal
-	depthoffield = 0;
 	aTan = -1 / tan(ray.angle);
 	if (ray.angle > PI) //looking up
 	{
@@ -70,42 +76,22 @@ static t_ray	static_calcualte_ray_h(float angle)
 		ray.x = (data()->player.y - ray.y) * aTan + data()->player.x;
 		ray.dy = -1;
 		ray.dx = -ray.dy * aTan;
+		static_iterate(&ray);
 	}
-	if (ray.angle < PI) //looking down
+	else if (ray.angle < PI) //looking down
 	{
 		ray.y = (float)ceil(data()->player.y);
 		ray.x = (data()->player.y - ray.y) * aTan + data()->player.x;
 		ray.dy = 1;
 		ray.dx = -ray.dy * aTan;
+		static_iterate(&ray);
 	}
-	if (ray.angle == 0 || ray.angle == PI)
+	else// (ray.angle == 0 || ray.angle == PI) //looking sideways
 	{
 		ray.x = data()->player.x;
 		ray.y = data()->player.y;
-		depthoffield = 8; //magicnumber
 	}
-	while (depthoffield < 8) //magicnumber
-	{
-		// ft_printf("r_x: %d, r_y: %d\n", ray.x, ray.y);
-		if (ray.y >= 0 && ray.x >= 0 && ray.y < data()->grid.height && ray.x < data()->grid.width && data()->map[(int)ray.y][(int)ray.x] == WALL)
-			depthoffield = 8; //magicnumber or break?
-		else
-		{
-			ray.x += ray.dx;
-			ray.y += ray.dy;
-			depthoffield++;
-		}
-	}
-	ray.orientation = HORIZONTAL;
-	ray.len = sqrt((ray.x - data()->player.x) * (ray.x - data()->player.x) + (ray.y - data()->player.y) * (ray.y - data()->player.y));
-	float	delta;
-	delta = data()->player.angle - ray.angle;
-	if (delta < 0)
-		delta += 2 * PI;
-	if (delta > 2 * PI)
-		delta -= 2 * PI;
-	ray.dist = ray.len * cos(delta);
-	return (ray);
+	return (static_fill_ray_struct(ray, HORIZONTAL));
 }
 
 static t_ray	static_draw_ray(float angle, int index)
@@ -117,12 +103,10 @@ static t_ray	static_draw_ray(float angle, int index)
 
 	rays[0] = static_calcualte_ray_h(angle);
 	rays[1] = static_calculate_ray_v(angle);
-	// printf("h: %f, v: %f\n", rays[0].len, rays[1].len); //remove
 	if (rays[0].len < rays[1].len)
 		ray = rays[0];
 	else
 		ray = rays[1];
-	// printf("r_a: %f, p_a: %f, r_x: %f, r_y: %f, r_dx: %f, p_dx: %f, r_dy: %f, p_dy: %f\n", ray.angle, data()->player.angle, ray.x, ray.y, ray.dx, data()->player.dx, ray.dy, data()->player.dy);
 	if (index != 0 && index != NUMBER_OF_RAYS -1)
 		return (ray);
 	if (ray.y >= 0 && ray.x >= 0 && ray.y < data()->grid.height && ray.x < data()->grid.width)
@@ -158,7 +142,6 @@ static void	static_display_rays()
 	{
 		data()->rays[i] = static_draw_ray(angle, i);
 		data()->rays[i].lineH = (data()->window.height / data()->rays[i].dist);
-		// draw_3Dwallsegment(i);
 		angle += DR;
 		if (angle < 0)
 			angle += 2 * PI;
