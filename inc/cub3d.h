@@ -7,7 +7,7 @@
 
 # define GRID_SIZE 32
 # define STEP 0.1
-# define STEP_A 0.05
+# define STEP_A 0.1
 # define NOSE 50
 # define PLAYER_SIZE 5
 # define PI 3.1415926535
@@ -24,12 +24,14 @@
 typedef enum e_x11events
 {
 	KeyPress = 2,
+	KeyRelease = 3,
 	DestroyNotify = 17,
 }	t_x11events;
 
 typedef enum e_x11masks
 {
 	KeyPressMask = 1L << 0,
+	KeyReleaseMask = 1L << 1,
 	StructureNotifyMask = 1L << 17,
 }	t_x11masks;
 
@@ -60,6 +62,14 @@ typedef enum e_key
 // 	RIGHT_KEY = 124,
 // 	ESC_KEY = 53,
 // }	t_key;
+
+typedef struct s_keys
+{
+	bool	forwards;
+	bool	turnleft;
+	bool	backwards;
+	bool	turnright;
+} t_keys;
 
 typedef enum e_direction
 {
@@ -219,7 +229,7 @@ typedef struct s_data
 t_data	*data(void);
 void	read_map(char *filepath);
 void	mlx(void);
-int		minimap(void);
+int		minimap(t_keys *keys);
 int		game(void);
 int		exit_program(void);
 void	display_3Dwalls(void);
