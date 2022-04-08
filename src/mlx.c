@@ -4,55 +4,54 @@ static int	static_key_release_hook(int keycode, t_keys *keys)
 {
 	if (keycode == W_KEY || keycode == UP_KEY)
 	{
-		ft_printf("W released\n"); //remove
+		// ft_printf("W released\n"); //remove
 		// key.forwards = 1;
 		keys->forwards = false;
 
 	}
 	else if (keycode == A_KEY || keycode == LEFT_KEY)
 	{
-		ft_printf("A released\n"); //remove
+		// ft_printf("A released\n"); //remove
 		keys->turnleft = false;
 	}
 	else if (keycode == S_KEY || keycode == DOWN_KEY)
 	{
-		ft_printf("S released\n"); //remove
+		// ft_printf("S released\n"); //remove
 		keys->turnright = false;
 	}
 	else if (keycode == D_KEY || keycode == RIGHT_KEY)
 	{
-		ft_printf("D released\n"); //remove
+		// ft_printf("D released\n"); //remove
 		keys->backwards = false;
 	}
-	// minimap();
 	return (EXIT_SUCCESS);
 }
 
 static int	static_key_press_hook(int keycode, t_keys *keys)
 {
+	if (keycode == ESC_KEY)
+		exit_program();
 	if (keycode == W_KEY || keycode == UP_KEY)
 	{
-		ft_printf("W pressed\n"); //remove
-		// key.forwards = 1;
+		// ft_printf("W pressed\n"); //remove
 		keys->forwards = true;
 
 	}
 	else if (keycode == A_KEY || keycode == LEFT_KEY)
 	{
-		ft_printf("A pressed\n"); //remove
+		// ft_printf("A pressed\n"); //remove
 		keys->turnleft = true;
 	}
 	else if (keycode == S_KEY || keycode == DOWN_KEY)
 	{
-		ft_printf("S pressed\n"); //remove
+		// ft_printf("S pressed\n"); //remove
 		keys->turnright = true;
 	}
 	else if (keycode == D_KEY || keycode == RIGHT_KEY)
 	{
-		ft_printf("D pressed\n"); //remove
+		// ft_printf("D pressed\n"); //remove
 		keys->backwards = true;
 	}
-	// minimap();
 	return (EXIT_SUCCESS);
 }
 
