@@ -5,16 +5,16 @@ static void static_create_3Dbackground()
 	int		x;
 	int		y;
 
-	data()->imgs[BACKGROUND_IMG].ptr = mlx_new_image(data()->mlx, data()->window.width, data()->window.height);
+	data()->imgs[BACKGROUND_IMG].ptr = mlx_new_image(data()->mlx, data()->window3D.width, data()->window3D.height);
 	data()->imgs[BACKGROUND_IMG].addr = mlx_get_data_addr(data()->imgs[BACKGROUND_IMG].ptr, &data()->imgs[BACKGROUND_IMG].bits_per_pixel, &data()->imgs[BACKGROUND_IMG].line_length, &data()->imgs[BACKGROUND_IMG].endian);
 	
 	y = 0;
-	while (y < data()->window.height)
+	while (y < data()->window3D.height)
 	{
 		x = 0;
-		while (x < data()->window.width)
+		while (x < data()->window3D.width)
 		{
-			if (y < data()->window.height / 2)
+			if (y < data()->window3D.height / 2)
 				my_pixel_put(&data()->imgs[BACKGROUND_IMG], x, y, CYAN);
 			else
 				my_pixel_put(&data()->imgs[BACKGROUND_IMG], x, y, BLACK);
@@ -22,8 +22,8 @@ static void static_create_3Dbackground()
 		}
 		y++;
 	}
-	data()->imgs[BACKGROUND_IMG].width = data()->window.width;
-	data()->imgs[BACKGROUND_IMG].height = data()->window.height;
+	data()->imgs[BACKGROUND_IMG].width = data()->window3D.width;
+	data()->imgs[BACKGROUND_IMG].height = data()->window3D.height;
 }
 
 static void static_create_player_img()
@@ -117,6 +117,8 @@ static void	static_initialize_data(void)
 	data()->mlx = mlx_init();
 	data()->window.width = data()->grid.width * GRID_SIZE;
 	data()->window.height = data()->grid.height * GRID_SIZE;
+	data()->window3D.width = WINDOW_WIDTH;
+	data()->window3D.height = WINDOW_HEIGHT;
 	data()->player.x = 1.5;
 	data()->player.y = 1.5;
 	data()->player.angle = PI / 2;
