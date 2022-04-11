@@ -108,6 +108,6 @@ void	mlx(void)
 		StructureNotifyMask, exit_program, NULL);
 	mlx_hook(data()->win, KeyPress, KeyPressMask, static_key_press_hook, &keys);
 	mlx_hook(data()->win, KeyRelease, KeyReleaseMask, static_key_release_hook, &keys);
-	mlx_loop_hook(data()->mlx, minimap, &keys);
+	mlx_loop_hook(data()->mlx, game, &keys);
 	mlx_loop(data()->mlx);
 }

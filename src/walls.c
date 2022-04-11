@@ -54,7 +54,7 @@ static void	static_draw_3Dwallsegment(int index)
 	mlx_destroy_image(data()->mlx, img.ptr);
 }
 
-void	display_3Dwalls(void)
+void	walls_display(void)
 {
 	int i;
 

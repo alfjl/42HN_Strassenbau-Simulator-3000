@@ -227,11 +227,12 @@ typedef struct s_data
 t_data	*data(void);
 void	read_map(char *filepath);
 void	mlx(void);
-int		minimap(t_keys *keys);
-int		game(void);
+int		game(t_keys *keys);
+void	minimap_display(void);
+// int		game(void);
 void	create_images(void);
 int		exit_program(void);
-void	display_3Dwalls(void);
+void	walls_display(void);
 //utils
 void	my_pixel_put(t_img *img, int x, int y, int color);
 void	draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
