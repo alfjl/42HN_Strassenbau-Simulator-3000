@@ -19,7 +19,7 @@ static void		static_iterate(t_ray *ray)
 	int i = 0;
 	while (i < DEPTH_OF_FIELD)
 	{
-		if ((*ray).y >= 0 && (*ray).x >= 0 && (*ray).y < data()->grid.height && (*ray).x < data()->grid.width && data()->map_old[(int)(*ray).y][(int)(*ray).x] == WALL)
+		if ((*ray).y >= 0 && (*ray).x >= 0 && (*ray).y < data()->grid.height && (*ray).x < data()->grid.width && data()->map.grid[(int)(*ray).y][(int)(*ray).x] == WALL)
 			break ;
 		else
 		{
@@ -118,7 +118,7 @@ static t_ray	static_draw_ray(float angle, int index)
 
 		a.x = data()->player.x * GRID_SIZE;
 		a.y = data()->player.y * GRID_SIZE;
-		img.ptr = mlx_new_image_alpha(data()->mlx, data()->window.width, data()->window.height);
+		img.ptr = mlx_new_image_alpha(data()->mlx, data()->minimap.width, data()->minimap.height);
 		img.addr = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
 		draw_line_a_to_b(&img, a, p, RED);
 		mlx_put_image_to_window(data()->mlx, data()->win, img.ptr, 0, 0);
@@ -141,7 +141,7 @@ static void	static_display_rays()
 	while (i < NUMBER_OF_RAYS)
 	{
 		data()->rays[i] = static_draw_ray(angle, i);
-		data()->rays[i].lineH = (data()->window.height / data()->rays[i].dist);
+		data()->rays[i].lineH = (data()->minimap.height / data()->rays[i].dist);
 		angle += DR;
 		if (angle < 0)
 			angle += 2 * PI;
@@ -161,7 +161,7 @@ static void	static_display_player()
 	a.y = data()->player.y * GRID_SIZE;
 	b.x = data()->player.x * GRID_SIZE + data()->player.dx * NOSE;
 	b.y = data()->player.y * GRID_SIZE + data()->player.dy * NOSE;
-	img.ptr = mlx_new_image_alpha(data()->mlx, data()->window.width, data()->window.height);
+	img.ptr = mlx_new_image_alpha(data()->mlx, data()->minimap.width, data()->minimap.height);
 	img.addr = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
 	draw_line_a_to_b(&img, a, b, BLACK);
 	mlx_put_image_to_window(data()->mlx, data()->win, img.ptr, 0, 0);
@@ -204,10 +204,10 @@ static void	static_update_pos(t_keys *keys)
 int	minimap(t_keys *keys)
 {
 	static_update_pos(keys);
-	mlx_put_image_to_window(data()->mlx, data()->win, data()->imgs[MINIMAP_IMG].ptr, 0, 0);
 	game();
+	display_3Dwalls();
+	mlx_put_image_to_window(data()->mlx, data()->win, data()->imgs[MINIMAP_IMG].ptr, 0, 0);
 	static_display_rays();
 	static_display_player();
-	display_3Dwalls();
 	return (EXIT_SUCCESS);
 }

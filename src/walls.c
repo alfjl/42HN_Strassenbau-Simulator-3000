@@ -20,19 +20,19 @@ static void	static_draw_3Dwallsegment(int index)
 	int		lineW;
 	float	lineH;
 
-	img.ptr = mlx_new_image_alpha(data()->mlx, data()->window3D.width, data()->window3D.height);
+	img.ptr = mlx_new_image_alpha(data()->mlx, data()->window.width, data()->window.height);
 	img.addr = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
 
-	lineW = data()->window3D.width / (NUMBER_OF_RAYS - 1);
+	lineW = data()->window.width / (NUMBER_OF_RAYS - 1);
 
 
 	lineH = data()->rays[index].lineH;
-	start.y = -lineH / 2 + data()->window3D.height / 2;
+	start.y = -lineH / 2 + data()->window.height / 2;
 	if(start.y < 0)
 		start.y = 0;
-	end.y = lineH / 2 + data()->window3D.height / 2;
-	if(end.y >= data()->window3D.height)
-		end.y = data()->window3D.height - 1;
+	end.y = lineH / 2 + data()->window.height / 2;
+	if(end.y >= data()->window.height)
+		end.y = data()->window.height - 1;
 
  	int line_i;
 	line_i = 0;
@@ -41,8 +41,8 @@ static void	static_draw_3Dwallsegment(int index)
 		start.x = lineW * index + line_i;
 		if (start.x < 0)
 			start.x = 0;
-		if (start.x > data()->window3D.width - 1)
-			start.x = data()->window3D.width - 1;
+		if (start.x > data()->window.width - 1)
+			start.x = data()->window.width - 1;
 		end.x = start.x;
 		if (data()->rays[index].orientation == HORIZONTAL)
 			static_draw_vertical_line(&img, start, end, GREY);
@@ -50,7 +50,7 @@ static void	static_draw_3Dwallsegment(int index)
 			static_draw_vertical_line(&img, start, end, WHITE);
 		line_i++;
 	}
-	mlx_put_image_to_window(data()->mlx, data()->win3D, img.ptr, 0, 0);
+	mlx_put_image_to_window(data()->mlx, data()->win, img.ptr, 0, 0);
 	mlx_destroy_image(data()->mlx, img.ptr);
 }
 

@@ -102,10 +102,10 @@ void	mlx(void)
 	keys.turnleft = false;
 	keys.turnright = false;
 	
+	// data()->win = mlx_new_window(data()->mlx, data()->minimap.width,
+	// 		data()->minimap.height, "cub3d");
 	data()->win = mlx_new_window(data()->mlx, data()->window.width,
-			data()->window.height, "cub3d");
-	data()->win3D = mlx_new_window(data()->mlx, data()->window3D.width,
-		data()->window3D.height, "cub3D");
+		data()->window.height, "cub3D");
 	// mlx_do_key_autorepeaton(data()->mlx);
 	// minimap();
 	mlx_hook(data()->win, DestroyNotify,

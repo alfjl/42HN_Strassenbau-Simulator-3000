@@ -5,16 +5,16 @@ static void static_create_3Dbackground()
 	int		x;
 	int		y;
 
-	data()->imgs[BACKGROUND_IMG].ptr = mlx_new_image(data()->mlx, data()->window3D.width, data()->window3D.height);
+	data()->imgs[BACKGROUND_IMG].ptr = mlx_new_image(data()->mlx, data()->window.width, data()->window.height);
 	data()->imgs[BACKGROUND_IMG].addr = mlx_get_data_addr(data()->imgs[BACKGROUND_IMG].ptr, &data()->imgs[BACKGROUND_IMG].bits_per_pixel, &data()->imgs[BACKGROUND_IMG].line_length, &data()->imgs[BACKGROUND_IMG].endian);
 	
 	y = 0;
-	while (y < data()->window3D.height)
+	while (y < data()->window.height)
 	{
 		x = 0;
-		while (x < data()->window3D.width)
+		while (x < data()->window.width)
 		{
-			if (y < data()->window3D.height / 2)
+			if (y < data()->window.height / 2)
 				my_pixel_put(&data()->imgs[BACKGROUND_IMG], x, y, CYAN);
 			else
 				my_pixel_put(&data()->imgs[BACKGROUND_IMG], x, y, BLACK);
@@ -22,8 +22,8 @@ static void static_create_3Dbackground()
 		}
 		y++;
 	}
-	data()->imgs[BACKGROUND_IMG].width = data()->window3D.width;
-	data()->imgs[BACKGROUND_IMG].height = data()->window3D.height;
+	data()->imgs[BACKGROUND_IMG].width = data()->window.width;
+	data()->imgs[BACKGROUND_IMG].height = data()->window.height;
 }
 
 static void static_create_player_img()
@@ -78,7 +78,7 @@ static void	static_paint_cell(t_img *img, int img_y, int img_x)
 		x = 1;
 		while (x < GRID_SIZE - 1)
 		{
-			if (data()->map_old[img_y][img_x] == WALL)
+			if (data()->map.grid[img_y][img_x] == WALL)
 				my_pixel_put(img, img_x * GRID_SIZE + x, img_y * GRID_SIZE + y, GREY);
 			else
 				my_pixel_put(img, img_x * GRID_SIZE + x, img_y * GRID_SIZE + y, WHITE);
@@ -94,31 +94,31 @@ static void static_create_minimap_img()
 	int		x;
 	int		y;
 
-	data()->imgs[MINIMAP_IMG].ptr = mlx_new_image(data()->mlx, data()->window.width, data()->window.height);
+	data()->imgs[MINIMAP_IMG].ptr = mlx_new_image(data()->mlx, data()->minimap.width, data()->minimap.height);
 	data()->imgs[MINIMAP_IMG].addr = mlx_get_data_addr(data()->imgs[MINIMAP_IMG].ptr, &data()->imgs[MINIMAP_IMG].bits_per_pixel, &data()->imgs[MINIMAP_IMG].line_length, &data()->imgs[MINIMAP_IMG].endian);
 	
 	y = 0;
-	while (data()->map_old[y] != NULL)
+	while (data()->map.grid[y] != NULL)
 	{
 		x = 0;
-		while (data()->map_old[y][x] != '\0')
+		while (data()->map.grid[y][x] != '\0')
 		{
 			static_paint_cell(&data()->imgs[MINIMAP_IMG], y, x);
 			x++;
 		}
 		y++;
 	}
-	data()->imgs[MINIMAP_IMG].width = data()->window.width;
-	data()->imgs[MINIMAP_IMG].height = data()->window.height;
+	data()->imgs[MINIMAP_IMG].width = data()->minimap.width;
+	data()->imgs[MINIMAP_IMG].height = data()->minimap.height;
 }
 
 static void	static_initialize_data(void)
 {
 	data()->mlx = mlx_init();
-	data()->window.width = data()->grid.width * GRID_SIZE;
-	data()->window.height = data()->grid.height * GRID_SIZE;
-	data()->window3D.width = WINDOW_WIDTH;
-	data()->window3D.height = WINDOW_HEIGHT;
+	data()->minimap.width = data()->grid.width * GRID_SIZE;
+	data()->minimap.height = data()->grid.height * GRID_SIZE;
+	data()->window.width = WINDOW_WIDTH;
+	data()->window.height = WINDOW_HEIGHT;
 	data()->player.x = 1.5;
 	data()->player.y = 1.5;
 	data()->player.angle = PI / 2;

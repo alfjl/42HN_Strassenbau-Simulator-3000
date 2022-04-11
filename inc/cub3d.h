@@ -5,7 +5,7 @@
 // # include <stdlib.h>
 #include <math.h>
 
-# define GRID_SIZE 32
+# define GRID_SIZE 16
 # define STEP 0.1
 # define STEP_A 0.1
 # define NOSE 50
@@ -17,7 +17,7 @@
 # define DR 0.0174533/2
 # define NUMBER_OF_RAYS 128
 # define WINDOW_HEIGHT 512
-# define WINDOW_WIDTH 512
+# define WINDOW_WIDTH 1024
 # define DEPTH_OF_FIELD 100
 
 
@@ -215,9 +215,8 @@ typedef struct s_data
 	struct s_frame	grid;
 	void			*mlx;
 	void			*win;
-	void			*win3D;
+	struct s_frame	minimap;
 	struct s_frame	window;
-	struct s_frame	window3D;
 	t_img			imgs[IMAGES];
 	int				img_size;
 	struct s_player	player;
