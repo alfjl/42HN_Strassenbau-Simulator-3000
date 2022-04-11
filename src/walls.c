@@ -44,10 +44,14 @@ static void	static_draw_3Dwallsegment(int index)
 		if (start.x > data()->window.width - 1)
 			start.x = data()->window.width - 1;
 		end.x = start.x;
-		if (data()->rays[index].orientation == HORIZONTAL)
-			static_draw_vertical_line(&img, start, end, GREY);
-		else
+		if (data()->rays[index].orientation == NORTH)
+			static_draw_vertical_line(&img, start, end, DARK_GREY);
+		else if (data()->rays[index].orientation == SOUTH)
 			static_draw_vertical_line(&img, start, end, WHITE);
+		else if (data()->rays[index].orientation == EAST)
+			static_draw_vertical_line(&img, start, end, SILVER);
+		else
+			static_draw_vertical_line(&img, start, end, GREY);
 		line_i++;
 	}
 	mlx_put_image_to_window(data()->mlx, data()->win, img.ptr, 0, 0);

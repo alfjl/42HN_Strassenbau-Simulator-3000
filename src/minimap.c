@@ -1,8 +1,7 @@
 # include "cub3d.h"
 
-static t_ray	static_fill_ray_struct(t_ray ray, int orientation)
+static t_ray	static_fill_ray_struct(t_ray ray)
 {
-	ray.orientation = orientation;
 	ray.len = sqrt((ray.x - data()->player.x) * (ray.x - data()->player.x) + (ray.y - data()->player.y) * (ray.y - data()->player.y));
 	float	delta;
 	delta = data()->player.angle - ray.angle;
@@ -40,6 +39,7 @@ static t_ray	static_calculate_ray_v(float angle)
 	nTan = -tan(ray.angle);
 	if (ray.angle > PI1 && ray.angle < PI3) //looking left
 	{
+		ray.orientation = WEST;
 		ray.x = (float)trunc(data()->player.x) - EDGE;
 		ray.y = (data()->player.x - ray.x) * nTan + data()->player.y;
 		ray.dx = -1;
@@ -48,6 +48,7 @@ static t_ray	static_calculate_ray_v(float angle)
 	}
 	else if (ray.angle < PI1 || ray.angle > PI3) //looking right
 	{
+		ray.orientation = EAST;
 		ray.x = (float)ceil(data()->player.x);
 		ray.y = (data()->player.x - ray.x) * nTan + data()->player.y;
 		ray.dx = 1;
@@ -59,7 +60,7 @@ static t_ray	static_calculate_ray_v(float angle)
 		ray.x = data()->player.x;
 		ray.y = data()->player.y;
 	}
-	return (static_fill_ray_struct(ray, VERTICAL));
+	return (static_fill_ray_struct(ray));
 }
 
 static t_ray	static_calcualte_ray_h(float angle)
@@ -72,6 +73,7 @@ static t_ray	static_calcualte_ray_h(float angle)
 	aTan = -1 / tan(ray.angle);
 	if (ray.angle > PI) //looking up
 	{
+		ray.orientation = NORTH;
 		ray.y = (float)trunc(data()->player.y) - EDGE;
 		ray.x = (data()->player.y - ray.y) * aTan + data()->player.x;
 		ray.dy = -1;
@@ -80,6 +82,7 @@ static t_ray	static_calcualte_ray_h(float angle)
 	}
 	else if (ray.angle < PI) //looking down
 	{
+		ray.orientation = SOUTH;
 		ray.y = (float)ceil(data()->player.y);
 		ray.x = (data()->player.y - ray.y) * aTan + data()->player.x;
 		ray.dy = 1;
@@ -91,7 +94,7 @@ static t_ray	static_calcualte_ray_h(float angle)
 		ray.x = data()->player.x;
 		ray.y = data()->player.y;
 	}
-	return (static_fill_ray_struct(ray, HORIZONTAL));
+	return (static_fill_ray_struct(ray));
 }
 
 static t_ray	static_draw_ray(float angle, int index)

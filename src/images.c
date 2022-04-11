@@ -15,9 +15,9 @@ static void static_create_3Dbackground()
 		while (x < data()->window.width)
 		{
 			if (y < data()->window.height / 2)
-				my_pixel_put(&data()->imgs[BACKGROUND_IMG], x, y, CYAN);
+				my_pixel_put(&data()->imgs[BACKGROUND_IMG], x, y, data()->map.ceiling.rgb);
 			else
-				my_pixel_put(&data()->imgs[BACKGROUND_IMG], x, y, BLACK);
+				my_pixel_put(&data()->imgs[BACKGROUND_IMG], x, y, data()->map.floor.rgb);
 			x++;
 		}
 		y++;

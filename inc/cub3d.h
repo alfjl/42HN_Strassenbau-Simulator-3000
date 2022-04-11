@@ -77,10 +77,10 @@ typedef enum e_mapchars
 {
 	WALL = '1',
 	SPACE = '0',
-	NORTH = 'N',
-	SOUTH = 'S',
-	EAST = 'E',
-	WEST = 'W',
+	PLAYER_NORTH = 'N',
+	PLAYER_SOUTH = 'S',
+	PLAYER_EAST = 'E',
+	PLAYER_WEST = 'W',
 }	t_mapchars;
 
 //mac
@@ -105,11 +105,14 @@ typedef enum e_colorcode
 	ORANGE = 0xFFFF8000,
 	YELLOW = 0xFFFFFF00,
 	GREEN = 0xFF00FF00,
+	OLIVE = 0xFF808000,
 	CYAN = 0xFF00FFFF,
 	BLUE = 0xFF0000FF,
 	MAGENTA = 0xFFFF00FF,
 	BLACK = 0xFF000000,
 	GREY = 0xFF808080,
+	DARK_GREY = 0xFF424949,
+	SILVER = 0xFFC0C0C0,
 	WHITE = 0xFFFFFFFF,
 	TRANSPARENT = 0x00000000,
 }	t_colorcode;
@@ -136,8 +139,10 @@ typedef struct s_player
 
 typedef enum e_orientation
 {
-	HORIZONTAL,
-	VERTICAL,
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
 }	t_orientation;
 
 typedef struct s_ray
