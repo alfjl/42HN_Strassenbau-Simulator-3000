@@ -79,7 +79,7 @@ typedef enum e_direction
 	RIGHT = 4,
 }	t_direction;
 
-typedef enum e_map
+typedef enum e_mapchars
 {
 	WALL = '1',
 	SPACE = '0',
@@ -87,7 +87,7 @@ typedef enum e_map
 	SOUTH = 'S',
 	EAST = 'E',
 	WEST = 'W',
-}	t_map;
+}	t_mapchars;
 
 //mac
 // typedef enum e_color
@@ -105,7 +105,7 @@ typedef enum e_map
 // }	t_color;
 
 //linux
-typedef enum e_color
+typedef enum e_colorcode
 {
 	RED = 0xFFFF0000,
 	ORANGE = 0xFFFF8000,
@@ -118,7 +118,7 @@ typedef enum e_color
 	GREY = 0xFF808080,
 	WHITE = 0xFFFFFFFF,
 	TRANSPARENT = 0x00000000,
-}	t_color;
+}	t_colorcode;
 
 typedef struct s_img
 {
@@ -138,7 +138,7 @@ typedef struct s_player
 	float		dx;
 	float		dy;
 	float		angle;
-	int		side;
+	// int		side;
 }				t_player;
 
 typedef enum e_orientation
@@ -160,12 +160,12 @@ typedef struct s_ray
 	int			orientation;
 }				t_ray;
 
-typedef struct s_enemy
-{
-	int		x;
-	int		y;
-	bool	status;
-}				t_enemy;
+// typedef struct s_enemy
+// {
+// 	int		x;
+// 	int		y;
+// 	bool	status;
+// }				t_enemy;
 
 typedef struct s_frame
 {
@@ -184,15 +184,44 @@ typedef enum e_imgnr
 	PLAYER_IMG,
 	MINIMAP_IMG,
 	BACKGROUND_IMG,
+	NORTH_IMG,
+	SOUTH_IMG,
+	EAST_IMG,
+	WEST_IMG,
 	IMAGES,
 }	t_imgnr;
+
+typedef struct s_color
+{
+	int				r;
+	int				g;
+	int				b;
+	unsigned int	rgb;
+}				t_color;
+
+typedef struct s_textures
+{
+	char	*north;
+	char	*south;
+	char	*east;
+	char	*west;
+}				t_textures;
+
+typedef struct s_map
+{
+	char				**grid;
+	struct s_color		floor;
+	struct s_color		ceiling;
+	struct s_textures	textures;
+}				t_map;
 
 typedef struct s_data
 {
 	// bool			errorflags[ERRORS];
 	char			*filepath;
 	struct s_frame	screen;
-	char			**map;
+	struct s_map	MAP_new;
+	char			**map_old;
 	struct s_frame	grid;
 	void			*mlx;
 	void			*win;
@@ -203,7 +232,7 @@ typedef struct s_data
 	int				img_size;
 	struct s_player	player;
 	struct s_ray	rays[NUMBER_OF_RAYS];
-	struct s_enemy	enemy;
+	// struct s_enemy	enemy;
 	int				dx;
 	int				dy;
 }	t_data;

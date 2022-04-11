@@ -19,7 +19,7 @@ static void		static_iterate(t_ray *ray)
 	int i = 0;
 	while (i < DEPTH_OF_FIELD)
 	{
-		if ((*ray).y >= 0 && (*ray).x >= 0 && (*ray).y < data()->grid.height && (*ray).x < data()->grid.width && data()->map[(int)(*ray).y][(int)(*ray).x] == WALL)
+		if ((*ray).y >= 0 && (*ray).x >= 0 && (*ray).y < data()->grid.height && (*ray).x < data()->grid.width && data()->map_old[(int)(*ray).y][(int)(*ray).x] == WALL)
 			break ;
 		else
 		{

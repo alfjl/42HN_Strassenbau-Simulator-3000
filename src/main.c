@@ -78,7 +78,7 @@ static void	static_paint_cell(t_img *img, int img_y, int img_x)
 		x = 1;
 		while (x < GRID_SIZE - 1)
 		{
-			if (data()->map[img_y][img_x] == WALL)
+			if (data()->map_old[img_y][img_x] == WALL)
 				my_pixel_put(img, img_x * GRID_SIZE + x, img_y * GRID_SIZE + y, GREY);
 			else
 				my_pixel_put(img, img_x * GRID_SIZE + x, img_y * GRID_SIZE + y, WHITE);
@@ -98,10 +98,10 @@ static void static_create_minimap_img()
 	data()->imgs[MINIMAP_IMG].addr = mlx_get_data_addr(data()->imgs[MINIMAP_IMG].ptr, &data()->imgs[MINIMAP_IMG].bits_per_pixel, &data()->imgs[MINIMAP_IMG].line_length, &data()->imgs[MINIMAP_IMG].endian);
 	
 	y = 0;
-	while (data()->map[y] != NULL)
+	while (data()->map_old[y] != NULL)
 	{
 		x = 0;
-		while (data()->map[y][x] != '\0')
+		while (data()->map_old[y][x] != '\0')
 		{
 			static_paint_cell(&data()->imgs[MINIMAP_IMG], y, x);
 			x++;

@@ -9,9 +9,9 @@ static int	determine_max_y(void)
 
 	max = 0;
 	y = 0;
-	while (data()->map[y] != NULL)
+	while (data()->map_old[y] != NULL)
 	{
-		len = ft_strlen(data()->map[y]);
+		len = ft_strlen(data()->map_old[y]);
 		if (len > max)
 			max = len;
 		y++;
@@ -19,9 +19,9 @@ static int	determine_max_y(void)
 	return (max);
 }
 
-// static void	static_exit_from_read(char **map, int error)
+// static void	static_exit_from_read(char **map_old, int error)
 // {
-// 	free(map);
+// 	free(map_old);
 // 	exit_error(NULL, error);
 // }
 
@@ -67,24 +67,24 @@ void	read_map(char *filepath)
 	int		y;
 
 	numberoflines = count_lines(filepath);
-	data()->map = malloc(sizeof(char *) * (numberoflines + 1));
-	// if (data()->map == NULL)
+	data()->map_old = malloc(sizeof(char *) * (numberoflines + 1));
+	// if (data()->map_old == NULL)
 	// 	exit_error(NULL, MALLOC);
 	fd = open(filepath, O_RDONLY);
 	// if (fd == -1)
-	// 	static_exit_from_read(data->map, OPEN);
+	// 	static_exit_from_read(data->map_old, OPEN);
 	y = 0;
 	while (y < numberoflines)
 	{
-		data()->map[y] = ft_gnl(fd);
-		// if (data()->map[y] == NULL)
+		data()->map_old[y] = ft_gnl(fd);
+		// if (data()->map_old[y] == NULL)
 		// 	exit_error(data, MALLOC);
-		replace_char1_with_char2(data()->map[y], '\n', '\0');
+		replace_char1_with_char2(data()->map_old[y], '\n', '\0');
 		y++;
 	}
-	data()->map[numberoflines] = NULL;
+	data()->map_old[numberoflines] = NULL;
 	// if (close(fd) == -1)
-	// 	static_exit_from_read(data->map, CLOSE);
+	// 	static_exit_from_read(data->map_old, CLOSE);
 	// check_map(data, numberoflines);
 	data()->grid.height = numberoflines;
 	data()->grid.width = determine_max_y();
