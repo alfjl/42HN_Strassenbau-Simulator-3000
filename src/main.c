@@ -2,10 +2,10 @@
 
 static void	static_initialize_data(void)
 {
-	data()->minimap.width = data()->grid.width * GRID_SIZE;
-	data()->minimap.height = data()->grid.height * GRID_SIZE;
 	data()->map.ceiling.rgb = CYAN;
 	data()->map.floor.rgb = BLACK;
+	data()->minimap.width = data()->map.width * GRID_SIZE;
+	data()->minimap.height = data()->map.height * GRID_SIZE;
 	data()->window.width = WINDOW_WIDTH;
 	data()->window.height = WINDOW_HEIGHT;
 	data()->player.x = 1.5;

@@ -18,7 +18,7 @@ static void		static_iterate(t_ray *ray)
 	int i = 0;
 	while (i < DEPTH_OF_FIELD)
 	{
-		if ((*ray).y >= 0 && (*ray).x >= 0 && (*ray).y < data()->grid.height && (*ray).x < data()->grid.width && data()->map.grid[(int)(*ray).y][(int)(*ray).x] == WALL)
+		if ((*ray).y >= 0 && (*ray).x >= 0 && (*ray).y < data()->map.height && (*ray).x < data()->map.width && data()->map.grid[(int)(*ray).y][(int)(*ray).x] == WALL)
 			break ;
 		else
 		{
@@ -112,7 +112,7 @@ static t_ray	static_draw_ray(float angle, int index)
 		ray = rays[1];
 	if (index != 0 && index != NUMBER_OF_RAYS -1)
 		return (ray);
-	if (ray.y >= 0 && ray.x >= 0 && ray.y < data()->grid.height && ray.x < data()->grid.width)
+	if (ray.y >= 0 && ray.x >= 0 && ray.y < data()->map.height && ray.x < data()->map.width)
 	{
 		p.x = ray.x * GRID_SIZE;
 		p.y = ray.y * GRID_SIZE;

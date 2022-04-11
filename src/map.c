@@ -86,7 +86,7 @@ void	read_map(char *filepath)
 	// if (close(fd) == -1)
 	// 	static_exit_from_read(data->map_old, CLOSE);
 	// check_map(data, numberoflines);
-	data()->grid.height = numberoflines;
-	data()->grid.width = determine_max_y();
+	data()->map.height = numberoflines;
+	data()->map.width = determine_max_y();
 	data()->map.grid = data()->map_old; //workaround to get map into the new struct format
 }

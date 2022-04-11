@@ -208,6 +208,8 @@ typedef struct s_textures
 typedef struct s_map
 {
 	char				**grid;
+	int					height;
+	int					width;
 	struct s_color		floor;
 	struct s_color		ceiling;
 	struct s_textures	textures;
