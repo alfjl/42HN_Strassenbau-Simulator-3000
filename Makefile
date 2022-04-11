@@ -7,6 +7,7 @@ SRCS :=	main.c \
 		minimap.c \
 		mlx.c \
 		utils.c \
+		images.c \
 		game.c \
 		walls.c \
 		exit.c

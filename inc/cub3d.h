@@ -229,6 +229,7 @@ void	read_map(char *filepath);
 void	mlx(void);
 int		minimap(t_keys *keys);
 int		game(void);
+void	create_images(void);
 int		exit_program(void);
 void	display_3Dwalls(void);
 //utils

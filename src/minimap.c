@@ -203,8 +203,8 @@ static void	static_update_pos(t_keys *keys)
 
 int	minimap(t_keys *keys)
 {
+	mlx_put_image_to_window(data()->mlx, data()->win, data()->imgs[BACKGROUND_IMG].ptr, 0, 0);
 	static_update_pos(keys);
-	game();
 	display_3Dwalls();
 	mlx_put_image_to_window(data()->mlx, data()->win, data()->imgs[MINIMAP_IMG].ptr, 0, 0);
 	static_display_rays();

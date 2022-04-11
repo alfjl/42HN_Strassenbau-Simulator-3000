@@ -102,19 +102,12 @@ void	mlx(void)
 	keys.turnleft = false;
 	keys.turnright = false;
 	
-	// data()->win = mlx_new_window(data()->mlx, data()->minimap.width,
-	// 		data()->minimap.height, "cub3d");
 	data()->win = mlx_new_window(data()->mlx, data()->window.width,
 		data()->window.height, "cub3D");
-	// mlx_do_key_autorepeaton(data()->mlx);
-	// minimap();
 	mlx_hook(data()->win, DestroyNotify,
 		StructureNotifyMask, exit_program, NULL);
-	// mlx_hook(data()->win, KeyPress, KeyPressMask, static_key_hook, NULL);
 	mlx_hook(data()->win, KeyPress, KeyPressMask, static_key_press_hook, &keys);
 	mlx_hook(data()->win, KeyRelease, KeyReleaseMask, static_key_release_hook, &keys);
 	mlx_loop_hook(data()->mlx, minimap, &keys);
-	// mlx_loop_hook(data()->mlx, game, NULL);
-	// game();
 	mlx_loop(data()->mlx);
 }
