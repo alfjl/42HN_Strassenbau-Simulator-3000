@@ -16,9 +16,9 @@
 # define EDGE 0.0001
 # define DR 0.0174533
 # define ANGLE_OF_VIEW 60
-# define NUMBER_OF_RAYS 128
 # define WINDOW_HEIGHT 512
 # define WINDOW_WIDTH 1024
+# define NUMBER_OF_RAYS 256
 // # define WALL_HEIGHT_RATIO 1
 # define DEPTH_OF_FIELD 100
 

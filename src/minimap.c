@@ -133,7 +133,6 @@ static void	static_display_rays()
 	float	angle;
 	
 	i = 0;
-	// angle = data()->player.angle - NUMBER_OF_RAYS / 2 * DR;
 	angle = data()->player.angle - ANGLE_OF_VIEW / 2 * DR;
 	if (angle < 0)
 		angle += 2 * PI;
@@ -142,7 +141,7 @@ static void	static_display_rays()
 	while (i < NUMBER_OF_RAYS)
 	{
 		data()->rays[i] = static_draw_ray(angle, i);
-		data()->rays[i].lineH = (data()->window.height / data()->rays[i].dist) * data()->window.width / data()->window.height;
+		data()->rays[i].lineH = (data()->window.height / data()->rays[i].dist) * data()->window.width / data()->window.height * 60 / ANGLE_OF_VIEW;
 		angle += ANGLE_OF_VIEW * DR / NUMBER_OF_RAYS;
 		if (angle < 0)
 			angle += 2 * PI;
