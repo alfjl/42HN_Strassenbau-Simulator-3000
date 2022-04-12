@@ -8,8 +8,8 @@
 
 # define GRID_SIZE 16
 # define TEXTURE_SIZE 32
-# define STEP 0.05
-# define STEP_A 0.05
+# define STEP 0.035
+# define STEP_A 0.025
 # define NOSE 50
 # define PLAYER_SIZE 5
 # define PI 3.1415926535
@@ -280,6 +280,6 @@ void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
 unsigned int	createRGBA(int r, int g, int b, int a);
 unsigned int	createARGB(int r, int g, int b, int a);
 //fps
-char	*get_fps(void); //remove
+void	fps_display(void); //remove
 void	timedifference(char *str); //remove
 #endif

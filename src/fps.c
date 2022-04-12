@@ -24,11 +24,12 @@ void	timedifference(char *str)
 		printf("%s time:\t%lu clocks\n", str, delta);
 }
 
-char	*get_fps(void)
+void	fps_display(void)
 {
 	long	currentTime;
 	long	elapse_time;
 	int		fps;
+	char	*str;
 
 	if (data()->fps.first)
 	{
@@ -39,5 +40,8 @@ char	*get_fps(void)
 	elapse_time = currentTime - data()->fps.lastTime;
 	fps = 1000.0/elapse_time;
 	data()->fps.lastTime = currentTime;
-	return (ft_itoa(fps));
+	str = ft_itoa(fps);
+	mlx_string_put(data()->mlx, data()->win, 20, 500, ORANGE, str); //remove
+	mlx_string_put(data()->mlx, data()->win, 40, 500, ORANGE, "FPS"); //remove
+	free(str);
 }

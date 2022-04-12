@@ -4,8 +4,10 @@ static void	static_update_pos(t_keys *keys)
 {
 	if (keys->forwards)
 	{
-		data()->player.x += data()->player.dx;
-		data()->player.y += data()->player.dy;
+		if (data()->map.grid[(int)(data()->player.y)][(int)(data()->player.x + data()->player.dx)] != WALL)
+			data()->player.x += data()->player.dx;
+		if (data()->map.grid[(int)(data()->player.y + data()->player.dy)][(int)(data()->player.x)] != WALL)
+			data()->player.y += data()->player.dy;
 	}
 	if (keys->turnleft)
 	{
@@ -36,7 +38,6 @@ int	game(t_keys *keys)
 	static_update_pos(keys);
 	walls_display();
 	minimap_display();
-	mlx_string_put(data()->mlx, data()->win, 20, 500, ORANGE, get_fps());
-	mlx_string_put(data()->mlx, data()->win, 40, 500, ORANGE, "FPS");
+	fps_display();
 	return (EXIT_SUCCESS);
 }
