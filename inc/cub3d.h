@@ -3,9 +3,11 @@
 # include "../mlx/mlx.h"
 # include "../libft/inc/libft.h"
 // # include <stdlib.h>
+// # include "../textures/T1_bricks.ppm"
 #include <math.h>
 
 # define GRID_SIZE 16
+# define TEXTURE_SIZE 32
 # define STEP 0.1
 # define STEP_A 0.1
 # define NOSE 50
@@ -156,6 +158,7 @@ typedef struct s_ray
 	float		dist;
 	float		lineH;
 	int			orientation;
+	float		tyoffset;
 }				t_ray;
 
 // typedef struct s_enemy
@@ -231,6 +234,7 @@ typedef struct s_data
 	struct s_player	player;
 	struct s_ray	rays[NUMBER_OF_RAYS];
 	// struct s_enemy	enemys;
+	int				texture[32];
 }	t_data;
 
 t_data	*data(void);
@@ -243,6 +247,8 @@ void	create_images(void);
 int		exit_program(void);
 void	walls_display(void);
 //utils
-void	my_pixel_put(t_img *img, int x, int y, int color);
-void	draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
+void			my_pixel_put(t_img *img, int x, int y, int color);
+void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
+unsigned int	createRGBA(int r, int g, int b, int a);
+unsigned int	createARGB(int r, int g, int b, int a);
 #endif

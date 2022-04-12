@@ -8,69 +8,17 @@ void	my_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-// void	draw_line_angle_len(t_img *img, t_point a, float angle, int color)
-// {
-// 	int	x;
-// 	int	y;
-// 	int	dx;
-// 	int dy;
-// 	int	p;
+unsigned int createRGBA(int r, int g, int b, int a)
+{
+	return ((r & 0xff) << 24) + ((g & 0xff) << 16) + ((b & 0xff) << 8)
+			+ (a & 0xff);
+}
 
-// 	dx=b.x-a.x;
-// 	dy=b.y-a.y;
-// 	x=a.x;
-// 	y=a.y;
-// 	p=2*dy-dx;
-// 	while(x<b.x)
-// 	{
-// 		if(p>=0)
-// 		{
-// 			// ft_printf("x: %d, y: %d\n", x, y);
-// 			my_pixel_put(img, x, y, color);
-// 			y=y+1;
-// 			p=p+2*dy-2*dx;
-// 		}
-// 		else
-// 		{
-// 			// ft_printf("x: %d, y: %d\n", x, y);
-// 			my_pixel_put(img, x, y, color);
-// 			p=p+2*dy;
-// 		}
-// 		x=x+1;
-// 	}
-// }
-
-// void	draw_line_a_to_b(t_img *img, t_point a, t_point b, int color)
-// {
-// 	float	x;
-// 	float	y;
-// 	float	dx;
-// 	float 	dy;
-// 	float	p;
-
-// 	dx=b.x-a.x;
-// 	dy=b.y-a.y;
-// 	x=a.x;
-// 	y=a.y;
-// 	p=2*dy-dx;
-// 	while(x<b.x)
-// 	{
-// 		if(p>=0)
-// 		{
-// 			// ft_printf("x: %d, y: %d\n", x, y);
-// 			my_pixel_put(img, x, y, color);
-// 			y=y+1;
-// 			p=p+2*dy-2*dx;
-// 		}
-// 		else
-// 		{
-// 			// ft_printf("x: %d, y: %d\n", x, y);
-// 			my_pixel_put(img, x, y, color);
-// 			p=p+2*dy;
-// 		}
-// 		x=x+1;
-// 	}
-// }
+unsigned int createARGB(int r, int g, int b, int a)
+{
+	return ((a & 0xff) << 24) + ((r & 0xff) << 16) + ((g & 0xff) << 8)
+			+ (b & 0xff);
+}
 
 static int	static_get_sign(int a, int b)
 {

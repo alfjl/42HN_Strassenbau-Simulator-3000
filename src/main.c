@@ -4,6 +4,10 @@ static void	static_initialize_data(void)
 {
 	data()->map.ceiling.rgb = CYAN;
 	data()->map.floor.rgb = BLACK;
+	data()->map.textures.south = "./textures/stone.xpm";
+	data()->map.textures.north = "./textures/moss.xpm";
+	data()->map.textures.east = "./textures/magma.xpm";
+	data()->map.textures.west = "./textures/bricks.xpm";
 	data()->minimap.width = data()->map.width * GRID_SIZE;
 	data()->minimap.height = data()->map.height * GRID_SIZE;
 	data()->window.width = WINDOW_WIDTH;
@@ -24,6 +28,8 @@ t_data	*data(void)
 
 int		main(int argc, char **argv)
 {
+	// printf("RED: %u\n", createARGB(255, 0, 0, 255));
+	// printf("RED: %u\n", RED);
 	if (argc != 2)
 	{
 		ft_printf("ERROR\n");
