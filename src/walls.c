@@ -48,7 +48,7 @@ static void	static_draw_3Dwallsegment(int index)
 	data()->rays[index].tyoffset = 0;
 	if(start.y < 0)
 	{
-		data()->rays[index].tyoffset = fabs((float)start.y / TEXTURE_SIZE);
+		data()->rays[index].tyoffset = fabs((float)start.y) / lineH * TEXTURE_SIZE;
 		start.y = 0;
 	}
 	end.y = lineH / 2 + data()->window.height / 2;
