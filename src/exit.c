@@ -23,9 +23,11 @@ int	exit_program(int errorcode)
 		exit(EXIT_SUCCESS);
 	else if (errorcode == SYSTEM)
 	{
-		ft_printf_stderr("Error: %s\n", strerror(errno));
+		ft_printf_stderr("Error\n%s\n", strerror(errno));
+		// perror("Error\n");
+		
 	}
 	else
-		ft_printf_stderr("Error: %s\n", static_get_error_message(errorcode));
+		ft_printf_stderr("Error\n%s\n", static_get_error_message(errorcode));
 	exit(EXIT_FAILURE);
 }
