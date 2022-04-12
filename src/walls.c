@@ -22,7 +22,7 @@ static void	static_draw_vertical_line(t_img *img, t_point start, t_point end, in
 		// printf("x: %d, y: %d, tx: %d, ty: %f, ty_s: %f\n", start.x, y, tx, ty, ty_step);
 		color = *(unsigned int *)(data()->imgs[image].addr
 				+ (unsigned int)((int)ty * data()->imgs[image].line_length
-					+ tx * (data()->imgs[image].bits_per_pixel / 8))) + ((0xff) << 24);
+					+ tx * (data()->imgs[image].bits_per_pixel / 8))) + ALPHA;
 		my_pixel_put(img, start.x, y, color);
 		y++;
 		ty += ty_step;

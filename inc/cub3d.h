@@ -23,6 +23,10 @@
 # define NUMBER_OF_RAYS 256
 // # define WALL_HEIGHT_RATIO 1
 # define DEPTH_OF_FIELD 100
+//Linux
+# define ALPHA ((0xff) << 24)
+//Mac
+// # define ALPHA 0
 
 
 typedef enum e_x11events
@@ -120,6 +124,14 @@ typedef enum e_colorcode
 	WHITE = 0xFFFFFFFF,
 	TRANSPARENT = 0x00000000,
 }	t_colorcode;
+
+typedef enum e_errorcodes
+{
+	SUCCESS = -2,
+	SYSTEM = -1,
+	CUSTOM,
+	ERRORS
+}	t_errorcodes;
 
 typedef struct s_img
 {
@@ -256,7 +268,7 @@ void	mlx(void);
 int		game(t_keys *keys);
 void	minimap_display(void);
 void	create_images(void);
-int		exit_program(void);
+int		exit_program(int errorcode);
 void	walls_display(void);
 //utils
 void			my_pixel_put(t_img *img, int x, int y, int color);

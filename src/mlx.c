@@ -30,7 +30,7 @@ static int	static_key_release_hook(int keycode, t_keys *keys)
 static int	static_key_press_hook(int keycode, t_keys *keys)
 {
 	if (keycode == ESC_KEY)
-		exit_program();
+		exit_program(SUCCESS);
 	if (keycode == W_KEY || keycode == UP_KEY)
 	{
 		// ft_printf("W pressed\n"); //remove

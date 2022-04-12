@@ -112,19 +112,27 @@ static void static_create_minimap_img()
 	data()->imgs[MINIMAP_IMG].height = data()->minimap.height;
 }
 
-static void	static_create_empty_img(int image)
+static void	static_create_img_from_texture(int image)
 {
 	data()->imgs[image].ptr = mlx_xpm_file_to_image(data()->mlx, data()->imgs[image].path, &data()->imgs[image].width, &data()->imgs[image].height);
 	data()->imgs[image].addr = mlx_get_data_addr(data()->imgs[image].ptr, &data()->imgs[image].bits_per_pixel, &data()->imgs[image].line_length, &data()->imgs[image].endian);
 }
+
+// static void	static_create_empty_img(int image)
+// {
+// 	data()->imgs[image].ptr = mlx_new_image_alpha(data()->mlx, data()->window.width, data()->window.height);
+// 	data()->imgs[image].addr = mlx_get_data_addr(data()->imgs[image].ptr, &data()->imgs[image].bits_per_pixel, &data()->imgs[image].line_length, &data()->imgs[image].endian);
+// }
 
 void	create_images(void)
 {
 	static_create_minimap_img();
 	static_create_3Dbackground();
 	static_create_player_img();
-	static_create_empty_img(SOUTH_IMG);
-	static_create_empty_img(NORTH_IMG);
-	static_create_empty_img(EAST_IMG);
-	static_create_empty_img(WEST_IMG);
+	static_create_img_from_texture(SOUTH_IMG);
+	static_create_img_from_texture(NORTH_IMG);
+	static_create_img_from_texture(EAST_IMG);
+	static_create_img_from_texture(WEST_IMG);
+	// static_create_empty_img(WALLS_IMG);
+	// static_create_empty_img(RAYS_IMG);
 }
