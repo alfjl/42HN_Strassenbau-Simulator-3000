@@ -6,6 +6,8 @@ static void static_create_3Dbackground()
 	int		y;
 
 	data()->imgs[BACKGROUND_IMG].ptr = mlx_new_image(data()->mlx, data()->window.width, data()->window.height);
+	if (data()->imgs[BACKGROUND_IMG].ptr == NULL)
+		exit_program(MLX_IMAGE);
 	data()->imgs[BACKGROUND_IMG].addr = mlx_get_data_addr(data()->imgs[BACKGROUND_IMG].ptr, &data()->imgs[BACKGROUND_IMG].bits_per_pixel, &data()->imgs[BACKGROUND_IMG].line_length, &data()->imgs[BACKGROUND_IMG].endian);
 	
 	y = 0;
@@ -31,6 +33,8 @@ static void static_create_player_img()
 	int	x;
 	int y;
 	data()->imgs[PLAYER_IMG].ptr = mlx_new_image(data()->mlx, PLAYER_SIZE, PLAYER_SIZE);
+	if (data()->imgs[PLAYER_IMG].ptr == NULL)
+		exit_program(MLX_IMAGE);
 	data()->imgs[PLAYER_IMG].addr = mlx_get_data_addr(data()->imgs[PLAYER_IMG].ptr, &data()->imgs[PLAYER_IMG].bits_per_pixel, &data()->imgs[PLAYER_IMG].line_length, &data()->imgs[PLAYER_IMG].endian);
 	
 	y = 0;
@@ -95,6 +99,8 @@ static void static_create_minimap_img()
 	int		y;
 
 	data()->imgs[MINIMAP_IMG].ptr = mlx_new_image(data()->mlx, data()->minimap.width, data()->minimap.height);
+	if (data()->imgs[MINIMAP_IMG].ptr == NULL)
+		exit_program(MLX_IMAGE);
 	data()->imgs[MINIMAP_IMG].addr = mlx_get_data_addr(data()->imgs[MINIMAP_IMG].ptr, &data()->imgs[MINIMAP_IMG].bits_per_pixel, &data()->imgs[MINIMAP_IMG].line_length, &data()->imgs[MINIMAP_IMG].endian);
 	
 	y = 0;

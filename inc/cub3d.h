@@ -129,7 +129,9 @@ typedef enum e_errorcodes
 {
 	SUCCESS = -2,
 	SYSTEM = -1,
-	CUSTOM,
+	MLX,
+	MLX_WIN,
+	MLX_IMAGE,
 	ERRORS
 }	t_errorcodes;
 

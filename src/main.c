@@ -33,8 +33,6 @@ t_data	*data(void)
 
 int		main(int argc, char **argv)
 {
-	// printf("RED: %u\n", createARGB(255, 0, 0, 255));
-	// printf("RED: %u\n", RED);
 	if (argc != 2)
 	{
 		ft_printf("ERROR\n");
@@ -43,6 +41,8 @@ int		main(int argc, char **argv)
 	read_map(argv[1]);
 	static_initialize_data();
 	data()->mlx = mlx_init();
+	if (data()->mlx == NULL)
+		exit_program(MLX);
 	create_images();
 	mlx();
 	return(EXIT_SUCCESS);

@@ -32,8 +32,8 @@ int	count_lines(char *filepath)
 	int		linecount;
 
 	fd = open(filepath, O_RDONLY);
-	// if (fd == -1)
-	// 	exit_error(NULL, OPEN);
+	if (fd == -1)
+		exit_program(SYSTEM);
 	linecount = 0;
 	line = ft_gnl(fd);
 	while (line != NULL)
@@ -42,8 +42,8 @@ int	count_lines(char *filepath)
 		free(line);
 		line = ft_gnl(fd);
 	}
-	// if (close(fd) == -1)
-	// 	exit_error(NULL, CLOSE);
+	if (close(fd) == -1)
+		exit_program(SYSTEM);
 	return (linecount);
 }
 
@@ -68,23 +68,23 @@ void	read_map(char *filepath)
 
 	numberoflines = count_lines(filepath);
 	data()->map_old = malloc(sizeof(char *) * (numberoflines + 1));
-	// if (data()->map_old == NULL)
-	// 	exit_error(NULL, MALLOC);
+	if (data()->map_old == NULL)
+		exit_program(SYSTEM);
 	fd = open(filepath, O_RDONLY);
-	// if (fd == -1)
-	// 	static_exit_from_read(data->map_old, OPEN);
+	if (fd == -1)
+		exit_program(SYSTEM);
 	y = 0;
 	while (y < numberoflines)
 	{
 		data()->map_old[y] = ft_gnl(fd);
-		// if (data()->map_old[y] == NULL)
-		// 	exit_error(data, MALLOC);
+		if (data()->map_old[y] == NULL)
+			exit_program(SYSTEM);
 		replace_char1_with_char2(data()->map_old[y], '\n', '\0');
 		y++;
 	}
 	data()->map_old[numberoflines] = NULL;
-	// if (close(fd) == -1)
-	// 	static_exit_from_read(data->map_old, CLOSE);
+	if (close(fd) == -1)
+		exit_program(SYSTEM);
 	// check_map(data, numberoflines);
 	data()->map.height = numberoflines;
 	data()->map.width = determine_max_y();

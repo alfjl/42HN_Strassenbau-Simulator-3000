@@ -5,7 +5,9 @@ static char	*static_get_error_message(int errorcode)
 {
 	char	*errormessage[ERRORS];
 
-	errormessage[CUSTOM] = "Custom errormessage!";
+	errormessage[MLX] = "Mlx init failed!";
+	errormessage[MLX_WIN] = "Mlx new window failed!";
+	errormessage[MLX_IMAGE] = "Mlx new image failed!";
 	return (errormessage[errorcode]);
 }
 
