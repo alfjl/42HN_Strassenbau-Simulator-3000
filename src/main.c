@@ -8,6 +8,10 @@ static void	static_initialize_data(void)
 	data()->map.textures.north = "./textures/moss.xpm";
 	data()->map.textures.east = "./textures/magma.xpm";
 	data()->map.textures.west = "./textures/bricks.xpm";
+	data()->imgs[SOUTH_IMG].path = data()->map.textures.south;
+	data()->imgs[NORTH_IMG].path = data()->map.textures.north;
+	data()->imgs[EAST_IMG].path = data()->map.textures.east;
+	data()->imgs[WEST_IMG].path = data()->map.textures.west;
 	data()->minimap.width = data()->map.width * GRID_SIZE;
 	data()->minimap.height = data()->map.height * GRID_SIZE;
 	data()->window.width = WINDOW_WIDTH;
@@ -17,7 +21,6 @@ static void	static_initialize_data(void)
 	data()->player.angle = PI / 2;
 	data()->player.dx = cos(data()->player.angle) * STEP;
 	data()->player.dy = sin(data()->player.angle) * STEP;
-	data()->frame = 0;
 	data()->fps.first = true;
 }
 

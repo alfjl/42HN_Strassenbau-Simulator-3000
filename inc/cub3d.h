@@ -108,8 +108,10 @@ typedef enum e_colorcode
 	YELLOW = 0xFFFFFF00,
 	GREEN = 0xFF00FF00,
 	OLIVE = 0xFF808000,
+	AQUA = 0xFF00FFFF,
 	CYAN = 0xFF00FFFF,
 	BLUE = 0xFF0000FF,
+	NAVY = 0xFF000080,
 	MAGENTA = 0xFFFF00FF,
 	BLACK = 0xFF000000,
 	GREY = 0xFF808080,
@@ -128,6 +130,7 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	char	*path;
 }				t_img;
 
 typedef struct s_player
@@ -243,7 +246,6 @@ typedef struct s_data
 	struct s_ray	rays[NUMBER_OF_RAYS];
 	// struct s_enemy	enemys;
 	int				texture[32];
-	int				frame;
 	struct s_fps	fps; //remove
 }	t_data;
 
@@ -253,7 +255,6 @@ void	read_map(char *filepath);
 void	mlx(void);
 int		game(t_keys *keys);
 void	minimap_display(void);
-// int		game(void);
 void	create_images(void);
 int		exit_program(void);
 void	walls_display(void);

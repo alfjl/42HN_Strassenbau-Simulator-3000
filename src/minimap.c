@@ -35,7 +35,6 @@ static t_ray	static_calculate_ray_v(float angle)
 	float	nTan;
 
 	ray.angle = angle;
-	//vertical
 	nTan = -tan(ray.angle);
 	if (ray.angle > PI1 && ray.angle < PI3) //looking left
 	{
@@ -69,7 +68,6 @@ static t_ray	static_calcualte_ray_h(float angle)
 	float	aTan;
 	
 	ray.angle = angle;
-	//horizontal
 	aTan = -1 / tan(ray.angle);
 	if (ray.angle > PI) //looking up
 	{

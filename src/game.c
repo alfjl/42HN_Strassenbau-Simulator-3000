@@ -103,20 +103,12 @@ static void	static_update_pos(t_keys *keys)
 
 int	game(t_keys *keys)
 {
-	// if (data()->frame != 0)
-	// {
-	// 	data()->frame++;
-	// 	if (data()->frame == 60)
-	// 		data()->frame = 0;
-	// 	return (EXIT_SUCCESS);
-	// }
 	mlx_put_image_to_window(data()->mlx, data()->win, data()->imgs[BACKGROUND_IMG].ptr, 0, 0);
 	static_update_pos(keys);
 	walls_display();
 	minimap_display();
 	// static_test();
 	// static_test2();
-	// data()->frame++;
 	mlx_string_put(data()->mlx, data()->win, 20, 500, ORANGE, get_fps());
 	mlx_string_put(data()->mlx, data()->win, 40, 500, ORANGE, "FPS");
 	return (EXIT_SUCCESS);

@@ -112,17 +112,19 @@ static void static_create_minimap_img()
 	data()->imgs[MINIMAP_IMG].height = data()->minimap.height;
 }
 
+static void	static_create_empty_img(int image)
+{
+	data()->imgs[image].ptr = mlx_xpm_file_to_image(data()->mlx, data()->imgs[image].path, &data()->imgs[image].width, &data()->imgs[image].height);
+	data()->imgs[image].addr = mlx_get_data_addr(data()->imgs[image].ptr, &data()->imgs[image].bits_per_pixel, &data()->imgs[image].line_length, &data()->imgs[image].endian);
+}
+
 void	create_images(void)
 {
 	static_create_minimap_img();
 	static_create_3Dbackground();
 	static_create_player_img();
-	data()->imgs[SOUTH_IMG].ptr = mlx_xpm_file_to_image(data()->mlx, data()->map.textures.south, &data()->imgs[SOUTH_IMG].width, &data()->imgs[SOUTH_IMG].height);
-	data()->imgs[SOUTH_IMG].addr = mlx_get_data_addr(data()->imgs[SOUTH_IMG].ptr, &data()->imgs[SOUTH_IMG].bits_per_pixel, &data()->imgs[SOUTH_IMG].line_length, &data()->imgs[SOUTH_IMG].endian);
-	data()->imgs[NORTH_IMG].ptr = mlx_xpm_file_to_image(data()->mlx, data()->map.textures.north, &data()->imgs[NORTH_IMG].width, &data()->imgs[NORTH_IMG].height);
-	data()->imgs[NORTH_IMG].addr = mlx_get_data_addr(data()->imgs[NORTH_IMG].ptr, &data()->imgs[NORTH_IMG].bits_per_pixel, &data()->imgs[NORTH_IMG].line_length, &data()->imgs[NORTH_IMG].endian);
-	data()->imgs[EAST_IMG].ptr = mlx_xpm_file_to_image(data()->mlx, data()->map.textures.east, &data()->imgs[EAST_IMG].width, &data()->imgs[EAST_IMG].height);
-	data()->imgs[EAST_IMG].addr = mlx_get_data_addr(data()->imgs[EAST_IMG].ptr, &data()->imgs[EAST_IMG].bits_per_pixel, &data()->imgs[EAST_IMG].line_length, &data()->imgs[EAST_IMG].endian);
-	data()->imgs[WEST_IMG].ptr = mlx_xpm_file_to_image(data()->mlx, data()->map.textures.west, &data()->imgs[WEST_IMG].width, &data()->imgs[WEST_IMG].height);
-	data()->imgs[WEST_IMG].addr = mlx_get_data_addr(data()->imgs[WEST_IMG].ptr, &data()->imgs[WEST_IMG].bits_per_pixel, &data()->imgs[WEST_IMG].line_length, &data()->imgs[WEST_IMG].endian);
+	static_create_empty_img(SOUTH_IMG);
+	static_create_empty_img(NORTH_IMG);
+	static_create_empty_img(EAST_IMG);
+	static_create_empty_img(WEST_IMG);
 }
