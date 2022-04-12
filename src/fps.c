@@ -1,5 +1,6 @@
 # include "cub3d.h"
 #include <sys/time.h>
+#include <time.h>
 
 static long	static_get_current_time(void)
 {
@@ -9,6 +10,18 @@ static long	static_get_current_time(void)
 	gettimeofday(&timeval, NULL);
 	current_time = timeval.tv_sec * 1000 + timeval.tv_usec / 1000;
 	return (current_time);
+}
+
+void	timedifference(char *str)
+{
+	long	currentTime;
+	long	delta;
+
+	currentTime = clock();
+	delta = currentTime - data()->time;
+	data()->time = currentTime;
+	// if (ft_strcmp(str, "START") || ft_strcmp(str, "END"))
+		printf("%s time:\t%lu clocks\n", str, delta);
 }
 
 char	*get_fps(void)

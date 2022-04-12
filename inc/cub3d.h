@@ -8,8 +8,8 @@
 
 # define GRID_SIZE 16
 # define TEXTURE_SIZE 32
-# define STEP 0.1
-# define STEP_A 0.1
+# define STEP 0.05
+# define STEP_A 0.05
 # define NOSE 50
 # define PLAYER_SIZE 5
 # define PI 3.1415926535
@@ -20,7 +20,7 @@
 # define ANGLE_OF_VIEW 60
 # define WINDOW_HEIGHT 512
 # define WINDOW_WIDTH 1024
-# define NUMBER_OF_RAYS 256
+# define NUMBER_OF_RAYS 1024
 // # define WALL_HEIGHT_RATIO 1
 # define DEPTH_OF_FIELD 100
 //Linux
@@ -254,6 +254,7 @@ typedef struct s_data
 	void			*win;
 	struct s_frame	minimap;
 	struct s_frame	window;
+	int				lineW;
 	t_img			imgs[IMAGES];
 	int				img_size;
 	struct s_player	player;
@@ -261,6 +262,7 @@ typedef struct s_data
 	// struct s_enemy	enemys;
 	int				texture[32];
 	struct s_fps	fps; //remove
+	long			time; //remove
 }	t_data;
 
 
@@ -279,4 +281,5 @@ unsigned int	createRGBA(int r, int g, int b, int a);
 unsigned int	createARGB(int r, int g, int b, int a);
 //fps
 char	*get_fps(void); //remove
+void	timedifference(char *str); //remove
 #endif

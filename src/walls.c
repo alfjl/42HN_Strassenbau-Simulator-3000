@@ -29,19 +29,11 @@ static void	static_draw_vertical_line(t_img *img, t_point start, t_point end, in
 	}
 }
 
-static void	static_draw_3Dwallsegment(int index)
+static void	static_draw_3Dwallsegment(int index, t_img *img)
 {
 	t_point	start;
 	t_point end;
-	t_img	img;
-	int		lineW;
 	float	lineH;
-
-	img.ptr = mlx_new_image_alpha(data()->mlx, data()->window.width, data()->window.height);
-	img.addr = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
-
-	lineW = data()->window.width / (NUMBER_OF_RAYS - 1);
-
 
 	lineH = data()->rays[index].lineH;
 	start.y = -lineH / 2 + data()->window.height / 2;
@@ -57,36 +49,42 @@ static void	static_draw_3Dwallsegment(int index)
 
  	int line_i;
 	line_i = 0;
-	while (line_i < lineW)
+	while (line_i < data()->lineW)
 	{
-		start.x = lineW * index + line_i;
+		start.x = data()->lineW * index + line_i;
 		if (start.x < 0)
 			start.x = 0;
 		if (start.x > data()->window.width - 1)
 			start.x = data()->window.width - 1;
 		end.x = start.x;
 		if (data()->rays[index].orientation == NORTH)
-			static_draw_vertical_line(&img, start, end, NORTH_IMG, index);
+			static_draw_vertical_line(img, start, end, NORTH_IMG, index);
 		else if (data()->rays[index].orientation == SOUTH)
-			static_draw_vertical_line(&img, start, end, SOUTH_IMG, index);
+			static_draw_vertical_line(img, start, end, SOUTH_IMG, index);
 		else if (data()->rays[index].orientation == EAST)
-			static_draw_vertical_line(&img, start, end, EAST_IMG, index);
+			static_draw_vertical_line(img, start, end, EAST_IMG, index);
 		else
-			static_draw_vertical_line(&img, start, end, WEST_IMG, index);
+			static_draw_vertical_line(img, start, end, WEST_IMG, index);
 		line_i++;
 	}
-	mlx_put_image_to_window(data()->mlx, data()->win, img.ptr, 0, 0);
-	mlx_destroy_image(data()->mlx, img.ptr);
 }
 
 void	walls_display(void)
 {
-	int i;
+	int 	i;
+	t_img	img;
 
+	img.ptr = mlx_new_image_alpha(data()->mlx, data()->window.width, data()->window.height);
+	if (img.ptr == NULL)
+		exit_program(MLX_IMAGE);
+	img.addr = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
+	
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{
-		static_draw_3Dwallsegment(i);
+		static_draw_3Dwallsegment(i, &img);
 		i++;
 	}
+	mlx_put_image_to_window(data()->mlx, data()->win, img.ptr, 0, 0);
+	mlx_destroy_image(data()->mlx, img.ptr);
 }

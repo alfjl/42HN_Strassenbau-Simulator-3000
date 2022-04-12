@@ -16,12 +16,14 @@ static void	static_initialize_data(void)
 	data()->minimap.height = data()->map.height * GRID_SIZE;
 	data()->window.width = WINDOW_WIDTH;
 	data()->window.height = WINDOW_HEIGHT;
+	data()->lineW = data()->window.width / (NUMBER_OF_RAYS - 1);
 	data()->player.x = 1.5;
 	data()->player.y = 1.5;
 	data()->player.angle = PI / 2;
 	data()->player.dx = cos(data()->player.angle) * STEP;
 	data()->player.dy = sin(data()->player.angle) * STEP;
 	data()->fps.first = true;
+	data()->time = 0; //remove
 }
 
 t_data	*data(void)

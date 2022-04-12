@@ -11,14 +11,14 @@ static char	*static_get_error_message(int errorcode)
 	return (errormessage[errorcode]);
 }
 
-static void free_all(void)
+static void static_free_all(void)
 {
 	return ;
 }
 
 int	exit_program(int errorcode)
 {	
-	free_all();
+	static_free_all();
 	if (errorcode == SUCCESS)
 		exit(EXIT_SUCCESS);
 	else if (errorcode == SYSTEM)

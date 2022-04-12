@@ -9,7 +9,6 @@ static void static_create_3Dbackground()
 	if (data()->imgs[BACKGROUND_IMG].ptr == NULL)
 		exit_program(MLX_IMAGE);
 	data()->imgs[BACKGROUND_IMG].addr = mlx_get_data_addr(data()->imgs[BACKGROUND_IMG].ptr, &data()->imgs[BACKGROUND_IMG].bits_per_pixel, &data()->imgs[BACKGROUND_IMG].line_length, &data()->imgs[BACKGROUND_IMG].endian);
-	
 	y = 0;
 	while (y < data()->window.height)
 	{
