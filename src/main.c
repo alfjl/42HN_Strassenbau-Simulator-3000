@@ -17,6 +17,8 @@ static void	static_initialize_data(void)
 	data()->player.angle = PI / 2;
 	data()->player.dx = cos(data()->player.angle) * STEP;
 	data()->player.dy = sin(data()->player.angle) * STEP;
+	data()->frame = 0;
+	data()->fps.first = true;
 }
 
 t_data	*data(void)

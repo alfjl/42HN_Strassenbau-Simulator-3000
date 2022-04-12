@@ -185,6 +185,8 @@ typedef enum e_imgnr
 	PLAYER_IMG,
 	MINIMAP_IMG,
 	BACKGROUND_IMG,
+	WALLS_IMG,
+	RAYS_IMG,
 	NORTH_IMG,
 	SOUTH_IMG,
 	EAST_IMG,
@@ -218,6 +220,12 @@ typedef struct s_map
 	struct s_textures	textures;
 }				t_map;
 
+typedef struct s_fps
+{
+	long	lastTime;
+	bool		first;
+}				t_fps;
+
 typedef struct s_data
 {
 	char			*filepath;
@@ -235,7 +243,10 @@ typedef struct s_data
 	struct s_ray	rays[NUMBER_OF_RAYS];
 	// struct s_enemy	enemys;
 	int				texture[32];
+	int				frame;
+	struct s_fps	fps; //remove
 }	t_data;
+
 
 t_data	*data(void);
 void	read_map(char *filepath);
@@ -251,4 +262,6 @@ void			my_pixel_put(t_img *img, int x, int y, int color);
 void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
 unsigned int	createRGBA(int r, int g, int b, int a);
 unsigned int	createARGB(int r, int g, int b, int a);
+//fps
+char	*get_fps(void); //remove
 #endif

@@ -10,7 +10,8 @@ SRCS :=	main.c \
 		images.c \
 		game.c \
 		walls.c \
-		exit.c
+		exit.c \
+		fps.c #remove
 OBJS := $(patsubst %.c,$(OBJ_DIR)%.o,$(SRCS))
 HEADERS := $(HEADER_DIR)*.h
 CC := gcc
