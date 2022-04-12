@@ -7,9 +7,9 @@ static int	static_key_release_hook(int keycode, t_keys *keys)
 	else if (keycode == A_KEY || keycode == LEFT_KEY)
 		keys->turnleft = false;
 	else if (keycode == S_KEY || keycode == DOWN_KEY)
-		keys->turnright = false;
-	else if (keycode == D_KEY || keycode == RIGHT_KEY)
 		keys->backwards = false;
+	else if (keycode == D_KEY || keycode == RIGHT_KEY)
+		keys->turnright = false;
 	return (EXIT_SUCCESS);
 }
 
@@ -22,9 +22,9 @@ static int	static_key_press_hook(int keycode, t_keys *keys)
 	else if (keycode == A_KEY || keycode == LEFT_KEY)
 		keys->turnleft = true;
 	else if (keycode == S_KEY || keycode == DOWN_KEY)
-		keys->turnright = true;
-	else if (keycode == D_KEY || keycode == RIGHT_KEY)
 		keys->backwards = true;
+	else if (keycode == D_KEY || keycode == RIGHT_KEY)
+		keys->turnright = true;
 	return (EXIT_SUCCESS);
 }
 

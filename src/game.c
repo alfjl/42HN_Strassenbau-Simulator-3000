@@ -1,12 +1,22 @@
 # include "cub3d.h"
 
+static bool	static_is_wall(float y, float x)
+{
+	if (y < data()->map.height && x < data()->map.width)
+	{
+		if (data()->map.grid[(int)y][(int)x] != WALL)
+			return (false);
+	}
+	return (true);
+}
+
 static void	static_update_pos(t_keys *keys)
 {
 	if (keys->forwards)
 	{
-		if (data()->map.grid[(int)(data()->player.y)][(int)(data()->player.x + data()->player.dx)] != WALL)
+		if (!static_is_wall(data()->player.y, (data()->player.x + data()->player.dx * DISTANCE_FACTOR)))
 			data()->player.x += data()->player.dx;
-		if (data()->map.grid[(int)(data()->player.y + data()->player.dy)][(int)(data()->player.x)] != WALL)
+		if (!static_is_wall((data()->player.y + data()->player.dy * DISTANCE_FACTOR), data()->player.x))
 			data()->player.y += data()->player.dy;
 	}
 	if (keys->turnleft)
@@ -17,12 +27,14 @@ static void	static_update_pos(t_keys *keys)
 		data()->player.dx = cos(data()->player.angle) * STEP;
 		data()->player.dy = sin(data()->player.angle) * STEP;
 	}
-	if (keys->turnright)
-	{
-		data()->player.x -= data()->player.dx;
-		data()->player.y -= data()->player.dy;
-	}
 	if (keys->backwards)
+	{
+		if (!static_is_wall(data()->player.y, (data()->player.x - data()->player.dx)))
+			data()->player.x -= data()->player.dx;
+		if (!static_is_wall((data()->player.y - data()->player.dy), data()->player.x))
+			data()->player.y -= data()->player.dy;
+	}
+	if (keys->turnright)
 	{
 		data()->player.angle += STEP_A;
 		if (data()->player.angle > 2 * PI)
