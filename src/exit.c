@@ -1,11 +1,11 @@
 # include "cub3d.h"
 #include <errno.h>
 
-static char	*get_error_message(int errorcode)
+static char	*static_get_error_message(int errorcode)
 {
 	char	*errormessage[ERRORS];
 
-	errormessage[CUSTOM] = "Too many arguments!";
+	errormessage[CUSTOM] = "Custom errormessage!";
 	return (errormessage[errorcode]);
 }
 
@@ -24,6 +24,6 @@ int	exit_program(int errorcode)
 		ft_printf_stderr("Error: %s\n", strerror(errno));
 	}
 	else
-		ft_printf_stderr("Error: %s\n", get_error_message(errorcode));
+		ft_printf_stderr("Error: %s\n", static_get_error_message(errorcode));
 	exit(EXIT_FAILURE);
 }
