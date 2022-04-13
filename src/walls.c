@@ -7,8 +7,6 @@ static void	static_draw_vertical_line(t_img *img, t_point start, t_point end, in
 	float	ty;
 	float	ty_step;
 	int		color;
-	// float	ty; ///texture_y
-	// float	c;
 
 	if (data()->rays[index].orientation == NORTH || data()->rays[index].orientation == SOUTH)
 		tx = (data()->rays[index].x - (int)data()->rays[index].x) * TEXTURE_SIZE;
@@ -19,7 +17,6 @@ static void	static_draw_vertical_line(t_img *img, t_point start, t_point end, in
 	y = start.y;
 	while (y <= end.y)
 	{
-		// printf("x: %d, y: %d, tx: %d, ty: %f, ty_s: %f\n", start.x, y, tx, ty, ty_step);
 		color = *(unsigned int *)(data()->imgs[image].addr
 				+ (unsigned int)((int)ty * data()->imgs[image].line_length
 					+ tx * (data()->imgs[image].bits_per_pixel / 8))) + ALPHA;
@@ -69,22 +66,20 @@ static void	static_draw_3Dwallsegment(int index, t_img *img)
 	}
 }
 
-void	walls_display(void)
+void	walls(void)
 {
 	int 	i;
-	t_img	img;
+	t_img	*img;
 
-	img.ptr = mlx_new_image_alpha(data()->mlx, data()->window.width, data()->window.height);
-	if (img.ptr == NULL)
+	img = &data()->imgs[WALLS_IMG];
+	img->ptr = mlx_new_image_alpha(data()->mlx, data()->window.width, data()->window.height);
+	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
-	img.addr = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
-	
+	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel, &img->line_length, &img->endian);
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{
-		static_draw_3Dwallsegment(i, &img);
+		static_draw_3Dwallsegment(i, img);
 		i++;
 	}
-	mlx_put_image_to_window(data()->mlx, data()->win, img.ptr, 0, 0);
-	mlx_destroy_image(data()->mlx, img.ptr);
 }

@@ -271,16 +271,18 @@ t_data	*data(void);
 void	read_map(char *filepath);
 void	mlx(void);
 int		game(t_keys *keys);
-void	minimap_display(void);
+void	player_update_position(t_keys *keys);
+bool	is_wall(float y, float x);
+void	minimap(void);
 void	create_images(void);
 int		exit_program(int errorcode);
-void	walls_display(void);
+void	walls(void);
 //utils
 void			my_pixel_put(t_img *img, int x, int y, int color);
 void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
 unsigned int	createRGBA(int r, int g, int b, int a);
 unsigned int	createARGB(int r, int g, int b, int a);
 //fps
-void	fps_display(void); //remove
+void	fps(void); //remove
 void	timedifference(char *str); //remove
 #endif

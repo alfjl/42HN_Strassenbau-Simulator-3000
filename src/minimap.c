@@ -95,12 +95,13 @@ static t_ray	static_calcualte_ray_h(float angle)
 	return (static_fill_ray_struct(ray));
 }
 
-static t_ray	static_draw_ray(float angle, int index)
+static t_ray	static_draw_ray(float angle, int index, t_img *img)
 {
 	
 	t_ray	rays[2];
 	t_ray	ray;
 	t_point	p;
+	t_point	a;
 
 	rays[0] = static_calcualte_ray_h(angle);
 	rays[1] = static_calculate_ray_v(angle);
@@ -114,18 +115,9 @@ static t_ray	static_draw_ray(float angle, int index)
 	{
 		p.x = ray.x * GRID_SIZE;
 		p.y = ray.y * GRID_SIZE;
-		t_img	img;
-		t_point	a;
-
 		a.x = data()->player.x * GRID_SIZE;
 		a.y = data()->player.y * GRID_SIZE;
-		img.ptr = mlx_new_image_alpha(data()->mlx, data()->minimap.width, data()->minimap.height);
-		if (img.ptr == NULL)
-			exit_program(MLX_IMAGE);
-		img.addr = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
-		draw_line_a_to_b(&img, a, p, RED);
-		mlx_put_image_to_window(data()->mlx, data()->win, img.ptr, 0, 0);
-		mlx_destroy_image(data()->mlx, img.ptr);
+		draw_line_a_to_b(img, a, p, RED);
 	}
 	return (ray);
 }
@@ -134,7 +126,16 @@ static void	static_display_rays()
 {
 	int		i;
 	float	angle;
-	
+
+	t_img	*img;
+
+	img = &data()->imgs[RAYS_IMG];
+	img->ptr = mlx_new_image_alpha(data()->mlx, data()->minimap.width, data()->minimap.height);
+	if (img->ptr == NULL)
+		exit_program(MLX_IMAGE);
+	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel, &img->line_length, &img->endian);
+
+
 	i = 0;
 	angle = data()->player.angle - ANGLE_OF_VIEW / 2 * DR;
 	if (angle < 0)
@@ -143,7 +144,7 @@ static void	static_display_rays()
 		angle -= 2 * PI;
 	while (i < NUMBER_OF_RAYS)
 	{
-		data()->rays[i] = static_draw_ray(angle, i);
+		data()->rays[i] = static_draw_ray(angle, i, img);
 		data()->rays[i].lineH = (data()->window.height / data()->rays[i].dist) * data()->window.width / data()->window.height * 60 / ANGLE_OF_VIEW;
 		angle += ANGLE_OF_VIEW * DR / NUMBER_OF_RAYS;
 		if (angle < 0)
@@ -174,9 +175,8 @@ static void	static_display_player()
 	mlx_put_image_to_window(data()->mlx, data()->win, data()->imgs[PLAYER_IMG].ptr, data()->player.x * GRID_SIZE - PLAYER_SIZE / 2, data()->player.y * GRID_SIZE - PLAYER_SIZE / 2);
 }
 
-void	minimap_display(void)
+void	minimap(void)
 {
-	mlx_put_image_to_window(data()->mlx, data()->win, data()->imgs[MINIMAP_IMG].ptr, 0, 0);
 	static_display_rays();
 	static_display_player();
 }

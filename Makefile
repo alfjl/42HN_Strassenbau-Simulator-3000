@@ -3,14 +3,16 @@ SRC_DIR := ./src/
 OBJ_DIR := ./obj/
 HEADER_DIR := ./inc/
 SRCS :=	main.c \
+		exit.c \
+		game.c \
+		images.c \
 		map.c \
 		minimap.c \
 		mlx.c \
+		player.c \
 		utils.c \
-		images.c \
-		game.c \
+		wallcollision.c \
 		walls.c \
-		exit.c \
 		fps.c #remove
 OBJS := $(patsubst %.c,$(OBJ_DIR)%.o,$(SRCS))
 HEADERS := $(HEADER_DIR)*.h
