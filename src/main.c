@@ -45,7 +45,8 @@ int		main(int argc, char **argv)
 	data()->mlx = mlx_init();
 	if (data()->mlx == NULL)
 		exit_program(MLX);
-	create_images();
+	images_create();
+	textures_load();
 	mlx();
 	return(EXIT_SUCCESS);
 }

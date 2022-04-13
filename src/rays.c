@@ -1,4 +1,4 @@
-# include "cub3d.h"
+#include "cub3d.h"
 
 static t_ray	static_min(t_ray ray1, t_ray ray2)
 {
@@ -28,16 +28,20 @@ void	rays_draw_to_image(void)
 
 	datas = data();
 	img = &datas->imgs[RAYS_IMG];
-	img->ptr = mlx_new_image_alpha(datas->mlx, datas->minimap.width, datas->minimap.height);
+	img->ptr = mlx_new_image_alpha(datas->mlx, datas->minimap.width,
+			datas->minimap.height);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
-	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel, &img->line_length, &img->endian);
+	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
+			&img->line_length, &img->endian);
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{
 		if (!(i % MINIMAP_RAY_DENSITY_FACTOR))
 		{
-			if (datas->rays[i].y >= 0 && datas->rays[i].x >= 0 && datas->rays[i].y < data()->map.height && datas->rays[i].x < data()->map.width)
+			if (datas->rays[i].y >= 0 && datas->rays[i].x >= 0
+				&& datas->rays[i].y < data()->map.height
+				&& datas->rays[i].x < data()->map.width)
 			{
 				player.x = datas->rays[i].x * GRID_SIZE;
 				player.y = datas->rays[i].y * GRID_SIZE;
@@ -62,7 +66,8 @@ static void	ray_fill_struct(float angle, int i)
 	ray[i].index = i;
 	delta = radian_limits(data()->player.angle - ray[i].angle);
 	ray[i].dist = ray[i].len * cos(delta);
-	ray[i].lineH = (window->height / ray[i].dist) * window->width / window->height * ANGLE_OF_VIEW_CONST / ANGLE_OF_VIEW;
+	ray[i].line_h = (window->height / ray[i].dist) * window->width
+		/ window->height * ANGLE_OF_VIEW_CONST / ANGLE_OF_VIEW;
 }
 
 void	rays_create(void)

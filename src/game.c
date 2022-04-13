@@ -1,4 +1,4 @@
-# include "cub3d.h"
+#include "cub3d.h"
 
 static void	player_to_window_buffer(void *mlx, void *win, t_img *img)
 {
@@ -6,7 +6,9 @@ static void	player_to_window_buffer(void *mlx, void *win, t_img *img)
 	mlx_destroy_image(mlx, img[RAYS_IMG].ptr);
 	mlx_put_image_to_window(mlx, win, img[NOSE_IMG].ptr, 0, 0);
 	mlx_destroy_image(mlx, img[NOSE_IMG].ptr);
-	mlx_put_image_to_window(mlx, win, img[PLAYER_IMG].ptr, data()->player.x * GRID_SIZE - PLAYER_SIZE / 2, data()->player.y * GRID_SIZE - PLAYER_SIZE / 2);
+	mlx_put_image_to_window(mlx, win, img[PLAYER_IMG].ptr,
+		data()->player.x * GRID_SIZE - PLAYER_SIZE / 2,
+		data()->player.y * GRID_SIZE - PLAYER_SIZE / 2);
 }
 
 static void	minimap_to_window_buffer(void *mlx, void *win, t_img *img)
@@ -22,7 +24,7 @@ static void	environment_to_window_buffer(void *mlx, void *win, t_img *img)
 	mlx_destroy_image(mlx, img[WALLS_IMG].ptr);
 }
 
-static void	window_set_up()
+static void	window_set_up(void)
 {
 	void	*mlx;
 	void	*win;

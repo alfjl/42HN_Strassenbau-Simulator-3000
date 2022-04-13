@@ -10,8 +10,9 @@ SRCS :=	main.c \
 		minimap.c \
 		mlx.c \
 		player.c \
-		rays.c \
 		rays_calculate.c \
+		rays.c \
+		textures.c \
 		utils.c \
 		wallcollision.c \
 		walls.c \

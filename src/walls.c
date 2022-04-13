@@ -1,4 +1,4 @@
-# include "cub3d.h"
+#include "cub3d.h"
 
 static void	static_draw_vertical_line(t_img *img, t_point start, t_point end, int image, int index)
 {
@@ -8,12 +8,15 @@ static void	static_draw_vertical_line(t_img *img, t_point start, t_point end, in
 	float	ty_step;
 	int		color;
 
-	if (data()->rays[index].orientation == NORTH || data()->rays[index].orientation == SOUTH)
-		tx = (data()->rays[index].x - (int)data()->rays[index].x) * TEXTURE_SIZE;
+	if (data()->rays[index].orientation == NORTH
+		|| data()->rays[index].orientation == SOUTH)
+		tx = (data()->rays[index].x - (int)data()->rays[index].x)
+			* TEXTURE_SIZE;
 	else
-		tx = (data()->rays[index].y - (int)data()->rays[index].y) * TEXTURE_SIZE;
-	ty =  data()->rays[index].tyoffset;
-	ty_step = TEXTURE_SIZE / data()->rays[index].lineH;
+		tx = (data()->rays[index].y - (int)data()->rays[index].y)
+			* TEXTURE_SIZE;
+	ty = data()->rays[index].tyoffset;
+	ty_step = TEXTURE_SIZE / data()->rays[index].line_h;
 	y = start.y;
 	while (y <= end.y)
 	{
@@ -26,25 +29,25 @@ static void	static_draw_vertical_line(t_img *img, t_point start, t_point end, in
 	}
 }
 
-static void	static_draw_3Dwallsegment(int index, t_img *img)
+static void	static_draw_wallsegment(int index, t_img *img)
 {
 	t_point	start;
-	t_point end;
-	float	lineH;
+	t_point	end;
+	float	line_h;
+	int		line_i;
 
-	lineH = data()->rays[index].lineH;
-	start.y = -lineH / 2 + data()->window.height / 2;
+	line_h = data()->rays[index].line_h;
+	start.y = -line_h / 2 + data()->window.height / 2;
 	data()->rays[index].tyoffset = 0;
-	if(start.y < 0)
+	if (start.y < 0)
 	{
-		data()->rays[index].tyoffset = fabs((float)start.y) / lineH * TEXTURE_SIZE;
+		data()->rays[index].tyoffset = fabs((float)start.y)
+		/ line_h * TEXTURE_SIZE;
 		start.y = 0;
 	}
-	end.y = lineH / 2 + data()->window.height / 2;
-	if(end.y >= data()->window.height)
+	end.y = line_h / 2 + data()->window.height / 2;
+	if (end.y >= data()->window.height)
 		end.y = data()->window.height - 1;
-
- 	int line_i;
 	line_i = 0;
 	while (line_i < data()->lineW)
 	{
@@ -68,18 +71,20 @@ static void	static_draw_3Dwallsegment(int index, t_img *img)
 
 void	walls_draw_to_image(void)
 {
-	int 	i;
+	int		i;
 	t_img	*img;
 
 	img = &data()->imgs[WALLS_IMG];
-	img->ptr = mlx_new_image_alpha(data()->mlx, data()->window.width, data()->window.height);
+	img->ptr = mlx_new_image_alpha(data()->mlx, data()->window.width,
+			data()->window.height);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
-	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel, &img->line_length, &img->endian);
+	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
+			&img->line_length, &img->endian);
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{
-		static_draw_3Dwallsegment(i, img);
+		static_draw_wallsegment(i, img);
 		i++;
 	}
 }

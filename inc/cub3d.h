@@ -177,7 +177,7 @@ typedef struct s_ray
 	float		angle;
 	float		len;
 	float		dist;
-	float		lineH;
+	float		line_h;
 	int			orientation;
 	float		tyoffset;
 }				t_ray;
@@ -282,14 +282,15 @@ void	rays_create(void);
 void	rays_draw_to_image(void);
 t_ray	ray_calculate_vertical(float angle);
 t_ray	ray_calculate_horizontal(float angle);
-void	create_images(void);
+void	images_create(void);
+void	textures_load(void);
 int		exit_program(int errorcode);
 void	walls_draw_to_image(void);
 //utils
 void			my_pixel_put(t_img *img, int x, int y, int color);
 void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
-unsigned int	createRGBA(int r, int g, int b, int a);
-unsigned int	createARGB(int r, int g, int b, int a);
+unsigned int	create_rgba(int r, int g, int b, int a);
+unsigned int	create_argb(int r, int g, int b, int a);
 float			radian_limits(float angle);
 //fps
 void	fps_to_window_buffer(void); //remove

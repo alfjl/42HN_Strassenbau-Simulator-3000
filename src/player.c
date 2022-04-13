@@ -1,10 +1,12 @@
-# include "cub3d.h"
+#include "cub3d.h"
 
 static void	static_player_update_forwards(void)
 {
-	if (!is_wall(data()->player.y, (data()->player.x + data()->player.dx * DISTANCE_FACTOR)))
+	if (!is_wall(data()->player.y,
+			(data()->player.x + data()->player.dx * DISTANCE_FACTOR)))
 		data()->player.x += data()->player.dx;
-	if (!is_wall((data()->player.y + data()->player.dy * DISTANCE_FACTOR), data()->player.x))
+	if (!is_wall((data()->player.y + data()->player.dy * DISTANCE_FACTOR),
+			data()->player.x))
 		data()->player.y += data()->player.dy;
 }
 
