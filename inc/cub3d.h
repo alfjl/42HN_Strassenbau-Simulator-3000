@@ -6,7 +6,7 @@
 // # include "../textures/T1_bricks.ppm"
 #include <math.h>
 
-# define COLISSION 0
+# define COLISSION 1
 # define MINIMAP 1
 # define GRID_SIZE 16
 # define TEXTURE_SIZE 32
