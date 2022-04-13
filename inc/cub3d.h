@@ -289,6 +289,7 @@ void			my_pixel_put(t_img *img, int x, int y, int color);
 void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
 unsigned int	createRGBA(int r, int g, int b, int a);
 unsigned int	createARGB(int r, int g, int b, int a);
+float			limit_to_radian(float angle);
 //fps
 void	fps_to_window_buffer(void); //remove
 void	timedifference(char *str); //remove

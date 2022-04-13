@@ -5,11 +5,7 @@ static t_ray	static_fill_ray_struct(t_ray ray, int index)
 	ray.index = index;
 	ray.len = sqrt((ray.x - data()->player.x) * (ray.x - data()->player.x) + (ray.y - data()->player.y) * (ray.y - data()->player.y));
 	float	delta;
-	delta = data()->player.angle - ray.angle;
-	if (delta < 0)
-		delta += 2 * PI;
-	if (delta > 2 * PI)
-		delta -= 2 * PI;
+	delta = limit_to_radian(data()->player.angle - ray.angle);
 	ray.dist = ray.len * cos(delta);
 	return (ray);
 }
@@ -37,7 +33,7 @@ t_ray	ray_calculate_vertical(float angle, int index)
 
 	ray.angle = angle;
 	nTan = -tan(ray.angle);
-	if (ray.angle > PI1 && ray.angle < PI3) //looking left
+	if (ray.angle > PI1 && ray.angle < PI3)
 	{
 		ray.orientation = WEST;
 		ray.x = (float)trunc(data()->player.x) - EDGE;
@@ -46,7 +42,7 @@ t_ray	ray_calculate_vertical(float angle, int index)
 		ray.dy = -ray.dx * nTan;
 		static_iterate(&ray);
 	}
-	else if (ray.angle < PI1 || ray.angle > PI3) //looking right
+	if (ray.angle < PI1 || ray.angle > PI3)
 	{
 		ray.orientation = EAST;
 		ray.x = (float)ceil(data()->player.x);
@@ -55,10 +51,33 @@ t_ray	ray_calculate_vertical(float angle, int index)
 		ray.dy = -ray.dx * nTan;
 		static_iterate(&ray);
 	}
-	else// (ray.angle == 0 || ray.angle == PI) //looking vertical
+	return (static_fill_ray_struct(ray, index));
+}
+
+t_ray	ray_calculate_horizontal(float angle, int index)
+{
+	t_ray	ray;
+	float	aTan;
+	
+	ray.angle = angle;
+	aTan = -1 / tan(ray.angle);
+	if (ray.angle > PI)
 	{
-		ray.x = data()->player.x;
-		ray.y = data()->player.y;
+		ray.orientation = NORTH;
+		ray.y = (float)trunc(data()->player.y) - EDGE;
+		ray.x = (data()->player.y - ray.y) * aTan + data()->player.x;
+		ray.dy = -1;
+		ray.dx = -ray.dy * aTan;
+		static_iterate(&ray);
+	}
+	if (ray.angle < PI)
+	{
+		ray.orientation = SOUTH;
+		ray.y = (float)ceil(data()->player.y);
+		ray.x = (data()->player.y - ray.y) * aTan + data()->player.x;
+		ray.dy = 1;
+		ray.dx = -ray.dy * aTan;
+		static_iterate(&ray);
 	}
 	return (static_fill_ray_struct(ray, index));
 }

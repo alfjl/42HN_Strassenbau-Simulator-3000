@@ -11,8 +11,7 @@ SRCS :=	main.c \
 		mlx.c \
 		player.c \
 		rays.c \
-		rays_calculate_vertical.c \
-		rays_calculate_horizontal.c \
+		rays_calculate.c \
 		utils.c \
 		wallcollision.c \
 		walls.c \

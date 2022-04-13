@@ -37,7 +37,16 @@ static int	static_abs(int a, int b)
 	return (d);
 }
 
-void	draw_line_a_to_b (t_img *img, t_point a, t_point b, int color)
+float	limit_to_radian(float angle)
+{
+	if (angle < 0)
+		angle += 2 * PI;
+	if (angle > 2 * PI)
+		angle -= 2 * PI;
+	return (angle);
+}
+
+void	draw_line_a_to_b(t_img *img, t_point a, t_point b, int color)
 {
 	int	dx;
 	int	dy;

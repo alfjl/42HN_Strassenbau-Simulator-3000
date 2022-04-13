@@ -2,11 +2,8 @@
 
 static t_ray	static_ray_calculate(float angle, int index)
 {
-	
 	t_ray	rays[2];
 	t_ray	ray;
-	// t_point	p;
-	// t_point	a;
 
 	rays[0] = ray_calculate_horizontal(angle, index);
 	rays[1] = ray_calculate_vertical(angle, index);
@@ -57,20 +54,12 @@ void	rays_calculate(void)
 
 	datas = data();
 	i = 0;
-	angle = datas->player.angle - ANGLE_OF_VIEW / 2 * DR;
-	if (angle < 0)
-		angle += 2 * PI;
-	if (angle > 2 * PI)
-		angle -= 2 * PI;
+	angle = limit_to_radian(datas->player.angle - ANGLE_OF_VIEW / 2 * DR);
 	while (i < NUMBER_OF_RAYS)
 	{
 		datas->rays[i] = static_ray_calculate(angle, i);
 		datas->rays[i].lineH = (datas->window.height / datas->rays[i].dist) * datas->window.width / datas->window.height * 60 / ANGLE_OF_VIEW;
-		angle += ANGLE_OF_VIEW * DR / NUMBER_OF_RAYS;
-		if (angle < 0)
-			angle += 2 * PI;
-		if (angle > 2 * PI)
-			angle -= 2 * PI;
+		angle = limit_to_radian(angle + ANGLE_OF_VIEW * DR / NUMBER_OF_RAYS);
 		i++;
 	}
 }
