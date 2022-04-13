@@ -24,7 +24,7 @@ void	timedifference(char *str)
 		printf("%s time:\t%lu clocks\n", str, delta);
 }
 
-void	fps(void)
+void	fps_to_window_buffer(void)
 {
 	long	currentTime;
 	long	elapse_time;

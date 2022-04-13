@@ -66,7 +66,7 @@ static void	static_draw_3Dwallsegment(int index, t_img *img)
 	}
 }
 
-void	walls(void)
+void	walls_draw_to_image(void)
 {
 	int 	i;
 	t_img	*img;

@@ -22,6 +22,7 @@
 # define WINDOW_HEIGHT 512
 # define WINDOW_WIDTH 1024
 # define NUMBER_OF_RAYS 1024
+# define MINIMAP_RAY_DENSITY_FACTOR 10
 // # define WALL_HEIGHT_RATIO 1
 # define DEPTH_OF_FIELD 100
 //Linux
@@ -167,6 +168,7 @@ typedef enum e_orientation
 
 typedef struct s_ray
 {
+	int			index;
 	float		x;
 	float		y;
 	float		dx;
@@ -274,16 +276,18 @@ void	mlx(void);
 int		game(t_keys *keys);
 void	player_update_position(t_keys *keys);
 bool	is_wall(float y, float x);
-void	minimap(void);
+void	player_nose_draw_to_image(void);
+void	rays_calculate(void);
+void	rays_draw_to_image(void);
 void	create_images(void);
 int		exit_program(int errorcode);
-void	walls(void);
+void	walls_draw_to_image(void);
 //utils
 void			my_pixel_put(t_img *img, int x, int y, int color);
 void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
 unsigned int	createRGBA(int r, int g, int b, int a);
 unsigned int	createARGB(int r, int g, int b, int a);
 //fps
-void	fps(void); //remove
+void	fps_to_window_buffer(void); //remove
 void	timedifference(char *str); //remove
 #endif
