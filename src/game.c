@@ -34,7 +34,8 @@ static void	window_set_up(void)
 	win = data()->win;
 	img = data()->imgs;
 	environment_to_window_buffer(mlx, win, img);
-	minimap_to_window_buffer(mlx, win, img);
+	if (MINIMAP)
+		minimap_to_window_buffer(mlx, win, img);
 	fps_to_window_buffer();
 }
 

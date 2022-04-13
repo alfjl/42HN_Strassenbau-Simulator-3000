@@ -6,6 +6,8 @@
 // # include "../textures/T1_bricks.ppm"
 #include <math.h>
 
+# define COLISSION 0
+# define MINIMAP 1
 # define GRID_SIZE 16
 # define TEXTURE_SIZE 32
 # define STEP 0.035
@@ -18,14 +20,14 @@
 # define PI3 3*PI1
 # define EDGE 0.0001
 # define DR 0.0174533
-# define ANGLE_OF_VIEW 60
 # define ANGLE_OF_VIEW_CONST 60
+# define ANGLE_OF_VIEW ANGLE_OF_VIEW_CONST
 # define WINDOW_HEIGHT 512
 # define WINDOW_WIDTH 1024
-# define NUMBER_OF_RAYS 1024
+# define NUMBER_OF_RAYS WINDOW_WIDTH
 # define MINIMAP_RAY_DENSITY_FACTOR 10
 // # define WALL_HEIGHT_RATIO 1
-# define DEPTH_OF_FIELD 100
+# define DEPTH_OF_FIELD 2 * WINDOW_HEIGHT
 //Linux
 # define ALPHA ((0xff) << 24)
 //Mac
@@ -250,22 +252,22 @@ typedef struct s_fps
 
 typedef struct s_data
 {
-	char			*filepath;
+	char			*filepath; //remove
 	struct s_frame	screen;
 	struct s_map	map;
-	char			**map_old;
-	struct s_frame	grid;
+	char			**map_old; //remove
+	struct s_frame	grid; //remove
 	void			*mlx;
 	void			*win;
 	struct s_frame	minimap;
 	struct s_frame	window;
-	int				lineW;
+	int				line_w;
 	t_img			imgs[IMAGES];
 	int				img_size;
 	struct s_player	player;
 	struct s_ray	rays[NUMBER_OF_RAYS];
 	// struct s_enemy	enemys;
-	int				texture[32];
+	// int				texture[32];
 	struct s_fps	fps; //remove
 	long			time; //remove
 }	t_data;

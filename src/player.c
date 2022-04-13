@@ -2,12 +2,23 @@
 
 static void	static_player_update_forwards(void)
 {
+	float	new_x;
+	float	new_y;
+	
 	if (!is_wall(data()->player.y,
 			(data()->player.x + data()->player.dx * DISTANCE_FACTOR)))
-		data()->player.x += data()->player.dx;
+	{
+		new_x = data()->player.x + data()->player.dx;
+		if (new_x >= 0 && new_x < data()->map.width)
+			data()->player.x = new_x;
+	}
 	if (!is_wall((data()->player.y + data()->player.dy * DISTANCE_FACTOR),
 			data()->player.x))
-		data()->player.y += data()->player.dy;
+	{
+		new_y = data()->player.y + data()->player.dy;
+		if (new_y >= 0 && new_y < data()->map.height)
+			data()->player.y = new_y;
+	}
 }
 
 static void	static_player_update_backwards(void)

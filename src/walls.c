@@ -15,14 +15,21 @@ static void	static_draw_vertical_line(t_img *img, t_point start, t_point end, in
 	else
 		tx = (data()->rays[index].y - (int)data()->rays[index].y)
 			* TEXTURE_SIZE;
+	if (tx < 0) //better check
+		tx = 0;
 	ty = data()->rays[index].tyoffset;
 	ty_step = TEXTURE_SIZE / data()->rays[index].line_h;
 	y = start.y;
 	while (y <= end.y)
 	{
-		color = *(unsigned int *)(data()->imgs[image].addr
+		if (!COLISSION)
+		{
+			color = *(unsigned int *)(data()->imgs[image].addr
 				+ (unsigned int)((int)ty * data()->imgs[image].line_length
 					+ tx * (data()->imgs[image].bits_per_pixel / 8))) + ALPHA;
+		}
+		else
+			color = BLUE;
 		my_pixel_put(img, start.x, y, color);
 		y++;
 		ty += ty_step;
@@ -49,9 +56,9 @@ static void	static_draw_wallsegment(int index, t_img *img)
 	if (end.y >= data()->window.height)
 		end.y = data()->window.height - 1;
 	line_i = 0;
-	while (line_i < data()->lineW)
+	while (line_i < data()->line_w)
 	{
-		start.x = data()->lineW * index + line_i;
+		start.x = data()->line_w * index + line_i;
 		if (start.x < 0)
 			start.x = 0;
 		if (start.x > data()->window.width - 1)

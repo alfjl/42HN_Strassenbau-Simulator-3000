@@ -15,5 +15,7 @@ void	player_nose_draw_to_image(void)
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
 	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel, &img->line_length, &img->endian);
+	if (b.y < 0 ||  b.x < 0) //better check
+		return;
 	draw_line_a_to_b(img, a, b, BLACK);
 }
