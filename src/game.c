@@ -39,7 +39,7 @@ static void	window_set_up()
 int	game(t_keys *keys)
 {
 	player_update_position(keys);
-	rays_calculate();
+	rays_create();
 	rays_draw_to_image();
 	player_nose_draw_to_image();
 	walls_draw_to_image();

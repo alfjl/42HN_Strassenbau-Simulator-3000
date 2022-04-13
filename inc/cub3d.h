@@ -19,6 +19,7 @@
 # define EDGE 0.0001
 # define DR 0.0174533
 # define ANGLE_OF_VIEW 60
+# define ANGLE_OF_VIEW_CONST 60
 # define WINDOW_HEIGHT 512
 # define WINDOW_WIDTH 1024
 # define NUMBER_OF_RAYS 1024
@@ -277,10 +278,10 @@ int		game(t_keys *keys);
 void	player_update_position(t_keys *keys);
 bool	is_wall(float y, float x);
 void	player_nose_draw_to_image(void);
-void	rays_calculate(void);
+void	rays_create(void);
 void	rays_draw_to_image(void);
-t_ray	ray_calculate_vertical(float angle, int index);
-t_ray	ray_calculate_horizontal(float angle, int index);
+t_ray	ray_calculate_vertical(float angle);
+t_ray	ray_calculate_horizontal(float angle);
 void	create_images(void);
 int		exit_program(int errorcode);
 void	walls_draw_to_image(void);
@@ -289,7 +290,7 @@ void			my_pixel_put(t_img *img, int x, int y, int color);
 void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
 unsigned int	createRGBA(int r, int g, int b, int a);
 unsigned int	createARGB(int r, int g, int b, int a);
-float			limit_to_radian(float angle);
+float			radian_limits(float angle);
 //fps
 void	fps_to_window_buffer(void); //remove
 void	timedifference(char *str); //remove

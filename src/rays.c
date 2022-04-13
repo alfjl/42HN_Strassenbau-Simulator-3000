@@ -1,17 +1,21 @@
 # include "cub3d.h"
 
-static t_ray	static_ray_calculate(float angle, int index)
+static t_ray	static_min(t_ray ray1, t_ray ray2)
 {
-	t_ray	rays[2];
-	t_ray	ray;
-
-	rays[0] = ray_calculate_horizontal(angle, index);
-	rays[1] = ray_calculate_vertical(angle, index);
-	if (rays[0].len < rays[1].len)
-		ray = rays[0];
+	if (ray1.len < ray2.len)
+		return (ray1);
 	else
-		ray = rays[1];
-	return (ray);
+		return (ray2);
+}
+
+static t_ray	static_ray_get(float angle)
+{
+	t_ray	ray_horizontal;
+	t_ray	ray_vertival;
+
+	ray_horizontal = ray_calculate_horizontal(angle);
+	ray_vertival = ray_calculate_vertical(angle);
+	return (static_min(ray_horizontal, ray_vertival));
 }
 
 void	rays_draw_to_image(void)
@@ -19,8 +23,8 @@ void	rays_draw_to_image(void)
 	int		i;
 	t_data	*datas;
 	t_img	*img;
-	t_point	p;
-	t_point	a;
+	t_point	player;
+	t_point	ray;
 
 	datas = data();
 	img = &datas->imgs[RAYS_IMG];
@@ -35,31 +39,43 @@ void	rays_draw_to_image(void)
 		{
 			if (datas->rays[i].y >= 0 && datas->rays[i].x >= 0 && datas->rays[i].y < data()->map.height && datas->rays[i].x < data()->map.width)
 			{
-				p.x = datas->rays[i].x * GRID_SIZE;
-				p.y = datas->rays[i].y * GRID_SIZE;
-				a.x = data()->player.x * GRID_SIZE;
-				a.y = data()->player.y * GRID_SIZE;
-				draw_line_a_to_b(img, a, p, RED);
+				player.x = datas->rays[i].x * GRID_SIZE;
+				player.y = datas->rays[i].y * GRID_SIZE;
+				ray.x = data()->player.x * GRID_SIZE;
+				ray.y = data()->player.y * GRID_SIZE;
+				draw_line_a_to_b(img, ray, player, RED);
 			}
 		}
 		i++;
 	}
 }
 
-void	rays_calculate(void)
+static void	ray_fill_struct(float angle, int i)
+{
+	float	delta;
+	t_ray	*ray;
+	t_frame	*window;
+
+	ray = data()->rays;
+	window = &data()->window;
+	ray[i] = static_ray_get(angle);
+	ray[i].index = i;
+	delta = radian_limits(data()->player.angle - ray[i].angle);
+	ray[i].dist = ray[i].len * cos(delta);
+	ray[i].lineH = (window->height / ray[i].dist) * window->width / window->height * ANGLE_OF_VIEW_CONST / ANGLE_OF_VIEW;
+}
+
+void	rays_create(void)
 {
 	int		i;
 	float	angle;
-	t_data	*datas;
 
-	datas = data();
+	angle = radian_limits(data()->player.angle - ANGLE_OF_VIEW / 2 * DR);
 	i = 0;
-	angle = limit_to_radian(datas->player.angle - ANGLE_OF_VIEW / 2 * DR);
 	while (i < NUMBER_OF_RAYS)
 	{
-		datas->rays[i] = static_ray_calculate(angle, i);
-		datas->rays[i].lineH = (datas->window.height / datas->rays[i].dist) * datas->window.width / datas->window.height * 60 / ANGLE_OF_VIEW;
-		angle = limit_to_radian(angle + ANGLE_OF_VIEW * DR / NUMBER_OF_RAYS);
+		ray_fill_struct(angle, i);
+		angle = radian_limits(angle + ANGLE_OF_VIEW * DR / NUMBER_OF_RAYS);
 		i++;
 	}
 }

@@ -37,7 +37,7 @@ static int	static_abs(int a, int b)
 	return (d);
 }
 
-float	limit_to_radian(float angle)
+float	radian_limits(float angle)
 {
 	if (angle < 0)
 		angle += 2 * PI;
