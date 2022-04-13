@@ -128,14 +128,11 @@ static void	static_display_rays()
 	float	angle;
 
 	t_img	*img;
-
 	img = &data()->imgs[RAYS_IMG];
 	img->ptr = mlx_new_image_alpha(data()->mlx, data()->minimap.width, data()->minimap.height);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
 	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel, &img->line_length, &img->endian);
-
-
 	i = 0;
 	angle = data()->player.angle - ANGLE_OF_VIEW / 2 * DR;
 	if (angle < 0)
@@ -157,22 +154,21 @@ static void	static_display_rays()
 
 static void	static_display_player()
 {
-	t_img	img;
+	// t_img	img;
 	t_point	a;
 	t_point	b;
+	t_img	*img;
+	img = &data()->imgs[NOSE_IMG];
 
 	a.x = data()->player.x * GRID_SIZE;
 	a.y = data()->player.y * GRID_SIZE;
 	b.x = data()->player.x * GRID_SIZE + data()->player.dx * NOSE;
 	b.y = data()->player.y * GRID_SIZE + data()->player.dy * NOSE;
-	img.ptr = mlx_new_image_alpha(data()->mlx, data()->minimap.width, data()->minimap.height);
-	if (img.ptr == NULL)
+	img->ptr = mlx_new_image_alpha(data()->mlx, data()->minimap.width, data()->minimap.height);
+	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
-	img.addr = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
-	draw_line_a_to_b(&img, a, b, BLACK);
-	mlx_put_image_to_window(data()->mlx, data()->win, img.ptr, 0, 0);
-	mlx_destroy_image(data()->mlx, img.ptr);
-	mlx_put_image_to_window(data()->mlx, data()->win, data()->imgs[PLAYER_IMG].ptr, data()->player.x * GRID_SIZE - PLAYER_SIZE / 2, data()->player.y * GRID_SIZE - PLAYER_SIZE / 2);
+	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel, &img->line_length, &img->endian);
+	draw_line_a_to_b(img, a, b, BLACK);
 }
 
 void	minimap(void)
