@@ -279,6 +279,8 @@ bool	is_wall(float y, float x);
 void	player_nose_draw_to_image(void);
 void	rays_calculate(void);
 void	rays_draw_to_image(void);
+t_ray	ray_calculate_vertical(float angle, int index);
+t_ray	ray_calculate_horizontal(float angle, int index);
 void	create_images(void);
 int		exit_program(int errorcode);
 void	walls_draw_to_image(void);
