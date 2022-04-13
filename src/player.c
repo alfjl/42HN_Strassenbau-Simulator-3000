@@ -23,10 +23,59 @@ static void	static_player_update_forwards(void)
 
 static void	static_player_update_backwards(void)
 {
+	float	new_x;
+	float	new_y;
+
 	if (!is_wall(data()->player.y, (data()->player.x - data()->player.dx)))
-		data()->player.x -= data()->player.dx;
+	{
+		new_x = data()->player.x - data()->player.dx;
+		if (new_x >= 0 && new_x < data()->map.width)
+			data()->player.x = new_x;
+	}
 	if (!is_wall((data()->player.y - data()->player.dy), data()->player.x))
-		data()->player.y -= data()->player.dy;
+	{
+		new_y = data()->player.y - data()->player.dy;
+		if (new_y >= 0 && new_y < data()->map.height)
+			data()->player.y = new_y;
+	}
+}
+
+static void	static_player_update_leftwards(void)
+{
+	float	new_x;
+	float	new_y;
+	
+	new_x = data()->player.x + data()->player.dy;
+	new_y = data()->player.y - data()->player.dx;
+	if (!is_wall(data()->player.y, new_x))
+	{
+		if (new_x >= 0 && new_x < data()->map.width)
+			data()->player.x = new_x;
+	}
+	if (!is_wall(new_y, data()->player.x))
+	{
+		if (new_y >= 0 && new_y < data()->map.height)
+			data()->player.y = new_y;
+	}
+}
+
+static void	static_player_update_rightwards(void)
+{
+	float	new_x;
+	float	new_y;
+	
+	new_x = data()->player.x - data()->player.dy;
+	new_y = data()->player.y + data()->player.dx;
+	if (!is_wall(data()->player.y, new_x))
+	{
+		if (new_x >= 0 && new_x < data()->map.width)
+			data()->player.x = new_x;
+	}
+	if (!is_wall(new_y, data()->player.x))
+	{
+		if (new_y >= 0 && new_y < data()->map.height)
+			data()->player.y = new_y;
+	}
 }
 
 static void	static_player_update_turnleft(void)
@@ -51,10 +100,14 @@ void	player_update_position(t_keys *keys)
 {
 	if (keys->forwards)
 		static_player_update_forwards();
-	if (keys->turnleft)
-		static_player_update_turnleft();
 	if (keys->backwards)
 		static_player_update_backwards();
+	if (keys->leftwards)
+		static_player_update_leftwards();
+	if (keys->rightwards)
+		static_player_update_rightwards();
+	if (keys->turnleft)
+		static_player_update_turnleft();
 	if (keys->turnright)
 		static_player_update_turnright();
 }

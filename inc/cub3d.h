@@ -79,8 +79,10 @@ typedef enum e_key
 typedef struct s_keys
 {
 	bool	forwards;
-	bool	turnleft;
 	bool	backwards;
+	bool	leftwards;
+	bool	rightwards;
+	bool	turnleft;
 	bool	turnright;
 } t_keys;
 
