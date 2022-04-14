@@ -14,7 +14,7 @@
 # define STEP_A 0.025
 # define NOSE 200
 # define DISTANCE_FACTOR 20
-# define DISTANCE 0.25
+# define DISTANCE 0.2
 # define PLAYER_SIZE 5
 # define PI 3.1415926535
 # define PI1 (PI / 2)
