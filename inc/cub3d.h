@@ -14,10 +14,11 @@
 # define STEP_A 0.025
 # define NOSE 200
 # define DISTANCE_FACTOR 20
+# define DISTANCE 0.25
 # define PLAYER_SIZE 5
 # define PI 3.1415926535
-# define PI1 PI/2
-# define PI3 3*PI1
+# define PI1 (PI / 2)
+# define PI3 (3 * PI1)
 # define EDGE 0.00001
 # define DR 0.0174533
 # define ANGLE_OF_VIEW_CONST 60

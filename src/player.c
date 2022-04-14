@@ -6,13 +6,13 @@ static void	static_player_update_forwards(void)
 	float	new_y;
 	
 	if (!is_wall(data()->player.y,
-			(data()->player.x + data()->player.dx * DISTANCE_FACTOR)))
+			(data()->player.x + data()->player.dx)))
 	{
 		new_x = data()->player.x + data()->player.dx;
 		if (new_x >= 0 && new_x < data()->map.width)
 			data()->player.x = new_x;
 	}
-	if (!is_wall((data()->player.y + data()->player.dy * DISTANCE_FACTOR),
+	if (!is_wall((data()->player.y + data()->player.dy),
 			data()->player.x))
 	{
 		new_y = data()->player.y + data()->player.dy;
@@ -47,12 +47,12 @@ static void	static_player_update_leftwards(void)
 	
 	new_x = data()->player.x + data()->player.dy;
 	new_y = data()->player.y - data()->player.dx;
-	if (!is_wall(data()->player.y, new_x))
+	if (!is_wall(data()->player.y, data()->player.x + data()->player.dy))
 	{
 		if (new_x >= 0 && new_x < data()->map.width)
 			data()->player.x = new_x;
 	}
-	if (!is_wall(new_y, data()->player.x))
+	if (!is_wall(data()->player.y - data()->player.dx, data()->player.x))
 	{
 		if (new_y >= 0 && new_y < data()->map.height)
 			data()->player.y = new_y;
@@ -66,12 +66,12 @@ static void	static_player_update_rightwards(void)
 	
 	new_x = data()->player.x - data()->player.dy;
 	new_y = data()->player.y + data()->player.dx;
-	if (!is_wall(data()->player.y, new_x))
+	if (!is_wall(data()->player.y, data()->player.x - data()->player.dy))
 	{
 		if (new_x >= 0 && new_x < data()->map.width)
 			data()->player.x = new_x;
 	}
-	if (!is_wall(new_y, data()->player.x))
+	if (!is_wall(data()->player.y + data()->player.dx, data()->player.x))
 	{
 		if (new_y >= 0 && new_y < data()->map.height)
 			data()->player.y = new_y;
@@ -83,8 +83,6 @@ static void	static_player_update_turnleft(void)
 	data()->player.angle -= STEP_A;
 	if (data()->player.angle < 0)
 		data()->player.angle += 2 * PI;
-	data()->player.dx = cos(data()->player.angle) * STEP;
-	data()->player.dy = sin(data()->player.angle) * STEP;
 }
 
 static void	static_player_update_turnright(void)
@@ -92,12 +90,14 @@ static void	static_player_update_turnright(void)
 	data()->player.angle += STEP_A;
 	if (data()->player.angle > 2 * PI)
 		data()->player.angle -= 2 * PI;
-	data()->player.dx = cos(data()->player.angle) * STEP;
-	data()->player.dy = sin(data()->player.angle) * STEP;
+	// data()->player.dx = cos(data()->player.angle) * STEP;
+	// data()->player.dy = sin(data()->player.angle) * STEP;
 }
 
 void	player_update_position(t_keys *keys)
 {
+	data()->player.dx = cos(data()->player.angle) * STEP;
+	data()->player.dy = sin(data()->player.angle) * STEP;
 	if (keys->forwards)
 		static_player_update_forwards();
 	if (keys->backwards)
@@ -110,4 +110,5 @@ void	player_update_position(t_keys *keys)
 		static_player_update_turnleft();
 	if (keys->turnright)
 		static_player_update_turnright();
+	// printf("dx: %f, dy: %f\n", data()->player.dx, data()->player.dy); //remove
 }

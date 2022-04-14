@@ -2,12 +2,28 @@
 
 bool	is_wall(float y, float x)
 {
+	float	miny;
+	float	maxy;
+	float	minx;
+	float	maxx;
+	
 	if (COLISSION == false)
 		return (false);
-	if (y < data()->map.height && x < data()->map.width)
+	miny = y - DISTANCE;
+	maxy = y + DISTANCE;
+	minx = x - DISTANCE;
+	maxx = x + DISTANCE;
+	if (maxy < data()->map.height && miny >= 0 && maxx < data()->map.width && minx >= 0)
 	{
-		if (data()->map.grid[(int)y][(int)x] != WALL)
-			return (false);
+		if (data()->map.grid[(int)miny][(int)minx] == WALL)
+			return (true);
+		if (data()->map.grid[(int)maxy][(int)maxx] == WALL)
+			return (true);
+		if (data()->map.grid[(int)miny][(int)maxx] == WALL)
+			return (true);
+		if (data()->map.grid[(int)maxy][(int)minx] == WALL)
+			return (true);
+		return (false);
 	}
 	return (true);
 }
