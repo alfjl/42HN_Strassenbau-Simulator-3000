@@ -38,7 +38,8 @@ void	rays_draw_to_image(void)
 	while (i < NUMBER_OF_RAYS)
 	{
 		// if (i == 705)
-		// {
+		if (!(i % MINIMAP_RAY_DENSITY_FACTOR))
+		{
 			if (datas->rays[i].y >= 0 && datas->rays[i].x >= 0
 				&& datas->rays[i].y < data()->map.height
 				&& datas->rays[i].x < data()->map.width)
@@ -49,7 +50,7 @@ void	rays_draw_to_image(void)
 				ray.y = data()->player.y * GRID_SIZE;
 				draw_line_a_to_b(img, ray, player, RED);
 			}
-		// }
+		}
 		i++;
 	}
 }
