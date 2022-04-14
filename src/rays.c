@@ -37,8 +37,8 @@ void	rays_draw_to_image(void)
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{
-		if (!(i % MINIMAP_RAY_DENSITY_FACTOR))
-		{
+		// if (i == 705)
+		// {
 			if (datas->rays[i].y >= 0 && datas->rays[i].x >= 0
 				&& datas->rays[i].y < data()->map.height
 				&& datas->rays[i].x < data()->map.width)
@@ -49,7 +49,7 @@ void	rays_draw_to_image(void)
 				ray.y = data()->player.y * GRID_SIZE;
 				draw_line_a_to_b(img, ray, player, RED);
 			}
-		}
+		// }
 		i++;
 	}
 }
@@ -62,6 +62,8 @@ static void	ray_fill_struct(float angle, int i)
 
 	ray = data()->rays;
 	window = &data()->window;
+	// if (i == 705)
+	// 	printf("i: %d\n", i);
 	ray[i] = static_ray_get(angle);
 	ray[i].index = i;
 	delta = radian_limits(data()->player.angle - ray[i].angle);
