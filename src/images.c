@@ -7,12 +7,13 @@ static void	static_create_background(void)
 	t_img	*img;
 
 	img = &data()->imgs[BACKGROUND_IMG];
-	img->ptr = mlx_new_image(data()->mlx, data()->window.width,
-			data()->window.height);
+	img->ptr = my_new_image(data()->mlx, data()->window.width, data()->window.height, img);
+	// img->ptr = mlx_new_image(data()->mlx, data()->window.width,
+	// 		data()->window.height);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
-	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
-			&img->line_length, &img->endian);
+	// img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
+	// 		&img->line_length, &img->endian);
 	y = 0;
 	while (y < data()->window.height)
 	{
@@ -36,11 +37,12 @@ static void	static_create_player_img(void)
 	t_img	*img;
 
 	img = &data()->imgs[PLAYER_IMG];
-	img->ptr = mlx_new_image(data()->mlx, PLAYER_SIZE, PLAYER_SIZE);
+	img->ptr = my_new_image(data()->mlx, PLAYER_SIZE, PLAYER_SIZE, img);
+	// img->ptr = mlx_new_image(data()->mlx, PLAYER_SIZE, PLAYER_SIZE);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
-	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
-			&img->line_length, &img->endian);
+	// img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
+	// 		&img->line_length, &img->endian);
 	y = 0;
 	while (y < PLAYER_SIZE)
 	{
@@ -105,12 +107,13 @@ static void	static_create_minimap_img(void)
 	t_img	*img;
 
 	img = &data()->imgs[MINIMAP_IMG];
-	img->ptr = mlx_new_image(data()->mlx, data()->minimap.width,
-			data()->minimap.height);
+	img->ptr = my_new_image(data()->mlx, data()->minimap.width, data()->minimap.height, img);
+	// img->ptr = mlx_new_image(data()->mlx, data()->minimap.width,
+	// 		data()->minimap.height);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
-	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
-			&img->line_length, &img->endian);
+	// img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
+	// 		&img->line_length, &img->endian);
 	y = 0;
 	while (data()->map.grid[y] != NULL)
 	{

@@ -1,21 +1,48 @@
 #include "cub3d.h"
 
-void	player_nose_draw_to_image(void)
+static void	static_copy_img_section(t_img *src)
 {
-	t_point	a;
-	t_point	b;
 	t_img	*img;
-	img = &data()->imgs[NOSE_IMG];
+	int		img_x;
+	int		img_y;
+	int		src_x;
+	int		src_y;
+	int		color;
 
-	a.x = data()->player.x * GRID_SIZE;
-	a.y = data()->player.y * GRID_SIZE;
-	b.x = data()->player.x * GRID_SIZE + data()->player.dx * NOSE;
-	b.y = data()->player.y * GRID_SIZE + data()->player.dy * NOSE;
-	img->ptr = mlx_new_image_alpha(data()->mlx, data()->minimap.width, data()->minimap.height);
+	img = &data()->imgs[MICROMAP_IMG];
+	src_y = (data()->player.y - MICROMAP_RADIUS) * GRID_SIZE;
+	src_x = (data()->player.x - MICROMAP_RADIUS) * GRID_SIZE;
+	img_y = 0;
+	while (img_y < img->height)
+	{
+		img_x = 0;
+		while (img_x < img->width)
+		{
+			color = BLACK;
+			if (!pixel_is_outside_img_limits(src_x + img_x, src_y + img_y, src))
+			{
+				color = *(unsigned int *)(src->addr
+					+ (unsigned int)((int)(src_y + img_y) * src->line_length
+						+ (src_x + img_x) * src->bits_per_pixel / 8));
+				// if (color != TRANSPARENT)
+				// 	my_pixel_put(img, img_x, img_y, color);
+			}
+			if (color != TRANSPARENT)
+				my_pixel_put(img, img_x, img_y, color);
+			img_x++;
+		}
+		img_y++;
+	}
+}
+
+void	micromap_draw_to_image(void)
+{
+	t_img	*img;
+
+	img = &data()->imgs[MICROMAP_IMG];
+	img->ptr = my_new_image(data()->mlx, MICROMAP_RADIUS * 2 * GRID_SIZE, MICROMAP_RADIUS * 2 * GRID_SIZE, img);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
-	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel, &img->line_length, &img->endian);
-	if (b.y < 0 ||  b.x < 0) //better check
-		return;
-	draw_line_a_to_b(img, a, b, BLACK);
+	static_copy_img_section(&data()->imgs[MINIMAP_IMG]);
+	static_copy_img_section(&data()->imgs[RAYS_IMG]);
 }

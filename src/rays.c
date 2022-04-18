@@ -28,12 +28,13 @@ void	rays_draw_to_image(void)
 
 	datas = data();
 	img = &datas->imgs[RAYS_IMG];
-	img->ptr = mlx_new_image_alpha(datas->mlx, datas->minimap.width,
-			datas->minimap.height);
+	img->ptr = my_new_image(data()->mlx, data()->minimap.width, data()->minimap.height, img);
+	// img->ptr = mlx_new_image_alpha(datas->mlx, datas->minimap.width,
+	// 		datas->minimap.height);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
-	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
-			&img->line_length, &img->endian);
+	// img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
+	// 		&img->line_length, &img->endian);
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{

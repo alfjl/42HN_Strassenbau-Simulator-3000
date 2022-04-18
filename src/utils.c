@@ -1,5 +1,26 @@
 #include "cub3d.h"
 
+void	*my_new_image(void *mlx_ptr, int width, int height, t_img *img)
+{
+	img->ptr = mlx_new_image_alpha(mlx_ptr, width, height);
+	if (img->ptr == NULL)
+		return (NULL);
+	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
+			&img->line_length, &img->endian);
+	img->width = width;
+	img->height = height;
+	return (img->ptr);
+}
+
+bool	pixel_is_outside_img_limits(int x, int y, t_img *img)
+{
+	if (x < 0 || x > img->width - 1)
+		return (true);
+	if (y < 0 || y > img->height - 1)
+		return (true);
+	return (false);
+}
+
 void	my_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;

@@ -82,12 +82,13 @@ void	walls_draw_to_image(void)
 	t_img	*img;
 
 	img = &data()->imgs[WALLS_IMG];
-	img->ptr = mlx_new_image_alpha(data()->mlx, data()->window.width,
-			data()->window.height);
+	img->ptr = my_new_image(data()->mlx, data()->window.width, data()->window.height, img);
+	// img->ptr = mlx_new_image_alpha(data()->mlx, data()->window.width,
+	// 		data()->window.height);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
-	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
-			&img->line_length, &img->endian);
+	// img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
+	// 		&img->line_length, &img->endian);
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{

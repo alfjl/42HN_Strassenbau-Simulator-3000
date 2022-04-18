@@ -7,8 +7,11 @@
 #include <math.h>
 
 # define COLISSION 1
-# define MINIMAP 1
+# define MINIMAP 0
+# define MICROMAP 1
 # define GRID_SIZE 16
+# define MICROMAP_RADIUS 4
+# define MICROMAP_OFFSET 10
 # define TEXTURE_SIZE 32
 # define STEP 0.035
 # define STEP_A 0.025
@@ -211,6 +214,7 @@ typedef enum e_imgnr
 	PLAYER_IMG,
 	NOSE_IMG,
 	MINIMAP_IMG,
+	MICROMAP_IMG,
 	BACKGROUND_IMG,
 	WALLS_IMG,
 	RAYS_IMG,
@@ -291,12 +295,15 @@ void	images_create(void);
 void	textures_load(void);
 int		exit_program(int errorcode);
 void	walls_draw_to_image(void);
+void	micromap_draw_to_image(void);
 //utils
 void			my_pixel_put(t_img *img, int x, int y, int color);
 void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
 unsigned int	create_rgba(int r, int g, int b, int a);
 unsigned int	create_argb(int r, int g, int b, int a);
 float			radian_limits(float angle);
+void			*my_new_image(void *mlx_ptr, int width, int height, t_img *img);
+bool			pixel_is_outside_img_limits(int x, int y, t_img *img);
 //fps
 void	fps_to_window_buffer(void); //remove
 void	timedifference(char *str); //remove

@@ -17,6 +17,14 @@ static void	minimap_to_window_buffer(void *mlx, void *win, t_img *img)
 	player_to_window_buffer(mlx, win, img);
 }
 
+static void	micromap_to_window_buffer(void *mlx, void *win, t_img *img)
+{
+	mlx_put_image_to_window(mlx, win, img[MICROMAP_IMG].ptr, MICROMAP_OFFSET, MICROMAP_OFFSET);
+	mlx_put_image_to_window(mlx, win, img[PLAYER_IMG].ptr,
+		MICROMAP_OFFSET + MICROMAP_RADIUS * GRID_SIZE - PLAYER_SIZE / 2,
+		MICROMAP_OFFSET + MICROMAP_RADIUS * GRID_SIZE - PLAYER_SIZE / 2);
+}
+
 static void	environment_to_window_buffer(void *mlx, void *win, t_img *img)
 {
 	mlx_put_image_to_window(mlx, win, img[BACKGROUND_IMG].ptr, 0, 0);
@@ -36,6 +44,8 @@ static void	window_set_up(void)
 	environment_to_window_buffer(mlx, win, img);
 	if (MINIMAP)
 		minimap_to_window_buffer(mlx, win, img);
+	if (MICROMAP)
+		micromap_to_window_buffer(mlx, win, img);
 	fps_to_window_buffer();
 }
 
@@ -46,6 +56,7 @@ int	game(t_keys *keys)
 	rays_draw_to_image();
 	player_nose_draw_to_image();
 	walls_draw_to_image();
+	micromap_draw_to_image();
 	window_set_up();
 	return (EXIT_SUCCESS);
 }
