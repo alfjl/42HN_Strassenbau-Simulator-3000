@@ -28,17 +28,13 @@ void	rays_draw_to_image(void)
 
 	datas = data();
 	img = &datas->imgs[RAYS_IMG];
+	// my_destroy_image(mlx, &img[RAYS_IMG]);
 	img->ptr = my_new_image(data()->mlx, data()->minimap.width, data()->minimap.height, img);
-	// img->ptr = mlx_new_image_alpha(datas->mlx, datas->minimap.width,
-	// 		datas->minimap.height);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
-	// img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
-	// 		&img->line_length, &img->endian);
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{
-		// if (i == 705)
 		if (!(i % MINIMAP_RAY_DENSITY_FACTOR))
 		{
 			if (datas->rays[i].y >= 0 && datas->rays[i].x >= 0
@@ -49,7 +45,7 @@ void	rays_draw_to_image(void)
 				player.y = datas->rays[i].y * GRID_SIZE;
 				ray.x = data()->player.x * GRID_SIZE;
 				ray.y = data()->player.y * GRID_SIZE;
-				draw_line_a_to_b(img, ray, player, RED);
+				draw_line_a_to_b(img, ray, player, RAY_COLOR);
 			}
 		}
 		i++;
@@ -64,8 +60,6 @@ static void	ray_fill_struct(float angle, int i)
 
 	ray = data()->rays;
 	window = &data()->window;
-	// if (i == 705)
-	// 	printf("i: %d\n", i);
 	ray[i] = static_ray_get(angle);
 	ray[i].index = i;
 	delta = radian_limits(data()->player.angle - ray[i].angle);

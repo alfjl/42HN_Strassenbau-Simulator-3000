@@ -1,6 +1,30 @@
 #include "cub3d.h"
 #include <errno.h>
 
+static void	mlx_destroy_images(void)
+{
+	void	*mlx;
+	t_img	*imgs;
+	int		i;
+
+	mlx = data()->mlx;
+	imgs = data()->imgs;
+	i = 0;
+	while (i < IMAGES)
+	{
+		if (imgs[i].ptr != NULL)
+			my_destroy_image(mlx, (t_img *)&imgs[i].ptr);
+		i++;
+	}
+}
+
+static void	mlx_free(void)
+{
+	mlx_destroy_images();
+	if (data()->win != NULL)
+		mlx_destroy_window(data()->mlx, data()->win);
+}
+
 static char	*static_get_error_message(int errorcode)
 {
 	char	*errormessage[ERRORS];
@@ -13,6 +37,7 @@ static char	*static_get_error_message(int errorcode)
 
 static void	static_free_all(void)
 {
+	mlx_free();
 	return ;
 }
 

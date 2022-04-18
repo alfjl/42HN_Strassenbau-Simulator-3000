@@ -26,6 +26,7 @@
 # define DR 0.0174533
 # define ANGLE_OF_VIEW_CONST 60
 # define ANGLE_OF_VIEW ANGLE_OF_VIEW_CONST
+# define RAY_COLOR RED
 # define WINDOW_HEIGHT 512
 # define WINDOW_WIDTH (2 * WINDOW_HEIGHT)
 # define NUMBER_OF_RAYS WINDOW_WIDTH
@@ -303,6 +304,7 @@ unsigned int	create_rgba(int r, int g, int b, int a);
 unsigned int	create_argb(int r, int g, int b, int a);
 float			radian_limits(float angle);
 void			*my_new_image(void *mlx_ptr, int width, int height, t_img *img);
+void			my_destroy_image(void *mlx_ptr, t_img *img);
 bool			pixel_is_outside_img_limits(int x, int y, t_img *img);
 //fps
 void	fps_to_window_buffer(void); //remove

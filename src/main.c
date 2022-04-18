@@ -1,7 +1,22 @@
 # include "cub3d.h"
 
+static void	static_init_image_pointers(void)
+{
+	t_img	*imgs;
+	int		i;
+
+	imgs = data()->imgs;
+	i = 0;
+	while (i < IMAGES)
+	{
+		imgs[i].ptr = NULL;
+		i++;
+	}
+}
+
 static void	static_initialize_data(void)
 {
+	data()->win = NULL;
 	data()->map.ceiling.rgb = CYAN;
 	data()->map.floor.rgb = BLACK;
 	data()->map.textures.south = "./textures/stone.xpm";
@@ -45,6 +60,7 @@ int		main(int argc, char **argv)
 	data()->mlx = mlx_init();
 	if (data()->mlx == NULL)
 		exit_program(MLX);
+	static_init_image_pointers();
 	images_create();
 	textures_load();
 	mlx();

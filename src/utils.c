@@ -1,5 +1,12 @@
 #include "cub3d.h"
 
+void	my_destroy_image(void *mlx_ptr, t_img *img)
+{
+	if (img->ptr != NULL)
+		mlx_destroy_image(mlx_ptr, img->ptr);
+	img->ptr = NULL;
+}
+
 void	*my_new_image(void *mlx_ptr, int width, int height, t_img *img)
 {
 	img->ptr = mlx_new_image_alpha(mlx_ptr, width, height);
