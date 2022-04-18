@@ -9,6 +9,8 @@ static void	static_create_img_from_texture(int image)
 			&img->width, &img->height);
 	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
+	img->width = TEXTURE_SIZE;
+	img->height = TEXTURE_SIZE;
 }
 
 void	textures_load(void)

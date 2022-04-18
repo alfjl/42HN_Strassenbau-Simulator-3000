@@ -22,15 +22,13 @@ static void	static_draw_vertical_line(t_img *img, t_point start, t_point end, in
 	y = start.y;
 	while (y <= end.y)
 	{
-		// if (index == 7050)
-		// 	color = MAGENTA;
-		// else
-		// {
+		if (!pixel_is_outside_img_limits(tx, ty, img))
+		{
 			color = *(unsigned int *)(data()->imgs[image].addr
 				+ (unsigned int)((int)ty * data()->imgs[image].line_length
 					+ tx * (data()->imgs[image].bits_per_pixel / 8))) + ALPHA;
-		// }
-		my_pixel_put(img, start.x, y, color);
+			my_pixel_put(img, start.x, y, color);
+		}
 		y++;
 		ty += ty_step;
 	}
@@ -83,12 +81,8 @@ void	walls_draw_to_image(void)
 
 	img = &data()->imgs[WALLS_IMG];
 	img->ptr = my_new_image(data()->mlx, data()->window.width, data()->window.height, img);
-	// img->ptr = mlx_new_image_alpha(data()->mlx, data()->window.width,
-	// 		data()->window.height);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
-	// img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
-	// 		&img->line_length, &img->endian);
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{

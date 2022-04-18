@@ -18,7 +18,7 @@ static void	static_copy_img_section(t_img *src)
 		img_x = 0;
 		while (img_x < img->width)
 		{
-			color = BLACK;
+			color = MINIMAP_BACKGROUND_COLOR;
 			if (!pixel_is_outside_img_limits(src_x + img_x, src_y + img_y, src))
 			{
 				color = *(unsigned int *)(src->addr

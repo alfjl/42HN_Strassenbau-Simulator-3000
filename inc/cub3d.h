@@ -2,13 +2,13 @@
 # define CUB3D_H
 # include "../mlx/mlx.h"
 # include "../libft/inc/libft.h"
-// # include <stdlib.h>
-// # include "../textures/T1_bricks.ppm"
-#include <math.h>
+# include <math.h>
 
+//Settings
 # define COLISSION 1
 # define MINIMAP 0
 # define MICROMAP 1
+//Parameters
 # define GRID_SIZE 16
 # define MICROMAP_RADIUS 4
 # define MICROMAP_OFFSET 10
@@ -19,24 +19,31 @@
 # define DISTANCE_FACTOR 20
 # define DISTANCE 0.2
 # define PLAYER_SIZE 5
+# define ANGLE_OF_VIEW_CONST 60
+# define ANGLE_OF_VIEW ANGLE_OF_VIEW_CONST
+# define WINDOW_HEIGHT 512
+# define WINDOW_WIDTH (2 * WINDOW_HEIGHT)
+# define NUMBER_OF_RAYS WINDOW_WIDTH
+# define MINIMAP_RAY_DENSITY_FACTOR 10
+# define WALL_HEIGHT_RATIO 1
+# define DEPTH_OF_FIELD (2 * WINDOW_HEIGHT)
+//Math
 # define PI 3.1415926535
 # define PI1 (PI / 2)
 # define PI3 (3 * PI1)
 # define EDGE 0.00001
 # define DR 0.0174533
-# define ANGLE_OF_VIEW_CONST 60
-# define ANGLE_OF_VIEW ANGLE_OF_VIEW_CONST
-# define RAY_COLOR RED
-# define WINDOW_HEIGHT 512
-# define WINDOW_WIDTH (2 * WINDOW_HEIGHT)
-# define NUMBER_OF_RAYS WINDOW_WIDTH
-# define MINIMAP_RAY_DENSITY_FACTOR 10
-// # define WALL_HEIGHT_RATIO 1
-# define DEPTH_OF_FIELD (2 * WINDOW_HEIGHT)
+//Color Theme
 //Linux
 # define ALPHA ((0xff) << 24)
 //Mac
 // # define ALPHA 0
+# define RAY_COLOR RED
+# define MINIMAP_SPACE_COLOR WHITE
+# define MINIMAP_WALL_COLOR GREY
+# define MINIMAP_GRID_COLOR BLACK
+# define MINIMAP_BACKGROUND_COLOR BLACK
+# define MINIMAP_PLAYER_COLOR BLACK
 
 
 typedef enum e_x11events

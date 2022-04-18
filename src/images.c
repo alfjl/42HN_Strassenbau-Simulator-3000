@@ -8,12 +8,8 @@ static void	static_create_background(void)
 
 	img = &data()->imgs[BACKGROUND_IMG];
 	img->ptr = my_new_image(data()->mlx, data()->window.width, data()->window.height, img);
-	// img->ptr = mlx_new_image(data()->mlx, data()->window.width,
-	// 		data()->window.height);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
-	// img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
-	// 		&img->line_length, &img->endian);
 	y = 0;
 	while (y < data()->window.height)
 	{
@@ -38,18 +34,15 @@ static void	static_create_player_img(void)
 
 	img = &data()->imgs[PLAYER_IMG];
 	img->ptr = my_new_image(data()->mlx, PLAYER_SIZE, PLAYER_SIZE, img);
-	// img->ptr = mlx_new_image(data()->mlx, PLAYER_SIZE, PLAYER_SIZE);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
-	// img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
-	// 		&img->line_length, &img->endian);
 	y = 0;
 	while (y < PLAYER_SIZE)
 	{
 		x = 0;
 		while (x < PLAYER_SIZE)
 		{
-			my_pixel_put(img, x, y, BLACK);
+			my_pixel_put(img, x, y, MINIMAP_PLAYER_COLOR);
 			x++;
 		}
 		y++;
@@ -69,7 +62,7 @@ static void	static_paint_borders(t_img *img, int img_y, int img_x)
 		{
 			if ((y == 0 || y == GRID_SIZE - 1) || (x == 0 || x == GRID_SIZE -1))
 				my_pixel_put(img, img_x * GRID_SIZE + x,
-					img_y * GRID_SIZE + y, BLACK);
+					img_y * GRID_SIZE + y, MINIMAP_GRID_COLOR);
 			x++;
 		}
 		y++;
@@ -89,10 +82,10 @@ static void	static_paint_cell(t_img *img, int img_y, int img_x)
 		{
 			if (data()->map.grid[img_y][img_x] == WALL)
 				my_pixel_put(img, img_x * GRID_SIZE + x,
-					img_y * GRID_SIZE + y, GREY);
+					img_y * GRID_SIZE + y, MINIMAP_WALL_COLOR);
 			else
 				my_pixel_put(img, img_x * GRID_SIZE + x,
-					img_y * GRID_SIZE + y, WHITE);
+					img_y * GRID_SIZE + y, MINIMAP_SPACE_COLOR);
 			x++;
 		}
 		y++;
@@ -108,12 +101,8 @@ static void	static_create_minimap_img(void)
 
 	img = &data()->imgs[MINIMAP_IMG];
 	img->ptr = my_new_image(data()->mlx, data()->minimap.width, data()->minimap.height, img);
-	// img->ptr = mlx_new_image(data()->mlx, data()->minimap.width,
-	// 		data()->minimap.height);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
-	// img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
-	// 		&img->line_length, &img->endian);
 	y = 0;
 	while (data()->map.grid[y] != NULL)
 	{

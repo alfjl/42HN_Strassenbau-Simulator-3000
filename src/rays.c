@@ -65,7 +65,7 @@ static void	ray_fill_struct(float angle, int i)
 	delta = radian_limits(data()->player.angle - ray[i].angle);
 	ray[i].dist = ray[i].len * cos(delta);
 	ray[i].line_h = (window->height / ray[i].dist) * window->width
-		/ window->height * ANGLE_OF_VIEW_CONST / ANGLE_OF_VIEW;
+		/ window->height * ANGLE_OF_VIEW_CONST / ANGLE_OF_VIEW * WALL_HEIGHT_RATIO;
 }
 
 void	rays_create(void)
