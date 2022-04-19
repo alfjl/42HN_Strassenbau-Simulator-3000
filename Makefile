@@ -16,6 +16,7 @@ SRCS :=	main.c \
 		textures.c \
 		utils.c \
 		wallcollision.c \
+		walls_vertical_line.c \
 		walls.c \
 		fps.c #remove
 OBJS := $(patsubst %.c,$(OBJ_DIR)%.o,$(SRCS))

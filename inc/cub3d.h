@@ -310,6 +310,7 @@ void	images_create(void);
 void	textures_load(void);
 int		exit_program(int errorcode);
 void	walls_draw_to_image(void);
+void	draw_vertical_line(t_img *img, t_point start, t_point end, int index);
 void	micromap_draw_to_image(void);
 //utils
 void			my_pixel_put(t_img *img, int x, int y, int color);
