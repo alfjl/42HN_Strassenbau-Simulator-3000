@@ -34,7 +34,8 @@ static void	static_create_img_from_texture(int image, float brightness)
 		exit_program(MLX_IMAGE);
 	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
-	static_shade_image(img, brightness);
+	if (SHADES)
+		static_shade_image(img, brightness);
 }
 
 void	textures_load(void)

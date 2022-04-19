@@ -7,7 +7,7 @@ SRCS :=	main.c \
 		game.c \
 		images.c \
 		map.c \
-		minimap.c \
+		micromap.c \
 		mlx.c \
 		player.c \
 		rays_calculate.c \

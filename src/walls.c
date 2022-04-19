@@ -15,6 +15,9 @@ static void	static_draw_vertical_line(t_img *img, t_point start, t_point end, in
 	else
 		tx = (data()->rays[index].y - (int)data()->rays[index].y)
 			* TEXTURE_SIZE;
+	if (data()->rays[index].orientation == WEST
+		|| data()->rays[index].orientation == SOUTH)
+		tx = TEXTURE_SIZE - 1 - tx;
 	if (tx < 0) //better check
 		tx = 0;
 	ty = data()->rays[index].tyoffset;
