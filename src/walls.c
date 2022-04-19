@@ -1,13 +1,21 @@
 #include "cub3d.h"
 
-static void	static_draw_vertical_line(t_img *img, t_point start, t_point end, int image, int index)
+static int	static_get_image(int index)
 {
-	int		y;
-	int		tx;
-	float	ty;
-	float	ty_step;
-	int		color;
+	if (data()->rays[index].orientation == NORTH)
+		return (NORTH_IMG);
+	else if (data()->rays[index].orientation == SOUTH)
+		return (SOUTH_IMG);
+	else if (data()->rays[index].orientation == EAST)
+		return (EAST_IMG);
+	else
+		return (WEST_IMG);
+}
 
+static int	static_determine_tx(int index)
+{
+	int tx;
+	
 	if (data()->rays[index].orientation == NORTH
 		|| data()->rays[index].orientation == SOUTH)
 		tx = (data()->rays[index].x - (int)data()->rays[index].x)
@@ -20,21 +28,38 @@ static void	static_draw_vertical_line(t_img *img, t_point start, t_point end, in
 		tx = TEXTURE_SIZE - 1 - tx;
 	if (tx < 0) //better check
 		tx = 0;
-	ty = data()->rays[index].tyoffset;
-	ty_step = TEXTURE_SIZE / data()->rays[index].line_h;
+	return (tx);
+}
+
+static void	static_copy_color(t_img *img, t_point start, int index, int y)
+{
+	int		color;
+	int		tx;
+	float	ty;
+	int		image;
+	
+	image = static_get_image(index);
+	tx = static_determine_tx(index);
+	ty = data()->rays[index].tyoffset + (TEXTURE_SIZE / data()->rays[index].line_h) * (y - start.y);
+	if (!is_out_of_limits(tx, ty, img))
+	{
+		color = *(unsigned int *)(data()->imgs[image].addr
+				+ (unsigned int)((int)ty * data()->imgs[image].line_len
+					+ tx * (data()->imgs[image].bits_per_pixel / 8)))
+			+ ALPHA;
+		my_pixel_put(img, start.x, y, color);
+	}
+}
+
+static void	static_draw_vertical_line(t_img *img, t_point start, t_point end, int index)
+{
+	int		y;
+
 	y = start.y;
 	while (y <= end.y)
 	{
-		if (!is_out_of_limits(tx, ty, img))
-		{
-			color = *(unsigned int *)(data()->imgs[image].addr
-					+ (unsigned int)((int)ty * data()->imgs[image].line_len
-						+ tx * (data()->imgs[image].bits_per_pixel / 8)))
-				+ ALPHA;
-			my_pixel_put(img, start.x, y, color);
-		}
+		static_copy_color(img, start, index, y);
 		y++;
-		ty += ty_step;
 	}
 }
 
@@ -66,14 +91,7 @@ static void	static_draw_wallsegment(int index, t_img *img)
 		if (start.x > data()->window.width - 1)
 			start.x = data()->window.width - 1;
 		end.x = start.x;
-		if (data()->rays[index].orientation == NORTH)
-			static_draw_vertical_line(img, start, end, NORTH_IMG, index);
-		else if (data()->rays[index].orientation == SOUTH)
-			static_draw_vertical_line(img, start, end, SOUTH_IMG, index);
-		else if (data()->rays[index].orientation == EAST)
-			static_draw_vertical_line(img, start, end, EAST_IMG, index);
-		else
-			static_draw_vertical_line(img, start, end, WEST_IMG, index);
+		static_draw_vertical_line(img, start, end, index);
 		line_i++;
 	}
 }
