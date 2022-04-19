@@ -1,13 +1,5 @@
 #include "cub3d.h"
 
-static t_ray	static_min(t_ray ray1, t_ray ray2)
-{
-	if (ray1.len < ray2.len)
-		return (ray1);
-	else
-		return (ray2);
-}
-
 static t_ray	static_ray_get(float angle)
 {
 	t_ray	ray_horizontal;
@@ -15,7 +7,28 @@ static t_ray	static_ray_get(float angle)
 
 	ray_horizontal = ray_calculate_horizontal(angle);
 	ray_vertival = ray_calculate_vertical(angle);
-	return (static_min(ray_horizontal, ray_vertival));
+	if (ray_horizontal.len < ray_vertival.len)
+		return (ray_horizontal);
+	else
+		return (ray_vertival);
+}
+
+static void	static_draw_single_ray(t_img *img, t_point player, t_point ray,
+	int i)
+{
+	t_ray	*rays;
+
+	rays = data()->rays;
+	if (rays[i].y >= 0 && rays[i].x >= 0
+		&& rays[i].y < data()->map.height
+		&& rays[i].x < data()->map.width)
+	{
+		player.x = rays[i].x * GRID_SIZE;
+		player.y = rays[i].y * GRID_SIZE;
+		ray.x = data()->player.x * GRID_SIZE;
+		ray.y = data()->player.y * GRID_SIZE;
+		draw_line_a_to_b(img, ray, player, RAY_COLOR);
+	}
 }
 
 void	rays_draw_to_image(void)
@@ -39,18 +52,7 @@ void	rays_draw_to_image(void)
 	while (i < NUMBER_OF_RAYS)
 	{
 		if (!(i % MINIMAP_RAY_DENSITY_FACTOR))
-		{
-			if (datas->rays[i].y >= 0 && datas->rays[i].x >= 0
-				&& datas->rays[i].y < data()->map.height
-				&& datas->rays[i].x < data()->map.width)
-			{
-				player.x = datas->rays[i].x * GRID_SIZE;
-				player.y = datas->rays[i].y * GRID_SIZE;
-				ray.x = data()->player.x * GRID_SIZE;
-				ray.y = data()->player.y * GRID_SIZE;
-				draw_line_a_to_b(img, ray, player, RAY_COLOR);
-			}
-		}
+			static_draw_single_ray(img, player, ray, i);
 		i++;
 	}
 }
