@@ -16,8 +16,8 @@ t_img	*image_clone(void *mlx, t_img *src, t_img *dst)
 		while (x < dst->width)
 		{
 			color = *(unsigned int *)(src->addr
-				+ (unsigned int)((int)y * src->line_len
-					+ x * (src->bits_per_pixel / 8)));
+					+ (unsigned int)((int)y * src->line_len
+						+ x * (src->bits_per_pixel / 8)));
 			my_pixel_put(dst, x, y, color);
 			x++;
 		}	
@@ -50,6 +50,7 @@ unsigned int	argb_color_shade(int color, float brightness)
 	int	r;
 	int	g;
 	int	b;
+
 	a = ((color >> 24) & 0xFF);
 	r = ((color >> 16) & 0xFF);
 	g = ((color >> 8) & 0xFF);

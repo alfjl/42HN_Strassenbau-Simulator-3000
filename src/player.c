@@ -4,7 +4,7 @@ static void	static_player_update_forwards(void)
 {
 	float	new_x;
 	float	new_y;
-	
+
 	if (!is_wall(data()->player.y,
 			(data()->player.x + data()->player.dx)))
 	{
@@ -44,7 +44,7 @@ static void	static_player_update_leftwards(void)
 {
 	float	new_x;
 	float	new_y;
-	
+
 	new_x = data()->player.x + data()->player.dy;
 	new_y = data()->player.y - data()->player.dx;
 	if (!is_wall(data()->player.y, data()->player.x + data()->player.dy))
@@ -63,7 +63,7 @@ static void	static_player_update_rightwards(void)
 {
 	float	new_x;
 	float	new_y;
-	
+
 	new_x = data()->player.x - data()->player.dy;
 	new_y = data()->player.y + data()->player.dx;
 	if (!is_wall(data()->player.y, data()->player.x - data()->player.dy))

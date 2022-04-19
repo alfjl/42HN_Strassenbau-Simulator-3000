@@ -28,9 +28,9 @@ void	rays_draw_to_image(void)
 
 	datas = data();
 	img = &datas->imgs[RAYS_IMG];
-	// my_destroy_image(mlx, &img[RAYS_IMG]);
 	if (LINUX)
-		img->ptr = my_new_image(data()->mlx, data()->minimap.width, data()->minimap.height, img);
+		img->ptr = my_new_image(data()->mlx, data()->minimap.width,
+				data()->minimap.height, img);
 	else
 		img = image_clone(data()->mlx, &data()->imgs[MINIMAP_IMG], img);
 	if (img->ptr == NULL)
@@ -68,7 +68,8 @@ static void	ray_fill_struct(float angle, int i)
 	delta = radian_limits(data()->player.angle - ray[i].angle);
 	ray[i].dist = ray[i].len * cos(delta);
 	ray[i].line_h = (window->height / ray[i].dist) * window->width
-		/ window->height * ANGLE_OF_VIEW_CONST / ANGLE_OF_VIEW * WALL_HEIGHT_RATIO;
+		/ window->height * ANGLE_OF_VIEW_CONST / ANGLE_OF_VIEW
+		* WALL_HEIGHT_RATIO;
 }
 
 void	rays_create(void)

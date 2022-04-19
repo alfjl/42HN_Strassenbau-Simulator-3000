@@ -9,9 +9,6 @@ static void	static_iterate(t_ray *ray)
 	i = 0;
 	while (i < DEPTH_OF_FIELD)
 	{
-		// if ((*ray).y >= 0 && (*ray).x >= 0 && (*ray).y < map->height
-		// 		&& (*ray).x < map->width)
-		// 	printf("x: %d, y: %d, map: %c\n",(int)(*ray).x ,(int)(*ray).y, map->grid[(int)(*ray).y][(int)(*ray).x]);
 		if ((*ray).y >= 0 && (*ray).x >= 0 && (*ray).y < map->height
 			&& (*ray).x < map->width
 			&& map->grid[(int)(*ray).y][(int)(*ray).x] == WALL)

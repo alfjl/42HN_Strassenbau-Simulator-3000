@@ -6,14 +6,15 @@ bool	is_wall(float y, float x)
 	float	maxy;
 	float	minx;
 	float	maxx;
-	
+
 	if (COLLISION == false)
 		return (false);
 	miny = y - DISTANCE;
 	maxy = y + DISTANCE;
 	minx = x - DISTANCE;
 	maxx = x + DISTANCE;
-	if (maxy < data()->map.height && miny >= 0 && maxx < data()->map.width && minx >= 0)
+	if (maxy < data()->map.height && miny >= 0 && maxx < data()->map.width
+		&& minx >= 0)
 	{
 		if (data()->map.grid[(int)miny][(int)minx] == WALL)
 			return (true);

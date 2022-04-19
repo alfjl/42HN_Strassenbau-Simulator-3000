@@ -13,8 +13,8 @@ static void	static_shade_image(t_img *img, float brightness)
 		while (x < img->width)
 		{
 			color = *(unsigned int *)(img->addr
-				+ (unsigned int)((int)y * img->line_len
-					+ x * (img->bits_per_pixel / 8)));
+					+ (unsigned int)((int)y * img->line_len
+						+ x * (img->bits_per_pixel / 8)));
 			color = argb_color_shade(color, brightness);
 			my_pixel_put(img, x, y, color);
 			x++;
