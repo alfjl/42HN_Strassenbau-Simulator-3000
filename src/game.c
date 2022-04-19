@@ -1,19 +1,19 @@
 #include "cub3d.h"
 
-static void	player_to_window_buffer(void *mlx, void *win, t_img *img)
-{
-	mlx_put_image_to_window(mlx, win, img[RAYS_IMG].ptr, 0, 0);
-	my_destroy_image(mlx, &img[RAYS_IMG]);
-	mlx_put_image_to_window(mlx, win, img[PLAYER_IMG].ptr,
-		data()->player.x * GRID_SIZE - PLAYER_SIZE / 2,
-		data()->player.y * GRID_SIZE - PLAYER_SIZE / 2);
-}
+// static void	player_to_window_buffer(void *mlx, void *win, t_img *img)
+// {
+// 	mlx_put_image_to_window(mlx, win, img[RAYS_IMG].ptr, 0, 0);
+// 	my_destroy_image(mlx, &img[RAYS_IMG]);
+// 	mlx_put_image_to_window(mlx, win, img[PLAYER_IMG].ptr,
+// 		data()->player.x * GRID_SIZE - PLAYER_SIZE / 2,
+// 		data()->player.y * GRID_SIZE - PLAYER_SIZE / 2);
+// }
 
-static void	minimap_to_window_buffer(void *mlx, void *win, t_img *img)
-{
-	mlx_put_image_to_window(mlx, win, img[MINIMAP_IMG].ptr, 0, 0);
-	player_to_window_buffer(mlx, win, img);
-}
+// static void	minimap_to_window_buffer(void *mlx, void *win, t_img *img)
+// {
+// 	mlx_put_image_to_window(mlx, win, img[MINIMAP_IMG].ptr, 0, 0);
+// 	player_to_window_buffer(mlx, win, img);
+// }
 
 static void	micromap_to_window_buffer(void *mlx, void *win, t_img *img)
 {
@@ -43,8 +43,6 @@ static void	window_set_up(void)
 	win = data()->win;
 	img = data()->imgs;
 	environment_to_window_buffer(mlx, win, img);
-	if (MINIMAP)
-		minimap_to_window_buffer(mlx, win, img);
 	if (MICROMAP)
 		micromap_to_window_buffer(mlx, win, img);
 	my_destroy_image(mlx, &img[RAYS_IMG]);

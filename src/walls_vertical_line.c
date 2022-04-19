@@ -42,7 +42,7 @@ static void	static_copy_color(t_img *img, t_point start, int index, int y)
 	tx = static_determine_tx(index);
 	ty = data()->rays[index].tyoffset + (TEXTURE_SIZE
 			/ data()->rays[index].line_h) * (y - start.y);
-	if (!is_out_of_limits(tx, ty, img))
+	if (is_inside_limits(tx, ty, img))
 	{
 		color = *(unsigned int *)(data()->imgs[image].addr
 				+ (unsigned int)((int)ty * data()->imgs[image].line_len

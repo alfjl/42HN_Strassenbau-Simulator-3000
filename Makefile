@@ -14,6 +14,9 @@ SRCS :=	main.c \
 		rays_calculate_vertical.c \
 		rays.c \
 		textures.c \
+		utils_colors.c \
+		utils_mlx_re.c \
+		utils_mlx.c \
 		utils.c \
 		wallcollision.c \
 		walls_vertical_line.c \

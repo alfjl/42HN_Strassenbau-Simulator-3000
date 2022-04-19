@@ -321,7 +321,7 @@ unsigned int	argb_color_shade(int color, float brightness);
 float			radian_limits(float angle);
 void			*my_new_image(void *mlx_ptr, int width, int height, t_img *img);
 void			my_destroy_image(void *mlx_ptr, t_img *img);
-bool			is_out_of_limits(int x, int y, t_img *img);
+bool			is_inside_limits(int x, int y, t_img *img);
 void			image_fill(t_img *img, int color);
 t_img			*image_clone(void *mlx, t_img *src, t_img *dst);
 //fps
