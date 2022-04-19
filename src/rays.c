@@ -29,7 +29,8 @@ void	rays_draw_to_image(void)
 	datas = data();
 	img = &datas->imgs[RAYS_IMG];
 	// my_destroy_image(mlx, &img[RAYS_IMG]);
-	img->ptr = my_new_image(data()->mlx, data()->minimap.width, data()->minimap.height, img);
+	// img->ptr = my_new_image(data()->mlx, data()->minimap.width, data()->minimap.height, img);
+	img = image_clone(data()->mlx, &data()->imgs[MINIMAP_IMG], img);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
 	i = 0;

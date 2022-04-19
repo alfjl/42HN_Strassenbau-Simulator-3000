@@ -1,5 +1,31 @@
 #include "cub3d.h"
 
+t_img	*image_clone(void *mlx, t_img *src, t_img *dst)
+{
+	int		x;
+	int		y;
+	int		color;
+
+	dst->ptr = my_new_image(mlx, src->width, src->height, dst);
+	if (dst->ptr == NULL)
+		return (NULL);
+	y = 0;
+	while (y < dst->height)
+	{
+		x = 0;
+		while (x < dst->width)
+		{
+			color = *(unsigned int *)(src->addr
+				+ (unsigned int)((int)y * src->line_length
+					+ x * (src->bits_per_pixel / 8)));
+			my_pixel_put(dst, x, y, color);
+			x++;
+		}	
+		y++;
+	}
+	return (dst);
+}
+
 void	image_fill(t_img *img, int color)
 {
 	int	x;
@@ -40,13 +66,14 @@ void	my_destroy_image(void *mlx_ptr, t_img *img)
 
 void	*my_new_image(void *mlx_ptr, int width, int height, t_img *img)
 {
-	img->ptr = mlx_new_image_alpha(mlx_ptr, width, height);
+	img->ptr = mlx_new_image(mlx_ptr, width, height);
 	if (img->ptr == NULL)
 		return (NULL);
 	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
 	img->width = width;
 	img->height = height;
+	image_fill(img, TRANSPARENT);
 	return (img->ptr);
 }
 

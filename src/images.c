@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void	static_create_background(void)
+static void	static_create_background_img(void)
 {
 	int		x;
 	int		y;
@@ -49,7 +49,7 @@ static void	static_create_player_img(void)
 	}
 }
 
-static void	static_paint_borders(t_img *img, int img_y, int img_x)
+static void	static_draw_grid(t_img *img, int img_y, int img_x)
 {
 	int		x;
 	int		y;
@@ -90,7 +90,7 @@ static void	static_paint_cell(t_img *img, int img_y, int img_x)
 		}
 		y++;
 	}
-	static_paint_borders(img, img_y, img_x);
+	static_draw_grid(img, img_y, img_x);
 }
 
 static void	static_create_minimap_img(void)
@@ -119,6 +119,6 @@ static void	static_create_minimap_img(void)
 void	images_create(void)
 {
 	static_create_minimap_img();
-	static_create_background();
+	static_create_background_img();
 	static_create_player_img();
 }

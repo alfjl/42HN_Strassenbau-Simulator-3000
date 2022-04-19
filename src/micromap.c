@@ -24,8 +24,6 @@ static void	static_copy_img_section(t_img *src)
 				color = *(unsigned int *)(src->addr
 					+ (unsigned int)((int)(src_y + img_y) * src->line_length
 						+ (src_x + img_x) * src->bits_per_pixel / 8));
-				// if (color != TRANSPARENT)
-				// 	my_pixel_put(img, img_x, img_y, color);
 			}
 			if (color != TRANSPARENT)
 				my_pixel_put(img, img_x, img_y, color);

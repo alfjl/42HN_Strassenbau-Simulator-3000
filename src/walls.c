@@ -83,7 +83,8 @@ void	walls_draw_to_image(void)
 	t_img	*img;
 
 	img = &data()->imgs[WALLS_IMG];
-	img->ptr = my_new_image(data()->mlx, data()->window.width, data()->window.height, img);
+	// img->ptr = my_new_image(data()->mlx, data()->window.width, data()->window.height, img);
+	img = image_clone(data()->mlx, &data()->imgs[BACKGROUND_IMG], img);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
 	i = 0;
