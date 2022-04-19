@@ -5,9 +5,11 @@
 # include <math.h>
 
 //Settings
+# define LINUX 1
 # define COLISSION 1
 # define MICROMAP 1
 # define SHADES 1
+# define OS LINUX
 //Parameters
 # define GRID_SIZE 16
 # define MICROMAP_RADIUS 4
@@ -50,8 +52,6 @@
 # define MINIMAP_PLAYER_COLOR BLACK
 //DEBUG
 # define MINIMAP 0
-
-
 
 typedef enum e_x11events
 {
