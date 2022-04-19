@@ -7,7 +7,7 @@ bool	is_wall(float y, float x)
 	float	minx;
 	float	maxx;
 	
-	if (COLISSION == false)
+	if (COLLISION == false)
 		return (false);
 	miny = y - DISTANCE;
 	maxy = y + DISTANCE;

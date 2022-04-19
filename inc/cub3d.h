@@ -6,10 +6,9 @@
 
 //Settings
 # define LINUX 1
-# define COLISSION 1
+# define COLLISION 1
 # define MICROMAP 1
 # define SHADES 1
-# define OS LINUX
 //Parameters
 # define GRID_SIZE 16
 # define MICROMAP_RADIUS 4
