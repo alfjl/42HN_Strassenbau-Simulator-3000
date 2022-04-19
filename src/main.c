@@ -19,9 +19,12 @@ static void	static_initialize_data(void)
 	data()->win = NULL;
 	data()->map.ceiling.rgb = CYAN;
 	data()->map.floor.rgb = BLACK;
-	data()->map.textures.south = "./textures/stone.xpm";
-	data()->map.textures.north = "./textures/moss.xpm";
-	data()->map.textures.east = "./textures/magma.xpm";
+	// data()->map.textures.south = "./textures/stone.xpm";
+	// data()->map.textures.north = "./textures/moss.xpm";
+	// data()->map.textures.east = "./textures/magma.xpm";
+	data()->map.textures.south = "./textures/bricks.xpm";
+	data()->map.textures.north = "./textures/bricks.xpm";
+	data()->map.textures.east = "./textures/bricks.xpm";
 	data()->map.textures.west = "./textures/bricks.xpm";
 	data()->imgs[SOUTH_IMG].path = data()->map.textures.south;
 	data()->imgs[NORTH_IMG].path = data()->map.textures.north;

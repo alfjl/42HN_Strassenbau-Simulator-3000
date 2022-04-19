@@ -309,10 +309,12 @@ void			my_pixel_put(t_img *img, int x, int y, int color);
 void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
 unsigned int	create_rgba(int r, int g, int b, int a);
 unsigned int	create_argb(int r, int g, int b, int a);
+unsigned int	argb_color_shade(int color, float brightness);
 float			radian_limits(float angle);
 void			*my_new_image(void *mlx_ptr, int width, int height, t_img *img);
 void			my_destroy_image(void *mlx_ptr, t_img *img);
 bool			pixel_is_outside_img_limits(int x, int y, t_img *img);
+void			image_fill(t_img *img, int color);
 //fps
 void	fps_to_window_buffer(void); //remove
 void	timedifference(char *str); //remove

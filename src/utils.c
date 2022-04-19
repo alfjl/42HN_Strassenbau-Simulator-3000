@@ -1,5 +1,36 @@
 #include "cub3d.h"
 
+void	image_fill(t_img *img, int color)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < img->height)
+	{
+		x = 0;
+		while (x < img->width)
+		{
+			my_pixel_put(img, x, y, color);
+			x++;
+		}	
+		y++;
+	}
+}
+
+unsigned int	argb_color_shade(int color, float brightness)
+{
+	int	a;
+	int	r;
+	int	g;
+	int	b;
+	a = ((color >> 24) & 0xFF);
+	r = ((color >> 16) & 0xFF);
+	g = ((color >> 8) & 0xFF);
+	b = ((color) & 0xFF);
+	return (create_argb(r * brightness, g * brightness, b * brightness, a));
+}
+
 void	my_destroy_image(void *mlx_ptr, t_img *img)
 {
 	if (img->ptr != NULL)
