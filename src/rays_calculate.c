@@ -32,7 +32,7 @@ t_ray	ray_calculate_vertical(float angle)
 
 	ray.angle = angle;
 	ntan = -tan(ray.angle);
-	if (ray.angle > PI1 && ray.angle < PI3)
+	if (ray.angle > PI1_2 && ray.angle < PI3_2)
 	{
 		ray.orientation = WEST;
 		ray.x = (float)trunc(data()->player.x) - EDGE;
@@ -41,7 +41,7 @@ t_ray	ray_calculate_vertical(float angle)
 		ray.dy = -ray.dx * ntan;
 		static_iterate(&ray);
 	}
-	if (ray.angle < PI1 || ray.angle > PI3)
+	if (ray.angle < PI1_2 || ray.angle > PI3_2)
 	{
 		ray.orientation = EAST;
 		ray.x = (float)ceil(data()->player.x);

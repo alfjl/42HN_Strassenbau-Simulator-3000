@@ -29,8 +29,8 @@
 # define DEPTH_OF_FIELD (2 * WINDOW_HEIGHT)
 //Math
 # define PI 3.1415926535
-# define PI1 (PI / 2)
-# define PI3 (3 * PI1)
+# define PI1_2 (PI / 2)
+# define PI3_2 (3 * PI1_2)
 # define EDGE 0.00001
 # define DR 0.0174533
 //Color Theme
@@ -38,6 +38,10 @@
 # define ALPHA ((0xff) << 24)
 //Mac
 // # define ALPHA 0
+# define SHADE_NORTH 1.0
+# define SHADE_SOUTH 0.5
+# define SHADE_EAST 0.8
+# define SHADE_WEST 0.8
 # define RAY_COLOR RED
 # define MINIMAP_SPACE_COLOR WHITE
 # define MINIMAP_WALL_COLOR GREY

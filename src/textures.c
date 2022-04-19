@@ -30,17 +30,17 @@ static void	static_create_img_from_texture(int image, float brightness)
 	img = &data()->imgs[image];
 	img->ptr = mlx_xpm_file_to_image(data()->mlx, img->path,
 			&img->width, &img->height);
+	if (img->ptr == NULL)
+		exit_program(MLX_IMAGE);
 	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
-	img->width = TEXTURE_SIZE;
-	img->height = TEXTURE_SIZE;
 	static_shade_image(img, brightness);
 }
 
 void	textures_load(void)
 {
-	static_create_img_from_texture(SOUTH_IMG, 0.5);
-	static_create_img_from_texture(NORTH_IMG, 1.0);
-	static_create_img_from_texture(EAST_IMG, 0.75);
-	static_create_img_from_texture(WEST_IMG, 0.75);
+	static_create_img_from_texture(NORTH_IMG, SHADE_NORTH);
+	static_create_img_from_texture(SOUTH_IMG, SHADE_SOUTH);
+	static_create_img_from_texture(EAST_IMG, SHADE_EAST);
+	static_create_img_from_texture(WEST_IMG, SHADE_WEST);
 }
