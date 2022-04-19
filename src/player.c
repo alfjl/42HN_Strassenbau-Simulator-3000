@@ -1,23 +1,5 @@
 #include "cub3d.h"
 
-// void	player_nose_draw_to_image(void)
-// {
-// 	t_point	a;
-// 	t_point	b;
-// 	t_img	*img;
-// 	img = &data()->imgs[NOSE_IMG];
-// 	img->ptr = my_new_image(data()->mlx, data()->minimap.width, data()->minimap.height, img);
-// 	if (img->ptr == NULL)
-// 		exit_program(MLX_IMAGE);
-// 	a.x = data()->player.x * GRID_SIZE;
-// 	a.y = data()->player.y * GRID_SIZE;
-// 	b.x = data()->player.x * GRID_SIZE + data()->player.dx * NOSE;
-// 	b.y = data()->player.y * GRID_SIZE + data()->player.dy * NOSE;
-// 	if (b.y < 0 ||  b.x < 0) //better check
-// 		return;
-// 	draw_line_a_to_b(img, a, b, BLACK);
-// }
-
 static void	static_player_update_forwards(void)
 {
 	float	new_x;
@@ -108,8 +90,6 @@ static void	static_player_update_turnright(void)
 	data()->player.angle += STEP_A;
 	if (data()->player.angle > 2 * PI)
 		data()->player.angle -= 2 * PI;
-	// data()->player.dx = cos(data()->player.angle) * STEP;
-	// data()->player.dy = sin(data()->player.angle) * STEP;
 }
 
 void	player_update_position(t_keys *keys)
@@ -128,5 +108,4 @@ void	player_update_position(t_keys *keys)
 		static_player_update_turnleft();
 	if (keys->turnright)
 		static_player_update_turnright();
-	// printf("dx: %f, dy: %f\n", data()->player.dx, data()->player.dy); //remove
 }

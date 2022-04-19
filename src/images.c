@@ -7,7 +7,8 @@ static void	static_create_background_img(void)
 	t_img	*img;
 
 	img = &data()->imgs[BACKGROUND_IMG];
-	img->ptr = my_new_image(data()->mlx, data()->window.width, data()->window.height, img);
+	img->ptr = my_new_image(data()->mlx, data()->window.width,
+			data()->window.height, img);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
 	y = 0;
@@ -100,7 +101,8 @@ static void	static_create_minimap_img(void)
 	t_img	*img;
 
 	img = &data()->imgs[MINIMAP_IMG];
-	img->ptr = my_new_image(data()->mlx, data()->minimap.width, data()->minimap.height, img);
+	img->ptr = my_new_image(data()->mlx, data()->minimap.width,
+			data()->minimap.height, img);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
 	y = 0;
