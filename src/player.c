@@ -1,80 +1,24 @@
 #include "cub3d.h"
 
-static void	static_player_update_forwards(void)
+static void	static_player_update(float *straight, float dstraight, float *cross,
+	float dcross)
 {
 	float	new_x;
 	float	new_y;
 
-	if (!is_wall(data()->player.y,
-			(data()->player.x + data()->player.dx)))
-	{
-		new_x = data()->player.x + data()->player.dx;
-		if (new_x >= 0 && new_x < data()->map.width)
-			data()->player.x = new_x;
-	}
-	if (!is_wall((data()->player.y + data()->player.dy),
-			data()->player.x))
-	{
-		new_y = data()->player.y + data()->player.dy;
-		if (new_y >= 0 && new_y < data()->map.height)
-			data()->player.y = new_y;
-	}
-}
-
-static void	static_player_update_backwards(void)
-{
-	float	new_x;
-	float	new_y;
-
-	if (!is_wall(data()->player.y, (data()->player.x - data()->player.dx)))
-	{
-		new_x = data()->player.x - data()->player.dx;
-		if (new_x >= 0 && new_x < data()->map.width)
-			data()->player.x = new_x;
-	}
-	if (!is_wall((data()->player.y - data()->player.dy), data()->player.x))
-	{
-		new_y = data()->player.y - data()->player.dy;
-		if (new_y >= 0 && new_y < data()->map.height)
-			data()->player.y = new_y;
-	}
-}
-
-static void	static_player_update_leftwards(void)
-{
-	float	new_x;
-	float	new_y;
-
-	new_x = data()->player.x + data()->player.dy;
-	new_y = data()->player.y - data()->player.dx;
-	if (!is_wall(data()->player.y, data()->player.x + data()->player.dy))
+	new_x = *straight + dstraight;
+	new_y = *cross + dcross;
+	if (!is_wall(*cross,
+			(*straight + dstraight)))
 	{
 		if (new_x >= 0 && new_x < data()->map.width)
-			data()->player.x = new_x;
+			*straight = new_x;
 	}
-	if (!is_wall(data()->player.y - data()->player.dx, data()->player.x))
+	if (!is_wall((*cross + dcross),
+			*straight))
 	{
 		if (new_y >= 0 && new_y < data()->map.height)
-			data()->player.y = new_y;
-	}
-}
-
-static void	static_player_update_rightwards(void)
-{
-	float	new_x;
-	float	new_y;
-
-	new_x = data()->player.x - data()->player.dy;
-	new_y = data()->player.y + data()->player.dx;
-	if (!is_wall(data()->player.y, data()->player.x - data()->player.dy))
-	{
-		if (new_x >= 0 && new_x < data()->map.width)
-			data()->player.x = new_x;
-	}
-	if (!is_wall(data()->player.y + data()->player.dx, data()->player.x))
-	{
-		if (new_y >= 0 && new_y < data()->map.height)
-			data()->player.y = new_y;
+			*cross = new_y;
 	}
 }
 
@@ -83,13 +27,17 @@ void	player_update_position(t_keys *keys)
 	data()->player.dx = cos(data()->player.angle) * STEP;
 	data()->player.dy = sin(data()->player.angle) * STEP;
 	if (keys->forwards)
-		static_player_update_forwards();
+		static_player_update(&data()->player.x, data()->player.dx,
+			&data()->player.y, data()->player.dy);
 	if (keys->backwards)
-		static_player_update_backwards();
+		static_player_update(&data()->player.x, -data()->player.dx,
+			&data()->player.y, -data()->player.dy);
 	if (keys->leftwards)
-		static_player_update_leftwards();
+		static_player_update(&data()->player.x, data()->player.dy,
+			&data()->player.y, -data()->player.dx);
 	if (keys->rightwards)
-		static_player_update_rightwards();
+		static_player_update(&data()->player.x, -data()->player.dy,
+			&data()->player.y, data()->player.dx);
 	if (keys->turnleft)
 		data()->player.angle = radian_limits(data()->player.angle - STEP_A);
 	if (keys->turnright)
