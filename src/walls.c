@@ -25,10 +25,10 @@ static void	static_draw_vertical_line(t_img *img, t_point start, t_point end, in
 	y = start.y;
 	while (y <= end.y)
 	{
-		if (!pixel_is_outside_img_limits(tx, ty, img))
+		if (!is_out_of_limits(tx, ty, img))
 		{
 			color = *(unsigned int *)(data()->imgs[image].addr
-				+ (unsigned int)((int)ty * data()->imgs[image].line_length
+				+ (unsigned int)((int)ty * data()->imgs[image].line_len
 					+ tx * (data()->imgs[image].bits_per_pixel / 8))) + ALPHA;
 			my_pixel_put(img, start.x, y, color);
 		}

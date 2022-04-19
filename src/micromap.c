@@ -1,35 +1,45 @@
 #include "cub3d.h"
 
-static void	static_copy_img_section(t_img *src)
+// static int	static_determine_color(t_img *src, )
+// {
+// 	int	color;
+
+// 	color = MINIMAP_BACKGROUND_COLOR;
+// 	if (!is_out_of_limits(src_x + dst_x, src_y + dst_y, src))
+// 	{
+// 		color = *(unsigned int *)(src->addr
+// 				+ (unsigned int)((int)(src_y + dst_y)*src->line_len
+// 					+ (src_x + dst_x) * src->bits_per_pixel / 8));
+// 	}
+// 	return (color);
+// }
+
+static void	static_copy_img_section(t_img *src, t_img *dst)
 {
-	t_img	*img;
-	int		img_x;
-	int		img_y;
-	int		src_x;
-	int		src_y;
+	t_point	dst_p;
+	t_point	src_p;
 	int		color;
 
-	img = &data()->imgs[MICROMAP_IMG];
-	src_y = (data()->player.y - MICROMAP_RADIUS) * GRID_SIZE;
-	src_x = (data()->player.x - MICROMAP_RADIUS) * GRID_SIZE;
-	img_y = 0;
-	while (img_y < img->height)
+	src_p.y = (data()->player.y - MICROMAP_RADIUS) * GRID_SIZE;
+	src_p.x = (data()->player.x - MICROMAP_RADIUS) * GRID_SIZE;
+	dst_p.y = 0;
+	while (dst_p.y < dst->height)
 	{
-		img_x = 0;
-		while (img_x < img->width)
+		dst_p.x = 0;
+		while (dst_p.x < dst->width)
 		{
 			color = MINIMAP_BACKGROUND_COLOR;
-			if (!pixel_is_outside_img_limits(src_x + img_x, src_y + img_y, src))
+			if (!is_out_of_limits(src_p.x + dst_p.x, src_p.y + dst_p.y, src))
 			{
 				color = *(unsigned int *)(src->addr
-					+ (unsigned int)((int)(src_y + img_y) * src->line_length
-						+ (src_x + img_x) * src->bits_per_pixel / 8));
+						+ (unsigned int)((int)(src_p.y + dst_p.y)*src->line_len
+							+ (src_p.x + dst_p.x) * src->bits_per_pixel / 8));
 			}
 			if (color != TRANSPARENT)
-				my_pixel_put(img, img_x, img_y, color);
-			img_x++;
+				my_pixel_put(dst, dst_p.x, dst_p.y, color);
+			dst_p.x++;
 		}
-		img_y++;
+		dst_p.y++;
 	}
 }
 
@@ -38,9 +48,10 @@ void	micromap_draw_to_image(void)
 	t_img	*img;
 
 	img = &data()->imgs[MICROMAP_IMG];
-	img->ptr = my_new_image(data()->mlx, MICROMAP_RADIUS * 2 * GRID_SIZE, MICROMAP_RADIUS * 2 * GRID_SIZE, img);
+	img->ptr = my_new_image(data()->mlx, MICROMAP_RADIUS * 2 * GRID_SIZE,
+			MICROMAP_RADIUS * 2 * GRID_SIZE, img);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
-	static_copy_img_section(&data()->imgs[MINIMAP_IMG]);
-	static_copy_img_section(&data()->imgs[RAYS_IMG]);
+	static_copy_img_section(&data()->imgs[MINIMAP_IMG], img);
+	static_copy_img_section(&data()->imgs[RAYS_IMG], img);
 }

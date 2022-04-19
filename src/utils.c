@@ -16,7 +16,7 @@ t_img	*image_clone(void *mlx, t_img *src, t_img *dst)
 		while (x < dst->width)
 		{
 			color = *(unsigned int *)(src->addr
-				+ (unsigned int)((int)y * src->line_length
+				+ (unsigned int)((int)y * src->line_len
 					+ x * (src->bits_per_pixel / 8)));
 			my_pixel_put(dst, x, y, color);
 			x++;
@@ -73,14 +73,14 @@ void	*my_new_image(void *mlx_ptr, int width, int height, t_img *img)
 	if (img->ptr == NULL)
 		return (NULL);
 	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
-			&img->line_length, &img->endian);
+			&img->line_len, &img->endian);
 	img->width = width;
 	img->height = height;
 	image_fill(img, TRANSPARENT);
 	return (img->ptr);
 }
 
-bool	pixel_is_outside_img_limits(int x, int y, t_img *img)
+bool	is_out_of_limits(int x, int y, t_img *img)
 {
 	if (x < 0 || x > img->width - 1)
 		return (true);
@@ -93,7 +93,7 @@ void	my_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	dst = img->addr + (y * img->line_len + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 
