@@ -1,5 +1,14 @@
 #include "cub3d.h"
 
+float	radian_limits(float angle)
+{
+	if (angle < 0)
+		angle += 2 * PI;
+	if (angle > 2 * PI)
+		angle -= 2 * PI;
+	return (angle);
+}
+
 static int	static_get_sign(int a, int b)
 {
 	if (a < b)
@@ -15,15 +24,6 @@ static int	static_abs(int a, int b)
 	if (d < 0)
 		d *= -1;
 	return (d);
-}
-
-float	radian_limits(float angle)
-{
-	if (angle < 0)
-		angle += 2 * PI;
-	if (angle > 2 * PI)
-		angle -= 2 * PI;
-	return (angle);
 }
 
 void	draw_line_a_to_b(t_img *img, t_point a, t_point b, int color)

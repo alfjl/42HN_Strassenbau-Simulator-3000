@@ -78,20 +78,6 @@ static void	static_player_update_rightwards(void)
 	}
 }
 
-static void	static_player_update_turnleft(void)
-{
-	data()->player.angle -= STEP_A;
-	if (data()->player.angle < 0)
-		data()->player.angle += 2 * PI;
-}
-
-static void	static_player_update_turnright(void)
-{
-	data()->player.angle += STEP_A;
-	if (data()->player.angle > 2 * PI)
-		data()->player.angle -= 2 * PI;
-}
-
 void	player_update_position(t_keys *keys)
 {
 	data()->player.dx = cos(data()->player.angle) * STEP;
@@ -105,7 +91,7 @@ void	player_update_position(t_keys *keys)
 	if (keys->rightwards)
 		static_player_update_rightwards();
 	if (keys->turnleft)
-		static_player_update_turnleft();
+		data()->player.angle = radian_limits(data()->player.angle - STEP_A);
 	if (keys->turnright)
-		static_player_update_turnright();
+		data()->player.angle = radian_limits(data()->player.angle + STEP_A);
 }
