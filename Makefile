@@ -10,7 +10,8 @@ SRCS :=	main.c \
 		micromap.c \
 		mlx.c \
 		player.c \
-		rays_calculate.c \
+		rays_calculate_horizontal.c \
+		rays_calculate_vertical.c \
 		rays.c \
 		textures.c \
 		utils.c \

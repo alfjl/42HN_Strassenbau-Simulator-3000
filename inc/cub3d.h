@@ -305,6 +305,7 @@ void	rays_create(void);
 void	rays_draw_to_image(void);
 t_ray	ray_calculate_vertical(float angle);
 t_ray	ray_calculate_horizontal(float angle);
+void	iterate_grid(t_ray *ray);
 void	images_create(void);
 void	textures_load(void);
 int		exit_program(int errorcode);
