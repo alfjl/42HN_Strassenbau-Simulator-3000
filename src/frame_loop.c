@@ -20,8 +20,8 @@ static void	micromap_to_window_buffer(void *mlx, void *win, t_img *imgs)
 	mlx_put_image_to_window(mlx, win, imgs[MICROMAP_IMG].ptr, MICROMAP_OFFSET,
 		MICROMAP_OFFSET);
 	mlx_put_image_to_window(mlx, win, imgs[PLAYER_IMG].ptr,
-		MICROMAP_OFFSET + MICROMAP_RADIUS * GRID_SIZE - PLAYER_SIZE / 2,
-		MICROMAP_OFFSET + MICROMAP_RADIUS * GRID_SIZE - PLAYER_SIZE / 2);
+		MICROMAP_PLAYER_POS,
+		MICROMAP_PLAYER_POS);
 	my_destroy_image(mlx, &imgs[MICROMAP_IMG]);
 	imgs[MICROMAP_IMG].ptr = NULL;
 }
@@ -53,11 +53,13 @@ int	frame_loop(t_keys *keys)
 {
 	player_update_position(keys);
 	rays_create();
-	if (MINIMAP)
-		rays_draw_to_image();
+	// if (MINIMAP)
+	// 	rays_draw_to_image();
 	walls_draw_to_image();
 	if (MICROMAP)
 		micromap_draw_to_image();
+	// if (MICROMAP)
+	// 	rays_draw_to_image();
 	window_set_up();
 	return (EXIT_SUCCESS);
 }

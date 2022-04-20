@@ -75,6 +75,8 @@ void	micromap_draw_to_image(void)
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
 	static_new_minimap(img);
+	// if (MINIMAP)
+		rays_draw_to_image();
 	// static_copy_img_section(&data()->imgs[MINIMAP_IMG], img);
 	// static_copy_img_section(&data()->imgs[RAYS_IMG], img);
 }

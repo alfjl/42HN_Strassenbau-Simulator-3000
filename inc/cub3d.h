@@ -26,9 +26,10 @@
 # define WINDOW_WIDTH (2 * WINDOW_HEIGHT)
 # define NUMBER_OF_RAYS WINDOW_WIDTH
 # define MINIMAP_RAY_DENSITY_FACTOR 10
+# define MICROMAP_PLAYER_POS (MICROMAP_OFFSET + MICROMAP_RADIUS * GRID_SIZE - PLAYER_SIZE / 2)
 # define WALL_HEIGHT_RATIO 1
 # define DEPTH_OF_FIELD (2 * WINDOW_HEIGHT)
-# define EPSILON 1.0 / GRID_SIZE
+# define EPSILON (1.0 / GRID_SIZE)
 //Math
 # define PI 3.1415926535
 # define PI1_2 (PI / 2)
@@ -195,6 +196,8 @@ typedef struct s_ray
 	int			index;
 	float		x;
 	float		y;
+	float		mini_x;
+	float		mini_y;
 	float		dx;
 	float		dy;
 	float		angle;

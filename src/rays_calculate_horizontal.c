@@ -9,6 +9,11 @@ void	iterate_grid(t_ray *ray)
 	i = 0;
 	while (i < DEPTH_OF_FIELD)
 	{
+		if (i < MICROMAP_RADIUS)
+		{
+			(*ray).mini_x = (*ray).x;
+			(*ray).mini_y = (*ray).y;
+		}
 		if ((*ray).y >= 0 && (*ray).x >= 0 && (*ray).y < map->height
 			&& (*ray).x < map->width
 			&& map->grid[(int)(*ray).y][(int)(*ray).x] == WALL)
