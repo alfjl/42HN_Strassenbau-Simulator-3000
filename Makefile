@@ -9,7 +9,7 @@ SRCS :=	main.c \
 		map.c \
 		micromap.c \
 		mlx.c \
-		player.c \
+		player_movement.c \
 		rays_calculate_horizontal.c \
 		rays_calculate_vertical.c \
 		rays.c \
@@ -18,7 +18,6 @@ SRCS :=	main.c \
 		utils_mlx_re.c \
 		utils_mlx.c \
 		utils.c \
-		wallcollision.c \
 		walls_vertical_line.c \
 		walls.c \
 		fps.c #remove
