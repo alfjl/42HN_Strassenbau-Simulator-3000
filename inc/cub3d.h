@@ -7,7 +7,7 @@
 //Settings
 # define LINUX 1
 # define COLLISION 1
-# define MICROMAP 1
+# define MICROMAP 0
 # define SHADES 1
 //Parameters
 # define GRID_SIZE 16
@@ -268,7 +268,7 @@ typedef struct s_map
 typedef struct s_fps
 {
 	long	lastTime;
-	bool		first;
+	bool	first;
 }				t_fps;
 
 typedef struct s_data

@@ -53,9 +53,11 @@ int	frame_loop(t_keys *keys)
 {
 	player_update_position(keys);
 	rays_create();
-	rays_draw_to_image();
+	if (MICROMAP)
+		rays_draw_to_image();
 	walls_draw_to_image();
-	micromap_draw_to_image();
+	if (MICROMAP)
+		micromap_draw_to_image();
 	window_set_up();
 	return (EXIT_SUCCESS);
 }

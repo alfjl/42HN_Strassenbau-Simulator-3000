@@ -120,7 +120,8 @@ static void	static_create_minimap_img(void)
 
 void	images_create(void)
 {
-	static_create_minimap_img();
+	if (MICROMAP)
+		static_create_minimap_img();
 	static_create_background_img();
 	static_create_player_img();
 }
