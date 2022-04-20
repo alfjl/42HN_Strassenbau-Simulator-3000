@@ -41,6 +41,12 @@ static void	static_free_all(void)
 	return ;
 }
 
+int	exit_program_success(void)
+{	
+	static_free_all();
+	exit(EXIT_SUCCESS);
+}
+
 int	exit_program(int errorcode)
 {	
 	static_free_all();

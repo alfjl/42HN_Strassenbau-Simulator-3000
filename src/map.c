@@ -1,11 +1,10 @@
-# include "cub3d.h"
+#include "cub3d.h"
 
 static int	determine_max_y(void)
 {
 	int	max;
 	int	len;
 	int	y;
-
 
 	max = 0;
 	y = 0;
@@ -18,12 +17,6 @@ static int	determine_max_y(void)
 	}
 	return (max);
 }
-
-// static void	static_exit_from_read(char **map_old, int error)
-// {
-// 	free(map_old);
-// 	exit_error(NULL, error);
-// }
 
 int	count_lines(char *filepath)
 {
@@ -85,8 +78,6 @@ void	read_map(char *filepath)
 	data()->map_old[numberoflines] = NULL;
 	if (close(fd) == -1)
 		exit_program(SYSTEM);
-	// check_map(data, numberoflines);
 	data()->map.height = numberoflines;
 	data()->map.width = determine_max_y();
-	data()->map.grid = data()->map_old; //workaround to get map into the new struct format
 }

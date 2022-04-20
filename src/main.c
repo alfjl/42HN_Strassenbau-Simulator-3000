@@ -1,10 +1,12 @@
-# include "cub3d.h"
+#include "cub3d.h"
 
-static void	static_init_image_pointers(void)
+static void	static_initialize_pointers(void)
 {
 	t_img	*imgs;
 	int		i;
 
+	data()->mlx = NULL;
+	data()->win = NULL;
 	imgs = data()->imgs;
 	i = 0;
 	while (i < IMAGES)
@@ -14,18 +16,8 @@ static void	static_init_image_pointers(void)
 	}
 }
 
-static void	static_initialize_data(void)
+static void	static_initialize_data_struct(void)
 {
-	data()->win = NULL;
-	data()->map.ceiling.rgb = CYAN;
-	data()->map.floor.rgb = BLACK;
-	// data()->map.textures.south = "./textures/stone.xpm";
-	// data()->map.textures.north = "./textures/moss.xpm";
-	// data()->map.textures.east = "./textures/magma.xpm";
-	data()->map.textures.south = "./textures/bricks.xpm";
-	data()->map.textures.north = "./textures/bricks.xpm";
-	data()->map.textures.east = "./textures/bricks.xpm";
-	data()->map.textures.west = "./textures/bricks.xpm";
 	data()->imgs[SOUTH_IMG].path = data()->map.textures.south;
 	data()->imgs[NORTH_IMG].path = data()->map.textures.north;
 	data()->imgs[EAST_IMG].path = data()->map.textures.east;
@@ -35,13 +27,32 @@ static void	static_initialize_data(void)
 	data()->window.width = WINDOW_WIDTH;
 	data()->window.height = WINDOW_HEIGHT;
 	data()->line_w = data()->window.width / (NUMBER_OF_RAYS - 1);
-	data()->player.x = 1.5;
-	data()->player.y = 1.5;
-	data()->player.angle = PI / 2;
-	data()->player.dx = cos(data()->player.angle) * STEP;
-	data()->player.dy = sin(data()->player.angle) * STEP;
-	data()->fps.first = true;
+	data()->fps.first = true; //remove
 	data()->time = 0; //remove
+}
+
+static void	static_get_map_file_data(void)
+{
+	///////map
+	data()->map.grid = data()->map_old; //workaround to get map into the new struct format
+	data()->map.height = data()->map.height; //placeholder
+	data()->map.width = data()->map.width; //placeholder
+	//colors
+	data()->map.ceiling.rgb = CYAN; //placeholder
+	data()->map.floor.rgb = BLACK; //placeholder
+	//textures
+	// data()->map.textures.south = "./textures/stone.xpm";
+	// data()->map.textures.north = "./textures/moss.xpm";
+	// data()->map.textures.east = "./textures/magma.xpm";
+	data()->map.textures.south = "./textures/bricks.xpm"; //placeholder
+	data()->map.textures.north = "./textures/bricks.xpm"; //placeholder
+	data()->map.textures.east = "./textures/bricks.xpm"; //placeholder
+	data()->map.textures.west = "./textures/bricks.xpm"; //placeholder
+	///////player
+	data()->player.x = 1.5; //placeholder
+	data()->player.y = 1.5; //placeholder
+	data()->player.angle = PI / 2; //placeholder
+	calculate_pos_delta();
 }
 
 t_data	*data(void)
@@ -53,17 +64,18 @@ t_data	*data(void)
 
 int		main(int argc, char **argv)
 {
+	static_initialize_pointers();
 	if (argc != 2)
 	{
 		ft_printf("ERROR\n");
 		return (EXIT_FAILURE);
 	}
 	read_map(argv[1]);
-	static_initialize_data();
+	static_get_map_file_data();
 	data()->mlx = mlx_init();
 	if (data()->mlx == NULL)
 		exit_program(MLX);
-	static_init_image_pointers();
+	static_initialize_data_struct();
 	images_create();
 	textures_load();
 	mlx();

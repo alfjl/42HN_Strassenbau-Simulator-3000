@@ -4,7 +4,7 @@ OBJ_DIR := ./obj/
 HEADER_DIR := ./inc/
 SRCS :=	main.c \
 		exit.c \
-		game.c \
+		frame_loop.c \
 		images.c \
 		map.c \
 		micromap.c \

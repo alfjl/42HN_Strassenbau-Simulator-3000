@@ -59,8 +59,7 @@ void	player_update_position(t_keys *keys)
 	float		dy;
 
 	player = &data()->player;
-	player->dx = cos(player->angle) * STEP;
-	player->dy = sin(player->angle) * STEP;
+	calculate_pos_delta();
 	x = &player->x;
 	y = &player->y;
 	dx = player->dx;

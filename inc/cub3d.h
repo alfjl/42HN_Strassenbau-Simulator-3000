@@ -297,7 +297,7 @@ typedef struct s_data
 t_data	*data(void);
 void	read_map(char *filepath);
 void	mlx(void);
-int		game(t_keys *keys);
+int		frame_loop(t_keys *keys);
 void	player_update_position(t_keys *keys);
 bool	is_wall(float y, float x);
 void	player_nose_draw_to_image(void);
@@ -309,6 +309,7 @@ void	iterate_grid(t_ray *ray);
 void	images_create(void);
 void	textures_load(void);
 int		exit_program(int errorcode);
+int		exit_program_success(void);
 void	walls_draw_to_image(void);
 void	draw_vertical_line(t_img *img, t_point start, t_point end, int index);
 void	micromap_draw_to_image(void);
@@ -324,6 +325,7 @@ void			my_destroy_image(void *mlx_ptr, t_img *img);
 bool			is_inside_limits(int x, int y, t_img *img);
 void			image_fill(t_img *img, int color);
 t_img			*image_clone(void *mlx, t_img *src, t_img *dst);
+void			calculate_pos_delta(void);
 //fps
 void	fps_to_window_buffer(void); //remove
 void	timedifference(char *str); //remove

@@ -1,5 +1,14 @@
 #include "cub3d.h"
 
+void	calculate_pos_delta(void)
+{
+	t_player	*player;
+	
+	player = &data()->player;
+	player->dx = cos(player->angle) * STEP;
+	player->dy = sin(player->angle) * STEP;
+}
+
 float	radian_limits(float angle)
 {
 	if (angle < 0)

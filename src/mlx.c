@@ -52,14 +52,14 @@ void	mlx(void)
 	keys.turnleft = false;
 	keys.turnright = false;
 	win = mlx_new_window(mlx, window->width, window->height, "cub3D");
-	data()->win = win;
-	if (data()->win == NULL)
+	if (win == NULL)
 		exit_program(MLX_WIN);
-	mlx_hook(data()->win, DestroyNotify,
-		StructureNotifyMask, exit_program, NULL); //why isn't this a problem? (NULL)
-	mlx_hook(data()->win, KeyPress, KeyPressMask, static_key_press_hook, &keys);
-	mlx_hook(data()->win, KeyRelease, KeyReleaseMask, static_key_release_hook,
+	data()->win = win;
+	mlx_hook(win, DestroyNotify,
+		StructureNotifyMask, exit_program_success, NULL);
+	mlx_hook(win, KeyPress, KeyPressMask, static_key_press_hook, &keys);
+	mlx_hook(win, KeyRelease, KeyReleaseMask, static_key_release_hook,
 		&keys);
-	mlx_loop_hook(data()->mlx, game, &keys);
-	mlx_loop(data()->mlx);
+	mlx_loop_hook(mlx, frame_loop, &keys);
+	mlx_loop(mlx);
 }
