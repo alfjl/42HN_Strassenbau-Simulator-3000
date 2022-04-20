@@ -13,51 +13,7 @@ static t_ray	static_ray_get(float angle)
 		return (ray_vertival);
 }
 
-static void	static_draw_single_ray(t_img *img, t_point player, t_point ray,
-	int i)
-{
-	t_ray	*rays;
-
-	rays = data()->rays;
-	if (rays[i].y >= 0 && rays[i].x >= 0
-		&& rays[i].y < data()->map.height
-		&& rays[i].x < data()->map.width)
-	{
-		player.x = rays[i].x * GRID_SIZE;
-		player.y = rays[i].y * GRID_SIZE;
-		ray.x = data()->player.x * GRID_SIZE;
-		ray.y = data()->player.y * GRID_SIZE;
-		draw_line_a_to_b(img, ray, player, RAY_COLOR);
-	}
-}
-
-void	rays_draw_to_image(void)
-{
-	int		i;
-	t_data	*datas;
-	t_img	*img;
-	t_point	player;
-	t_point	ray;
-
-	datas = data();
-	img = &datas->imgs[RAYS_IMG];
-	if (LINUX)
-		img->ptr = my_new_image(data()->mlx, data()->minimap.width,
-				data()->minimap.height, img);
-	else
-		img = image_clone(data()->mlx, &data()->imgs[MINIMAP_IMG], img);
-	if (img->ptr == NULL)
-		exit_program(MLX_IMAGE);
-	i = 0;
-	while (i < NUMBER_OF_RAYS)
-	{
-		if (!(i % MINIMAP_RAY_DENSITY_FACTOR))
-			static_draw_single_ray(img, player, ray, i);
-		i++;
-	}
-}
-
-static void	ray_fill_struct(float angle, int i)
+static void	static_ray_fill_struct(float angle, int i)
 {
 	float	delta;
 	t_ray	*ray;
@@ -83,7 +39,7 @@ void	rays_create(void)
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{
-		ray_fill_struct(angle, i);
+		static_ray_fill_struct(angle, i);
 		angle = radian_limits(angle + ANGLE_OF_VIEW * DR / NUMBER_OF_RAYS);
 		i++;
 	}
