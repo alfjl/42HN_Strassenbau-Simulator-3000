@@ -1,7 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
-# include "../mlx/mlx.h"
-# include "../libft/inc/libft.h"
+# include "mlx.h"
+# include "libft.h"
 # include <math.h>
 
 //Settings

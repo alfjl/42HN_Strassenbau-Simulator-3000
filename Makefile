@@ -32,12 +32,15 @@ YELLOW := \033[0;33m
 BLUE := \033[0;34m
 NC := \033[0m
 LIBFT_DIR := ./libft/
+LIBFT_INCLUDE_PATH := $(LIBFT_DIR)/inc/
 LIBFT := $(LIBFT_DIR)libft.a
 LIBFT_OBJS := $(LIBFT_DIR)obj/*.o
 MLX_DIR := ./mlx/
+MLX_INCLUDE_PATH := $(MLX_DIR)
 MLX := $(MLX_DIR)libmlx.a
 MLX_FLAGS := -lXext -lX11 -lm -lz -lXrender
-DEPS := $(HEADERS) $(LIBFT) $(MLX)
+INCLUDES := -I $(HEADER_DIR) -I $(LIBFT_INCLUDE_PATH) -I $(MLX_INCLUDE_PATH)
+DEPS := $(LIBFT) $(MLX) $(HEADERS)
 MAKEFLAGS += --no-print-directory
 
 all: link $(NAME)
@@ -47,7 +50,7 @@ link:
 	@make -C $(MLX_DIR)
 
 $(NAME): $(OBJ_DIR) $(OBJS) $(DEPS)
-	@$(CC) $(CFLAGS) -I$(HEADER_DIR) $(OBJS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $@
 	@echo "\n$(GREEN)$(NAME) created$(NC)"
 	@echo "$(YELLOW)SUCCESFULLY COMPILED!$(NC)"
 
@@ -55,7 +58,7 @@ $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(DEPS) ofilemessage
-	@$(CC) $(CFLAGS) -I$(HEADER_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	@echo ".\c"
 
 ofilemessage:
