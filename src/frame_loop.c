@@ -53,7 +53,7 @@ int	frame_loop(t_keys *keys)
 {
 	player_update_position(keys);
 	rays_create();
-	if (MICROMAP)
+	if (MINIMAP)
 		rays_draw_to_image();
 	walls_draw_to_image();
 	if (MICROMAP)

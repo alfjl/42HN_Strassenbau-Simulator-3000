@@ -7,19 +7,19 @@
 //Settings
 # define LINUX 1
 # define COLLISION 1
-# define MICROMAP 0
+# define MICROMAP 1
 # define SHADES 1
 //Parameters
 # define GRID_SIZE 16
 # define MICROMAP_RADIUS 4
 # define MICROMAP_OFFSET 10
 # define TEXTURE_SIZE 32
-# define STEP 0.035
-# define STEP_A 0.025
+# define STEP 0.06
+# define STEP_A 0.035
 # define NOSE 200
-# define DISTANCE_FACTOR 20
-# define DISTANCE 0.2
-# define PLAYER_SIZE 5
+// # define DISTANCE_FACTOR 20
+# define COLLISION_DISTANCE 0.20
+# define PLAYER_SIZE 4
 # define ANGLE_OF_VIEW_CONST 60
 # define ANGLE_OF_VIEW ANGLE_OF_VIEW_CONST
 # define WINDOW_HEIGHT 512
@@ -28,6 +28,7 @@
 # define MINIMAP_RAY_DENSITY_FACTOR 10
 # define WALL_HEIGHT_RATIO 1
 # define DEPTH_OF_FIELD (2 * WINDOW_HEIGHT)
+# define EPSILON 1.0 / GRID_SIZE
 //Math
 # define PI 3.1415926535
 # define PI1_2 (PI / 2)

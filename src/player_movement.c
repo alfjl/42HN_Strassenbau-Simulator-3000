@@ -9,12 +9,12 @@ static bool	static_is_wall(float y, float x)
 
 	if (!COLLISION)
 		return (false);
-	min_y = y - DISTANCE;
-	max_y = y + DISTANCE;
-	min_x = x - DISTANCE;
-	max_x = x + DISTANCE;
+	min_y = y - COLLISION_DISTANCE;
+	max_y = y + COLLISION_DISTANCE;
+	min_x = x - COLLISION_DISTANCE;
+	max_x = x + COLLISION_DISTANCE;
 	if (max_y < data()->map.height && min_y >= 0 && max_x < data()->map.width
-		&& min_x >= 0)
+		&& min_x >= 0) //inside map function
 	{
 		if (data()->map.grid[(int)min_y][(int)min_x] == WALL)
 			return (true);
