@@ -12,7 +12,6 @@ SRCS :=	main.c \
 		player_movement.c \
 		rays_calculate_horizontal.c \
 		rays_calculate_vertical.c \
-		rays_to_image.c \
 		rays.c \
 		textures.c \
 		utils_colors.c \

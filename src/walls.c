@@ -27,11 +27,8 @@ void	walls_draw_to_image(void)
 	t_img	*img;
 
 	img = &data()->imgs[WALLS_IMG];
-	// if (!HAS_ALPHA)
-		img->ptr = my_new_image(data()->mlx, data()->window.width,
-				data()->window.height, img);
-	// else
-	// 	img = image_clone(data()->mlx, &data()->imgs[BACKGROUND_IMG], img);
+	img->ptr = my_new_image(data()->mlx, data()->window.width,
+			data()->window.height, img);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
 	i = 0;

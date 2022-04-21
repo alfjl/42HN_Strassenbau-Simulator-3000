@@ -14,7 +14,7 @@ static bool	static_is_wall(float y, float x)
 	min_x = x - COLLISION_DISTANCE;
 	max_x = x + COLLISION_DISTANCE;
 	if (max_y < data()->map.height && min_y >= 0 && max_x < data()->map.width
-		&& min_x >= 0) //is inside map function
+		&& min_x >= 0)
 	{
 		if (data()->map.grid[(int)min_y][(int)min_x] == WALL)
 			return (true);

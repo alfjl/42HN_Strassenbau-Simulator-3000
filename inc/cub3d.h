@@ -12,22 +12,20 @@
 # define LINUX 1
 # define HAS_ALPHA 1
 //Parameters
+# define WINDOW_HEIGHT 512
+# define WINDOW_WIDTH (2 * WINDOW_HEIGHT)
 # define GRID_SIZE 16
+# define TEXTURE_SIZE 32
 # define MINIMAP_RADIUS 4
 # define MINIMAP_OFFSET 10
-# define TEXTURE_SIZE 32
+# define MINIMAP_RAY_DENSITY_FACTOR 20
 # define STEP 0.06
 # define STEP_A 0.035
-# define NOSE 200
-// # define DISTANCE_FACTOR 20
 # define COLLISION_DISTANCE 0.20
 # define PLAYER_SIZE 4
 # define ANGLE_OF_VIEW_CONST 60
 # define ANGLE_OF_VIEW ANGLE_OF_VIEW_CONST
-# define WINDOW_HEIGHT 512
-# define WINDOW_WIDTH (2 * WINDOW_HEIGHT)
 # define NUMBER_OF_RAYS WINDOW_WIDTH
-# define MINIMAP_RAY_DENSITY_FACTOR 20
 # define WALL_HEIGHT_RATIO 1
 # define DEPTH_OF_FIELD (2 * WINDOW_HEIGHT)
 # define EPSILON (1.0 / GRID_SIZE)
@@ -302,7 +300,6 @@ void	player_update_position(t_keys *keys);
 bool	is_wall(float y, float x);
 void	player_nose_draw_to_image(void);
 void	rays_create(void);
-void	rays_draw_to_image(void);
 t_ray	ray_calculate_vertical(float angle);
 t_ray	ray_calculate_horizontal(float angle);
 void	iterate_grid(t_ray *ray);
