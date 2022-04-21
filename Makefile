@@ -1,7 +1,9 @@
 NAME := cub3d
 SRC_DIR := ./src/
 OBJ_DIR := ./obj/
-HEADER_DIR := ./inc/
+HEADER_DIR = ./inc/
+# $(NAME): HEADER_DIR = ./inc/
+# bonus: HEADER_DIR = ./inc/bonus/
 SRCS :=	main.c \
 		exit.c \
 		frame_loop.c \
@@ -22,7 +24,8 @@ SRCS :=	main.c \
 		walls.c \
 		fps.c #remove
 OBJS := $(patsubst %.c,$(OBJ_DIR)%.o,$(SRCS))
-HEADERS := $(HEADER_DIR)*.h
+HEADERS = $(wildcard $(HEADER_DIR)*.h)
+PLATFORM := $(shell uname -s)
 CC := gcc
 CFLAGS := -g -Wall -Wextra -Werror
 RED := \033[0;31m
@@ -31,20 +34,24 @@ YELLOW := \033[0;33m
 BLUE := \033[0;34m
 NC := \033[0m
 LIBFT_DIR := ./libft/
-LIBFT_INCLUDE_PATH := $(LIBFT_DIR)/inc/
+LIBFT_INCLUDE_PATH := $(LIBFT_DIR)inc/
 LIBFT := $(LIBFT_DIR)libft.a
-LIBFT_OBJS := $(LIBFT_DIR)obj/*.o
+ifeq ($(PLATFORM), Linux)
 MLX_DIR := ./mlx_linux/
+MLX_FLAGS := -lXext -lX11 -lm -lz -lXrender
+else
+MLX_DIR := ./mlx_mac_stable/
+MLX_FLAGS := -framework OpenGL -framework AppKit
+endif
 MLX_INCLUDE_PATH := $(MLX_DIR)
 MLX := $(MLX_DIR)libmlx.a
-MLX_FLAGS := -lXext -lX11 -lm -lz -lXrender
-INCLUDES := -I $(HEADER_DIR) -I $(LIBFT_INCLUDE_PATH) -I $(MLX_INCLUDE_PATH)
-DEPS := $(LIBFT) $(MLX) $(HEADERS)
+INCLUDES = -I $(HEADER_DIR) -I $(LIBFT_INCLUDE_PATH) -I $(MLX_INCLUDE_PATH)
+DEPS = $(LIBFT) $(MLX) $(HEADERS)
 MAKEFLAGS += --no-print-directory
 
-all: link $(NAME)
+all: extern $(NAME)
 
-link:
+extern:
 	@make -C $(LIBFT_DIR)
 	@make -C $(MLX_DIR)
 
@@ -59,6 +66,12 @@ $(OBJ_DIR):
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(DEPS) ofilemessage
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	@echo ".\c"
+
+# bonus: $(eval HEADER_DIR = ./inc/bonus/) re
+# 	@echo $(INCLUDES)
+
+# bonus: all
+# 	@echo $(INCLUDES)
 
 ofilemessage:
 	@echo "compiling $(NAME)-object-files: \c"
@@ -93,6 +106,9 @@ peace:
 	@echo "       |      |"
 	@echo "       |      |\n"
 
+norm:
+	@norminette $(SRC_DIR)* $(HEADER_DIR)*
+
 .INTERMEDIATE: ofilemessage
 
-.PHONY: clean fclean all re link
+.PHONY: clean fclean all re

@@ -27,7 +27,7 @@
 # define NUMBER_OF_RAYS WINDOW_WIDTH
 # define WALL_HEIGHT_RATIO 1
 //Math
-# define EDGE 0.00001
+# define EDGE 0.000001
 # define DR 0.0174533
 //Color Theme
 # define SHADE_NORTH 1.0
