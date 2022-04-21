@@ -7,7 +7,7 @@ SRCS :=	main.c \
 		frame_loop.c \
 		images.c \
 		map.c \
-		micromap.c \
+		minimap.c \
 		mlx.c \
 		player_movement.c \
 		rays_calculate_horizontal.c \

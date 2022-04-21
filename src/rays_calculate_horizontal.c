@@ -9,7 +9,7 @@ void	iterate_grid(t_ray *ray)
 	i = 0;
 	while (i < DEPTH_OF_FIELD)
 	{
-		if (i < MICROMAP_RADIUS + 1)
+		if (i < MINIMAP_RADIUS + 1)
 		{
 			(*ray).mini_x = (*ray).x;
 			(*ray).mini_y = (*ray).y;

@@ -9,10 +9,10 @@ static void	static_draw_single_ray(t_img *img, int i)
 
 	rays = data()->rays;
 	player = &data()->player;
-	ray_p.x = (rays[i].mini_x - player->x + MICROMAP_RADIUS) * GRID_SIZE;
-	ray_p.y = (rays[i].mini_y - player->y + MICROMAP_RADIUS) * GRID_SIZE;
-	player_p.x = MICROMAP_RADIUS * GRID_SIZE;
-	player_p.y = MICROMAP_RADIUS * GRID_SIZE;
+	ray_p.x = (rays[i].mini_x - player->x + MINIMAP_RADIUS) * GRID_SIZE;
+	ray_p.y = (rays[i].mini_y - player->y + MINIMAP_RADIUS) * GRID_SIZE;
+	player_p.x = MINIMAP_RADIUS * GRID_SIZE;
+	player_p.y = MINIMAP_RADIUS * GRID_SIZE;
 	draw_line_a_to_b(img, player_p, ray_p, RAY_COLOR);
 }
 
@@ -23,7 +23,7 @@ void	rays_draw_to_image(void)
 	t_img	*img;
 
 	datas = data();
-	img = &datas->imgs[MICROMAP_IMG];
+	img = &datas->imgs[MINIMAP_IMG];
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{

@@ -7,12 +7,12 @@ static void	static_new_minimap(t_img *dst)
 	float	map_x;
 	float	map_y;
 
-	map_y = (data()->player.y - MICROMAP_RADIUS);
+	map_y = (data()->player.y - MINIMAP_RADIUS);
 	dst_p.y = 0;
 	while (dst_p.y < dst->height)
 	{
 		dst_p.x = 0;
-		map_x = (data()->player.x - MICROMAP_RADIUS);
+		map_x = (data()->player.x - MINIMAP_RADIUS);
 		while (dst_p.x < dst->width)
 		{
 			color = MINIMAP_BACKGROUND_COLOR;
@@ -35,13 +35,13 @@ static void	static_new_minimap(t_img *dst)
 	}
 }
 
-void	micromap_draw_to_image(void)
+void	minimap_draw_to_image(void)
 {
 	t_img	*img;
 
-	img = &data()->imgs[MICROMAP_IMG];
-	img->ptr = my_new_image(data()->mlx, MICROMAP_RADIUS * 2 * GRID_SIZE,
-			MICROMAP_RADIUS * 2 * GRID_SIZE, img);
+	img = &data()->imgs[MINIMAP_IMG];
+	img->ptr = my_new_image(data()->mlx, MINIMAP_RADIUS * 2 * GRID_SIZE,
+			MINIMAP_RADIUS * 2 * GRID_SIZE, img);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
 	static_new_minimap(img);

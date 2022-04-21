@@ -7,12 +7,12 @@
 //Settings
 # define LINUX 1
 # define COLLISION 1
-# define MICROMAP 1
+# define MINIMAP 1
 # define SHADES 1
 //Parameters
 # define GRID_SIZE 16
-# define MICROMAP_RADIUS 4
-# define MICROMAP_OFFSET 10
+# define MINIMAP_RADIUS 4
+# define MINIMAP_OFFSET 10
 # define TEXTURE_SIZE 32
 # define STEP 0.06
 # define STEP_A 0.035
@@ -227,7 +227,7 @@ typedef struct s_point
 typedef enum e_imgnr
 {
 	PLAYER_IMG,
-	MICROMAP_IMG,
+	MINIMAP_IMG,
 	BACKGROUND_IMG,
 	WALLS_IMG,
 	NORTH_IMG,
@@ -310,7 +310,7 @@ int		exit_program(int errorcode);
 int		exit_program_success(void);
 void	walls_draw_to_image(void);
 void	draw_vertical_line(t_img *img, t_point start, t_point end, int index);
-void	micromap_draw_to_image(void);
+void	minimap_draw_to_image(void);
 //utils
 void			my_pixel_put(t_img *img, int x, int y, int color);
 void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
