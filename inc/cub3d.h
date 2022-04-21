@@ -163,6 +163,7 @@ typedef enum e_imgnbr
 	SOUTH_IMG,
 	EAST_IMG,
 	WEST_IMG,
+	TMP_IMG,
 	IMAGES,
 }	t_imgnbr;
 

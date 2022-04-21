@@ -29,7 +29,7 @@ static void	static_minimap_draw_rays(t_img *img)
 	}
 }
 
-static int	static_determine_color(float map_y, float map_x)
+static int	static_minimap_determine_color(float map_y, float map_x)
 {
 	int		color;
 	t_map	*map;
@@ -69,7 +69,7 @@ static void	static_minimap_draw_background(t_img *dst)
 		map_x = (player->x - MINIMAP_RADIUS);
 		while (dst_p.x < dst->width)
 		{
-			color = static_determine_color(map_y, map_x);
+			color = static_minimap_determine_color(map_y, map_x);
 			my_pixel_put(dst, dst_p.x, dst_p.y, color);
 			dst_p.x++;
 			map_x = map_x + 1.0 / GRID_SIZE;
