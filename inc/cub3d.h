@@ -14,7 +14,7 @@
 //Parameters
 # define WINDOW_HEIGHT 512
 # define GRID_SIZE 16
-# define TEXTURE_SIZE 32
+# define TEXTURE_SIZE 512
 # define MINIMAP_RADIUS 4
 # define MINIMAP_OFFSET 10
 # define MINIMAP_RAY_DENSITY_FACTOR 20

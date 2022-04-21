@@ -42,5 +42,8 @@ int	frame_loop(t_keys *keys)
 	if (MINIMAP)
 		minimap_draw_to_image();
 	window_set_up();
+	// int w;
+	// int h;
+	// mlx_put_image_to_window(data()->mlx, data()->win, mlx_png_file_to_image(data()->mlx, "./textures/dirt2048x2048.png", &w, &h), 0, 0);
 	return (EXIT_SUCCESS);
 }

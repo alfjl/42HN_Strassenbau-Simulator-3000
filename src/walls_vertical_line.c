@@ -46,8 +46,7 @@ static void	static_copy_color(t_img *img, t_point start, int index, int y)
 	{
 		color = *(unsigned int *)(data()->imgs[image].addr
 				+ (unsigned int)((int)ty * data()->imgs[image].line_len
-					+ tx * (data()->imgs[image].bits_per_pixel / 8)))
-			+ ALPHA;
+					+ tx * (data()->imgs[image].bits_per_pixel / 8))) + ALPHA;
 		my_pixel_put(img, start.x, y, color);
 	}
 }
