@@ -5,10 +5,12 @@
 # include <math.h>
 
 //Settings
-# define LINUX 1
 # define COLLISION 1
 # define MINIMAP 1
 # define SHADES 1
+//mlx
+# define LINUX 1
+# define HAS_ALPHA 1
 //Parameters
 # define GRID_SIZE 16
 # define MINIMAP_RADIUS 4

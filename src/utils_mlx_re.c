@@ -19,7 +19,8 @@ void	*my_new_image(void *mlx_ptr, int width, int height, t_img *img)
 			&img->line_len, &img->endian);
 	img->width = width;
 	img->height = height;
-	image_fill(img, TRANSPARENT);
+	if (!HAS_ALPHA)
+		image_fill(img, TRANSPARENT);
 	return (img->ptr);
 }
 

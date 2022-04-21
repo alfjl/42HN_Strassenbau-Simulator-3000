@@ -13,7 +13,8 @@ static void	minimap_to_window_buffer(void *mlx, void *win, t_img *imgs)
 
 static void	environment_to_window_buffer(void *mlx, void *win, t_img *imgs)
 {
-	mlx_put_image_to_window(mlx, win, imgs[BACKGROUND_IMG].ptr, 0, 0);
+	if (HAS_ALPHA)
+		mlx_put_image_to_window(mlx, win, imgs[BACKGROUND_IMG].ptr, 0, 0);
 	mlx_put_image_to_window(mlx, win, imgs[WALLS_IMG].ptr, 0, 0);
 	my_destroy_image(mlx, &imgs[WALLS_IMG]);
 }

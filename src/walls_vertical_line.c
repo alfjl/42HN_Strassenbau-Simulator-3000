@@ -57,10 +57,24 @@ static void	static_draw_single_vertical_line(t_img *img, t_point start,
 {
 	int		y;
 
-	y = start.y;
+	y = 0;
+	if (HAS_ALPHA)
+		y = start.y;
+	while (y < start.y)
+	{
+		my_pixel_put(img, start.x, y, data()->map.ceiling.rgb);
+		y++;
+	}
 	while (y <= end.y)
 	{
 		static_copy_color(img, start, index, y);
+		y++;
+	}
+	if (HAS_ALPHA)
+		return ;
+	while (y < WINDOW_HEIGHT)
+	{
+		my_pixel_put(img, start.x, y, data()->map.floor.rgb);
 		y++;
 	}
 }

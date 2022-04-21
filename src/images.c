@@ -52,6 +52,7 @@ static void	static_create_player_img(void)
 
 void	images_create(void)
 {
-	static_create_background_img();
+	if (HAS_ALPHA)
+		static_create_background_img();
 	static_create_player_img();
 }
