@@ -51,7 +51,7 @@ static void	static_get_map_file_data(void)
 	///////player
 	data()->player.x = 1.5; //placeholder
 	data()->player.y = 1.5; //placeholder
-	data()->player.angle = PI / 2; //placeholder
+	data()->player.angle = M_PI / 2; //placeholder
 	calculate_pos_delta();
 }
 

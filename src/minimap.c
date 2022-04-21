@@ -33,7 +33,9 @@ static int	static_determine_color(float map_y, float map_x)
 {
 	int		color;
 	t_map	*map;
+	float	epsilon;
 
+	epsilon = (1.0 / GRID_SIZE);
 	map = &data()->map;
 	color = MINIMAP_BACKGROUND_COLOR;
 	if (map_y < map->height && map_y >= 0
@@ -43,8 +45,8 @@ static int	static_determine_color(float map_y, float map_x)
 			color = MINIMAP_WALL_COLOR;
 		else
 			color = MINIMAP_SPACE_COLOR;
-		if ((map_y > (int)map_y - EPSILON && map_y < (int)map_y + EPSILON)
-			|| (map_x > (int)map_x - EPSILON && map_x < (int)map_x + EPSILON))
+		if ((map_y > (int)map_y - epsilon && map_y < (int)map_y + epsilon)
+			|| (map_x > (int)map_x - epsilon && map_x < (int)map_x + epsilon))
 			color = MINIMAP_GRID_COLOR;
 	}
 	return (color);

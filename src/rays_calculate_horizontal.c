@@ -52,9 +52,9 @@ t_ray	ray_calculate_horizontal(float angle)
 
 	ray.angle = angle;
 	atan = -1 / tan(ray.angle);
-	if (ray.angle > PI)
+	if (ray.angle > M_PI)
 		static_set_ray_parameters_north(&ray, atan);
-	else if (ray.angle < PI)
+	else if (ray.angle < M_PI)
 		static_set_ray_parameters_south(&ray, atan);
 	iterate_grid(&ray);
 	ray.len = sqrt((ray.x - data()->player.x) * (ray.x - data()->player.x)

@@ -13,7 +13,6 @@
 # define HAS_ALPHA 1
 //Parameters
 # define WINDOW_HEIGHT 512
-// # define WINDOW_WIDTH (2 * WINDOW_HEIGHT)
 # define GRID_SIZE 16
 # define TEXTURE_SIZE 32
 # define MINIMAP_RADIUS 4
@@ -27,12 +26,7 @@
 # define ANGLE_OF_VIEW ANGLE_OF_VIEW_CONST
 # define NUMBER_OF_RAYS WINDOW_WIDTH
 # define WALL_HEIGHT_RATIO 1
-// # define DEPTH_OF_FIELD (2 * WINDOW_HEIGHT)
-# define EPSILON (1.0 / GRID_SIZE)
 //Math
-# define PI 3.1415926535
-# define PI1_2 (PI / 2)
-# define PI3_2 (3 * PI1_2)
 # define EDGE 0.00001
 # define DR 0.0174533
 //Color Theme

@@ -12,9 +12,9 @@ void	calculate_pos_delta(void)
 float	radian_limits(float angle)
 {
 	if (angle < 0)
-		angle += 2 * PI;
-	if (angle > 2 * PI)
-		angle -= 2 * PI;
+		angle += 2 * M_PI;
+	if (angle > 2 * M_PI)
+		angle -= 2 * M_PI;
 	return (angle);
 }
 

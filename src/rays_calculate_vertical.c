@@ -25,9 +25,9 @@ t_ray	ray_calculate_vertical(float angle)
 
 	ray.angle = angle;
 	ntan = -tan(ray.angle);
-	if (ray.angle > PI1_2 && ray.angle < PI3_2)
+	if (ray.angle > M_PI_2 && ray.angle < (3 * M_PI_2))
 		static_set_ray_parameters_west(&ray, ntan);
-	else if (ray.angle < PI1_2 || ray.angle > PI3_2)
+	else if (ray.angle < M_PI_2 || ray.angle > (3 * M_PI_2))
 		static_set_ray_parameters_east(&ray, ntan);
 	iterate_grid(&ray);
 	ray.len = sqrt((ray.x - data()->player.x) * (ray.x - data()->player.x)
