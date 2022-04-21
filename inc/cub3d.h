@@ -13,7 +13,7 @@
 # define HAS_ALPHA 1
 //Parameters
 # define WINDOW_HEIGHT 512
-# define WINDOW_WIDTH (2 * WINDOW_HEIGHT)
+// # define WINDOW_WIDTH (2 * WINDOW_HEIGHT)
 # define GRID_SIZE 16
 # define TEXTURE_SIZE 32
 # define MINIMAP_RADIUS 4
@@ -27,7 +27,7 @@
 # define ANGLE_OF_VIEW ANGLE_OF_VIEW_CONST
 # define NUMBER_OF_RAYS WINDOW_WIDTH
 # define WALL_HEIGHT_RATIO 1
-# define DEPTH_OF_FIELD (2 * WINDOW_HEIGHT)
+// # define DEPTH_OF_FIELD (2 * WINDOW_HEIGHT)
 # define EPSILON (1.0 / GRID_SIZE)
 //Math
 # define PI 3.1415926535
@@ -36,10 +36,6 @@
 # define EDGE 0.00001
 # define DR 0.0174533
 //Color Theme
-//Linux
-# define ALPHA ((0xff) << 24)
-//Mac
-// # define ALPHA 0
 # define SHADE_NORTH 1.0
 # define SHADE_SOUTH 0.5
 # define SHADE_EAST 0.8
@@ -50,6 +46,113 @@
 # define MINIMAP_GRID_COLOR BLACK
 # define MINIMAP_BACKGROUND_COLOR BLACK
 # define MINIMAP_PLAYER_COLOR BLACK
+
+typedef enum e_defines
+{
+	WINDOW_WIDTH = (2 * WINDOW_HEIGHT),
+	DEPTH_OF_FIELD = (2 * WINDOW_HEIGHT),
+}	t_defines;
+
+typedef enum e_argb_colorcode
+{
+	MAC_RED = 0x00FF0000,
+	MAC_ORANGE = 0x00FF8000,
+	MAC_YELLOW = 0x00FFFF00,
+	MAC_GREEN = 0x0000FF00,
+	MAC_CYAN = 0x0000FFFF,
+	MAC_BLUE = 0x000000FF,
+	MAC_MAGENTA = 0x00FF00FF,
+	MAC_BLACK = 0x00000000,
+	MAC_GREY = 0x00808080,
+	MAC_WHITE = 0x00FFFFFF,
+	MAC_OLIVE = 0x00808000,
+	MAC_AQUA = 0x0000FFFF,
+	MAC_NAVY = 0x00000080,
+	MAC_DARK_GREY = 0x00424949,
+	MAC_SILVER = 0x00C0C0C0,
+	MAC_TRANSPARENT = 0xFF000000,
+}	t_argb_colorcode;
+
+# if LINUX
+
+typedef enum e_alpha_linux
+{
+	ALPHA = ((0xff) << 24),
+}	t_alpha_linux;
+
+typedef enum e_key_linux
+{
+	W_KEY = 119,
+	A_KEY = 97,
+	S_KEY = 115,
+	D_KEY = 100,
+	UP_KEY = 65362,
+	LEFT_KEY = 65361,
+	DOWN_KEY = 65364,
+	RIGHT_KEY = 65363,
+	ESC_KEY = 65307,
+}	t_key_linux;
+
+typedef enum e_argb_colorcode_linux
+{
+	RED = MAC_RED + ALPHA,
+	ORANGE = MAC_ORANGE + ALPHA,
+	YELLOW = MAC_YELLOW + ALPHA,
+	GREEN = MAC_GREEN + ALPHA,
+	CYAN = MAC_CYAN + ALPHA,
+	BLUE = MAC_BLUE + ALPHA,
+	MAGENTA = MAC_MAGENTA + ALPHA,
+	BLACK = MAC_BLACK + ALPHA,
+	GREY = MAC_GREY + ALPHA,
+	WHITE = MAC_WHITE + ALPHA,
+	OLIVE = MAC_OLIVE + ALPHA,
+	AQUA = MAC_AQUA + ALPHA,
+	NAVY = MAC_NAVY + ALPHA,
+	DARK_GREY = MAC_DARK_GREY + ALPHA,
+	SILVER = MAC_SILVER + ALPHA,
+	TRANSPARENT =MAC_TRANSPARENT - ALPHA,
+}	t_argb_colorcode_linux;
+
+# else
+
+typedef enum e_alpha_mac
+{
+	ALPHA = 0,
+}	t_alpha_mac;
+
+typedef enum e_key_mac
+{
+	W_KEY = 13,
+	A_KEY = 0,
+	S_KEY = 1,
+	D_KEY = 2,
+	UP_KEY = 126,
+	LEFT_KEY = 123,
+	DOWN_KEY = 125,
+	RIGHT_KEY = 124,
+	ESC_KEY = 53,
+}	t_key_mac;
+
+typedef enum e_argb_colorcode_mac
+{
+	RED = MAC_RED,
+	ORANGE = MAC_ORANGE,
+	YELLOW = MAC_YELLOW,
+	GREEN = MAC_GREEN,
+	CYAN = MAC_CYAN,
+	BLUE = MAC_BLUE,
+	MAGENTA = MAC_MAGENTA,
+	BLACK = MAC_BLACK,
+	GREY = MAC_GREY,
+	WHITE = MAC_WHITE,
+	OLIVE = MAC_OLIVE,
+	AQUA = MAC_AQUA,
+	NAVY = MAC_NAVY,
+	DARK_GREY = MAC_DARK_GREY,
+	SILVER = MAC_SILVER,
+	TRANSPARENT =MAC_TRANSPARENT,
+}	t_argb_colorcode_mac;
+# endif
 
 typedef enum e_x11events
 {
@@ -65,34 +168,6 @@ typedef enum e_x11masks
 	StructureNotifyMask = 1L << 17,
 }	t_x11masks;
 
-//Linux
-typedef enum e_key
-{
-	W_KEY = 119,
-	A_KEY = 97,
-	S_KEY = 115,
-	D_KEY = 100,
-	UP_KEY = 65362,
-	LEFT_KEY = 65361,
-	DOWN_KEY = 65364,
-	RIGHT_KEY = 65363,
-	ESC_KEY = 65307,
-}	t_key;
-
-//mac
-// typedef enum e_key
-// {
-// 	W_KEY = 13,
-// 	A_KEY = 0,
-// 	S_KEY = 1,
-// 	D_KEY = 2,
-// 	UP_KEY = 126,
-// 	LEFT_KEY = 123,
-// 	DOWN_KEY = 125,
-// 	RIGHT_KEY = 124,
-// 	ESC_KEY = 53,
-// }	t_key;
-
 typedef struct s_keys
 {
 	bool	forwards;
@@ -101,7 +176,7 @@ typedef struct s_keys
 	bool	rightwards;
 	bool	turnleft;
 	bool	turnright;
-} t_keys;
+}	t_keys;
 
 typedef enum e_mapchars
 {
@@ -112,42 +187,6 @@ typedef enum e_mapchars
 	PLAYER_EAST = 'E',
 	PLAYER_WEST = 'W',
 }	t_mapchars;
-
-//mac
-// typedef enum e_color
-// {
-// 	RED = 0x00FF0000,
-// 	ORANGE = 0x00FF8000,
-// 	YELLOW = 0x00FFFF00,
-// 	GREEN = 0x0000FF00,
-// 	CYAN = 0x0000FFFF,
-// 	BLUE = 0x000000FF,
-// 	MAGENTA = 0x00FF00FF,
-// 	BLACK = 0x00000000,
-// 	GREY = 0x00808080,
-// 	WHITE = 0x00FFFFFF,
-// }	t_color;
-
-//linux
-typedef enum e_colorcode
-{
-	RED = 0xFFFF0000,
-	ORANGE = 0xFFFF8000,
-	YELLOW = 0xFFFFFF00,
-	GREEN = 0xFF00FF00,
-	OLIVE = 0xFF808000,
-	AQUA = 0xFF00FFFF,
-	CYAN = 0xFF00FFFF,
-	BLUE = 0xFF0000FF,
-	NAVY = 0xFF000080,
-	MAGENTA = 0xFFFF00FF,
-	BLACK = 0xFF000000,
-	GREY = 0xFF808080,
-	DARK_GREY = 0xFF424949,
-	SILVER = 0xFFC0C0C0,
-	WHITE = 0xFFFFFFFF,
-	TRANSPARENT = 0x00000000,
-}	t_colorcode;
 
 typedef enum e_errorcodes
 {
@@ -205,13 +244,6 @@ typedef struct s_ray
 	float		tyoffset;
 }				t_ray;
 
-// typedef struct s_enemy
-// {
-// 	int		x;
-// 	int		y;
-// 	bool	status;
-// }				t_enemy;
-
 typedef struct s_frame
 {
 	int		height;
@@ -265,7 +297,7 @@ typedef struct s_map
 
 typedef struct s_fps
 {
-	long	lastTime;
+	long	last_time;
 	bool	first;
 }				t_fps;
 
@@ -285,31 +317,29 @@ typedef struct s_data
 	int				img_size;
 	struct s_player	player;
 	struct s_ray	rays[NUMBER_OF_RAYS];
-	// struct s_enemy	enemys;
-	// int				texture[32];
 	struct s_fps	fps; //remove
 	long			time; //remove
 }	t_data;
 
 
-t_data	*data(void);
-void	read_map(char *filepath);
-void	mlx(void);
-int		frame_loop(t_keys *keys);
-void	player_update_position(t_keys *keys);
-bool	is_wall(float y, float x);
-void	player_nose_draw_to_image(void);
-void	rays_create(void);
-t_ray	ray_calculate_vertical(float angle);
-t_ray	ray_calculate_horizontal(float angle);
-void	iterate_grid(t_ray *ray);
-void	images_create(void);
-void	textures_load(void);
-int		exit_program(int errorcode);
-int		exit_program_success(void);
-void	walls_draw_to_image(void);
-void	draw_vertical_line(t_img *img, t_point start, t_point end, int index);
-void	minimap_draw_to_image(void);
+t_data			*data(void);
+void			read_map(char *filepath);
+void			mlx(void);
+int				frame_loop(t_keys *keys);
+void			player_update_position(t_keys *keys);
+bool			is_wall(float y, float x);
+void			player_nose_draw_to_image(void);
+void			rays_create(void);
+t_ray			ray_calculate_vertical(float angle);
+t_ray			ray_calculate_horizontal(float angle);
+void			iterate_grid(t_ray *ray);
+void			images_create(void);
+void			textures_load(void);
+int				exit_program(int errorcode);
+int				exit_program_success(void);
+void			walls_draw_to_image(void);
+void			draw_vertical_line(t_img *img, t_point start, t_point end, int index);
+void			minimap_draw_to_image(void);
 //utils
 void			my_pixel_put(t_img *img, int x, int y, int color);
 void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
@@ -324,6 +354,6 @@ void			image_fill(t_img *img, int color);
 t_img			*image_clone(void *mlx, t_img *src, t_img *dst);
 void			calculate_pos_delta(void);
 //fps
-void	fps_to_window_buffer(void); //remove
-void	timedifference(char *str); //remove
+void			fps_to_window_buffer(void); //remove
+void			timedifference(char *str); //remove
 #endif

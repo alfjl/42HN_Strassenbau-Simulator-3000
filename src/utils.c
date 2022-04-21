@@ -3,7 +3,7 @@
 void	calculate_pos_delta(void)
 {
 	t_player	*player;
-	
+
 	player = &data()->player;
 	player->dx = cos(player->angle) * STEP;
 	player->dy = sin(player->angle) * STEP;

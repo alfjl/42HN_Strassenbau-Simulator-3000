@@ -56,13 +56,15 @@ static void	static_draw_single_vertical_line(t_img *img, t_point start,
 	t_point end, int index)
 {
 	int		y;
+	t_data	*datas;
 
+	datas = data();
 	y = 0;
 	if (HAS_ALPHA)
 		y = start.y;
 	while (y < start.y)
 	{
-		my_pixel_put(img, start.x, y, data()->map.ceiling.rgb);
+		my_pixel_put(img, start.x, y, datas->map.ceiling.rgb);
 		y++;
 	}
 	while (y <= end.y)
@@ -72,9 +74,9 @@ static void	static_draw_single_vertical_line(t_img *img, t_point start,
 	}
 	if (HAS_ALPHA)
 		return ;
-	while (y < WINDOW_HEIGHT)
+	while (y < datas->window.height)
 	{
-		my_pixel_put(img, start.x, y, data()->map.floor.rgb);
+		my_pixel_put(img, start.x, y, datas->map.floor.rgb);
 		y++;
 	}
 }
@@ -83,15 +85,17 @@ void	draw_vertical_line(t_img *img, t_point start, t_point end,
 	int index)
 {
 	int		line_i;
+	t_data	*datas;
 
+	datas = data();
 	line_i = 0;
-	while (line_i < data()->line_w)
+	while (line_i < datas->line_w)
 	{
-		start.x = data()->line_w * index + line_i;
+		start.x = datas->line_w * index + line_i;
 		if (start.x < 0)
 			start.x = 0;
-		if (start.x > data()->window.width - 1)
-			start.x = data()->window.width - 1;
+		if (start.x > datas->window.width - 1)
+			start.x = datas->window.width - 1;
 		end.x = start.x;
 		static_draw_single_vertical_line(img, start, end, index);
 		line_i++;

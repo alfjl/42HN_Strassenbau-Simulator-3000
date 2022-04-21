@@ -34,7 +34,7 @@ static void	static_initialize_data_struct(void)
 static void	static_get_map_file_data(void)
 {
 	///////map
-	data()->map.grid = data()->map_old; //workaround to get map into the new struct format
+	data()->map.grid = data()->map_old; //workaround to get map into new struct
 	data()->map.height = data()->map.height; //placeholder
 	data()->map.width = data()->map.width; //placeholder
 	//colors
@@ -62,7 +62,7 @@ t_data	*data(void)
 	return (&data);
 }
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	static_initialize_pointers();
 	if (argc != 2)
@@ -79,5 +79,5 @@ int		main(int argc, char **argv)
 	images_create();
 	textures_load();
 	mlx();
-	return(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }

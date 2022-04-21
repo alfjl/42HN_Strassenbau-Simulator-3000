@@ -16,7 +16,7 @@ static void	static_draw_single_ray(t_img *img, int i)
 	draw_line_a_to_b(img, player_p, ray_p, RAY_COLOR);
 }
 
-static void	static_rays_draw_to_image(t_img *img)
+static void	static_minimap_draw_rays(t_img *img)
 {
 	int		i;
 
@@ -50,7 +50,7 @@ static int	static_determine_color(float map_y, float map_x)
 	return (color);
 }
 
-static void	static_new_minimap(t_img *dst)
+static void	static_minimap_draw_background(t_img *dst)
 {
 	t_point		dst_p;
 	int			color;
@@ -86,6 +86,6 @@ void	minimap_draw_to_image(void)
 			MINIMAP_RADIUS * 2 * GRID_SIZE, img);
 	if (img->ptr == NULL)
 		exit_program(MLX_IMAGE);
-	static_new_minimap(img);
-	static_rays_draw_to_image(img);
+	static_minimap_draw_background(img);
+	static_minimap_draw_rays(img);
 }
