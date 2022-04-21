@@ -61,8 +61,8 @@ static void	static_draw_single_ray(t_img *img, int i)
 	// 	&& rays[i].y < map->height
 	// 	&& rays[i].x < map->width)
 	// {
-		ray_p.x = (rays[i].mini_x * GRID_SIZE) - (data()->player.x - MICROMAP_RADIUS);
-		ray_p.y = (rays[i].mini_y * GRID_SIZE) - (data()->player.y - MICROMAP_RADIUS);
+		ray_p.x = (rays[i].mini_x - data()->player.x + MICROMAP_RADIUS) * GRID_SIZE;
+		ray_p.y = (rays[i].mini_y - data()->player.y + MICROMAP_RADIUS) * GRID_SIZE;
 		player_p.x = MICROMAP_RADIUS * GRID_SIZE;
 		player_p.y = MICROMAP_RADIUS * GRID_SIZE;
 		draw_line_a_to_b(img, player_p, ray_p, RAY_COLOR);
