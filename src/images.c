@@ -50,78 +50,8 @@ static void	static_create_player_img(void)
 	}
 }
 
-static void	static_draw_grid(t_img *img, int img_y, int img_x)
-{
-	int		x;
-	int		y;
-
-	y = 0;
-	while (y < GRID_SIZE)
-	{
-		x = 0;
-		while (x < GRID_SIZE)
-		{
-			if ((y == 0 || y == GRID_SIZE - 1) || (x == 0 || x == GRID_SIZE -1))
-				my_pixel_put(img, img_x * GRID_SIZE + x,
-					img_y * GRID_SIZE + y, MINIMAP_GRID_COLOR);
-			x++;
-		}
-		y++;
-	}
-}
-
-static void	static_paint_cell(t_img *img, int img_y, int img_x)
-{
-	int		x;
-	int		y;
-
-	y = 1;
-	while (y < GRID_SIZE - 1)
-	{
-		x = 1;
-		while (x < GRID_SIZE - 1)
-		{
-			if (data()->map.grid[img_y][img_x] == WALL)
-				my_pixel_put(img, img_x * GRID_SIZE + x,
-					img_y * GRID_SIZE + y, MINIMAP_WALL_COLOR);
-			else
-				my_pixel_put(img, img_x * GRID_SIZE + x,
-					img_y * GRID_SIZE + y, MINIMAP_SPACE_COLOR);
-			x++;
-		}
-		y++;
-	}
-	static_draw_grid(img, img_y, img_x);
-}
-
-static void	static_create_minimap_img(void)
-{
-	int		x;
-	int		y;
-	t_img	*img;
-
-	img = &data()->imgs[MINIMAP_IMG];
-	img->ptr = my_new_image(data()->mlx, data()->minimap.width,
-			data()->minimap.height, img);
-	if (img->ptr == NULL)
-		exit_program(MLX_IMAGE);
-	y = 0;
-	while (data()->map.grid[y] != NULL)
-	{
-		x = 0;
-		while (data()->map.grid[y][x] != '\0')
-		{
-			static_paint_cell(img, y, x);
-			x++;
-		}
-		y++;
-	}
-}
-
 void	images_create(void)
 {
-	if (MINIMAP)
-		static_create_minimap_img();
 	static_create_background_img();
 	static_create_player_img();
 }
