@@ -10,7 +10,7 @@
 # define SHADES 1
 //mlx
 # define LINUX 1
-# define HAS_ALPHA 1
+# define HAS_ALPHA 0
 //Parameters
 # define WINDOW_HEIGHT 512
 # define GRID_SIZE 16
@@ -215,7 +215,7 @@ typedef struct s_img
 	int		line_len;
 	int		endian;
 	char	*path;
-}				t_img;
+}	t_img;
 
 typedef struct s_player
 {
@@ -241,19 +241,19 @@ typedef struct s_ray
 	float		line_h;
 	int			orientation;
 	float		tyoffset;
-}				t_ray;
+}	t_ray;
 
 typedef struct s_frame
 {
 	int		height;
 	int		width;
-}				t_frame;
+}	t_frame;
 
 typedef struct s_point
 {
 	int	x;
 	int	y;
-}				t_point;
+}	t_point;
 
 typedef struct s_color
 {
@@ -261,7 +261,7 @@ typedef struct s_color
 	int				g;
 	int				b;
 	unsigned int	rgb;
-}				t_color;
+}	t_color;
 
 typedef struct s_textures
 {
@@ -269,7 +269,7 @@ typedef struct s_textures
 	char	*south;
 	char	*east;
 	char	*west;
-}				t_textures;
+}	t_textures;
 
 typedef struct s_map
 {
@@ -279,13 +279,13 @@ typedef struct s_map
 	struct s_color		floor;
 	struct s_color		ceiling;
 	struct s_textures	textures;
-}				t_map;
+}	t_map;
 
 typedef struct s_fps
 {
 	long	last_time;
 	bool	first;
-}				t_fps;
+}	t_fps;
 
 typedef struct s_data
 {
@@ -307,38 +307,40 @@ typedef struct s_data
 	long			time; //remove
 }	t_data;
 
-t_data			*data(void);
-void			read_map(char *filepath);
-void			mlx(void);
-int				frame_loop(t_keys *keys);
-void			player_update_position(t_keys *keys);
-bool			is_wall(float y, float x);
-void			player_nose_draw_to_image(void);
-void			rays_create(void);
-t_ray			ray_calculate_vertical(float angle);
-t_ray			ray_calculate_horizontal(float angle);
-void			iterate_grid(t_ray *ray);
-void			images_create(void);
-void			textures_load(void);
-int				exit_program(int errorcode);
-int				exit_program_success(void);
-void			walls_draw_to_image(void);
-void			draw_vertical_line(t_img *img, t_point s, t_point e, int i);
-void			minimap_draw_to_image(void);
+t_data	*data(void);
+void	read_map(char *filepath);
+void	mlx(void);
+int		frame_loop(t_keys *keys);
+void	player_update_position(t_keys *keys);
+bool	is_wall(float y, float x);
+void	player_nose_draw_to_image(void);
+void	rays_create(void);
+t_ray	ray_calculate_vertical(float angle);
+t_ray	ray_calculate_horizontal(float angle);
+void	iterate_grid(t_ray *ray);
+void	images_create(void);
+void	textures_load(void);
+int		exit_program(int errorcode);
+int		exit_program_success(void);
+void	walls_draw_to_image(void);
+void	draw_vertical_line(t_img *img, t_point s, t_point e, int i);
+void	minimap_draw_to_image(void);
 //utils
-void			my_pixel_put(t_img *img, int x, int y, int color);
-void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
-unsigned int	create_rgba(int r, int g, int b, int a);
-unsigned int	create_argb(int r, int g, int b, int a);
-unsigned int	argb_color_shade(int color, float brightness);
-float			radian_limits(float angle);
-void			*my_new_image(void *mlx_ptr, int width, int height, t_img *img);
-void			my_destroy_image(void *mlx_ptr, t_img *img);
-bool			is_inside_limits(int x, int y, t_img *img);
-void			image_fill(t_img *img, int color);
-t_img			*image_clone(void *mlx, t_img *src, t_img *dst);
-void			calculate_pos_delta(void);
+void	my_pixel_put(t_img *img, int x, int y, int color);
+void	draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
+uint	create_rgba(int r, int g, int b, int a);
+uint	create_argb(int r, int g, int b, int a);
+uint	argb_color_shade(int color, float brightness);
+float	radian_limits(float angle);
+void	*my_new_image(void *mlx_ptr, int width, int height, t_img *img);
+void	my_destroy_image(void *mlx_ptr, t_img *img);
+bool	is_inside_limits(int x, int y, t_img *img);
+void	image_fill(t_img *img, int color);
+t_img	*image_clone(void *mlx, t_img *src, t_img *dst);
+void	calculate_pos_delta(void);
+//mlx
+void	*mlx_new_image_alpha(void *mlx_ptr, int width, int height);
 //fps
-void			fps_to_window_buffer(void); //remove
-void			timedifference(char *str); //remove
+void	fps_to_window_buffer(void); //remove
+void	timedifference(char *str); //remove
 #endif

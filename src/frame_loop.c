@@ -44,6 +44,7 @@ int	frame_loop(t_keys *keys)
 	window_set_up();
 	// int w;
 	// int h;
+	// mlx_put_image_to_window(data()->mlx, data()->win, mlx_xpm_file_to_image(data()->mlx, "./textures/dirt2048x2048.xpm", &w, &h), 0, 0);
 	// mlx_put_image_to_window(data()->mlx, data()->win, mlx_png_file_to_image(data()->mlx, "./textures/dirt2048x2048.png", &w, &h), 0, 0);
 	return (EXIT_SUCCESS);
 }

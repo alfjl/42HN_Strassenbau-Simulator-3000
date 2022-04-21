@@ -9,7 +9,7 @@ void	my_destroy_image(void *mlx_ptr, t_img *img)
 
 void	*my_new_image(void *mlx_ptr, int width, int height, t_img *img)
 {
-	if (LINUX)
+	if (LINUX && HAS_ALPHA)
 		img->ptr = mlx_new_image_alpha(mlx_ptr, width, height);
 	else
 		img->ptr = mlx_new_image(mlx_ptr, width, height);
