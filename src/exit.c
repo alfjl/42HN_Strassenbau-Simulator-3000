@@ -9,7 +9,6 @@ static void	static_mlx_destroy(void)
 
 	mlx = data()->mlx;
 	imgs = data()->imgs;
-	// mlx_do_key_autorepeaton(mlx);
 	i = 0;
 	while (i < IMAGES)
 	{

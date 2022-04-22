@@ -149,6 +149,7 @@ typedef enum e_x11events
 {
 	KeyPress = 2,
 	KeyRelease = 3,
+	MotionNotify = 6,
 	DestroyNotify = 17,
 }	t_x11events;
 
@@ -156,6 +157,7 @@ typedef enum e_x11masks
 {
 	KeyPressMask = 1L << 0,
 	KeyReleaseMask = 1L << 1,
+	PointerMotionMask = 1L<<6,
 	StructureNotifyMask = 1L << 17,
 }	t_x11masks;
 
@@ -341,6 +343,8 @@ uint	argb_color_shade(int color, float brightness);
 float	radian_limits(float angle);
 void	*my_new_image(void *mlx_ptr, int width, int height, t_img *img);
 void	my_destroy_image(void *mlx_ptr, t_img *img);
+int		my_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y);
+int		my_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
 bool	is_inside_limits(int x, int y, t_img *img);
 void	image_fill(t_img *img, int color);
 t_img	*image_clone(void *mlx, t_img *src, t_img *dst);
