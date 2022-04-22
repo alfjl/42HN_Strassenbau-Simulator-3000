@@ -1,5 +1,35 @@
 #include "cub3d.h"
 
+static bool	static_is_door(float y, float x)
+{
+	if (y < data()->map.height && y >= 0 && x < data()->map.width
+		&& x >= 0)
+	{
+		if (data()->map.grid[(int)y][(int)x] == WALL)
+			return (true);
+	}
+	return (false);
+}
+
+void	wall_open_door(void)
+{
+	float	x;
+	float	y;
+	t_ray	*ray;
+	
+	ray = &data()->rays[(NUMBER_OF_RAYS - 1) / 2];
+	x = ray->x;
+	y = ray->y;
+	if (ray->orientation == NORTH)
+		y -= EDGE;
+	if (ray->orientation == WEST)
+		x -= EDGE;
+	if (ray->len > 1)
+		return ;
+	if (static_is_door(y, x))
+		data()->map.grid[(int)y][(int)x] = SPACE;
+}
+
 static void	static_draw_wallsegment(int index, t_img *img)
 {
 	t_point	start;

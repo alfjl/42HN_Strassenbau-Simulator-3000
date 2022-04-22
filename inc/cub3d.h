@@ -8,6 +8,7 @@
 # define COLLISION 1
 # define MINIMAP 1
 # define SHADES 1
+# define DOORS 1
 //mlx
 # define LINUX 1
 # define HAS_ALPHA 0
@@ -26,6 +27,7 @@
 # define ANGLE_OF_VIEW ANGLE_OF_VIEW_CONST
 # define NUMBER_OF_RAYS WINDOW_WIDTH
 # define WALL_HEIGHT_RATIO 1
+# define DOOR_DETECTION_RATIO 20.0
 //Math
 # define EDGE 0.000001
 # define DR 0.0174533
@@ -71,6 +73,7 @@ typedef enum e_argb_colorcode
 # if LINUX
 #  define ALPHA 0xFF000000
 
+//showkey -a
 typedef enum e_keycode_linux
 {
 	W_KEY = 119,
@@ -81,6 +84,7 @@ typedef enum e_keycode_linux
 	LEFT_KEY = 65361,
 	DOWN_KEY = 65364,
 	RIGHT_KEY = 65363,
+	E_KEY = 101,
 	ESC_KEY = 65307,
 }	t_keycode_linux;
 
@@ -116,6 +120,7 @@ typedef enum e_keycode_mac
 	LEFT_KEY = 123,
 	DOWN_KEY = 125,
 	RIGHT_KEY = 124,
+	E_KEY = 14,
 	ESC_KEY = 53,
 }	t_keycode_mac;
 
@@ -326,6 +331,7 @@ int		exit_program_success(void);
 void	walls_draw_to_image(void);
 void	draw_vertical_line(t_img *img, t_point s, t_point e, int i);
 void	minimap_draw_to_image(void);
+void	wall_open_door(void);
 //utils
 void	my_pixel_put(t_img *img, int x, int y, int color);
 void	draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);

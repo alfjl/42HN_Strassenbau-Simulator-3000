@@ -4,15 +4,15 @@ static int	static_key_release_hook(int keycode, t_keys *keys)
 {
 	if (keycode == W_KEY)
 		keys->forwards = false;
-	else if (keycode == S_KEY)
+	if (keycode == S_KEY)
 		keys->backwards = false;
-	else if (keycode == A_KEY)
+	if (keycode == A_KEY)
 		keys->leftwards = false;
-	else if (keycode == D_KEY)
+	if (keycode == D_KEY)
 		keys->rightwards = false;
-	else if (keycode == LEFT_KEY)
+	if (keycode == LEFT_KEY)
 		keys->turnleft = false;
-	else if (keycode == RIGHT_KEY)
+	if (keycode == RIGHT_KEY)
 		keys->turnright = false;
 	return (EXIT_SUCCESS);
 }
@@ -23,16 +23,18 @@ static int	static_key_press_hook(int keycode, t_keys *keys)
 		exit_program(SUCCESS);
 	if (keycode == W_KEY)
 		keys->forwards = true;
-	else if (keycode == S_KEY)
+	if (keycode == S_KEY)
 		keys->backwards = true;
-	else if (keycode == A_KEY)
+	if (keycode == A_KEY)
 		keys->leftwards = true;
-	else if (keycode == D_KEY)
+	if (keycode == D_KEY)
 		keys->rightwards = true;
-	else if (keycode == LEFT_KEY)
+	if (keycode == LEFT_KEY)
 		keys->turnleft = true;
-	else if (keycode == RIGHT_KEY)
+	if (keycode == RIGHT_KEY)
 		keys->turnright = true;
+	if (DOORS && keycode == E_KEY)
+		wall_open_door();
 	return (EXIT_SUCCESS);
 }
 
@@ -57,6 +59,7 @@ void	mlx(void)
 	data()->win = win;
 	mlx_hook(win, DestroyNotify,
 		StructureNotifyMask, exit_program_success, NULL);
+	mlx_do_key_autorepeatoff(mlx);
 	mlx_hook(win, KeyPress, KeyPressMask, static_key_press_hook, &keys);
 	mlx_hook(win, KeyRelease, KeyReleaseMask, static_key_release_hook,
 		&keys);
