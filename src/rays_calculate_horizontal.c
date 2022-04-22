@@ -47,7 +47,7 @@ void	iterate_grid(t_ray *ray)
 static void	static_set_ray_parameters_north(t_ray *ray, float atan)
 {
 	ray->orientation = NORTH;
-	ray->y = (float)trunc(data()->player.y);
+	ray->y = trunc(data()->player.y);
 	ray->x = (data()->player.y - ray->y) * atan + data()->player.x;
 	ray->dy = -1;
 	ray->dx = -ray->dy * atan;
@@ -56,7 +56,7 @@ static void	static_set_ray_parameters_north(t_ray *ray, float atan)
 static void	static_set_ray_parameters_south(t_ray *ray, float atan)
 {
 	ray->orientation = SOUTH;
-	ray->y = (float)ceil(data()->player.y);
+	ray->y = ceil(data()->player.y);
 	ray->x = (data()->player.y - ray->y) * atan + data()->player.x;
 	ray->dy = 1;
 	ray->dx = -ray->dy * atan;

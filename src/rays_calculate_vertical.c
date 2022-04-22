@@ -3,7 +3,7 @@
 static void	static_set_ray_parameters_east(t_ray *ray, float ntan)
 {
 	ray->orientation = EAST;
-	ray->x = (float)ceil(data()->player.x);
+	ray->x = ceil(data()->player.x);
 	ray->y = (data()->player.x - ray->x) * ntan + data()->player.y;
 	ray->dx = 1;
 	ray->dy = -ray->dx * ntan;
@@ -12,7 +12,7 @@ static void	static_set_ray_parameters_east(t_ray *ray, float ntan)
 static void	static_set_ray_parameters_west(t_ray *ray, float ntan)
 {
 	ray->orientation = WEST;
-	ray->x = (float)trunc(data()->player.x);
+	ray->x = trunc(data()->player.x);
 	ray->y = (data()->player.x - ray->x) * ntan + data()->player.y;
 	ray->dx = -1;
 	ray->dy = -ray->dx * ntan;
