@@ -1,5 +1,24 @@
 #include "cub3d.h"
 
+static bool	static_ray_hits_wall(t_ray *ray, t_map *map)
+{
+	float	y;
+	float	x;
+	
+	y = ray->y;
+	x = ray->x;
+	if (ray->orientation == NORTH)
+		y -= EDGE;
+	if (ray->orientation == WEST)
+		x -= EDGE;
+	if (y >= 0 && x >= 0 && y < map->height
+		&& x < map->width
+		&& map->grid[(int)y][(int)x] == WALL)
+		return (true);
+	else
+		return  (false);
+}
+
 void	iterate_grid(t_ray *ray)
 {
 	int		i;
@@ -14,23 +33,21 @@ void	iterate_grid(t_ray *ray)
 			ray->mini_x = ray->x;
 			ray->mini_y = ray->y;
 		}
-		if (ray->y >= 0 && ray->x >= 0 && ray->y < map->height
-			&& ray->x < map->width
-			&& map->grid[(int)ray->y][(int)ray->x] == WALL)
+		if (static_ray_hits_wall(ray, map))
 			break ;
 		else
 		{
 			ray->x += ray->dx;
 			ray->y += ray->dy;
-			i++;
 		}
+		i++;
 	}
 }
 
 static void	static_set_ray_parameters_north(t_ray *ray, float atan)
 {
 	ray->orientation = NORTH;
-	ray->y = (float)trunc(data()->player.y) - EDGE;
+	ray->y = (float)trunc(data()->player.y);
 	ray->x = (data()->player.y - ray->y) * atan + data()->player.x;
 	ray->dy = -1;
 	ray->dx = -ray->dy * atan;
