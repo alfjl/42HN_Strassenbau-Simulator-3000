@@ -59,6 +59,8 @@ $(NAME): $(OBJ_DIR) $(OBJS) $(DEPS)
 	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $@
 	@echo "\n$(GREEN)$(NAME) created$(NC)"
 	@echo "$(YELLOW)SUCCESFULLY COMPILED!$(NC)"
+	@echo name: $(DEPS)
+	@echo name: $(INCLUDES)
 
 $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
@@ -67,11 +69,12 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(DEPS) ofilemessage
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	@echo ".\c"
 
-# bonus: $(eval HEADER_DIR = ./inc/bonus/) re
-# 	@echo $(INCLUDES)
+bonus: set all
+	@echo bonus: $(DEPS)
 
-# bonus: all
-# 	@echo $(INCLUDES)
+set:
+	@touch $(HEADERS)
+	$(eval HEADER_DIR = ./inc/bonus/)
 
 ofilemessage:
 	@echo "compiling $(NAME)-object-files: \c"
