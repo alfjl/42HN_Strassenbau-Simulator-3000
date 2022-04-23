@@ -44,18 +44,32 @@ static int	static_mouse_click_hook(int button, int x, int y)
 	return (EXIT_SUCCESS);
 }
 
-static int	static_mouse_move_hook(int x, int y)
-{
-	printf("move x: %d, y: %d\n", x, y);
-	return (EXIT_SUCCESS);
-}
+// static int	static_mouse_move_hook(int x, int y, t_buttons *buttons)
+// {
+// 	(void)y;
+// 	printf("move x: %d, y: %d\n", x, y); //remove
+// 	if (x < data()->window.width / 2)
+// 	{
+// 		buttons->mouse_left = true;
+// 		printf("turn left\n"); //remove
+// 	}
+// 	else if (x > data()->window.width / 2)
+// 	{
+// 		buttons->mouse_right = true;
+// 		printf("turn right\n"); //remove
+// 	}
+// 	else
+// 		printf("neutral\n"); //remove
+// 	printf("hook left: %d, right: %d\n", buttons->mouse_left, buttons->mouse_right);
+// 	return (EXIT_SUCCESS);
+// }
 
 void	mlx(void)
 {
-	t_keys	keys;
-	void	*mlx;
-	void	*win;
-	t_frame	*window;
+	t_keys		keys;
+	void		*mlx;
+	void		*win;
+	t_frame		*window;
 
 	mlx = data()->mlx;
 	window = &data()->window;
@@ -72,11 +86,12 @@ void	mlx(void)
 	mlx_hook(win, DestroyNotify,
 		StructureNotifyMask, exit_program_success, NULL);
 	mlx_do_key_autorepeatoff(mlx);
+	mlx_mouse_hide(mlx, win);
 	mlx_hook(win, KeyPress, KeyPressMask, static_key_press_hook, &keys);
 	mlx_hook(win, KeyRelease, KeyReleaseMask, static_key_release_hook,
 		&keys);
 	mlx_mouse_hook(win, static_mouse_click_hook, NULL);
-	mlx_hook(win, MotionNotify, PointerMotionMask, static_mouse_move_hook, NULL);
+	// mlx_hook(win, MotionNotify, PointerMotionMask, static_mouse_move_hook, &buttons);
 	mlx_loop_hook(mlx, frame_loop, &keys);
 	mlx_loop(mlx);
 }

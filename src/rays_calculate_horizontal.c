@@ -4,7 +4,7 @@ static bool	static_ray_hits_wall(t_ray *ray, t_map *map)
 {
 	float	y;
 	float	x;
-	
+
 	y = ray->y;
 	x = ray->x;
 	if (ray->orientation == NORTH)
@@ -16,7 +16,7 @@ static bool	static_ray_hits_wall(t_ray *ray, t_map *map)
 		&& map->grid[(int)y][(int)x] == WALL)
 		return (true);
 	else
-		return  (false);
+		return (false);
 }
 
 void	iterate_grid(t_ray *ray)

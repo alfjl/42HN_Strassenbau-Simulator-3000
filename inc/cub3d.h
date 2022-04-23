@@ -9,6 +9,7 @@
 # define MINIMAP 1
 # define SHADES 1
 # define DOORS 1
+# define MOUSE 1
 //mlx
 # define LINUX 1
 # define HAS_ALPHA 0
@@ -73,6 +74,8 @@ typedef enum e_argb_colorcode
 # if LINUX
 #  define ALPHA 0xFF000000
 
+int		mlx_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y); //remove?
+
 //showkey -a
 typedef enum e_keycode_linux
 {
@@ -109,6 +112,8 @@ typedef enum e_argb_colorcode_linux
 }	t_argb_colorcode_linux;
 # else
 #  define ALPHA 0
+
+int		mlx_mouse_move(void *win_ptr, int x, int y); //remove?
 
 typedef enum e_keycode_mac
 {
@@ -157,7 +162,7 @@ typedef enum e_x11masks
 {
 	KeyPressMask = 1L << 0,
 	KeyReleaseMask = 1L << 1,
-	PointerMotionMask = 1L<<6,
+	PointerMotionMask = 1L << 6,
 	StructureNotifyMask = 1L << 17,
 }	t_x11masks;
 
@@ -212,6 +217,12 @@ typedef struct s_keys
 	bool	turnleft;
 	bool	turnright;
 }	t_keys;
+
+typedef struct s_buttons
+{
+	bool	mouse_left;
+	bool	mouse_right;
+}	t_buttons;
 
 typedef struct s_img
 {
@@ -313,13 +324,15 @@ typedef struct s_data
 	struct s_ray	rays[NUMBER_OF_RAYS];
 	struct s_fps	fps; //remove
 	long			time; //remove
+	int				mouse_x;
+	int				mouse_y;
 }	t_data;
 
 t_data	*data(void);
 void	read_map(char *filepath);
 void	mlx(void);
 int		frame_loop(t_keys *keys);
-void	player_update_position(t_keys *keys);
+void	player_update_position(t_keys *keys, t_buttons *buttons);
 bool	is_wall(float y, float x);
 void	player_nose_draw_to_image(void);
 void	rays_create(void);

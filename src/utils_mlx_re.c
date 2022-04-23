@@ -10,6 +10,7 @@
 // 		(void)mlx_ptr;
 // 		mlx_mouse_move(win_ptr, x, y);
 // 	}
+// 	return (EXIT_SUCCESS);
 // }
 
 // int		my_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y)

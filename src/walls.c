@@ -16,7 +16,7 @@ void	wall_open_door(void)
 	float	x;
 	float	y;
 	t_ray	*ray;
-	
+
 	ray = &data()->rays[(NUMBER_OF_RAYS - 1) / 2];
 	x = ray->x;
 	y = ray->y;
