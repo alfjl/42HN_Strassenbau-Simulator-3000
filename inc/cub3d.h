@@ -9,7 +9,7 @@
 # define MINIMAP 1
 # define SHADES 1
 # define DOORS 1
-# define MOUSE 1
+# define MOUSE 0
 //mlx
 # define LINUX 1
 # define HAS_ALPHA 0
@@ -208,7 +208,7 @@ typedef enum e_errorcodes
 	ERRORS
 }	t_errorcodes;
 
-typedef struct s_keys
+typedef struct s_controls
 {
 	bool	forwards;
 	bool	backwards;
@@ -216,13 +216,9 @@ typedef struct s_keys
 	bool	rightwards;
 	bool	turnleft;
 	bool	turnright;
-}	t_keys;
-
-typedef struct s_buttons
-{
 	bool	mouse_left;
 	bool	mouse_right;
-}	t_buttons;
+}	t_controls;
 
 typedef struct s_img
 {
@@ -324,15 +320,13 @@ typedef struct s_data
 	struct s_ray	rays[NUMBER_OF_RAYS];
 	struct s_fps	fps; //remove
 	long			time; //remove
-	int				mouse_x;
-	int				mouse_y;
 }	t_data;
 
 t_data	*data(void);
 void	read_map(char *filepath);
 void	mlx(void);
-int		frame_loop(t_keys *keys);
-void	player_update_position(t_keys *keys, t_buttons *buttons);
+int		frame_loop(t_controls *keys);
+void	player_update_position(t_controls *keys);
 bool	is_wall(float y, float x);
 void	player_nose_draw_to_image(void);
 void	rays_create(void);
@@ -347,6 +341,7 @@ void	walls_draw_to_image(void);
 void	draw_vertical_line(t_img *img, t_point s, t_point e, int i);
 void	minimap_draw_to_image(void);
 void	wall_open_door(void);
+void	mouse(t_controls *controls);
 //utils
 void	my_pixel_put(t_img *img, int x, int y, int color);
 void	draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);

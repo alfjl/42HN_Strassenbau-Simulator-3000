@@ -2,6 +2,9 @@ NAME := cub3d
 SRC_DIR := ./src/
 OBJ_DIR := ./obj/
 HEADER_DIR = ./inc/
+ifdef BONUS
+HEADER_DIR = ./inc/bonus/
+endif
 # $(NAME): HEADER_DIR = ./inc/
 # bonus: HEADER_DIR = ./inc/bonus/
 SRCS :=	main.c \
@@ -11,6 +14,7 @@ SRCS :=	main.c \
 		map.c \
 		minimap.c \
 		mlx.c \
+		mouse.c \
 		player_movement.c \
 		rays_calculate_horizontal.c \
 		rays_calculate_vertical.c \
@@ -59,8 +63,8 @@ $(NAME): $(OBJ_DIR) $(OBJS) $(DEPS)
 	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $@
 	@echo "\n$(GREEN)$(NAME) created$(NC)"
 	@echo "$(YELLOW)SUCCESFULLY COMPILED!$(NC)"
-	@echo name: $(DEPS)
-	@echo name: $(INCLUDES)
+#	@echo name: $(DEPS)
+#	@echo name: $(INCLUDES)
 
 $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
@@ -69,12 +73,15 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(DEPS) ofilemessage
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	@echo ".\c"
 
-bonus: set all
-	@echo bonus: $(DEPS)
+# bonus: set all
+# 	@echo bonus: $(DEPS)
 
-set:
-	@touch $(HEADERS)
-	$(eval HEADER_DIR = ./inc/bonus/)
+bonus:
+	@make BONUS=1
+
+# set:
+# 	@touch $(HEADERS)
+# 	$(eval HEADER_DIR = ./inc/bonus/)
 
 ofilemessage:
 	@echo "compiling $(NAME)-object-files: \c"

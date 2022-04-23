@@ -50,7 +50,7 @@ static void	static_player_update(float *x, float dx, float *y, float dy)
 	}
 }
 
-void	player_update_position(t_keys *keys, t_buttons *buttons)
+void	player_update_position(t_controls *controls)
 {
 	t_player	*player;
 	float		*x;
@@ -64,16 +64,16 @@ void	player_update_position(t_keys *keys, t_buttons *buttons)
 	y = &player->y;
 	dx = player->dx;
 	dy = player->dy;
-	if (keys->forwards)
+	if (controls->forwards)
 		static_player_update(x, dx, y, dy);
-	if (keys->backwards)
+	if (controls->backwards)
 		static_player_update(x, -dx, y, -dy);
-	if (keys->leftwards)
+	if (controls->leftwards)
 		static_player_update(x, dy, y, -dx);
-	if (keys->rightwards)
+	if (controls->rightwards)
 		static_player_update(x, -dy, y, dx);
-	if (keys->turnleft || buttons->mouse_left)
+	if (controls->turnleft || controls->mouse_left)
 		player->angle = radian_limits(player->angle - STEP_A);
-	if (keys->turnright || buttons->mouse_right)
+	if (controls->turnright || controls->mouse_right)
 		player->angle = radian_limits(player->angle + STEP_A);
 }

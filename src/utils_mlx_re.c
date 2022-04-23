@@ -1,29 +1,5 @@
 #include "cub3d.h"
 
-// int		my_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y)
-// {
-
-// 	if (LINUX)
-// 		mlx_mouse_move(mlx_ptr, win_ptr, x, y);
-// 	else
-// 	{
-// 		(void)mlx_ptr;
-// 		mlx_mouse_move(win_ptr, x, y);
-// 	}
-// 	return (EXIT_SUCCESS);
-// }
-
-// int		my_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y)
-// {
-// 	if (LINUX)
-// 		mlx_mouse_get_pos(mlx_ptr, win_ptr, x, y);
-// 	else
-// 	{
-// 		(void)mlx_ptr;
-// 		mlx_mouse_get_pos(win_ptr, x, y);
-// 	}
-// }
-
 void	my_destroy_image(void *mlx_ptr, t_img *img)
 {
 	if (img->ptr != NULL)

@@ -34,41 +34,11 @@ static void	window_set_up(void)
 	fps_to_window_buffer(); //remove
 }
 
-static void	static_get_mouse_info(t_buttons *buttons)
+int	frame_loop(t_controls *controls)
 {
-	int	x;
-	int	y;
-
-	mlx_mouse_get_pos(data()->mlx, data()->win, &x, &y);
-	// printf("move start x: %d\n", x); //remove
-	if (x < data()->mouse_x)
-	{
-		buttons->mouse_left = true;
-		// printf("turn left\n"); //remove
-	}
-	else if (x > data()->mouse_x)
-	{
-		buttons->mouse_right = true;
-		// printf("turn right\n"); //remove
-	}
-	if (x < 0 || x > data()->window.width)
-	{
-		mlx_mouse_move(data()->mlx, data()->win, data()->window.width / 2, data()->window.height / 2);
-		mlx_mouse_get_pos(data()->mlx, data()->win, &x, &y);
-		// data()->mouse_x = data()->window.width / 2;
-	}
-	data()->mouse_x = x;
-	// printf("move end x: %d\n", data()->mouse_x); //remove
-}
-
-int	frame_loop(t_keys *keys)
-{
-	t_buttons buttons;
-
-	buttons.mouse_left = false;
-	buttons.mouse_right = false;
-	static_get_mouse_info(&buttons);
-	player_update_position(keys, &buttons);
+	player_update_position(controls);
+	controls->mouse_left = false;
+	controls->mouse_right = false;
 	rays_create();
 	walls_draw_to_image();
 	if (MINIMAP)
@@ -76,7 +46,11 @@ int	frame_loop(t_keys *keys)
 	window_set_up();
 	// int w;
 	// int h;
-	// mlx_put_image_to_window(data()->mlx, data()->win, mlx_xpm_file_to_image(data()->mlx, "./textures/dirt2048x2048.xpm", &w, &h), 0, 0);
-	// mlx_put_image_to_window(data()->mlx, data()->win, mlx_png_file_to_image(data()->mlx, "./textures/dirt2048x2048.png", &w, &h), 0, 0);
+	// mlx_put_image_to_window(data()->mlx, data()->win,
+	// 	mlx_xpm_file_to_image(data()->mlx, "./textures/dirt2048x2048.xpm",
+	// 		&w, &h), 0, 0);
+	// mlx_put_image_to_window(data()->mlx, data()->win,
+	// 	mlx_png_file_to_image(data()->mlx, "./textures/dirt2048x2048.png",
+	// 		&w, &h), 0, 0);
 	return (EXIT_SUCCESS);
 }
