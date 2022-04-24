@@ -11,7 +11,31 @@ static void	minimap_to_window_buffer(void *mlx, void *win, t_img *imgs)
 	imgs[MINIMAP_IMG].ptr = NULL;
 }
 
-static void	static_sprites_to_window_buffer(void)
+// static void	static_sprites_to_window_buffer(void)
+// {
+// 	int 		nbr;
+// 	int			i;
+// 	int			*counter;
+// 	int			*sign;
+// 	int			max;
+
+// 	nbr = 0;
+// 	while (nbr < SPRITENBR)
+// 	{
+// 		counter = &data()->sprites[nbr].counter;
+// 		sign = &data()->sprites[nbr].sign;
+// 		max = data()->sprites[nbr].count;
+// 		i = *counter / 10 % max;
+// 		if (data()->sprites[nbr].enabled)
+// 			image_overlay(&data()->sprites[nbr].sequence[i], &data()->imgs[WALLS_IMG], 200, 200 + i * 5);
+// 		*counter += *sign;
+// 		if (*counter == 0 || *counter == (max - 1) * data()->sprites[nbr].speed)
+// 			*sign *= -1;
+// 		nbr++;
+// 	}
+// }
+
+static void	static_player_sprite_to_window_buffer(void)
 {
 	int 		nbr;
 	int			i;
@@ -19,20 +43,28 @@ static void	static_sprites_to_window_buffer(void)
 	int			*sign;
 	int			max;
 
-	nbr = 0;
-	while (nbr < SPRITENBR)
-	{
+	nbr = data()->player.status;
+	// while (nbr < SPRITENBR)
+	// {
 		counter = &data()->sprites[nbr].counter;
 		sign = &data()->sprites[nbr].sign;
 		max = data()->sprites[nbr].count;
 		i = *counter / 10 % max;
-		if (data()->sprites[nbr].enabled)
+		// if (data()->sprites[nbr].enabled)
 			image_overlay(&data()->sprites[nbr].sequence[i], &data()->imgs[WALLS_IMG], 200, 200 + i * 5);
 		*counter += *sign;
-		if (*counter == 0 || *counter == (max - 1) * SPRITE_SPEED)
-			*sign *= -1;
-		nbr++;
-	}
+		if (*counter == 0 || *counter == (max - 1) * data()->sprites[nbr].speed)
+		{
+			if (nbr == HITTING)
+			{
+				*counter = 0;
+				data()->player.status = IDLE;
+			}
+			else
+				*sign *= -1;
+		}
+	// 	nbr++;
+	// }
 }
 
 static void	environment_to_window_buffer(void *mlx, void *win, t_img *imgs)
@@ -40,7 +72,7 @@ static void	environment_to_window_buffer(void *mlx, void *win, t_img *imgs)
 	if (HAS_ALPHA)
 		mlx_put_image_to_window(mlx, win, imgs[BACKGROUND_IMG].ptr, 0, 0);
 	if (SPRITES)
-		static_sprites_to_window_buffer();
+		static_player_sprite_to_window_buffer();
 	mlx_put_image_to_window(mlx, win, imgs[WALLS_IMG].ptr, 0, 0);
 	my_destroy_image(mlx, &imgs[WALLS_IMG]);
 }
@@ -56,7 +88,7 @@ static void	window_set_up(void)
 	imgs = data()->imgs;
 	environment_to_window_buffer(mlx, win, imgs);
 	// if (SPRITES)
-	// 	static_sprites_to_window_buffer();
+	// 	static_player_sprite_to_window_buffer();
 	if (MINIMAP)
 		minimap_to_window_buffer(mlx, win, imgs);
 	fps_to_window_buffer(); //remove

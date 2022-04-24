@@ -20,7 +20,7 @@
 # define TEXTURE_SIZE 512
 # define SPRITE_SIZE 512
 # define SPRITE_COUNT 6
-# define SPRITE_SPEED 8
+# define SPRITE_SPEED 3
 # define MINIMAP_RADIUS 4
 # define MINIMAP_OFFSET 10
 # define MINIMAP_RAY_DENSITY_FACTOR 20
@@ -32,7 +32,7 @@
 # define ANGLE_OF_VIEW ANGLE_OF_VIEW_CONST
 # define NUMBER_OF_RAYS WINDOW_WIDTH
 # define WALL_HEIGHT_RATIO 1
-# define DOOR_DETECTION_RATIO 20.0
+# define HIT_RANGE 1.5
 //Math
 # define EDGE 0.000001
 # define DR 0.0174533
@@ -193,6 +193,13 @@ typedef enum e_imgnbr
 	IMAGES,
 }	t_imgnbr;
 
+typedef enum e_player_status
+{
+	IDLE =	SHOVEL_SPRITE,
+	WALKING = SHOVEL_WALK_SPRITE,
+	HITTING = SHOVEL_HIT_SPRITE,
+}	t_player_status;
+
 typedef enum e_orientation
 {
 	NORTH,
@@ -249,6 +256,7 @@ typedef struct s_sprite
 {
 	int			count;
 	int			counter;
+	int			speed;
 	t_img		sequence[SPRITE_COUNT + 1];
 	int			sign;
 	bool		enabled;
@@ -261,6 +269,7 @@ typedef struct s_player
 	float		dx;
 	float		dy;
 	float		angle;
+	int			status;
 }				t_player;
 
 typedef struct s_ray

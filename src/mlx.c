@@ -34,7 +34,10 @@ static int	static_key_press_hook(int keycode, t_controls *controls)
 	if (keycode == RIGHT_KEY)
 		controls->turnright = true;
 	if (DOORS && keycode == E_KEY)
+	{
+		data()->player.status = HITTING;
 		wall_open_door();
+	}
 	return (EXIT_SUCCESS);
 }
 

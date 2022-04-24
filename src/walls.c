@@ -24,7 +24,7 @@ void	wall_open_door(void)
 		y -= EDGE;
 	if (ray->orientation == WEST)
 		x -= EDGE;
-	if (ray->len > 1)
+	if (ray->len > HIT_RANGE)
 		return ;
 	if (static_is_door(y, x))
 		data()->map.grid[(int)y][(int)x] = SPACE;

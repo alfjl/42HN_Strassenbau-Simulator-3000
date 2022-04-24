@@ -65,6 +65,7 @@ static void	static_get_map_file_data(void)
 	data()->map.textures.east = "./textures/bricks.xpm"; //placeholder
 	data()->map.textures.west = "./textures/bricks.xpm"; //placeholder
 	///////player
+	data()->player.x = IDLE;
 	data()->player.x = 1.5; //placeholder
 	data()->player.y = 1.5; //placeholder
 	data()->player.angle = M_PI / 2; //placeholder

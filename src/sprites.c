@@ -40,7 +40,6 @@ static void	static_resize_img(t_img *tmp, t_img *img)
 		}	
 		y++;
 	}
-	printf("resize: %p, %p\n", &data()->sprites[0].sequence[0], data()->sprites[0].sequence[0].ptr); //remove
 }
 
 static void	static_create_img_from_sprite(int spritenbr)
@@ -66,7 +65,6 @@ static void	static_create_img_from_sprite(int spritenbr)
 		my_destroy_image(data()->mlx, tmp);
 		i++;
 	}
-	printf("create: %p, %p\n", &data()->sprites[0].sequence[0], data()->sprites[0].sequence[0].ptr); //remove
 }
 
 void	sprites_load(void)
@@ -76,6 +74,7 @@ void	sprites_load(void)
 	data()->sprites[SHOVEL_SPRITE].counter = 0;
 	data()->sprites[SHOVEL_SPRITE].enabled = true;
 	data()->sprites[SHOVEL_SPRITE].sign = 1;
+	data()->sprites[SHOVEL_SPRITE].speed = 1;
 	static_create_img_from_sprite(SHOVEL_SPRITE);
 
 	data()->sprites[SHOVEL_WALK_SPRITE].sequence[0].path = "./sprites/shovel0.xpm";
@@ -88,12 +87,15 @@ void	sprites_load(void)
 	data()->sprites[SHOVEL_WALK_SPRITE].counter = 0;
 	data()->sprites[SHOVEL_WALK_SPRITE].enabled = false;
 	data()->sprites[SHOVEL_WALK_SPRITE].sign = 1;
+	data()->sprites[SHOVEL_WALK_SPRITE].speed = 3;
 	static_create_img_from_sprite(SHOVEL_WALK_SPRITE);
 
 	data()->sprites[SHOVEL_HIT_SPRITE].sequence[0].path = "./sprites/shovel_hit0.xpm";
-	data()->sprites[SHOVEL_HIT_SPRITE].count = 1;
+	data()->sprites[SHOVEL_HIT_SPRITE].sequence[1].path = "./sprites/shovel_hit0.xpm";
+	data()->sprites[SHOVEL_HIT_SPRITE].count = 2;
 	data()->sprites[SHOVEL_HIT_SPRITE].counter = 0;
 	data()->sprites[SHOVEL_HIT_SPRITE].enabled = false;
 	data()->sprites[SHOVEL_HIT_SPRITE].sign = 1;
+	data()->sprites[SHOVEL_HIT_SPRITE].speed = 6;
 	static_create_img_from_sprite(SHOVEL_HIT_SPRITE);
 }
