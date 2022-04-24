@@ -10,6 +10,7 @@
 # define SHADES 1
 # define DOORS 1
 # define MOUSE 0
+# define SPRITES 1
 //mlx
 # define LINUX 1
 # define HAS_ALPHA 0
@@ -17,6 +18,8 @@
 # define WINDOW_HEIGHT 512
 # define GRID_SIZE 16
 # define TEXTURE_SIZE 512
+# define SPRITE_SIZE 512
+# define SPRITE_COUNT 3
 # define MINIMAP_RADIUS 4
 # define MINIMAP_OFFSET 10
 # define MINIMAP_RAY_DENSITY_FACTOR 20
@@ -166,6 +169,12 @@ typedef enum e_x11masks
 	StructureNotifyMask = 1L << 17,
 }	t_x11masks;
 
+typedef enum e_spritenbr
+{
+	SHOVEL_SPRITE,
+	SPRITENBR,
+}	t_spritenbr;
+
 typedef enum e_imgnbr
 {
 	PLAYER_IMG,
@@ -231,6 +240,12 @@ typedef struct s_img
 	int		endian;
 	char	*path;
 }	t_img;
+
+typedef struct s_sprite
+{
+	int			count;
+	t_img		sequence[SPRITE_COUNT + 1];
+}	t_sprite;
 
 typedef struct s_player
 {
@@ -316,6 +331,7 @@ typedef struct s_data
 	int				line_w;
 	t_img			imgs[IMAGES];
 	int				img_size;
+	t_sprite		sprites[SPRITENBR];
 	struct s_player	player;
 	struct s_ray	rays[NUMBER_OF_RAYS];
 	struct s_fps	fps; //remove
@@ -335,6 +351,7 @@ t_ray	ray_calculate_horizontal(float angle);
 void	iterate_grid(t_ray *ray);
 void	images_create(void);
 void	textures_load(void);
+void	sprites_load(void);
 int		exit_program(int errorcode);
 int		exit_program_success(void);
 void	walls_draw_to_image(void);
@@ -356,6 +373,7 @@ int		my_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
 bool	is_inside_limits(int x, int y, t_img *img);
 void	image_fill(t_img *img, int color);
 t_img	*image_clone(void *mlx, t_img *src, t_img *dst);
+void	image_overlay(t_img *src, t_img *dst, int dst_x, int dst_y);
 void	calculate_pos_delta(void);
 //mlx
 void	*mlx_new_image_alpha(void *mlx_ptr, int width, int height);

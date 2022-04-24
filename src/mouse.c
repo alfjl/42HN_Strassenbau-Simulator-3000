@@ -32,7 +32,7 @@ static int	static_mouse_click_hook(int button, int x, int y)
 
 static int	static_mouse_move_hook(int x, int y, t_controls *controls)
 {
-	static int	old_x;
+	static int	old_x = WINDOW_WIDTH / 2;
 
 	if (x < old_x)
 	{

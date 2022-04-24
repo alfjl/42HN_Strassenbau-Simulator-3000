@@ -11,10 +11,33 @@ static void	minimap_to_window_buffer(void *mlx, void *win, t_img *imgs)
 	imgs[MINIMAP_IMG].ptr = NULL;
 }
 
+static void	sprites_to_window_buffer(void *mlx, void *win)
+{
+	int nbr;
+	int	i;
+
+	(void)win;
+	(void)mlx;
+	nbr = 0;
+	i = 0;
+	while (nbr < SPRITENBR)
+	{
+		// mlx_put_image_to_window(mlx, win, imgs[BACKGROUND_IMG].ptr, 0, 0);
+		// mlx_put_image_to_window(mlx, win, imgs[WALLS_IMG].ptr, 0, 0);
+		// my_destroy_image(mlx, &imgs[WALLS_IMG]);
+		// mlx_put_image_to_window(mlx, win, data()->sprites[nbr].sequence[i].ptr, 0, 0);
+		// image_fill(&data()->imgs[WALLS_IMG], BLACK);
+		image_overlay(&data()->sprites[nbr].sequence[i], &data()->imgs[WALLS_IMG], 0, 0);
+		nbr++;
+	}
+}
+
 static void	environment_to_window_buffer(void *mlx, void *win, t_img *imgs)
 {
 	if (HAS_ALPHA)
 		mlx_put_image_to_window(mlx, win, imgs[BACKGROUND_IMG].ptr, 0, 0);
+	if (SPRITES)
+		sprites_to_window_buffer(mlx, win);
 	mlx_put_image_to_window(mlx, win, imgs[WALLS_IMG].ptr, 0, 0);
 	my_destroy_image(mlx, &imgs[WALLS_IMG]);
 }
@@ -29,6 +52,8 @@ static void	window_set_up(void)
 	win = data()->win;
 	imgs = data()->imgs;
 	environment_to_window_buffer(mlx, win, imgs);
+	// if (SPRITES)
+	// 	sprites_to_window_buffer(mlx, win);
 	if (MINIMAP)
 		minimap_to_window_buffer(mlx, win, imgs);
 	fps_to_window_buffer(); //remove
@@ -47,7 +72,7 @@ int	frame_loop(t_controls *controls)
 	// int w;
 	// int h;
 	// mlx_put_image_to_window(data()->mlx, data()->win,
-	// 	mlx_xpm_file_to_image(data()->mlx, "./textures/dirt2048x2048.xpm",
+	// 	mlx_xpm_file_to_image(data()->mlx, "./sprites/shovel0.xpm",
 	// 		&w, &h), 0, 0);
 	// mlx_put_image_to_window(data()->mlx, data()->win,
 	// 	mlx_png_file_to_image(data()->mlx, "./textures/dirt2048x2048.png",

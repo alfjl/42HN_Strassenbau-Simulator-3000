@@ -1,5 +1,30 @@
 #include "cub3d.h"
 
+void	image_overlay(t_img *src, t_img *dst, int dst_x, int dst_y)
+{
+	int		x;
+	int		y;
+	int		color;
+
+	if (src == NULL || dst == NULL || dst->ptr == NULL)
+		return ;
+	y = 0;
+	while (y < src->height)
+	{
+		x = 0;
+		while (x < src->width)
+		{
+			color = *(unsigned int *)(src->addr
+					+ (unsigned int)((int)y * src->line_len
+						+ x * (src->bits_per_pixel / 8)));
+			if (color != (int)BLACK)
+				my_pixel_put(dst, dst_x + x, dst_y + y, color);
+			x++;
+		}	
+		y++;
+	}
+}
+
 t_img	*image_clone(void *mlx, t_img *src, t_img *dst)
 {
 	int		x;

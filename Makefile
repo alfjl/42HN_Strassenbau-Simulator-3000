@@ -19,6 +19,7 @@ SRCS :=	main.c \
 		rays_calculate_horizontal.c \
 		rays_calculate_vertical.c \
 		rays.c \
+		sprites.c \
 		textures.c \
 		utils_colors.c \
 		utils_mlx_re.c \

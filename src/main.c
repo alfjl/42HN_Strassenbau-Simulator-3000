@@ -14,6 +14,22 @@ static void	static_initialize_pointers(void)
 		imgs[i].ptr = NULL;
 		i++;
 	}
+	//init sprite pointers
+	int			nbr;
+	t_sprite	*sprite;
+	
+	nbr = 0;
+	i = 0;
+	while (nbr < SPRITENBR)
+	{
+		sprite = &data()->sprites[nbr];
+		while (i <= sprite->count)
+		{
+			sprite->sequence[i].ptr = NULL;
+			i++;
+		}
+		nbr++;
+	}
 }
 
 static void	static_initialize_data_struct(void)
@@ -78,6 +94,8 @@ int	main(int argc, char **argv)
 	static_initialize_data_struct();
 	images_create();
 	textures_load();
+	if (SPRITES)
+		sprites_load();
 	mlx();
 	return (EXIT_SUCCESS);
 }

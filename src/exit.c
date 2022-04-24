@@ -16,6 +16,7 @@ static void	static_mlx_destroy(void)
 			my_destroy_image(mlx, (t_img *)&imgs[i].ptr);
 		i++;
 	}
+	//free sprites
 	if (data()->win != NULL)
 		mlx_destroy_window(data()->mlx, data()->win);
 }
