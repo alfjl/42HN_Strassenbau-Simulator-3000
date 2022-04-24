@@ -17,6 +17,23 @@ static void	static_mlx_destroy(void)
 		i++;
 	}
 	//free sprites
+	int			nbr;
+	t_sprite	*sprite;
+	
+	nbr = 0;
+	i = 0;
+	while (nbr < SPRITENBR)
+	{
+		sprite = &data()->sprites[nbr];
+		while (i <= sprite->count)
+		{
+			if (sprite->sequence[i].ptr != NULL)
+				my_destroy_image(mlx, (t_img *)&imgs[i].ptr);
+			i++;
+		}
+		nbr++;
+	}
+	//free win
 	if (data()->win != NULL)
 		mlx_destroy_window(data()->mlx, data()->win);
 }

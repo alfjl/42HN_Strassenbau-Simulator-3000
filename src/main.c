@@ -1,12 +1,10 @@
 #include "cub3d.h"
 
-static void	static_initialize_pointers(void)
+static void	static_initialize_img_pointers(void)
 {
 	t_img	*imgs;
 	int		i;
 
-	data()->mlx = NULL;
-	data()->win = NULL;
 	imgs = data()->imgs;
 	i = 0;
 	while (i < IMAGES)
@@ -14,7 +12,11 @@ static void	static_initialize_pointers(void)
 		imgs[i].ptr = NULL;
 		i++;
 	}
-	//init sprite pointers
+}
+
+static void	static_initialize_sprite_pointers(void)
+{
+	int			i;
 	int			nbr;
 	t_sprite	*sprite;
 	
@@ -72,16 +74,12 @@ static void	static_get_map_file_data(void)
 	calculate_pos_delta();
 }
 
-t_data	*data(void)
-{
-	static t_data	data;
-
-	return (&data);
-}
-
 int	main(int argc, char **argv)
 {
-	static_initialize_pointers();
+	data()->mlx = NULL;
+	data()->win = NULL;
+	static_initialize_img_pointers();
+	static_initialize_sprite_pointers();
 	if (argc != 2)
 	{
 		ft_printf("ERROR\n");

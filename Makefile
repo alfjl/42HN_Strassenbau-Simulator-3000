@@ -24,7 +24,8 @@ SRCS :=	main.c \
 		utils_colors.c \
 		utils_mlx_re.c \
 		utils_mlx.c \
-		utils.c \
+		utils1.c \
+		utils2.c \
 		walls_vertical_line.c \
 		walls.c \
 		fps.c #remove

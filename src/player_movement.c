@@ -1,14 +1,14 @@
 #include "cub3d.h"
 
-
 static void	static_set_player_status(t_controls *controls)
 {
 	if (data()->player.status == HITTING)
 		return ;
-	else if (controls->forwards || controls->backwards || controls->leftwards || controls->rightwards)
+	else if (controls->forwards || controls->backwards || controls->leftwards
+		|| controls->rightwards)
 		data()->player.status = WALKING;
 	else
-			data()->player.status = IDLE;
+		data()->player.status = IDLE;
 }
 
 static bool	static_is_wall(float y, float x)
