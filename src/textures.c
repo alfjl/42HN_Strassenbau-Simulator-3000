@@ -37,7 +37,7 @@ static int	static_textures_determine_color(t_img *img, int x, int y)
 	ty = y * scale_y;
 	color = *(unsigned int *)(img->addr
 			+ (unsigned int)((int)ty * img->line_len
-				+ (int)tx * (img->bits_per_pixel / 8)));
+				+ (int)tx * (img->bits_per_pixel / 8))) + ALPHA;
 	return (color);
 }
 

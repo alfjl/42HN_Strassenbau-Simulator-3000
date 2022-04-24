@@ -19,7 +19,8 @@
 # define GRID_SIZE 16
 # define TEXTURE_SIZE 512
 # define SPRITE_SIZE 512
-# define SPRITE_COUNT 7
+# define SPRITE_COUNT 6
+# define SPRITE_SPEED 8
 # define MINIMAP_RADIUS 4
 # define MINIMAP_OFFSET 10
 # define MINIMAP_RAY_DENSITY_FACTOR 20
@@ -172,6 +173,8 @@ typedef enum e_x11masks
 typedef enum e_spritenbr
 {
 	SHOVEL_SPRITE,
+	SHOVEL_WALK_SPRITE,
+	SHOVEL_HIT_SPRITE,
 	SPRITENBR,
 }	t_spritenbr;
 
@@ -245,7 +248,10 @@ typedef struct s_img
 typedef struct s_sprite
 {
 	int			count;
+	int			counter;
 	t_img		sequence[SPRITE_COUNT + 1];
+	int			sign;
+	bool		enabled;
 }	t_sprite;
 
 typedef struct s_player

@@ -16,8 +16,8 @@ void	image_overlay(t_img *src, t_img *dst, int dst_x, int dst_y)
 		{
 			color = *(unsigned int *)(src->addr
 					+ (unsigned int)((int)y * src->line_len
-						+ x * (src->bits_per_pixel / 8)));
-			if (color != (int)BLACK)
+						+ x * (src->bits_per_pixel / 8))) + ALPHA;
+			if (color != (int)TRANSPARENT)
 				my_pixel_put(dst, dst_x + x, dst_y + y, color);
 			x++;
 		}	

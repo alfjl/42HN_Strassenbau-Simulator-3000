@@ -11,26 +11,27 @@ static void	minimap_to_window_buffer(void *mlx, void *win, t_img *imgs)
 	imgs[MINIMAP_IMG].ptr = NULL;
 }
 
-static void	sprites_to_window_buffer(void *mlx, void *win)
+static void	static_sprites_to_window_buffer(void)
 {
-	int nbr;
+	int 		nbr;
 	int			i;
-	static int	counter = 0;
+	int			*counter;
+	int			*sign;
+	int			max;
 
-	(void)win;
-	(void)mlx;
 	nbr = 0;
 	while (nbr < SPRITENBR)
 	{
-		i =  counter / 15 % data()->sprites[nbr].count;
-		// mlx_put_image_to_window(mlx, win, imgs[BACKGROUND_IMG].ptr, 0, 0);
-		// mlx_put_image_to_window(mlx, win, imgs[WALLS_IMG].ptr, 0, 0);
-		// my_destroy_image(mlx, &imgs[WALLS_IMG]);
-		// mlx_put_image_to_window(mlx, win, data()->sprites[nbr].sequence[i].ptr, 0, 0);
-		// image_fill(&data()->imgs[WALLS_IMG], BLACK);
-		image_overlay(&data()->sprites[nbr].sequence[i], &data()->imgs[WALLS_IMG], 200, 200);
+		counter = &data()->sprites[nbr].counter;
+		sign = &data()->sprites[nbr].sign;
+		max = data()->sprites[nbr].count;
+		i = *counter / 10 % max;
+		if (data()->sprites[nbr].enabled)
+			image_overlay(&data()->sprites[nbr].sequence[i], &data()->imgs[WALLS_IMG], 200, 200 + i * 5);
+		*counter += *sign;
+		if (*counter == 0 || *counter == (max - 1) * SPRITE_SPEED)
+			*sign *= -1;
 		nbr++;
-		counter++;
 	}
 }
 
@@ -39,7 +40,7 @@ static void	environment_to_window_buffer(void *mlx, void *win, t_img *imgs)
 	if (HAS_ALPHA)
 		mlx_put_image_to_window(mlx, win, imgs[BACKGROUND_IMG].ptr, 0, 0);
 	if (SPRITES)
-		sprites_to_window_buffer(mlx, win);
+		static_sprites_to_window_buffer();
 	mlx_put_image_to_window(mlx, win, imgs[WALLS_IMG].ptr, 0, 0);
 	my_destroy_image(mlx, &imgs[WALLS_IMG]);
 }
@@ -55,7 +56,7 @@ static void	window_set_up(void)
 	imgs = data()->imgs;
 	environment_to_window_buffer(mlx, win, imgs);
 	// if (SPRITES)
-	// 	sprites_to_window_buffer(mlx, win);
+	// 	static_sprites_to_window_buffer();
 	if (MINIMAP)
 		minimap_to_window_buffer(mlx, win, imgs);
 	fps_to_window_buffer(); //remove
