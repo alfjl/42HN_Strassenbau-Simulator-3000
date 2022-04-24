@@ -22,7 +22,7 @@ static void	sprites_to_window_buffer(void *mlx, void *win)
 	nbr = 0;
 	while (nbr < SPRITENBR)
 	{
-		i =  counter / 10 % SPRITE_COUNT;
+		i =  counter / 15 % data()->sprites[nbr].count;
 		// mlx_put_image_to_window(mlx, win, imgs[BACKGROUND_IMG].ptr, 0, 0);
 		// mlx_put_image_to_window(mlx, win, imgs[WALLS_IMG].ptr, 0, 0);
 		// my_destroy_image(mlx, &imgs[WALLS_IMG]);
