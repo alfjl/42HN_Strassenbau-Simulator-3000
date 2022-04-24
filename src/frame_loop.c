@@ -14,21 +14,23 @@ static void	minimap_to_window_buffer(void *mlx, void *win, t_img *imgs)
 static void	sprites_to_window_buffer(void *mlx, void *win)
 {
 	int nbr;
-	int	i;
+	int			i;
+	static int	counter = 0;
 
 	(void)win;
 	(void)mlx;
 	nbr = 0;
-	i = 0;
 	while (nbr < SPRITENBR)
 	{
+		i =  counter / 10 % SPRITE_COUNT;
 		// mlx_put_image_to_window(mlx, win, imgs[BACKGROUND_IMG].ptr, 0, 0);
 		// mlx_put_image_to_window(mlx, win, imgs[WALLS_IMG].ptr, 0, 0);
 		// my_destroy_image(mlx, &imgs[WALLS_IMG]);
 		// mlx_put_image_to_window(mlx, win, data()->sprites[nbr].sequence[i].ptr, 0, 0);
 		// image_fill(&data()->imgs[WALLS_IMG], BLACK);
-		image_overlay(&data()->sprites[nbr].sequence[i], &data()->imgs[WALLS_IMG], 0, 0);
+		image_overlay(&data()->sprites[nbr].sequence[i], &data()->imgs[WALLS_IMG], 200, 200);
 		nbr++;
+		counter++;
 	}
 }
 
