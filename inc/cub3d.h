@@ -55,6 +55,11 @@ typedef enum e_defines
 	DEPTH_OF_FIELD = (2 * WINDOW_HEIGHT),
 }	t_defines;
 
+typedef enum e_buttons
+{
+	LEFT_BUTTON = 1,
+}	t_buttons;
+
 typedef enum e_argb_colorcode
 {
 	COLOR_RED = 0x00FF0000,

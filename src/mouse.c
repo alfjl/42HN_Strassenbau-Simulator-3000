@@ -2,7 +2,14 @@
 
 static int	static_mouse_click_hook(int button, int x, int y)
 {
-	printf("mouse click\tx: %d, y: %d, button: %d\n", x, y, button); //remove
+	(void)x;
+	(void)y;
+	if (DOORS && button == LEFT_BUTTON)
+	{
+		data()->player.status = HITTING;
+		wall_open_door();
+	}
+	// printf("mouse click\tx: %d, y: %d, button: %d\n", x, y, button); //remove
 	return (EXIT_SUCCESS);
 }
 
@@ -10,6 +17,7 @@ static int	static_mouse_move_hook(int x, int y, t_controls *controls)
 {
 	static int	old_x = WINDOW_WIDTH / 2;
 
+	(void)y;
 	if (x < old_x)
 	{
 		controls->mouse_left = true;
@@ -31,7 +39,7 @@ static int	static_mouse_move_hook(int x, int y, t_controls *controls)
 	}
 	old_x = x;
 	// printf("move end x: %d\n", old_x); //remove
-	printf("mouse move\tx: %d, y: %d\n", x, y); //remove
+	// printf("mouse move\tx: %d, y: %d\n", x, y); //remove
 	return (EXIT_SUCCESS);
 }
 
