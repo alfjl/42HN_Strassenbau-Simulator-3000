@@ -57,7 +57,7 @@ void	mlx(void)
 	mlx_hook(win, DestroyNotify,
 		StructureNotifyMask, exit_program_success, NULL);
 	mlx_do_key_autorepeatoff(mlx);
-	mlx_mouse_hide(mlx, win);
+	my_mouse_hide(mlx, win);
 	mlx_hook(win, KeyPress, KeyPressMask, static_key_press_hook, &controls);
 	mlx_hook(win, KeyRelease, KeyReleaseMask, static_key_release_hook,
 		&controls);

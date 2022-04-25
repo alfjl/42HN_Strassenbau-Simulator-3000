@@ -22,6 +22,8 @@ SRCS :=	main.c \
 		sprites.c \
 		textures.c \
 		utils_colors.c \
+		utils_mlx_platform1.c \
+		utils_mlx_platform2.c \
 		utils_mlx_re.c \
 		utils_mlx.c \
 		utils1.c \

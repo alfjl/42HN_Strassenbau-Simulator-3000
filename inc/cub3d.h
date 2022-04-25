@@ -9,10 +9,9 @@
 # define MINIMAP 1
 # define SHADES 1
 # define DOORS 1
-# define MOUSE 0
+# define MOUSE 1
 # define SPRITES 1
 //mlx
-# define LINUX 1
 # define HAS_ALPHA 0
 //Parameters
 # define WINDOW_HEIGHT 512
@@ -75,10 +74,14 @@ typedef enum e_argb_colorcode
 	COLOR_TRANSPARENT = 0xFF000000,
 }	t_argb_colorcode;
 
-# if LINUX
+# if defined(__linux__)
+#  define LINUX 1
 #  define ALPHA 0xFF000000
 
-int		mlx_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y); //remove?
+// int		mlx_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
+// int		mlx_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y);
+// int		mlx_mouse_hide(void *mlx_ptr, void *win_ptr);
+// int		mlx_mouse_show(void *mlx_ptr, void *win_ptr);
 
 //showkey -a
 typedef enum e_keycode_linux
@@ -115,9 +118,13 @@ typedef enum e_argb_colorcode_linux
 	TRANSPARENT = COLOR_TRANSPARENT + ALPHA,
 }	t_argb_colorcode_linux;
 # else
+#  define LINUX 0
 #  define ALPHA 0
 
-int		mlx_mouse_move(void *win_ptr, int x, int y); //remove?
+// int		mlx_mouse_move(void *win_ptr, int x, int y);
+// int		mlx_mouse_get_pos(void *win_ptr, int *x, int *y);
+// int		mlx_mouse_hide();
+// int		mlx_mouse_show();
 
 typedef enum e_keycode_mac
 {
@@ -386,6 +393,8 @@ void	*my_new_image(void *mlx_ptr, int width, int height, t_img *img);
 void	my_destroy_image(void *mlx_ptr, t_img *img);
 int		my_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y);
 int		my_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
+int		my_mouse_hide(void *mlx_ptr, void *win_ptr);
+int		my_mouse_show(void *mlx_ptr, void *win_ptr);
 bool	is_inside_limits(int x, int y, t_img *img);
 void	image_fill(t_img *img, int color);
 t_img	*image_clone(void *mlx, t_img *src, t_img *dst);
