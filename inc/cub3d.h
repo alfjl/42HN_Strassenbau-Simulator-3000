@@ -9,7 +9,7 @@
 # define MINIMAP 1
 # define SHADES 1
 # define DOORS 1
-# define MOUSE 0
+# define MOUSE 1
 # define SPRITES 1
 # define FPS 1
 //mlx
@@ -386,9 +386,9 @@ void	mouse(t_controls *controls);
 //utils
 void	my_pixel_put(t_img *img, int x, int y, int color);
 void	draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
-uint	create_rgba(int r, int g, int b, int a);
-uint	create_argb(int r, int g, int b, int a);
-uint	argb_color_shade(int color, float brightness);
+unsigned int	create_rgba(int r, int g, int b, int a);
+unsigned int	create_argb(int r, int g, int b, int a);
+unsigned int	argb_color_shade(int color, float brightness);
 float	radian_limits(float angle);
 void	*my_new_image(void *mlx_ptr, int width, int height, t_img *img);
 void	my_destroy_image(void *mlx_ptr, t_img *img);
