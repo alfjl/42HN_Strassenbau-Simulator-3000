@@ -2,9 +2,10 @@ NAME := cub3d
 SRC_DIR := ./src/
 OBJ_DIR := ./obj/
 HEADER_DIR = ./inc/
-ifdef BONUS
-HEADER_DIR = ./inc/bonus/
-endif
+# ifdef BONUS
+# HEADER_DIR = ./inc/bonus/
+# endif
+
 # $(NAME): HEADER_DIR = ./inc/
 # bonus: HEADER_DIR = ./inc/bonus/
 SRCS :=	main.c \
@@ -80,8 +81,8 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(DEPS) ofilemessage
 # bonus: set all
 # 	@echo bonus: $(DEPS)
 
-bonus:
-	@make BONUS=1
+# bonus:
+# 	@make BONUS=1
 
 # set:
 # 	@touch $(HEADERS)

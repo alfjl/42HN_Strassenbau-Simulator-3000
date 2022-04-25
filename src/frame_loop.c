@@ -91,7 +91,8 @@ static void	window_set_up(void)
 	// 	static_player_sprite_to_window_buffer();
 	if (MINIMAP)
 		minimap_to_window_buffer(mlx, win, imgs);
-	fps_to_window_buffer(); //remove
+	if (FPS)
+		fps_to_window_buffer(); //remove
 }
 
 int	frame_loop(t_controls *controls)
@@ -107,7 +108,7 @@ int	frame_loop(t_controls *controls)
 	// int w;
 	// int h;
 	// mlx_put_image_to_window(data()->mlx, data()->win,
-	// 	mlx_xpm_file_to_image(data()->mlx, "./sprites/shovel0.xpm",
+	// 	mlx_xpm_file_to_image(data()->mlx, "./textures/dirt2048x2048.xpm",
 	// 		&w, &h), 0, 0);
 	// mlx_put_image_to_window(data()->mlx, data()->win,
 	// 	mlx_png_file_to_image(data()->mlx, "./textures/dirt2048x2048.png",

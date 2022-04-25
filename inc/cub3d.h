@@ -9,8 +9,9 @@
 # define MINIMAP 1
 # define SHADES 1
 # define DOORS 1
-# define MOUSE 1
+# define MOUSE 0
 # define SPRITES 1
+# define FPS 1
 //mlx
 # define HAS_ALPHA 0
 //Parameters

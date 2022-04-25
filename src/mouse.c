@@ -2,7 +2,7 @@
 
 static int	static_mouse_click_hook(int button, int x, int y)
 {
-	printf("mouse click\tx: %d, y: %d, button: %d\n", x, y, button);
+	printf("mouse click\tx: %d, y: %d, button: %d\n", x, y, button); //remove
 	return (EXIT_SUCCESS);
 }
 
@@ -24,6 +24,8 @@ static int	static_mouse_move_hook(int x, int y, t_controls *controls)
 	{
 		my_mouse_move(data()->mlx, data()->win, data()->window.width / 2,
 			data()->window.height / 2);
+		// my_mouse_show(data()->mlx, data()->win);
+		// my_mouse_hide(data()->mlx, data()->win);
 		// mlx_mouse_get_pos(data()->mlx, data()->win, &x, &y);
 		x = data()->window.width / 2;
 	}
