@@ -46,23 +46,23 @@ static void	static_player_sprite_to_window_buffer(void)
 	nbr = data()->player.status;
 	// while (nbr < SPRITENBR)
 	// {
-		counter = &data()->sprites[nbr].counter;
-		sign = &data()->sprites[nbr].sign;
-		max = data()->sprites[nbr].count;
-		i = *counter / 10 % max;
-		// if (data()->sprites[nbr].enabled)
-			image_overlay(&data()->sprites[nbr].sequence[i], &data()->imgs[WALLS_IMG], 200, 200 + i * 5);
-		*counter += *sign;
-		if (*counter == 0 || *counter == (max - 1) * data()->sprites[nbr].speed)
+	counter = &data()->sprites[nbr].counter;
+	sign = &data()->sprites[nbr].sign;
+	max = data()->sprites[nbr].count;
+	i = *counter / 10 % max;
+	// if (data()->sprites[nbr].enabled)
+	image_overlay(&data()->sprites[nbr].sequence[i], &data()->imgs[WALLS_IMG], 200, 200 + i * 5);
+	*counter += *sign;
+	if (*counter == 0 || *counter == (max - 1) * data()->sprites[nbr].speed)
+	{
+		if (nbr == HITTING)
 		{
-			if (nbr == HITTING)
-			{
-				*counter = 0;
-				data()->player.status = IDLE;
-			}
-			else
-				*sign *= -1;
+			*counter = 0;
+			data()->player.status = IDLE;
 		}
+		else
+			*sign *= -1;
+	}
 	// 	nbr++;
 	// }
 }

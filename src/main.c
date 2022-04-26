@@ -19,7 +19,7 @@ static void	static_initialize_sprite_pointers(void)
 	int			i;
 	int			nbr;
 	t_sprite	*sprite;
-	
+
 	nbr = 0;
 	i = 0;
 	while (nbr < SPRITENBR)
