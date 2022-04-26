@@ -9,13 +9,14 @@ HEADER_DIR = ./inc/
 # $(NAME): HEADER_DIR = ./inc/
 # bonus: HEADER_DIR = ./inc/bonus/
 SRCS :=	main.c \
+		controls_keyboard.c \
+		controls_mouse.c \
 		exit.c \
-		frame_loop.c \
+		frame.c \
 		images.c \
 		map.c \
 		minimap.c \
 		mlx.c \
-		mouse.c \
 		player_movement.c \
 		rays_calculate_horizontal.c \
 		rays_calculate_vertical.c \

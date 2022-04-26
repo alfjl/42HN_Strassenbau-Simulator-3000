@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static int	static_get_image(int index)
+static int	static_walls_get_texture_image_index(int index)
 {
 	if (data()->rays[index].orientation == NORTH)
 		return (NORTH_IMG);
@@ -12,7 +12,7 @@ static int	static_get_image(int index)
 		return (WEST_IMG);
 }
 
-static int	static_determine_tx(int index)
+static int	static_walls_determine_tx(int index)
 {
 	int	tx;
 
@@ -31,18 +31,18 @@ static int	static_determine_tx(int index)
 	return (tx);
 }
 
-static void	static_copy_color(t_img *img, t_point start, int index, int y)
+static void	static_walls_put_texture_color(t_img *img, t_point start, int index, int y)
 {
 	int		color;
 	int		tx;
 	float	ty;
 	int		image;
 
-	image = static_get_image(index);
-	tx = static_determine_tx(index);
+	image = static_walls_get_texture_image_index(index);
+	tx = static_walls_determine_tx(index);
 	ty = data()->rays[index].tyoffset + (TEXTURE_SIZE
 			/ data()->rays[index].line_h) * (y - start.y);
-	if (is_inside_limits(tx, ty, img))
+	if (is_inside_image_limits(tx, ty, img))
 	{
 		color = *(unsigned int *)(data()->imgs[image].addr
 				+ (unsigned int)((int)ty * data()->imgs[image].line_len
@@ -51,7 +51,7 @@ static void	static_copy_color(t_img *img, t_point start, int index, int y)
 	}
 }
 
-static void	static_draw_single_vertical_line(t_img *img, t_point start,
+static void	static_walls_draw_single_vertical_line(t_img *img, t_point start,
 	t_point end, int index)
 {
 	int		y;
@@ -68,7 +68,7 @@ static void	static_draw_single_vertical_line(t_img *img, t_point start,
 	}
 	while (y < end.y)
 	{
-		static_copy_color(img, start, index, y);
+		static_walls_put_texture_color(img, start, index, y);
 		y++;
 	}
 	if (HAS_ALPHA)
@@ -80,7 +80,7 @@ static void	static_draw_single_vertical_line(t_img *img, t_point start,
 	}
 }
 
-void	draw_vertical_line(t_img *img, t_point start, t_point end,
+void	walls_draw_vertical_line(t_img *img, t_point start, t_point end,
 	int index)
 {
 	int		line_i;
@@ -96,7 +96,7 @@ void	draw_vertical_line(t_img *img, t_point start, t_point end,
 		if (start.x > datas->window.width - 1)
 			start.x = datas->window.width - 1;
 		end.x = start.x;
-		static_draw_single_vertical_line(img, start, end, index);
+		static_walls_draw_single_vertical_line(img, start, end, index);
 		line_i++;
 	}	
 }

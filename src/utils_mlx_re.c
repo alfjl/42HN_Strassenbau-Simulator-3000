@@ -28,7 +28,7 @@ void	my_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	if (!is_inside_limits(x, y, img))
+	if (!is_inside_image_limits(x, y, img))
 		return ;
 	dst = img->addr + (y * img->line_len + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;

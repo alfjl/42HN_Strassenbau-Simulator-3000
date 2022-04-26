@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void	static_draw_single_ray(t_img *img, int i)
+static void	static_minimap_draw_single_ray(t_img *img, int i)
 {
 	t_ray		*rays;
 	t_point		player_p;
@@ -24,7 +24,7 @@ static void	static_minimap_draw_rays(t_img *img)
 	while (i < NUMBER_OF_RAYS)
 	{
 		if (!(i % MINIMAP_RAY_DENSITY_FACTOR))
-			static_draw_single_ray(img, i);
+			static_minimap_draw_single_ray(img, i);
 		i++;
 	}
 }
@@ -90,7 +90,7 @@ void	minimap_draw_to_image(void)
 	img->ptr = my_new_image(data()->mlx, MINIMAP_RADIUS * 2 * GRID_SIZE,
 			MINIMAP_RADIUS * 2 * GRID_SIZE, img);
 	if (img->ptr == NULL)
-		exit_program(MLX_IMAGE);
+		exit_end_program_error(MLX_IMAGE);
 	image_fill(img, MINIMAP_SPACE_COLOR);
 	static_minimap_draw_rays(img);
 	static_minimap_draw_map(img);

@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static bool	static_is_door(float y, float x)
+static bool	static_walls_is_door(float y, float x)
 {
 	if (y < data()->map.height && y >= 0 && x < data()->map.width
 		&& x >= 0)
@@ -11,7 +11,7 @@ static bool	static_is_door(float y, float x)
 	return (false);
 }
 
-void	wall_open_door(void)
+void	walls_open_door(void)
 {
 	float	x;
 	float	y;
@@ -26,11 +26,11 @@ void	wall_open_door(void)
 		x -= EDGE;
 	if (ray->len > HIT_RANGE)
 		return ;
-	if (static_is_door(y, x))
+	if (static_walls_is_door(y, x))
 		data()->map.grid[(int)y][(int)x] = SPACE;
 }
 
-static void	static_draw_wallsegment(int index, t_img *img)
+static void	static_walls_draw_wallsegment(int index, t_img *img)
 {
 	t_point	start;
 	t_point	end;
@@ -48,7 +48,7 @@ static void	static_draw_wallsegment(int index, t_img *img)
 	end.y = line_h / 2 + data()->window.height / 2;
 	if (end.y >= data()->window.height)
 		end.y = data()->window.height - 1;
-	draw_vertical_line(img, start, end, index);
+	walls_draw_vertical_line(img, start, end, index);
 }
 
 void	walls_draw_to_image(void)
@@ -60,11 +60,11 @@ void	walls_draw_to_image(void)
 	img->ptr = my_new_image(data()->mlx, data()->window.width,
 			data()->window.height, img);
 	if (img->ptr == NULL)
-		exit_program(MLX_IMAGE);
+		exit_end_program_error(MLX_IMAGE);
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{
-		static_draw_wallsegment(i, img);
+		static_walls_draw_wallsegment(i, img);
 		i++;
 	}
 }

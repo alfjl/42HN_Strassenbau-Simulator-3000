@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void	static_create_background_img(void)
+static void	static_images_create_background_img(void)
 {
 	int		x;
 	int		y;
@@ -10,7 +10,7 @@ static void	static_create_background_img(void)
 	img->ptr = my_new_image(data()->mlx, data()->window.width,
 			data()->window.height, img);
 	if (img->ptr == NULL)
-		exit_program(MLX_IMAGE);
+		exit_end_program_error(MLX_IMAGE);
 	y = 0;
 	while (y < data()->window.height)
 	{
@@ -27,7 +27,7 @@ static void	static_create_background_img(void)
 	}
 }
 
-static void	static_create_player_img(void)
+static void	static_images_create_player_img(void)
 {
 	int		x;
 	int		y;
@@ -36,7 +36,7 @@ static void	static_create_player_img(void)
 	img = &data()->imgs[PLAYER_IMG];
 	img->ptr = my_new_image(data()->mlx, PLAYER_SIZE, PLAYER_SIZE, img);
 	if (img->ptr == NULL)
-		exit_program(MLX_IMAGE);
+		exit_end_program_error(MLX_IMAGE);
 	y = 0;
 	while (y < PLAYER_SIZE)
 	{
@@ -53,6 +53,6 @@ static void	static_create_player_img(void)
 void	images_create(void)
 {
 	if (HAS_ALPHA)
-		static_create_background_img();
-	static_create_player_img();
+		static_images_create_background_img();
+	static_images_create_player_img();
 }

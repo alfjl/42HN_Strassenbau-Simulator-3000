@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void	static_set_player_status(t_controls *controls)
+static void	static_player_set_status(t_controls *controls)
 {
 	if (data()->player.status == HITTING)
 		return ;
@@ -11,7 +11,7 @@ static void	static_set_player_status(t_controls *controls)
 		data()->player.status = IDLE;
 }
 
-static bool	static_is_wall(float y, float x)
+static bool	static_player_is_wall(float y, float x)
 {
 	float	min_y;
 	float	max_y;
@@ -49,12 +49,12 @@ static void	static_player_update(float *x, float dx, float *y, float dy)
 	map = &data()->map;
 	new_x = *x + dx;
 	new_y = *y + dy;
-	if (!static_is_wall(*y, (*x + dx)))
+	if (!static_player_is_wall(*y, (*x + dx)))
 	{
 		if (new_x >= 0 && new_x < map->width)
 			*x = new_x;
 	}
-	if (!static_is_wall((*y + dy), *x))
+	if (!static_player_is_wall((*y + dy), *x))
 	{
 		if (new_y >= 0 && new_y < map->height)
 			*y = new_y;
@@ -87,5 +87,5 @@ void	player_update_position(t_controls *controls)
 		player->angle = radian_limits(player->angle - STEP_A);
 	if (controls->turnright || controls->mouse_right)
 		player->angle = radian_limits(player->angle + STEP_A);
-	static_set_player_status(controls);
+	static_player_set_status(controls);
 }

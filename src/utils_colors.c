@@ -13,10 +13,10 @@
 // 	g = ((color >> 16) & 0xFFFF) / 0xFF;
 // 	b = ((color) & 0xFFFF) / 0xFF;
 // 	printf("a %d r %d g %d b %d\n", a, r, g, b);
-// 	return (create_argb(r, g, b, a));
+// 	return (argb_create(r, g, b, a));
 // }
 
-unsigned int	argb_color_shade(int color, float brightness)
+unsigned int	argb_shade_color(int color, float brightness)
 {
 	int	a;
 	int	r;
@@ -27,16 +27,16 @@ unsigned int	argb_color_shade(int color, float brightness)
 	r = ((color >> 16) & 0xFF);
 	g = ((color >> 8) & 0xFF);
 	b = ((color) & 0xFF);
-	return (create_argb(r * brightness, g * brightness, b * brightness, a));
+	return (argb_create(r * brightness, g * brightness, b * brightness, a));
 }
 
-unsigned int	create_rgba(int r, int g, int b, int a)
+unsigned int	rgba_create(int r, int g, int b, int a)
 {
 	return (((r & 0xff) << 24) + ((g & 0xff) << 16) + ((b & 0xff) << 8)
 		+ (a & 0xff));
 }
 
-unsigned int	create_argb(int r, int g, int b, int a)
+unsigned int	argb_create(int r, int g, int b, int a)
 {
 	return (((a & 0xff) << 24) + ((r & 0xff) << 16) + ((g & 0xff) << 8)
 		+ (b & 0xff));

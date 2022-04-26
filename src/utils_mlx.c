@@ -69,7 +69,7 @@ void	image_fill(t_img *img, int color)
 	}
 }
 
-bool	is_inside_limits(int x, int y, t_img *img)
+bool	is_inside_image_limits(int x, int y, t_img *img)
 {
 	if (x < 0 || x > img->width - 1)
 		return (false);

@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static bool	static_ray_hits_wall(t_ray *ray, t_map *map)
+static bool	static_rays_hits_wall(t_ray *ray, t_map *map)
 {
 	float	y;
 	float	x;
@@ -19,7 +19,7 @@ static bool	static_ray_hits_wall(t_ray *ray, t_map *map)
 		return (false);
 }
 
-void	iterate_grid(t_ray *ray)
+void	rays_iterate_grid(t_ray *ray)
 {
 	int		i;
 	t_map	*map;
@@ -33,7 +33,7 @@ void	iterate_grid(t_ray *ray)
 			ray->mini_x = ray->x;
 			ray->mini_y = ray->y;
 		}
-		if (static_ray_hits_wall(ray, map))
+		if (static_rays_hits_wall(ray, map))
 			break ;
 		else
 		{
@@ -44,7 +44,7 @@ void	iterate_grid(t_ray *ray)
 	}
 }
 
-static void	static_set_ray_parameters_north(t_ray *ray, float atan)
+static void	static_rays_set_parameters_north(t_ray *ray, float atan)
 {
 	ray->orientation = NORTH;
 	ray->y = trunc(data()->player.y);
@@ -53,7 +53,7 @@ static void	static_set_ray_parameters_north(t_ray *ray, float atan)
 	ray->dx = -ray->dy * atan;
 }
 
-static void	static_set_ray_parameters_south(t_ray *ray, float atan)
+static void	static_rays_set_parameters_south(t_ray *ray, float atan)
 {
 	ray->orientation = SOUTH;
 	ray->y = ceil(data()->player.y);
@@ -62,7 +62,7 @@ static void	static_set_ray_parameters_south(t_ray *ray, float atan)
 	ray->dx = -ray->dy * atan;
 }
 
-t_ray	ray_calculate_horizontal(float angle)
+t_ray	rays_calculate_horizontal(float angle)
 {
 	t_ray	ray;
 	float	atan;
@@ -70,10 +70,10 @@ t_ray	ray_calculate_horizontal(float angle)
 	ray.angle = angle;
 	atan = -1 / tan(ray.angle);
 	if (ray.angle > M_PI)
-		static_set_ray_parameters_north(&ray, atan);
+		static_rays_set_parameters_north(&ray, atan);
 	else if (ray.angle < M_PI)
-		static_set_ray_parameters_south(&ray, atan);
-	iterate_grid(&ray);
+		static_rays_set_parameters_south(&ray, atan);
+	rays_iterate_grid(&ray);
 	ray.len = sqrt((ray.x - data()->player.x) * (ray.x - data()->player.x)
 			+ (ray.y - data()->player.y) * (ray.y - data()->player.y));
 	return (ray);

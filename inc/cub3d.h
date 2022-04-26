@@ -85,11 +85,6 @@ typedef enum e_argb_colorcode
 #  define LINUX 1
 #  define ALPHA 0xFF000000
 
-// int		mlx_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
-// int		mlx_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y);
-// int		mlx_mouse_hide(void *mlx_ptr, void *win_ptr);
-// int		mlx_mouse_show(void *mlx_ptr, void *win_ptr);
-
 //showkey -a
 typedef enum e_keycode_linux
 {
@@ -128,11 +123,6 @@ typedef enum e_argb_colorcode_linux
 # else
 #  define LINUX 0
 #  define ALPHA 0
-
-// int		mlx_mouse_move(void *win_ptr, int x, int y);
-// int		mlx_mouse_get_pos(void *win_ptr, int *x, int *y);
-// int		mlx_mouse_hide();
-// int		mlx_mouse_show();
 
 typedef enum e_keycode_mac
 {
@@ -270,12 +260,12 @@ typedef struct s_img
 
 typedef struct s_sprite
 {
+	char		*name;
 	int			count;
 	int			counter;
 	int			speed;
-	t_img		sequence[SPRITE_COUNT + 1];
 	int			sign;
-	bool		enabled;
+	t_img		sequence[SPRITE_COUNT];
 }	t_sprite;
 
 typedef struct s_player
@@ -371,32 +361,33 @@ typedef struct s_data
 }	t_data;
 
 t_data	*data(void);
-void	read_map(char *filepath);
+void	map_read(char *filepath);
 void	mlx(void);
-int		frame_loop(t_controls *keys);
+int		frame(t_controls *keys);
 void	player_update_position(t_controls *keys);
 bool	is_wall(float y, float x);
 void	player_nose_draw_to_image(void);
 void	rays_create(void);
-t_ray	ray_calculate_vertical(float angle);
-t_ray	ray_calculate_horizontal(float angle);
-void	iterate_grid(t_ray *ray);
+t_ray	rays_calculate_vertical(float angle);
+t_ray	rays_calculate_horizontal(float angle);
+void	rays_iterate_grid(t_ray *ray);
 void	images_create(void);
 void	textures_load(void);
 void	sprites_load(void);
-int		exit_program(int errorcode);
-int		exit_program_success(void);
+int		exit_end_program_error(int errorcode);
+int		exit_end_program_success(void);
 void	walls_draw_to_image(void);
-void	draw_vertical_line(t_img *img, t_point s, t_point e, int i);
+void	walls_draw_vertical_line(t_img *img, t_point s, t_point e, int i);
 void	minimap_draw_to_image(void);
-void	wall_open_door(void);
+void	walls_open_door(void);
 void	mouse(t_controls *controls);
+void	keyboard(t_controls *controls);
 //utils
 void	my_pixel_put(t_img *img, int x, int y, int color);
 void	draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
-unsigned int	create_rgba(int r, int g, int b, int a);
-unsigned int	create_argb(int r, int g, int b, int a);
-unsigned int	argb_color_shade(int color, float brightness);
+unsigned int	rgba_create(int r, int g, int b, int a);
+unsigned int	argb_create(int r, int g, int b, int a);
+unsigned int	argb_shade_color(int color, float brightness);
 // unsigned int	color_convert(long color);
 float	radian_limits(float angle);
 void	*my_new_image(void *mlx_ptr, int width, int height, t_img *img);
@@ -405,7 +396,7 @@ int		my_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y);
 int		my_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
 int		my_mouse_hide(void *mlx_ptr, void *win_ptr);
 int		my_mouse_show(void *mlx_ptr, void *win_ptr);
-bool	is_inside_limits(int x, int y, t_img *img);
+bool	is_inside_image_limits(int x, int y, t_img *img);
 void	image_fill(t_img *img, int color);
 t_img	*image_clone(void *mlx, t_img *src, t_img *dst);
 void	image_overlay(t_img *src, t_img *dst, int dst_x, int dst_y);

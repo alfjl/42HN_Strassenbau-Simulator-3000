@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void	static_initialize_img_pointers(void)
+static void	static_initialize_images(void)
 {
 	t_img	*imgs;
 	int		i;
@@ -10,11 +10,18 @@ static void	static_initialize_img_pointers(void)
 	while (i < IMAGES)
 	{
 		imgs[i].ptr = NULL;
+		imgs[i].width = 0;
+		imgs[i].height = 0;
+		imgs[i].addr = NULL;
+		imgs[i].bits_per_pixel = 0;
+		imgs[i].line_len = 0;
+		imgs[i].endian = 0;
+		imgs[i].path = NULL;
 		i++;
 	}
 }
 
-static void	static_initialize_sprite_pointers(void)
+static void	static_initialize_sprites(void)
 {
 	int			i;
 	int			nbr;
@@ -25,6 +32,11 @@ static void	static_initialize_sprite_pointers(void)
 	while (nbr < SPRITENBR)
 	{
 		sprite = &data()->sprites[nbr];
+		sprite->name = NULL;
+		sprite->count = SPRITE_COUNT;
+		sprite->counter = 0;
+		sprite->speed = 1;
+		sprite->sign = 1;
 		while (i <= sprite->count)
 		{
 			sprite->sequence[i].ptr = NULL;
@@ -78,18 +90,18 @@ int	main(int argc, char **argv)
 {
 	data()->mlx = NULL;
 	data()->win = NULL;
-	static_initialize_img_pointers();
-	static_initialize_sprite_pointers();
+	static_initialize_images();
+	static_initialize_sprites();
 	if (argc != 2)
 	{
 		ft_printf("ERROR\n");
 		return (EXIT_FAILURE);
 	}
-	read_map(argv[1]);
+	map_read(argv[1]);
 	static_get_map_file_data();
 	data()->mlx = mlx_init();
 	if (data()->mlx == NULL)
-		exit_program(MLX);
+		exit_end_program_error(MLX);
 	static_initialize_data_struct();
 	images_create();
 	textures_load();

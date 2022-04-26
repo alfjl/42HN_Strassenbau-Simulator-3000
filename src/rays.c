@@ -5,8 +5,8 @@ static t_ray	static_ray_get(float angle)
 	t_ray	ray_horizontal;
 	t_ray	ray_vertival;
 
-	ray_horizontal = ray_calculate_horizontal(angle);
-	ray_vertival = ray_calculate_vertical(angle);
+	ray_horizontal = rays_calculate_horizontal(angle);
+	ray_vertival = rays_calculate_vertical(angle);
 	if (ray_horizontal.len < ray_vertival.len)
 		return (ray_horizontal);
 	else

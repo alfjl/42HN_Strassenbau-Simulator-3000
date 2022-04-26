@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void	static_shade_image(t_img *img, float brightness)
+static void	static_textures_shade_image(t_img *img, float brightness)
 {
 	int	x;
 	int	y;
@@ -15,7 +15,7 @@ static void	static_shade_image(t_img *img, float brightness)
 			color = *(unsigned int *)(img->addr
 					+ (unsigned int)((int)y * img->line_len
 						+ x * (img->bits_per_pixel / 8)));
-			color = argb_color_shade(color, brightness);
+			color = argb_shade_color(color, brightness);
 			my_pixel_put(img, x, y, color);
 			x++;
 		}	
@@ -41,7 +41,7 @@ static int	static_textures_determine_color(t_img *img, int x, int y)
 	return (color);
 }
 
-static void	static_resize_img(t_img *tmp, t_img *img)
+static void	static_textures_resize_img(t_img *tmp, t_img *img)
 {
 	int		y;
 	int		x;
@@ -50,7 +50,7 @@ static void	static_resize_img(t_img *tmp, t_img *img)
 	img->ptr = my_new_image(data()->mlx, TEXTURE_SIZE,
 			TEXTURE_SIZE, img);
 	if (img->ptr == NULL)
-		exit_program(MLX_IMAGE);
+		exit_end_program_error(MLX_IMAGE);
 	y = 0;
 	while (y < img->height)
 	{
@@ -75,13 +75,13 @@ static void	static_create_img_from_texture(int image, float brightness)
 	tmp->ptr = mlx_xpm_file_to_image(data()->mlx, img->path,
 			&tmp->width, &tmp->height);
 	if (tmp->ptr == NULL)
-		exit_program(MLX_IMAGE);
+		exit_end_program_error(MLX_IMAGE);
 	tmp->addr = mlx_get_data_addr(tmp->ptr, &tmp->bits_per_pixel,
 			&tmp->line_len, &tmp->endian);
-	static_resize_img(tmp, img);
+	static_textures_resize_img(tmp, img);
 	my_destroy_image(data()->mlx, tmp);
 	if (SHADES)
-		static_shade_image(img, brightness);
+		static_textures_shade_image(img, brightness);
 }
 
 void	textures_load(void)

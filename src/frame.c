@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void	minimap_to_window_buffer(void *mlx, void *win, t_img *imgs)
+static void	static_frame_minimap_to_window_buffer(void *mlx, void *win, t_img *imgs)
 {
 	mlx_put_image_to_window(mlx, win, imgs[MINIMAP_IMG].ptr, MINIMAP_OFFSET,
 		MINIMAP_OFFSET);
@@ -35,7 +35,7 @@ static void	minimap_to_window_buffer(void *mlx, void *win, t_img *imgs)
 // 	}
 // }
 
-static void	static_player_sprite_to_window_buffer(void)
+static void	static_frame_player_sprite_to_window_buffer(void)
 {
 	int 		nbr;
 	int			i;
@@ -62,17 +62,17 @@ static void	static_player_sprite_to_window_buffer(void)
 	}
 }
 
-static void	environment_to_window_buffer(void *mlx, void *win, t_img *imgs)
+static void	static_frame_environment_to_window_buffer(void *mlx, void *win, t_img *imgs)
 {
 	if (HAS_ALPHA)
 		mlx_put_image_to_window(mlx, win, imgs[BACKGROUND_IMG].ptr, 0, 0);
 	if (SPRITES)
-		static_player_sprite_to_window_buffer();
+		static_frame_player_sprite_to_window_buffer();
 	mlx_put_image_to_window(mlx, win, imgs[WALLS_IMG].ptr, 0, 0);
 	my_destroy_image(mlx, &imgs[WALLS_IMG]);
 }
 
-static void	window_set_up(void)
+static void	frame_set_up_window(void)
 {
 	void	*mlx;
 	void	*win;
@@ -81,14 +81,14 @@ static void	window_set_up(void)
 	mlx = data()->mlx;
 	win = data()->win;
 	imgs = data()->imgs;
-	environment_to_window_buffer(mlx, win, imgs);
+	static_frame_environment_to_window_buffer(mlx, win, imgs);
 	if (MINIMAP)
-		minimap_to_window_buffer(mlx, win, imgs);
+		static_frame_minimap_to_window_buffer(mlx, win, imgs);
 	if (FPS)
 		fps_to_window_buffer(); //remove
 }
 
-int	frame_loop(t_controls *controls)
+int	frame(t_controls *controls)
 {
 	player_update_position(controls);
 	controls->mouse_left = false;
@@ -97,6 +97,6 @@ int	frame_loop(t_controls *controls)
 	walls_draw_to_image();
 	if (MINIMAP)
 		minimap_draw_to_image();
-	window_set_up();
+	frame_set_up_window();
 	return (EXIT_SUCCESS);
 }

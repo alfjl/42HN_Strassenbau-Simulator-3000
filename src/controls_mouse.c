@@ -7,7 +7,7 @@ static int	static_mouse_click_hook(int button, int x, int y)
 	if (DOORS && button == LEFT_BUTTON)
 	{
 		data()->player.status = HITTING;
-		wall_open_door();
+		walls_open_door();
 	}
 	// printf("mouse click\tx: %d, y: %d, button: %d\n", x, y, button); //remove
 	return (EXIT_SUCCESS);
