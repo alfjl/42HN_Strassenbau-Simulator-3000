@@ -66,7 +66,7 @@ static void	static_draw_single_vertical_line(t_img *img, t_point start,
 		my_pixel_put(img, start.x, y, datas->map.ceiling.rgb);
 		y++;
 	}
-	while (y <= end.y)
+	while (y < end.y)
 	{
 		static_copy_color(img, start, index, y);
 		y++;

@@ -57,15 +57,15 @@ static void	static_get_map_file_data(void)
 	data()->map.width = data()->map.width; //placeholder
 	//colors
 	data()->map.ceiling.rgb = CYAN; //placeholder
-	data()->map.floor.rgb = BLACK; //placeholder
+	data()->map.floor.rgb = BROWN; //placeholder
 	//textures
 	// data()->map.textures.south = "./textures/stone.xpm";
 	// data()->map.textures.north = "./textures/moss.xpm";
 	// data()->map.textures.east = "./textures/magma.xpm";
-	data()->map.textures.south = "./textures/bricks.xpm"; //placeholder
-	data()->map.textures.north = "./textures/bricks.xpm"; //placeholder
-	data()->map.textures.east = "./textures/bricks.xpm"; //placeholder
-	data()->map.textures.west = "./textures/bricks.xpm"; //placeholder
+	data()->map.textures.west = "./textures/dirt_low2048x2048.xpm"; //placeholder
+	data()->map.textures.south = data()->map.textures.west; //placeholder
+	data()->map.textures.north = data()->map.textures.west; //placeholder
+	data()->map.textures.east = data()->map.textures.west; //placeholder
 	///////player
 	data()->player.x = IDLE;
 	data()->player.x = 1.5; //placeholder

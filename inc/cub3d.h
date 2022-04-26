@@ -77,6 +77,7 @@ typedef enum e_argb_colorcode
 	COLOR_NAVY = 0x00000080,
 	COLOR_DARK_GREY = 0x00424949,
 	COLOR_SILVER = 0x00C0C0C0,
+	COLOR_BROWN = 0x0037271B,
 	COLOR_TRANSPARENT = 0xFF000000,
 }	t_argb_colorcode;
 
@@ -121,6 +122,7 @@ typedef enum e_argb_colorcode_linux
 	NAVY = COLOR_NAVY + ALPHA,
 	DARK_GREY = COLOR_DARK_GREY + ALPHA,
 	SILVER = COLOR_SILVER + ALPHA,
+	BROWN = COLOR_BROWN + ALPHA,
 	TRANSPARENT = COLOR_TRANSPARENT + ALPHA,
 }	t_argb_colorcode_linux;
 # else
@@ -163,6 +165,7 @@ typedef enum e_argb_colorcode_mac
 	NAVY = COLOR_NAVY,
 	DARK_GREY = COLOR_DARK_GREY,
 	SILVER = COLOR_SILVER,
+	BROWN = COLOR_BROWN + ALPHA,
 	TRANSPARENT = COLOR_TRANSPARENT,
 }	t_argb_colorcode_mac;
 # endif
@@ -394,6 +397,7 @@ void	draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
 unsigned int	create_rgba(int r, int g, int b, int a);
 unsigned int	create_argb(int r, int g, int b, int a);
 unsigned int	argb_color_shade(int color, float brightness);
+// unsigned int	color_convert(long color);
 float	radian_limits(float angle);
 void	*my_new_image(void *mlx_ptr, int width, int height, t_img *img);
 void	my_destroy_image(void *mlx_ptr, t_img *img);

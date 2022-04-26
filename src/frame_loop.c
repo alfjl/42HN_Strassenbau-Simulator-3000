@@ -44,13 +44,10 @@ static void	static_player_sprite_to_window_buffer(void)
 	int			max;
 
 	nbr = data()->player.status;
-	// while (nbr < SPRITENBR)
-	// {
 	counter = &data()->sprites[nbr].counter;
 	sign = &data()->sprites[nbr].sign;
 	max = data()->sprites[nbr].count;
 	i = *counter / 10 % max;
-	// if (data()->sprites[nbr].enabled)
 	image_overlay(&data()->sprites[nbr].sequence[i], &data()->imgs[WALLS_IMG], 200, 200 + i * 5);
 	*counter += *sign;
 	if (*counter == 0 || *counter == (max - 1) * data()->sprites[nbr].speed)
@@ -63,8 +60,6 @@ static void	static_player_sprite_to_window_buffer(void)
 		else
 			*sign *= -1;
 	}
-	// 	nbr++;
-	// }
 }
 
 static void	environment_to_window_buffer(void *mlx, void *win, t_img *imgs)
@@ -87,8 +82,6 @@ static void	window_set_up(void)
 	win = data()->win;
 	imgs = data()->imgs;
 	environment_to_window_buffer(mlx, win, imgs);
-	// if (SPRITES)
-	// 	static_player_sprite_to_window_buffer();
 	if (MINIMAP)
 		minimap_to_window_buffer(mlx, win, imgs);
 	if (FPS)
@@ -105,13 +98,5 @@ int	frame_loop(t_controls *controls)
 	if (MINIMAP)
 		minimap_draw_to_image();
 	window_set_up();
-	// int w;
-	// int h;
-	// mlx_put_image_to_window(data()->mlx, data()->win,
-	// 	mlx_xpm_file_to_image(data()->mlx, "./textures/dirt2048x2048.xpm",
-	// 		&w, &h), 0, 0);
-	// mlx_put_image_to_window(data()->mlx, data()->win,
-	// 	mlx_png_file_to_image(data()->mlx, "./textures/dirt2048x2048.png",
-	// 		&w, &h), 0, 0);
 	return (EXIT_SUCCESS);
 }

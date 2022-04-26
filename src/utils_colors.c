@@ -1,5 +1,21 @@
 #include "cub3d.h"
 
+// unsigned int	color_convert(long color)
+// {
+// 	int	a;
+// 	int	r;
+// 	int	g;
+// 	int	b;
+
+// 	// a = ((color >> 48) & 0xFFFF) / 0xFF;
+// 	a = 0;
+// 	r = ((color >> 32) & 0xFFFF) / 0xFF;
+// 	g = ((color >> 16) & 0xFFFF) / 0xFF;
+// 	b = ((color) & 0xFFFF) / 0xFF;
+// 	printf("a %d r %d g %d b %d\n", a, r, g, b);
+// 	return (create_argb(r, g, b, a));
+// }
+
 unsigned int	argb_color_shade(int color, float brightness)
 {
 	int	a;
