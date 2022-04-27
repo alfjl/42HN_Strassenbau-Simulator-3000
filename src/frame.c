@@ -37,7 +37,7 @@ static void	static_frame_minimap_to_window_buffer(void *mlx, void *win, t_img *i
 
 static void	static_frame_player_sprite_to_window_buffer(void)
 {
-	int 		nbr;
+	int			nbr;
 	int			i;
 	int			*counter;
 	int			*sign;

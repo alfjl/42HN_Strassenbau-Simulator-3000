@@ -1,25 +1,27 @@
 #include "cub3d.h"
 #include <errno.h>
 
-static void	static_exit_mlx_destroy(void)
+static void	static_exit_destroy_images(void *mlx)
 {
-	void	*mlx;
 	t_img	*imgs;
 	int		i;
 
-	mlx = data()->mlx;
 	imgs = data()->imgs;
 	i = 0;
 	while (i < IMAGES)
 	{
 		if (imgs[i].ptr != NULL)
-			my_destroy_image(mlx, (t_img *)&imgs[i].ptr);
+			my_destroy_image(mlx, &imgs[i]);
 		i++;
 	}
-	//free sprites
+}
+
+static void	static_exit_destroy_sprites(void *mlx)
+{
+	int			i;
 	int			nbr;
 	t_sprite	*sprite;
-	
+
 	nbr = 0;
 	i = 0;
 	while (nbr < SPRITENBR)
@@ -28,14 +30,11 @@ static void	static_exit_mlx_destroy(void)
 		while (i <= sprite->count)
 		{
 			if (sprite->sequence[i].ptr != NULL)
-				my_destroy_image(mlx, (t_img *)&imgs[i].ptr);
+				my_destroy_image(mlx, &sprite->sequence[i]);
 			i++;
 		}
 		nbr++;
 	}
-	//free win
-	if (data()->win != NULL)
-		mlx_destroy_window(data()->mlx, data()->win);
 }
 
 static char	*static_exit_get_error_message(int errorcode)
@@ -50,7 +49,17 @@ static char	*static_exit_get_error_message(int errorcode)
 
 static void	static_exit_free_all(void)
 {
-	static_exit_mlx_destroy();
+	void	*mlx;
+	void	*win;
+	
+	mlx = data()->mlx;
+	if (mlx == NULL)
+		return ;
+	static_exit_destroy_images(mlx);
+	static_exit_destroy_sprites(mlx);
+	win = data()->win;
+	if (win != NULL)
+		mlx_destroy_window(mlx, win);
 	return ;
 }
 
