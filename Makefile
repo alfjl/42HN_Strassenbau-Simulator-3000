@@ -13,6 +13,7 @@ SRCS :=	main.c \
 		controls_mouse.c \
 		exit.c \
 		frame.c \
+		free.c \
 		images.c \
 		map.c \
 		minimap.c \
@@ -32,7 +33,7 @@ SRCS :=	main.c \
 		utils2.c \
 		walls_vertical_line.c \
 		walls.c \
-		fps.c #remove
+		fps_bonus.c #remove
 OBJS := $(patsubst %.c,$(OBJ_DIR)%.o,$(SRCS))
 HEADERS = $(wildcard $(HEADER_DIR)*.h)
 PLATFORM := $(shell uname -s)

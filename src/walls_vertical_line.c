@@ -26,12 +26,13 @@ static int	static_walls_determine_tx(int index)
 	if (data()->rays[index].orientation == WEST
 		|| data()->rays[index].orientation == SOUTH)
 		tx = TEXTURE_SIZE - 1 - tx;
-	if (tx < 0) //better check
+	if (tx < 0)
 		tx = 0;
 	return (tx);
 }
 
-static void	static_walls_put_texture_color(t_img *img, t_point start, int index, int y)
+static void	static_walls_put_texture_color(t_img *img, t_point start,
+	int index, int y)
 {
 	int		color;
 	int		tx;

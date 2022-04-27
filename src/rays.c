@@ -35,12 +35,14 @@ void	rays_create(void)
 	int		i;
 	float	angle;
 
-	angle = radian_limits(data()->player.angle - ANGLE_OF_VIEW / 2 * ONE_DEGREE_IN_RAD);
+	angle = radian_limits(data()->player.angle
+			- ANGLE_OF_VIEW / 2 * ONE_DEGREE_IN_RAD);
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{
 		static_ray_fill_struct(angle, i);
-		angle = radian_limits(angle + ANGLE_OF_VIEW * ONE_DEGREE_IN_RAD / NUMBER_OF_RAYS);
+		angle = radian_limits(angle
+				+ ANGLE_OF_VIEW * ONE_DEGREE_IN_RAD / NUMBER_OF_RAYS);
 		i++;
 	}
 }

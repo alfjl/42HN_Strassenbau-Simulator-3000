@@ -20,7 +20,7 @@ static int	static_keyboard_key_release_hook(int keycode, t_controls *controls)
 static int	static_keyboard_key_press_hook(int keycode, t_controls *controls)
 {
 	if (keycode == ESC_KEY)
-		exit_end_program_error(SUCCESS);
+		exit_end_program_success();
 	if (keycode == W_KEY)
 		controls->forwards = true;
 	if (keycode == S_KEY)
@@ -46,7 +46,8 @@ void	keyboard(t_controls *controls)
 	void	*win;
 
 	win = data()->win;
-	mlx_hook(win, KeyPress, KeyPressMask, static_keyboard_key_press_hook, controls);
+	mlx_hook(win, KeyPress, KeyPressMask, static_keyboard_key_press_hook,
+		controls);
 	mlx_hook(win, KeyRelease, KeyReleaseMask, static_keyboard_key_release_hook,
 		controls);
 }

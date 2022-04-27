@@ -34,7 +34,8 @@ static void	static_images_create_player_img(void)
 	t_img	*img;
 
 	img = &data()->imgs[PLAYER_IMG];
-	img->ptr = my_new_image(data()->mlx, MINIMAP_PLAYER_SIZE, MINIMAP_PLAYER_SIZE, img);
+	img->ptr = my_new_image(data()->mlx,
+			MINIMAP_PLAYER_SIZE, MINIMAP_PLAYER_SIZE, img);
 	if (img->ptr == NULL)
 		exit_end_program_error(MLX_IMAGE);
 	y = 0;

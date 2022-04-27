@@ -57,8 +57,6 @@ static void	static_initialize_data_struct(void)
 	data()->window.width = WINDOW_WIDTH;
 	data()->window.height = WINDOW_HEIGHT;
 	data()->line_w = data()->window.width / (NUMBER_OF_RAYS - 1);
-	data()->fps.first = true; //remove
-	data()->time = 0; //remove
 }
 
 static void	static_get_map_file_data(void)

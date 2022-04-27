@@ -1,6 +1,5 @@
 #include "cub3d.h"
 #include <sys/time.h>
-#include <time.h>
 
 static long	static_fps_get_current_time(void)
 {
@@ -14,20 +13,18 @@ static long	static_fps_get_current_time(void)
 
 void	fps_to_window_buffer(void)
 {
-	long	current_time;
-	long	elapse_time;
-	int		fps;
-	char	*str;
+	long		current_time;
+	static long	last_time = 0;
+	long		elapse_time;
+	int			fps;
+	char		*str;
 
-	if (data()->fps.first)
-	{
-		data()->fps.last_time = static_fps_get_current_time();
-		data()->fps.first = false;
-	}
+	if (last_time == 0)
+		last_time = static_fps_get_current_time();
 	current_time = static_fps_get_current_time();
-	elapse_time = current_time - data()->fps.last_time;
+	elapse_time = current_time - last_time;
 	fps = 1000.0 / elapse_time;
-	data()->fps.last_time = current_time;
+	last_time = current_time;
 	str = ft_itoa(fps);
 	mlx_string_put(data()->mlx, data()->win, 20, 500, ORANGE, str);
 	mlx_string_put(data()->mlx, data()->win, 40, 500, ORANGE, "FPS");

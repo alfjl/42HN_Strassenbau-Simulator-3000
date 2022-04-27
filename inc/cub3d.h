@@ -229,12 +229,11 @@ typedef enum e_mapchars
 
 typedef enum e_errorcodes
 {
-	SUCCESS = -2,
-	SYSTEM = -1,
-	MLX,
+	MLX = 0,
 	MLX_WIN,
 	MLX_IMAGE,
-	ERRORS
+	SYSTEM,
+	ERRORS,
 }	t_errorcodes;
 
 typedef struct s_controls
@@ -334,6 +333,7 @@ typedef struct s_map
 	struct s_color		floor;
 	struct s_color		ceiling;
 	struct s_textures	textures;
+	int					errorcode;
 }	t_map;
 
 typedef struct s_fps
@@ -359,8 +359,6 @@ typedef struct s_data
 	t_sprite		sprites[SPRITE_NBR];
 	struct s_player	player;
 	struct s_ray	rays[NUMBER_OF_RAYS];
-	struct s_fps	fps; //remove
-	long			time; //remove
 }	t_data;
 
 void			map_read(char *filepath);
@@ -377,11 +375,13 @@ t_ray			rays_calculate_horizontal(float angle);
 void			rays_iterate_grid(t_ray *ray);
 void			minimap_draw_to_image(void);
 void			walls_draw_to_image(void);
-void			walls_draw_vertical_line(t_img *img, t_point s, t_point e, int i);
+void			walls_draw_vertical_line(t_img *img, t_point start,
+					t_point end, int i);
 void			player_update_position(t_controls *keys);
 void			walls_open_door(void);
 int				exit_end_program_error(int errorcode);
 int				exit_end_program_success(void);
+void			free_all(void);
 //utils
 void			my_pixel_put(t_img *img, int x, int y, int color);
 void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
@@ -406,5 +406,4 @@ void			calculate_pos_delta(void);
 void			*mlx_new_image_alpha(void *mlx_ptr, int width, int height);
 //fps
 void			fps_to_window_buffer(void); //remove
-void			timedifference(char *str); //remove
 #endif

@@ -1,12 +1,15 @@
 #include "cub3d.h"
 
-static void	static_frame_minimap_to_window_buffer(void *mlx, void *win, t_img *imgs)
+static void	static_frame_minimap_to_window_buffer(void *mlx,
+	void *win, t_img *imgs)
 {
+	int	origin;
+
+	origin = MINIMAP_OFFSET + MINIMAP_RADIUS * MAP_GRID_SIZE
+		- MINIMAP_PLAYER_SIZE / 2;
 	mlx_put_image_to_window(mlx, win, imgs[MINIMAP_IMG].ptr, MINIMAP_OFFSET,
 		MINIMAP_OFFSET);
-	mlx_put_image_to_window(mlx, win, imgs[PLAYER_IMG].ptr,
-		MINIMAP_OFFSET + MINIMAP_RADIUS * MAP_GRID_SIZE - MINIMAP_PLAYER_SIZE / 2,
-		MINIMAP_OFFSET + MINIMAP_RADIUS * MAP_GRID_SIZE - MINIMAP_PLAYER_SIZE / 2);
+	mlx_put_image_to_window(mlx, win, imgs[PLAYER_IMG].ptr, origin, origin);
 	my_destroy_image(mlx, &imgs[MINIMAP_IMG]);
 	imgs[MINIMAP_IMG].ptr = NULL;
 }
@@ -27,7 +30,8 @@ static void	static_frame_minimap_to_window_buffer(void *mlx, void *win, t_img *i
 // 		max = data()->sprites[nbr].count;
 // 		i = *counter / 10 % max;
 // 		if (data()->sprites[nbr].enabled)
-// 			image_overlay(&data()->sprites[nbr].sequence[i], &data()->imgs[WALLS_IMG], 200, 200 + i * 5);
+// 			image_overlay(&data()->sprites[nbr].sequence[i],
+// 				&data()->imgs[WALLS_IMG], 200, 200 + i * 5);
 // 		*counter += *sign;
 // 		if (*counter == 0 || *counter == (max - 1) * data()->sprites[nbr].speed)
 // 			*sign *= -1;
@@ -48,7 +52,8 @@ static void	static_frame_player_sprite_to_window_buffer(void)
 	sign = &data()->sprites[nbr].sign;
 	max = data()->sprites[nbr].count;
 	i = *counter / 10 % max;
-	image_overlay(&data()->sprites[nbr].sequence[i], &data()->imgs[WALLS_IMG], 200, 200 + i * 5);
+	image_overlay(&data()->sprites[nbr].sequence[i], &data()->imgs[WALLS_IMG],
+		200, 200 + i * 5);
 	*counter += *sign;
 	if (*counter == 0 || *counter == (max - 1) * data()->sprites[nbr].speed)
 	{
@@ -62,7 +67,8 @@ static void	static_frame_player_sprite_to_window_buffer(void)
 	}
 }
 
-static void	static_frame_environment_to_window_buffer(void *mlx, void *win, t_img *imgs)
+static void	static_frame_environment_to_window_buffer(void *mlx, void *win,
+	t_img *imgs)
 {
 	if (HAS_ALPHA)
 		mlx_put_image_to_window(mlx, win, imgs[BACKGROUND_IMG].ptr, 0, 0);
