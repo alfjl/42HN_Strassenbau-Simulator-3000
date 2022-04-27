@@ -15,12 +15,21 @@ static int	static_mouse_click_hook(int button, int x, int y)
 static int	static_mouse_move_hook(int x, int y, t_controls *controls)
 {
 	static int	old_x = WINDOW_WIDTH / 2;
+	float		factor;
 
 	(void)y;
 	if (x < old_x)
 		controls->mouse_left = true;
 	else if (x > old_x)
 		controls->mouse_right = true;
+	printf("%d\n", my_abs(x, old_x));
+	if (my_abs(x, old_x) < MOUSE_ACCELERATION_KICK_IN)
+		factor = MOUSE_TURN_FACTOR;
+	else if (my_abs(x, old_x) > MOUSE_ACCELERATION_KICK_IN * 2)
+		factor = MOUSE_ACCELERATION_FACTOR * 2;
+	else
+		factor = MOUSE_ACCELERATION_FACTOR;
+	data()->player.turn_speed = TURN_STEP * factor;
 	if (x < 0 || x > data()->window.width)
 	{
 		my_mouse_move(data()->mlx, data()->win, data()->window.width / 2,

@@ -99,6 +99,7 @@ int	frame(t_controls *controls)
 	player_update_position(controls);
 	controls->mouse_left = false;
 	controls->mouse_right = false;
+	data()->player.turn_speed = TURN_STEP;
 	rays_create();
 	walls_draw_to_image();
 	if (MINIMAP_ENABLED)

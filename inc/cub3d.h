@@ -21,6 +21,9 @@
 # define ANGLE_OF_VIEW ANGLE_OF_VIEW_CONST
 # define NUMBER_OF_RAYS WINDOW_WIDTH
 # define WALL_HEIGHT_RATIO 1
+# define MOUSE_TURN_FACTOR 1.0
+# define MOUSE_ACCELERATION_FACTOR 3.0
+# define MOUSE_ACCELERATION_KICK_IN 15
 //Player Parameters
 # define MOVE_STEP 0.06
 # define TURN_STEP 0.035
@@ -279,6 +282,7 @@ typedef struct s_player
 	float		x;
 	float		y;
 	float		step_size;
+	float		turn_speed;
 	float		dx;
 	float		dy;
 	float		angle;
@@ -409,6 +413,7 @@ t_img			*image_clone(void *mlx, t_img *src, t_img *dst);
 void			image_overlay(t_img *src, t_img *dst, int dst_x, int dst_y);
 void			calculate_pos_delta(void);
 double			pythagoras_hypotenuse(double a, double b);
+int				my_abs(int a, int b);
 //mlx
 void			*mlx_new_image_alpha(void *mlx_ptr, int width, int height);
 //fps

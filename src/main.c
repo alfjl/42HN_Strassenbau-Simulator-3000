@@ -79,6 +79,7 @@ static void	static_get_map_file_data(void)
 	///////player
 	data()->player.status = IDLE;
 	data()->player.step_size = MOVE_STEP;
+	data()->player.turn_speed = TURN_STEP;
 	data()->player.x = 1.5; //placeholder
 	data()->player.y = 1.5; //placeholder
 	data()->player.angle = M_PI / 2; //placeholder

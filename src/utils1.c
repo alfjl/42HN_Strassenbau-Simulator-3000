@@ -25,7 +25,7 @@ static int	static_get_sign(int a, int b)
 	return (-1);
 }
 
-static int	static_abs(int a, int b)
+int	my_abs(int a, int b)
 {
 	int	d;
 
@@ -42,8 +42,8 @@ void	draw_line_a_to_b(t_img *img, t_point a, t_point b, int color)
 	int	err;
 	int	e2;
 
-	dx = static_abs(a.x, b.x);
-	dy = -static_abs(a.y, b.y);
+	dx = my_abs(a.x, b.x);
+	dy = -my_abs(a.y, b.y);
 	err = dx + dy;
 	while (1)
 	{

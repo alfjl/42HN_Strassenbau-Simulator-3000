@@ -84,8 +84,8 @@ void	player_update_position(t_controls *controls)
 	if (controls->rightwards)
 		static_player_update(x, -dy, y, dx);
 	if (controls->turnleft || controls->mouse_left)
-		player->angle = radian_limits(player->angle - TURN_STEP);
+		player->angle = radian_limits(player->angle - player->turn_speed);
 	if (controls->turnright || controls->mouse_right)
-		player->angle = radian_limits(player->angle + TURN_STEP);
+		player->angle = radian_limits(player->angle + player->turn_speed);
 	static_player_set_status(controls);
 }
