@@ -82,6 +82,9 @@ static void	static_get_map_file_data(void)
 	data()->player.turn_speed = TURN_STEP;
 	data()->player.x = 1.5; //placeholder
 	data()->player.y = 1.5; //placeholder
+	data()->player.dz = 0;
+	data()->player.is_jumping = false;
+	data()->player.is_crouching = false;
 	data()->player.angle = M_PI / 2; //placeholder
 	calculate_pos_delta();
 }

@@ -35,6 +35,14 @@ static int	static_keyboard_key_press_hook(int keycode, t_controls *controls)
 		controls->turnleft = true;
 	if (keycode == RIGHT_KEY)
 		controls->turnright = true;
+	if (CROUCH_ENABLED && keycode == CTRL_KEY && data()->player.dz == 0)
+		data()->player.dz = CROUCH_DELTA;
+	else if (CROUCH_ENABLED && keycode == CTRL_KEY && !(data()->player.dz > 0))
+		data()->player.dz = 0;
+	if (JUMP_ENABLED && keycode == SPACE_KEY && !(data()->player.dz > 0))
+		data()->player.is_jumping = true;
+	// else if (JUMP_ENABLED && keycode == SPACE_KEY && data()->player.dz > 0)
+	// 	data()->player.dz -= GRAVITY;
 	if (SPRINT_ENABLED && keycode == SHIFT_KEY)
 		data()->player.step_size = MOVE_STEP * PLAYER_SPRINT_FACTOR;
 	if (DOORS_ENABLED && keycode == E_KEY)

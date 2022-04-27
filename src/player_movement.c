@@ -1,5 +1,23 @@
 #include "cub3d.h"
 
+void	player_update_z_position(void)
+{
+	t_player	*player;
+
+	player = &data()->player;
+	if (player->is_jumping && player->dz < 0)
+		player->dz = 0;
+	else if (player->is_jumping && player->dz < JUMP_DELTA)
+		player->dz += GRAVITY;
+	else if (player->dz > 0)
+ 	{
+		player->is_jumping = false;
+		player->dz -= GRAVITY;
+		if (player->dz < 0)
+			player->dz = 0;
+	 }
+}
+
 static void	static_player_set_status(t_controls *controls)
 {
 	if (data()->player.status == HITTING)

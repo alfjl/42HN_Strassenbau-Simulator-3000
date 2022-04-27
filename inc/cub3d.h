@@ -13,6 +13,10 @@
 # define SPRITES_ENABLED 1
 # define FPS_ENABLED 1
 # define SPRINT_ENABLED 1
+# define CROUCH_ENABLED 1
+# define JUMP_ENABLED 1
+# define FLOOR_TEXTURE_ENABLED 1
+# define CEILING_TEXTURE_ENABLED 1
 //mlx
 # define HAS_ALPHA 0
 //Parameters
@@ -62,6 +66,9 @@ typedef enum e_defines
 {
 	WINDOW_WIDTH = (2 * WINDOW_HEIGHT),
 	DEPTH_OF_FIELD = (2 * WINDOW_HEIGHT),
+	CROUCH_DELTA = -(WINDOW_HEIGHT / 4),
+	JUMP_DELTA = (WINDOW_HEIGHT / 3),
+	GRAVITY = JUMP_DELTA / 5,
 }	t_defines;
 
 typedef enum e_buttons
@@ -145,7 +152,9 @@ typedef enum e_keycode_mac
 	DOWN_KEY,
 	UP_KEY,
 	ESC_KEY = 53,
-	SHIFT_KEY = 257,
+	CTRL_KEY = 256,
+	SHIFT_KEY,
+	SPACE_KEY = 49,
 }	t_keycode_mac;
 
 typedef enum e_argb_colorcode_mac
@@ -285,8 +294,11 @@ typedef struct s_player
 	float		turn_speed;
 	float		dx;
 	float		dy;
+	float		dz;
 	float		angle;
 	int			status;
+	bool		is_jumping;
+	bool		is_crouching;
 }				t_player;
 
 typedef struct s_ray
@@ -389,6 +401,7 @@ void			walls_draw_vertical_line(t_img *img, t_point start,
 void			walls_open_door(void);
 void			walls_close_door(void);
 void			player_update_position(t_controls *keys);
+void			player_update_z_position(void);
 int				exit_end_program_error(int errorcode);
 int				exit_end_program_success(void);
 void			free_all(void);

@@ -60,7 +60,7 @@ static void	static_walls_draw_wallsegment(int index, t_img *img)
 	float	line_h;
 
 	line_h = data()->rays[index].line_h;
-	start.y = -line_h / 2 + data()->window.height / 2;
+	start.y = -line_h / 2 + data()->window.height / 2 + data()->player.dz;
 	data()->rays[index].tyoffset = 0;
 	if (start.y < 0)
 	{
@@ -68,7 +68,7 @@ static void	static_walls_draw_wallsegment(int index, t_img *img)
 		/ line_h * TEXTURE_SIZE;
 		start.y = 0;
 	}
-	end.y = line_h / 2 + data()->window.height / 2;
+	end.y = line_h / 2 + data()->window.height / 2 + data()->player.dz;
 	if (end.y >= data()->window.height)
 		end.y = data()->window.height - 1;
 	walls_draw_vertical_line(img, start, end, index);
