@@ -14,6 +14,8 @@ static int	static_keyboard_key_release_hook(int keycode, t_controls *controls)
 		controls->turnleft = false;
 	if (keycode == RIGHT_KEY)
 		controls->turnright = false;
+	if (SPRINT_ENABLED && keycode == SHIFT_KEY)
+		data()->player.step_size = MOVE_STEP;
 	return (EXIT_SUCCESS);
 }
 
@@ -33,6 +35,8 @@ static int	static_keyboard_key_press_hook(int keycode, t_controls *controls)
 		controls->turnleft = true;
 	if (keycode == RIGHT_KEY)
 		controls->turnright = true;
+	if (SPRINT_ENABLED && keycode == SHIFT_KEY)
+		data()->player.step_size = MOVE_STEP * PLAYER_SPRINT_FACTOR;
 	if (DOORS_ENABLED && keycode == E_KEY)
 	{
 		data()->player.status = HITTING;

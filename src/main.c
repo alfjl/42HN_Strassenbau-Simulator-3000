@@ -77,7 +77,8 @@ static void	static_get_map_file_data(void)
 	data()->map.textures.north = data()->map.textures.west; //placeholder
 	data()->map.textures.east = data()->map.textures.west; //placeholder
 	///////player
-	data()->player.x = IDLE;
+	data()->player.status = IDLE;
+	data()->player.step_size = MOVE_STEP;
 	data()->player.x = 1.5; //placeholder
 	data()->player.y = 1.5; //placeholder
 	data()->player.angle = M_PI / 2; //placeholder

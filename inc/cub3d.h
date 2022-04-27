@@ -12,6 +12,7 @@
 # define MOUSE_ENABLED 1
 # define SPRITES_ENABLED 1
 # define FPS_ENABLED 1
+# define SPRINT_ENABLED 1
 //mlx
 # define HAS_ALPHA 0
 //Parameters
@@ -25,6 +26,7 @@
 # define TURN_STEP 0.035
 # define COLLISION_DISTANCE 0.20
 # define PLAYER_HIT_RANGE 1.5
+# define PLAYER_SPRINT_FACTOR 2.0
 //Minimap Parameters
 # define MAP_GRID_SIZE 16
 # define MINIMAP_RADIUS 4
@@ -140,6 +142,7 @@ typedef enum e_keycode_mac
 	DOWN_KEY,
 	UP_KEY,
 	ESC_KEY = 53,
+	SHIFT_KEY = 257,
 }	t_keycode_mac;
 
 typedef enum e_argb_colorcode_mac
@@ -275,6 +278,7 @@ typedef struct s_player
 {
 	float		x;
 	float		y;
+	float		step_size;
 	float		dx;
 	float		dy;
 	float		angle;
