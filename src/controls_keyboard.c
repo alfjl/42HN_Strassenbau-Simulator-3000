@@ -33,7 +33,7 @@ static int	static_keyboard_key_press_hook(int keycode, t_controls *controls)
 		controls->turnleft = true;
 	if (keycode == RIGHT_KEY)
 		controls->turnright = true;
-	if (DOORS && keycode == E_KEY)
+	if (DOORS_ENABLED && keycode == E_KEY)
 	{
 		data()->player.status = HITTING;
 		walls_open_door();

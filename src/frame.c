@@ -5,8 +5,8 @@ static void	static_frame_minimap_to_window_buffer(void *mlx, void *win, t_img *i
 	mlx_put_image_to_window(mlx, win, imgs[MINIMAP_IMG].ptr, MINIMAP_OFFSET,
 		MINIMAP_OFFSET);
 	mlx_put_image_to_window(mlx, win, imgs[PLAYER_IMG].ptr,
-		MINIMAP_OFFSET + MINIMAP_RADIUS * GRID_SIZE - PLAYER_SIZE / 2,
-		MINIMAP_OFFSET + MINIMAP_RADIUS * GRID_SIZE - PLAYER_SIZE / 2);
+		MINIMAP_OFFSET + MINIMAP_RADIUS * MAP_GRID_SIZE - MINIMAP_PLAYER_SIZE / 2,
+		MINIMAP_OFFSET + MINIMAP_RADIUS * MAP_GRID_SIZE - MINIMAP_PLAYER_SIZE / 2);
 	my_destroy_image(mlx, &imgs[MINIMAP_IMG]);
 	imgs[MINIMAP_IMG].ptr = NULL;
 }
@@ -20,7 +20,7 @@ static void	static_frame_minimap_to_window_buffer(void *mlx, void *win, t_img *i
 // 	int			max;
 
 // 	nbr = 0;
-// 	while (nbr < SPRITENBR)
+// 	while (nbr < SPRITE_NBR)
 // 	{
 // 		counter = &data()->sprites[nbr].counter;
 // 		sign = &data()->sprites[nbr].sign;
@@ -66,7 +66,7 @@ static void	static_frame_environment_to_window_buffer(void *mlx, void *win, t_im
 {
 	if (HAS_ALPHA)
 		mlx_put_image_to_window(mlx, win, imgs[BACKGROUND_IMG].ptr, 0, 0);
-	if (SPRITES)
+	if (SPRITES_ENABLED)
 		static_frame_player_sprite_to_window_buffer();
 	mlx_put_image_to_window(mlx, win, imgs[WALLS_IMG].ptr, 0, 0);
 	my_destroy_image(mlx, &imgs[WALLS_IMG]);
@@ -82,9 +82,9 @@ static void	frame_set_up_window(void)
 	win = data()->win;
 	imgs = data()->imgs;
 	static_frame_environment_to_window_buffer(mlx, win, imgs);
-	if (MINIMAP)
+	if (MINIMAP_ENABLED)
 		static_frame_minimap_to_window_buffer(mlx, win, imgs);
-	if (FPS)
+	if (FPS_ENABLED)
 		fps_to_window_buffer(); //remove
 }
 
@@ -95,7 +95,7 @@ int	frame(t_controls *controls)
 	controls->mouse_right = false;
 	rays_create();
 	walls_draw_to_image();
-	if (MINIMAP)
+	if (MINIMAP_ENABLED)
 		minimap_draw_to_image();
 	frame_set_up_window();
 	return (EXIT_SUCCESS);

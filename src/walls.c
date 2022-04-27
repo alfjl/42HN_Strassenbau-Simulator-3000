@@ -21,10 +21,10 @@ void	walls_open_door(void)
 	x = ray->x;
 	y = ray->y;
 	if (ray->orientation == NORTH)
-		y -= EDGE;
+		y -= EXTRA_EDGE;
 	if (ray->orientation == WEST)
-		x -= EDGE;
-	if (ray->len > HIT_RANGE)
+		x -= EXTRA_EDGE;
+	if (ray->len > PLAYER_HIT_RANGE)
 		return ;
 	if (static_walls_is_door(y, x))
 		data()->map.grid[(int)y][(int)x] = SPACE;

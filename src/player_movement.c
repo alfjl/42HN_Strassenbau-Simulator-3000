@@ -18,7 +18,7 @@ static bool	static_player_is_wall(float y, float x)
 	float	min_x;
 	float	max_x;
 
-	if (!COLLISION)
+	if (!COLLISION_ENABLED)
 		return (false);
 	min_y = y - COLLISION_DISTANCE;
 	max_y = y + COLLISION_DISTANCE;
@@ -84,8 +84,8 @@ void	player_update_position(t_controls *controls)
 	if (controls->rightwards)
 		static_player_update(x, -dy, y, dx);
 	if (controls->turnleft || controls->mouse_left)
-		player->angle = radian_limits(player->angle - STEP_A);
+		player->angle = radian_limits(player->angle - TURN_STEP);
 	if (controls->turnright || controls->mouse_right)
-		player->angle = radian_limits(player->angle + STEP_A);
+		player->angle = radian_limits(player->angle + TURN_STEP);
 	static_player_set_status(controls);
 }

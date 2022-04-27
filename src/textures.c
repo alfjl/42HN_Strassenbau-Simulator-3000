@@ -80,7 +80,7 @@ static void	static_create_img_from_texture(int image, float brightness)
 			&tmp->line_len, &tmp->endian);
 	static_textures_resize_img(tmp, img);
 	my_destroy_image(data()->mlx, tmp);
-	if (SHADES)
+	if (SHADING_ENABLED)
 		static_textures_shade_image(img, brightness);
 }
 

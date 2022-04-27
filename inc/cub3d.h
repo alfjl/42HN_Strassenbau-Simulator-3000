@@ -5,49 +5,53 @@
 # include <math.h>
 
 //Settings
-# define COLLISION 1
-# define MINIMAP 1
-# define SHADES 1
-# define DOORS 1
-# define MOUSE 1
-# define SPRITES 1
-# define FPS 1
+# define COLLISION_ENABLED 1
+# define MINIMAP_ENABLED 1
+# define SHADING_ENABLED 1
+# define DOORS_ENABLED 1
+# define MOUSE_ENABLED 1
+# define SPRITES_ENABLED 1
+# define FPS_ENABLED 1
 //mlx
 # define HAS_ALPHA 0
 //Parameters
 # define WINDOW_HEIGHT 512
-# define GRID_SIZE 16
-# define TEXTURE_SIZE 512
-# define SPRITE_SIZE 512
-# define SPRITE_COUNT 6
-# define SPRITE_SPEED 3
-# define MINIMAP_RADIUS 4
-# define MINIMAP_OFFSET 10
-# define MINIMAP_RAY_DENSITY_FACTOR 20
-# define STEP 0.06
-# define STEP_A 0.035
-# define COLLISION_DISTANCE 0.20
-# define PLAYER_SIZE 4
 # define ANGLE_OF_VIEW_CONST 60
 # define ANGLE_OF_VIEW ANGLE_OF_VIEW_CONST
 # define NUMBER_OF_RAYS WINDOW_WIDTH
 # define WALL_HEIGHT_RATIO 1
-# define HIT_RANGE 1.5
-//Math
-# define EDGE 0.000001
-# define DR 0.0174533
-//Color Theme
-# define SHADE_NORTH 1.0
-# define SHADE_SOUTH 0.5
-# define SHADE_EAST 0.8
-# define SHADE_WEST 0.8
-# define RAY_COLOR RED
+//Player Parameters
+# define MOVE_STEP 0.06
+# define TURN_STEP 0.035
+# define COLLISION_DISTANCE 0.20
+# define PLAYER_HIT_RANGE 1.5
+//Minimap Parameters
+# define MAP_GRID_SIZE 16
+# define MINIMAP_RADIUS 4
+# define MINIMAP_OFFSET 10
+# define MINIMAP_RAY_DENSITY_FACTOR 20
+# define MINIMAP_PLAYER_SIZE 4
+//Minimap Colors Theme
 # define MINIMAP_SPACE_COLOR WHITE
 # define MINIMAP_WALL_COLOR GREY
 # define MINIMAP_GRID_COLOR BLACK
 # define MINIMAP_GRID_ENABLED 1
 # define MINIMAP_BACKGROUND_COLOR BLACK
 # define MINIMAP_PLAYER_COLOR BLACK
+# define MINIMAP_RAY_COLOR RED
+//Environment Color Theme
+# define SHADE_NORTH 1.0
+# define SHADE_SOUTH 0.5
+# define SHADE_EAST 0.8
+# define SHADE_WEST 0.8
+//Graphics
+# define TEXTURE_SIZE 512
+# define SPRITE_SIZE 512
+# define SPRITE_COUNT 6
+# define SPRITE_SPEED 3
+//Calculation constants
+# define EXTRA_EDGE 0.000001
+# define ONE_DEGREE_IN_RAD 0.0174533
 
 typedef enum e_defines
 {
@@ -181,7 +185,7 @@ typedef enum e_spritenbr
 	SHOVEL_SPRITE,
 	SHOVEL_WALK_SPRITE,
 	SHOVEL_HIT_SPRITE,
-	SPRITENBR,
+	SPRITE_NBR,
 }	t_spritenbr;
 
 typedef enum e_imgnbr
@@ -196,7 +200,7 @@ typedef enum e_imgnbr
 	EAST_IMG,
 	WEST_IMG,
 	TMP_IMG,
-	IMAGES,
+	IMG_NBR,
 }	t_imgnbr;
 
 typedef enum e_player_status
@@ -351,9 +355,9 @@ typedef struct s_data
 	struct s_frame	minimap;
 	struct s_frame	window;
 	int				line_w;
-	t_img			imgs[IMAGES];
+	t_img			imgs[IMG_NBR];
 	int				img_size;
-	t_sprite		sprites[SPRITENBR];
+	t_sprite		sprites[SPRITE_NBR];
 	struct s_player	player;
 	struct s_ray	rays[NUMBER_OF_RAYS];
 	struct s_fps	fps; //remove

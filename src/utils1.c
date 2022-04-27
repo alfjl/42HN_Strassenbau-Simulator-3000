@@ -5,8 +5,8 @@ void	calculate_pos_delta(void)
 	t_player	*player;
 
 	player = &data()->player;
-	player->dx = cos(player->angle) * STEP;
-	player->dy = sin(player->angle) * STEP;
+	player->dx = cos(player->angle) * MOVE_STEP;
+	player->dy = sin(player->angle) * MOVE_STEP;
 }
 
 float	radian_limits(float angle)

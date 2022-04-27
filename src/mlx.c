@@ -18,7 +18,7 @@ void	mlx(void)
 	mlx_do_key_autorepeatoff(mlx);
 	my_mouse_hide(mlx, win);
 	keyboard(&controls);
-	if (MOUSE)
+	if (MOUSE_ENABLED)
 		mouse(&controls);
 	mlx_loop_hook(mlx, frame, &controls);
 	mlx_loop(mlx);

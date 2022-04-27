@@ -7,7 +7,7 @@ static void	static_initialize_images(void)
 
 	imgs = data()->imgs;
 	i = 0;
-	while (i < IMAGES)
+	while (i < IMG_NBR)
 	{
 		imgs[i].ptr = NULL;
 		imgs[i].width = 0;
@@ -29,7 +29,7 @@ static void	static_initialize_sprites(void)
 
 	nbr = 0;
 	i = 0;
-	while (nbr < SPRITENBR)
+	while (nbr < SPRITE_NBR)
 	{
 		sprite = &data()->sprites[nbr];
 		sprite->name = NULL;
@@ -52,8 +52,8 @@ static void	static_initialize_data_struct(void)
 	data()->imgs[NORTH_IMG].path = data()->map.textures.north;
 	data()->imgs[EAST_IMG].path = data()->map.textures.east;
 	data()->imgs[WEST_IMG].path = data()->map.textures.west;
-	data()->minimap.width = data()->map.width * GRID_SIZE;
-	data()->minimap.height = data()->map.height * GRID_SIZE;
+	data()->minimap.width = data()->map.width * MAP_GRID_SIZE;
+	data()->minimap.height = data()->map.height * MAP_GRID_SIZE;
 	data()->window.width = WINDOW_WIDTH;
 	data()->window.height = WINDOW_HEIGHT;
 	data()->line_w = data()->window.width / (NUMBER_OF_RAYS - 1);
@@ -105,7 +105,7 @@ int	main(int argc, char **argv)
 	static_initialize_data_struct();
 	images_create();
 	textures_load();
-	if (SPRITES)
+	if (SPRITES_ENABLED)
 		sprites_load();
 	mlx();
 	return (EXIT_SUCCESS);

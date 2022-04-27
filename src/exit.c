@@ -8,7 +8,7 @@ static void	static_exit_destroy_images(void *mlx)
 
 	imgs = data()->imgs;
 	i = 0;
-	while (i < IMAGES)
+	while (i < IMG_NBR)
 	{
 		if (imgs[i].ptr != NULL)
 			my_destroy_image(mlx, &imgs[i]);
@@ -24,7 +24,7 @@ static void	static_exit_destroy_sprites(void *mlx)
 
 	nbr = 0;
 	i = 0;
-	while (nbr < SPRITENBR)
+	while (nbr < SPRITE_NBR)
 	{
 		sprite = &data()->sprites[nbr];
 		while (i <= sprite->count)

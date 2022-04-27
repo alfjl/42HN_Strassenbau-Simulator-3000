@@ -34,14 +34,14 @@ static void	static_images_create_player_img(void)
 	t_img	*img;
 
 	img = &data()->imgs[PLAYER_IMG];
-	img->ptr = my_new_image(data()->mlx, PLAYER_SIZE, PLAYER_SIZE, img);
+	img->ptr = my_new_image(data()->mlx, MINIMAP_PLAYER_SIZE, MINIMAP_PLAYER_SIZE, img);
 	if (img->ptr == NULL)
 		exit_end_program_error(MLX_IMAGE);
 	y = 0;
-	while (y < PLAYER_SIZE)
+	while (y < MINIMAP_PLAYER_SIZE)
 	{
 		x = 0;
-		while (x < PLAYER_SIZE)
+		while (x < MINIMAP_PLAYER_SIZE)
 		{
 			my_pixel_put(img, x, y, MINIMAP_PLAYER_COLOR);
 			x++;

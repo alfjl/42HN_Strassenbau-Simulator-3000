@@ -8,9 +8,9 @@ static bool	static_rays_hits_wall(t_ray *ray, t_map *map)
 	y = ray->y;
 	x = ray->x;
 	if (ray->orientation == NORTH)
-		y -= EDGE;
+		y -= EXTRA_EDGE;
 	if (ray->orientation == WEST)
-		x -= EDGE;
+		x -= EXTRA_EDGE;
 	if (y >= 0 && x >= 0 && y < map->height
 		&& x < map->width
 		&& map->grid[(int)y][(int)x] == WALL)

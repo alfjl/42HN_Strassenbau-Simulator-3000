@@ -9,11 +9,11 @@ static void	static_minimap_draw_single_ray(t_img *img, int i)
 
 	rays = data()->rays;
 	player = &data()->player;
-	ray_p.x = (rays[i].mini_x - player->x + MINIMAP_RADIUS) * GRID_SIZE;
-	ray_p.y = (rays[i].mini_y - player->y + MINIMAP_RADIUS) * GRID_SIZE;
-	player_p.x = MINIMAP_RADIUS * GRID_SIZE;
-	player_p.y = MINIMAP_RADIUS * GRID_SIZE;
-	draw_line_a_to_b(img, player_p, ray_p, RAY_COLOR);
+	ray_p.x = (rays[i].mini_x - player->x + MINIMAP_RADIUS) * MAP_GRID_SIZE;
+	ray_p.y = (rays[i].mini_y - player->y + MINIMAP_RADIUS) * MAP_GRID_SIZE;
+	player_p.x = MINIMAP_RADIUS * MAP_GRID_SIZE;
+	player_p.y = MINIMAP_RADIUS * MAP_GRID_SIZE;
+	draw_line_a_to_b(img, player_p, ray_p, MINIMAP_RAY_COLOR);
 }
 
 static void	static_minimap_draw_rays(t_img *img)
@@ -35,7 +35,7 @@ static int	static_minimap_determine_color(float map_y, float map_x)
 	t_map	*map;
 	float	epsilon;
 
-	epsilon = (1.0 / GRID_SIZE);
+	epsilon = (1.0 / MAP_GRID_SIZE);
 	map = &data()->map;
 	color = MINIMAP_BACKGROUND_COLOR;
 	if (map_y < map->height && map_y >= 0
@@ -62,7 +62,7 @@ static void	static_minimap_draw_map(t_img *dst)
 	float		map_y;
 	float		epsilon;
 
-	epsilon = (1.0 / GRID_SIZE);
+	epsilon = (1.0 / MAP_GRID_SIZE);
 	map_y = (data()->player.y - MINIMAP_RADIUS) + epsilon;
 	dst_p.y = 0;
 	while (dst_p.y < dst->height)
@@ -87,8 +87,8 @@ void	minimap_draw_to_image(void)
 	t_img	*img;
 
 	img = &data()->imgs[MINIMAP_IMG];
-	img->ptr = my_new_image(data()->mlx, MINIMAP_RADIUS * 2 * GRID_SIZE,
-			MINIMAP_RADIUS * 2 * GRID_SIZE, img);
+	img->ptr = my_new_image(data()->mlx, MINIMAP_RADIUS * 2 * MAP_GRID_SIZE,
+			MINIMAP_RADIUS * 2 * MAP_GRID_SIZE, img);
 	if (img->ptr == NULL)
 		exit_end_program_error(MLX_IMAGE);
 	image_fill(img, MINIMAP_SPACE_COLOR);
