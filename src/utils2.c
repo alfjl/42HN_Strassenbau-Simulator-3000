@@ -2,7 +2,7 @@
 
 double	pythagoras_hypotenuse(double a, double b)
 {
-	return (sqrt(a * a	+ b * b));
+	return (sqrt(a * a + b * b));
 }
 
 t_data	*data(void)

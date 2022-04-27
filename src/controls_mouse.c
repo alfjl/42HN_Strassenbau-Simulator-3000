@@ -22,11 +22,12 @@ static int	static_mouse_move_hook(int x, int y, t_controls *controls)
 		controls->mouse_left = true;
 	else if (x > old_x)
 		controls->mouse_right = true;
-	printf("%d\n", my_abs(x, old_x));
 	if (my_abs(x, old_x) < MOUSE_ACCELERATION_KICK_IN)
 		factor = MOUSE_TURN_FACTOR;
-	else if (my_abs(x, old_x) > MOUSE_ACCELERATION_KICK_IN * 2)
-		factor = MOUSE_ACCELERATION_FACTOR * 2;
+	else if (my_abs(x, old_x) > MOUSE_ACCELERATION_KICK_IN * 1.5)
+		factor = MOUSE_TURN_FACTOR * MOUSE_ACCELERATION_FACTOR * 3.0;
+	else if (my_abs(x, old_x) > MOUSE_ACCELERATION_KICK_IN * 2.0)
+		factor = MOUSE_TURN_FACTOR * MOUSE_ACCELERATION_FACTOR * 6.0;
 	else
 		factor = MOUSE_ACCELERATION_FACTOR;
 	data()->player.turn_speed = TURN_STEP * factor;
