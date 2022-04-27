@@ -30,7 +30,7 @@ t_ray	rays_calculate_vertical(float angle)
 	else if (ray.angle < M_PI_2 || ray.angle > (3 * M_PI_2))
 		static_rays_set_parameters_east(&ray, ntan);
 	rays_iterate_grid(&ray);
-	ray.len = sqrt((ray.x - data()->player.x) * (ray.x - data()->player.x)
-			+ (ray.y - data()->player.y) * (ray.y - data()->player.y));
+	ray.len = pythagoras_hypotenuse((ray.x - data()->player.x),
+			(ray.y - data()->player.y));
 	return (ray);
 }

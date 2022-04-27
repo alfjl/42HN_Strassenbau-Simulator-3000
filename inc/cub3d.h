@@ -221,6 +221,7 @@ typedef enum e_mapchars
 {
 	WALL = '1',
 	SPACE = '0',
+	VOID = 'X',
 	PLAYER_NORTH = 'N',
 	PLAYER_SOUTH = 'S',
 	PLAYER_EAST = 'E',
@@ -364,8 +365,8 @@ typedef struct s_data
 void			map_read(char *filepath);
 void			images_create(void);
 void			mlx(void);
-void			mouse(t_controls *controls);
-void			keyboard(t_controls *controls);
+void			controls_mouse(t_controls *controls);
+void			controls_keyboard(t_controls *controls);
 int				frame(t_controls *keys);
 void			textures_load(void);
 void			sprites_load(void);
@@ -377,8 +378,9 @@ void			minimap_draw_to_image(void);
 void			walls_draw_to_image(void);
 void			walls_draw_vertical_line(t_img *img, t_point start,
 					t_point end, int i);
-void			player_update_position(t_controls *keys);
 void			walls_open_door(void);
+void			walls_close_door(void);
+void			player_update_position(t_controls *keys);
 int				exit_end_program_error(int errorcode);
 int				exit_end_program_success(void);
 void			free_all(void);
@@ -402,6 +404,7 @@ void			image_fill(t_img *img, int color);
 t_img			*image_clone(void *mlx, t_img *src, t_img *dst);
 void			image_overlay(t_img *src, t_img *dst, int dst_x, int dst_y);
 void			calculate_pos_delta(void);
+double			pythagoras_hypotenuse(double a, double b);
 //mlx
 void			*mlx_new_image_alpha(void *mlx_ptr, int width, int height);
 //fps

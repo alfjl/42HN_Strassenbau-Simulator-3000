@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void	static_initialize_images(void)
+static void	static_images_initialize(void)
 {
 	t_img	*imgs;
 	int		i;
@@ -21,7 +21,7 @@ static void	static_initialize_images(void)
 	}
 }
 
-static void	static_initialize_sprites(void)
+static void	static_sprites_initialize(void)
 {
 	int			i;
 	int			nbr;
@@ -46,7 +46,7 @@ static void	static_initialize_sprites(void)
 	}
 }
 
-static void	static_initialize_data_struct(void)
+static void	static_data_struct_initialize(void)
 {
 	data()->imgs[SOUTH_IMG].path = data()->map.textures.south;
 	data()->imgs[NORTH_IMG].path = data()->map.textures.north;
@@ -88,8 +88,8 @@ int	main(int argc, char **argv)
 {
 	data()->mlx = NULL;
 	data()->win = NULL;
-	static_initialize_images();
-	static_initialize_sprites();
+	static_images_initialize();
+	static_sprites_initialize();
 	if (argc != 2)
 	{
 		ft_printf("ERROR\n");
@@ -100,7 +100,7 @@ int	main(int argc, char **argv)
 	data()->mlx = mlx_init();
 	if (data()->mlx == NULL)
 		exit_end_program_error(MLX);
-	static_initialize_data_struct();
+	static_data_struct_initialize();
 	images_create();
 	textures_load();
 	if (SPRITES_ENABLED)

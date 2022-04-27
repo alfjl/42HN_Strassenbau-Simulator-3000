@@ -74,7 +74,7 @@ t_ray	rays_calculate_horizontal(float angle)
 	else if (ray.angle < M_PI)
 		static_rays_set_parameters_south(&ray, atan);
 	rays_iterate_grid(&ray);
-	ray.len = sqrt((ray.x - data()->player.x) * (ray.x - data()->player.x)
-			+ (ray.y - data()->player.y) * (ray.y - data()->player.y));
+	ray.len = pythagoras_hypotenuse((ray.x - data()->player.x),
+			(ray.y - data()->player.y));
 	return (ray);
 }

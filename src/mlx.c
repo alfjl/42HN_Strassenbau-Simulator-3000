@@ -17,9 +17,9 @@ void	mlx(void)
 		StructureNotifyMask, exit_end_program_success, NULL);
 	mlx_do_key_autorepeatoff(mlx);
 	my_mouse_hide(mlx, win);
-	keyboard(&controls);
+	controls_keyboard(&controls);
 	if (MOUSE_ENABLED)
-		mouse(&controls);
+		controls_mouse(&controls);
 	mlx_loop_hook(mlx, frame, &controls);
 	mlx_loop(mlx);
 }

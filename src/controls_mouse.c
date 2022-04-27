@@ -31,7 +31,7 @@ static int	static_mouse_move_hook(int x, int y, t_controls *controls)
 	return (EXIT_SUCCESS);
 }
 
-void	mouse(t_controls *controls)
+void	controls_mouse(t_controls *controls)
 {
 	t_data	*datas;
 
