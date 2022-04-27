@@ -79,7 +79,7 @@ void	sprites_load(void)
 	data()->sprites[SHOVEL_WALK_SPRITE].sequence[3].path = "./sprites/shovel3.xpm";
 	data()->sprites[SHOVEL_WALK_SPRITE].sequence[4].path = "./sprites/shovel4.xpm";
 	data()->sprites[SHOVEL_WALK_SPRITE].sequence[5].path = "./sprites/shovel5.xpm";
-	data()->sprites[SHOVEL_WALK_SPRITE].count = SPRITE_COUNT;
+	data()->sprites[SHOVEL_WALK_SPRITE].count = MAX_SPRITE_COUNT;
 	data()->sprites[SHOVEL_WALK_SPRITE].speed = 3;
 	static_create_img_from_sprite(SHOVEL_WALK_SPRITE);
 	data()->sprites[SHOVEL_HIT_SPRITE].sequence[0].path = "./sprites/shovel_hit0.xpm";

@@ -47,7 +47,7 @@
 //Graphics
 # define TEXTURE_SIZE 512
 # define SPRITE_SIZE 512
-# define SPRITE_COUNT 6
+# define MAX_SPRITE_COUNT 6
 # define SPRITE_SPEED 3
 //Calculation constants
 # define EXTRA_EDGE 0.000001
@@ -92,15 +92,15 @@ typedef enum e_argb_colorcode
 //showkey -a
 typedef enum e_keycode_linux
 {
-	W_KEY = 119,
 	A_KEY = 97,
-	S_KEY = 115,
 	D_KEY = 100,
-	UP_KEY = 65362,
+	E_KEY,
+	S_KEY = 115,
+	W_KEY = 119,
 	LEFT_KEY = 65361,
-	DOWN_KEY = 65364,
-	RIGHT_KEY = 65363,
-	E_KEY = 101,
+	UP_KEY,
+	RIGHT_KEY,
+	DOWN_KEY,
 	ESC_KEY = 65307,
 }	t_keycode_linux;
 
@@ -130,15 +130,15 @@ typedef enum e_argb_colorcode_linux
 
 typedef enum e_keycode_mac
 {
-	W_KEY = 13,
 	A_KEY = 0,
-	S_KEY = 1,
-	D_KEY = 2,
-	UP_KEY = 126,
+	S_KEY,
+	D_KEY,
+	W_KEY = 13,
+	E_KEY,
 	LEFT_KEY = 123,
-	DOWN_KEY = 125,
-	RIGHT_KEY = 124,
-	E_KEY = 14,
+	RIGHT_KEY,
+	DOWN_KEY,
+	UP_KEY,
 	ESC_KEY = 53,
 }	t_keycode_mac;
 
@@ -159,41 +159,40 @@ typedef enum e_argb_colorcode_mac
 	NAVY = COLOR_NAVY,
 	DARK_GREY = COLOR_DARK_GREY,
 	SILVER = COLOR_SILVER,
-	BROWN = COLOR_BROWN + ALPHA,
+	BROWN = COLOR_BROWN,
 	TRANSPARENT = COLOR_TRANSPARENT,
 }	t_argb_colorcode_mac;
 # endif
 
-typedef enum e_x11events
+typedef enum e_x11_events
 {
 	KeyPress = 2,
 	KeyRelease = 3,
 	MotionNotify = 6,
 	DestroyNotify = 17,
-}	t_x11events;
+}	t_x11_events;
 
-typedef enum e_x11masks
+typedef enum e_x11_masks
 {
 	KeyPressMask = 1L << 0,
 	KeyReleaseMask = 1L << 1,
 	PointerMotionMask = 1L << 6,
 	StructureNotifyMask = 1L << 17,
-}	t_x11masks;
+}	t_x11_masks;
 
-typedef enum e_spritenbr
+typedef enum e_sprite_nbr
 {
 	SHOVEL_SPRITE,
 	SHOVEL_WALK_SPRITE,
 	SHOVEL_HIT_SPRITE,
 	SPRITE_NBR,
-}	t_spritenbr;
+}	t_sprite_nbr;
 
-typedef enum e_imgnbr
+typedef enum e_img_nbr
 {
 	PLAYER_IMG,
 	MINIMAP_IMG,
 	BACKGROUND_IMG,
-	SPRITE_IMG,
 	WALLS_IMG,
 	NORTH_IMG,
 	SOUTH_IMG,
@@ -201,7 +200,7 @@ typedef enum e_imgnbr
 	WEST_IMG,
 	TMP_IMG,
 	IMG_NBR,
-}	t_imgnbr;
+}	t_img_nbr;
 
 typedef enum e_player_status
 {
@@ -269,7 +268,7 @@ typedef struct s_sprite
 	int			counter;
 	int			speed;
 	int			sign;
-	t_img		sequence[SPRITE_COUNT];
+	t_img		sequence[MAX_SPRITE_COUNT];
 }	t_sprite;
 
 typedef struct s_player
@@ -364,50 +363,48 @@ typedef struct s_data
 	long			time; //remove
 }	t_data;
 
-t_data	*data(void);
-void	map_read(char *filepath);
-void	mlx(void);
-int		frame(t_controls *keys);
-void	player_update_position(t_controls *keys);
-bool	is_wall(float y, float x);
-void	player_nose_draw_to_image(void);
-void	rays_create(void);
-t_ray	rays_calculate_vertical(float angle);
-t_ray	rays_calculate_horizontal(float angle);
-void	rays_iterate_grid(t_ray *ray);
-void	images_create(void);
-void	textures_load(void);
-void	sprites_load(void);
-int		exit_end_program_error(int errorcode);
-int		exit_end_program_success(void);
-void	walls_draw_to_image(void);
-void	walls_draw_vertical_line(t_img *img, t_point s, t_point e, int i);
-void	minimap_draw_to_image(void);
-void	walls_open_door(void);
-void	mouse(t_controls *controls);
-void	keyboard(t_controls *controls);
+void			map_read(char *filepath);
+void			images_create(void);
+void			mlx(void);
+void			mouse(t_controls *controls);
+void			keyboard(t_controls *controls);
+int				frame(t_controls *keys);
+void			textures_load(void);
+void			sprites_load(void);
+void			rays_create(void);
+t_ray			rays_calculate_vertical(float angle);
+t_ray			rays_calculate_horizontal(float angle);
+void			rays_iterate_grid(t_ray *ray);
+void			minimap_draw_to_image(void);
+void			walls_draw_to_image(void);
+void			walls_draw_vertical_line(t_img *img, t_point s, t_point e, int i);
+void			player_update_position(t_controls *keys);
+void			walls_open_door(void);
+int				exit_end_program_error(int errorcode);
+int				exit_end_program_success(void);
 //utils
-void	my_pixel_put(t_img *img, int x, int y, int color);
-void	draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
+void			my_pixel_put(t_img *img, int x, int y, int color);
+void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
 unsigned int	rgba_create(int r, int g, int b, int a);
 unsigned int	argb_create(int r, int g, int b, int a);
 unsigned int	argb_shade_color(int color, float brightness);
-// unsigned int	color_convert(long color);
-float	radian_limits(float angle);
-void	*my_new_image(void *mlx_ptr, int width, int height, t_img *img);
-void	my_destroy_image(void *mlx_ptr, t_img *img);
-int		my_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y);
-int		my_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
-int		my_mouse_hide(void *mlx_ptr, void *win_ptr);
-int		my_mouse_show(void *mlx_ptr, void *win_ptr);
-bool	is_inside_image_limits(int x, int y, t_img *img);
-void	image_fill(t_img *img, int color);
-t_img	*image_clone(void *mlx, t_img *src, t_img *dst);
-void	image_overlay(t_img *src, t_img *dst, int dst_x, int dst_y);
-void	calculate_pos_delta(void);
+t_data			*data(void);
+// unsigned 	int	color_convert(long color);
+float			radian_limits(float angle);
+void			*my_new_image(void *mlx_ptr, int width, int height, t_img *img);
+void			my_destroy_image(void *mlx_ptr, t_img *img);
+int				my_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y);
+int				my_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
+int				my_mouse_hide(void *mlx_ptr, void *win_ptr);
+int				my_mouse_show(void *mlx_ptr, void *win_ptr);
+bool			is_inside_image_limits(int x, int y, t_img *img);
+void			image_fill(t_img *img, int color);
+t_img			*image_clone(void *mlx, t_img *src, t_img *dst);
+void			image_overlay(t_img *src, t_img *dst, int dst_x, int dst_y);
+void			calculate_pos_delta(void);
 //mlx
-void	*mlx_new_image_alpha(void *mlx_ptr, int width, int height);
+void			*mlx_new_image_alpha(void *mlx_ptr, int width, int height);
 //fps
-void	fps_to_window_buffer(void); //remove
-void	timedifference(char *str); //remove
+void			fps_to_window_buffer(void); //remove
+void			timedifference(char *str); //remove
 #endif

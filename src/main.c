@@ -33,7 +33,7 @@ static void	static_initialize_sprites(void)
 	{
 		sprite = &data()->sprites[nbr];
 		sprite->name = NULL;
-		sprite->count = SPRITE_COUNT;
+		sprite->count = MAX_SPRITE_COUNT;
 		sprite->counter = 0;
 		sprite->speed = 1;
 		sprite->sign = 1;
