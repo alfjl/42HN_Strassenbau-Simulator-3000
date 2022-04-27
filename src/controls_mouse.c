@@ -16,20 +16,17 @@ static int	static_mouse_move_hook(int x, int y, t_controls *controls)
 {
 	static int	old_x = WINDOW_WIDTH / 2;
 	float		factor;
+	int			delta;
 
 	(void)y;
 	if (x < old_x)
 		controls->mouse_left = true;
 	else if (x > old_x)
 		controls->mouse_right = true;
-	if (my_abs(x, old_x) < MOUSE_ACCELERATION_KICK_IN)
-		factor = MOUSE_TURN_FACTOR;
-	else if (my_abs(x, old_x) > MOUSE_ACCELERATION_KICK_IN * 1.5)
-		factor = MOUSE_TURN_FACTOR * MOUSE_ACCELERATION_FACTOR * 3.0;
-	else if (my_abs(x, old_x) > MOUSE_ACCELERATION_KICK_IN * 2.0)
-		factor = MOUSE_TURN_FACTOR * MOUSE_ACCELERATION_FACTOR * 6.0;
-	else
-		factor = MOUSE_ACCELERATION_FACTOR;
+	delta = my_abs(x, old_x);
+	factor = MOUSE_TURN_FACTOR;
+	if (delta > MOUSE_ACCELERATION_KICK_IN)
+		factor *= MOUSE_ACCELERATION_FACTOR * delta / MOUSE_ACCELERATION_KICK_IN;
 	data()->player.turn_speed = TURN_STEP * factor;
 	if (x < 0 || x > data()->window.width)
 	{
