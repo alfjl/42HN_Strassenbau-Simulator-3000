@@ -109,6 +109,7 @@ typedef enum e_keycode_linux
 	A_KEY = 97,
 	D_KEY = 100,
 	E_KEY,
+	Q_KEY = 113,
 	S_KEY = 115,
 	W_KEY = 119,
 	LEFT_KEY = 65361,
@@ -116,6 +117,9 @@ typedef enum e_keycode_linux
 	RIGHT_KEY,
 	DOWN_KEY,
 	ESC_KEY = 65307,
+	CTRL_KEY = 65507,
+	SHIFT_KEY = 65505,
+	SPACE_KEY = 32,
 }	t_keycode_linux;
 
 typedef enum e_argb_colorcode_linux
@@ -147,7 +151,8 @@ typedef enum e_keycode_mac
 	A_KEY = 0,
 	S_KEY,
 	D_KEY,
-	W_KEY = 13,
+	Q_KEY = 12,
+	W_KEY,
 	E_KEY,
 	LEFT_KEY = 123,
 	RIGHT_KEY,
