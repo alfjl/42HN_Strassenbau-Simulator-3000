@@ -15,8 +15,9 @@
 # define SPRINT_ENABLED 1
 # define CROUCH_ENABLED 1
 # define JUMP_ENABLED 1
-# define FLOOR_TEXTURE_ENABLED 1
+# define FLOOR_TEXTURE_ENABLED 0
 # define CEILING_TEXTURE_ENABLED 1
+# define DEBUG 0
 //mlx
 # define HAS_ALPHA 0
 //Parameters
@@ -68,12 +69,13 @@ typedef enum e_defines
 	DEPTH_OF_FIELD = (2 * WINDOW_HEIGHT),
 	CROUCH_DELTA = -(WINDOW_HEIGHT / 4),
 	JUMP_DELTA = (WINDOW_HEIGHT / 3),
-	GRAVITY = JUMP_DELTA / 5,
+	GRAVITY = JUMP_DELTA / 8,
 }	t_defines;
 
 typedef enum e_buttons
 {
 	LEFT_BUTTON = 1,
+	RIGHT_BUTTON,
 }	t_buttons;
 
 typedef enum e_argb_colorcode
@@ -213,6 +215,8 @@ typedef enum e_img_nbr
 	SOUTH_IMG,
 	EAST_IMG,
 	WEST_IMG,
+	FLOOR_IMG,
+	CEILING_IMG,
 	TMP_IMG,
 	IMG_NBR,
 }	t_img_nbr;
@@ -405,6 +409,7 @@ void			player_update_z_position(void);
 int				exit_end_program_error(int errorcode);
 int				exit_end_program_success(void);
 void			free_all(void);
+void			ft_floor(t_img *img);
 //utils
 void			my_pixel_put(t_img *img, int x, int y, int color);
 void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);

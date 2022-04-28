@@ -52,6 +52,42 @@ static void	static_walls_put_texture_color(t_img *img, t_point start,
 	}
 }
 
+static void	static_floor(t_img *img, t_point start,
+	int index, int y)
+{
+	int		color;
+	int		tx;
+	float	ty;
+	int		image;
+	float	current_dist;
+	float	weight;
+	float	current_floor_x;
+	float	current_floor_y;
+
+	(void)current_dist;
+	(void)weight;
+	(void)current_floor_x;
+	(void)current_floor_y;
+	image = FLOOR_IMG;
+	current_dist = data()->window.height / (2.0 * y - data()->window.height);
+	weight = current_dist / data()->rays[index].dist;
+	current_floor_x = weight * data()->rays[index].x + (1.0 - weight) * data()->player.x;
+	current_floor_y = weight * data()->rays[index].y + (1.0 - weight) * data()->player.y;
+	// tx = (int)(current_floor_x * TEXTURE_SIZE) % TEXTURE_SIZE;
+	// ty = (int)(current_floor_y * TEXTURE_SIZE) % TEXTURE_SIZE;
+	tx = (current_floor_x - (int)current_floor_x) * TEXTURE_SIZE;
+	ty = (current_floor_y - (int)current_floor_y) * TEXTURE_SIZE;
+	// tx = data()->player.x / 2 + cos(data()->rays[index].angle) * 158 * TEXTURE_SIZE / (y - (data()->window.height / 2.0)) / cos(radian_limits(data()->player.angle - data()->rays[index].angle));
+	// ty = data()->player.x / 2 - sin(data()->rays[index].angle) * 158 * TEXTURE_SIZE / (y - (data()->window.height / 2.0)) / cos(radian_limits(data()->player.angle - data()->rays[index].angle));
+	if (is_inside_image_limits(tx, ty, img))
+	{
+		color = *(unsigned int *)(data()->imgs[image].addr
+				+ (unsigned int)((int)ty * data()->imgs[image].line_len
+					+ tx * (data()->imgs[image].bits_per_pixel / 8))) + ALPHA;
+		my_pixel_put(img, start.x, y, color);
+	}
+}
+
 static void	static_walls_draw_single_vertical_line(t_img *img, t_point start,
 	t_point end, int index)
 {
@@ -72,11 +108,14 @@ static void	static_walls_draw_single_vertical_line(t_img *img, t_point start,
 		static_walls_put_texture_color(img, start, index, y);
 		y++;
 	}
-	if (HAS_ALPHA)
+	if (HAS_ALPHA || FLOOR_TEXTURE_ENABLED)
 		return ;
 	while (y < datas->window.height)
 	{
-		my_pixel_put(img, start.x, y, datas->map.floor.rgb);
+		if (FLOOR_TEXTURE_ENABLED && DEBUG)
+			static_floor(img, start, index, y);
+		else
+			my_pixel_put(img, start.x, y, datas->map.floor.rgb);
 		y++;
 	}
 }

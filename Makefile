@@ -12,6 +12,7 @@ SRCS :=	main.c \
 		controls_keyboard.c \
 		controls_mouse.c \
 		exit.c \
+		floor.c \
 		frame.c \
 		free.c \
 		images.c \
