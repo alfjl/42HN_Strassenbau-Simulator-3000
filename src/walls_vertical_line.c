@@ -108,11 +108,14 @@ static void	static_walls_draw_single_vertical_line(t_img *img, t_point start,
 		static_walls_put_texture_color(img, start, index, y);
 		y++;
 	}
-	if (HAS_ALPHA || FLOOR_TEXTURE_ENABLED)
+	if (HAS_ALPHA)
 		return ;
 	while (y < datas->window.height)
 	{
-		if (FLOOR_TEXTURE_ENABLED && DEBUG)
+		
+		if (FLOOR_TEXTURE_ENABLED && FLOOR_TEXTURE_HORIZONTAL)
+			return ;
+		else if (FLOOR_TEXTURE_ENABLED)
 			static_floor(img, start, index, y);
 		else
 			my_pixel_put(img, start.x, y, datas->map.floor.rgb);

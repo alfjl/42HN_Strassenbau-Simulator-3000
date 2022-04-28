@@ -15,9 +15,9 @@
 # define SPRINT_ENABLED 1
 # define CROUCH_ENABLED 1
 # define JUMP_ENABLED 1
-# define FLOOR_TEXTURE_ENABLED 0
+# define FLOOR_TEXTURE_ENABLED 1
+# define FLOOR_TEXTURE_HORIZONTAL 0
 # define CEILING_TEXTURE_ENABLED 1
-# define DEBUG 0
 //mlx
 # define HAS_ALPHA 0
 //Parameters
