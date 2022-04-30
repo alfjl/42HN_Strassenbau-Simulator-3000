@@ -52,7 +52,7 @@ static void	static_walls_put_texture_color(t_img *img, t_point start,
 	}
 }
 
-static void	static_floor(t_img *img, t_point start,
+static void	static_floor_guide(t_img *img, t_point start,
 	int index, int y)
 {
 	int		color;
@@ -88,6 +88,37 @@ static void	static_floor(t_img *img, t_point start,
 	}
 }
 
+static void	static_floor_video(t_img *img, t_point start,
+	int index, int y)
+{
+	(void)img;
+	(void)start;
+	(void)index;
+	(void)y;
+	int		distance = data()->window.height/ 2 / tan(ANGLE_OF_VIEW / 2);
+	int		image = FLOOR_IMG;
+	int		color;
+	float	tx;
+	float	ty;
+	// while (y < data()->window.height)
+	// {
+		float	dy = y - (data()->window.height/ 2.0);
+		float	deg = data()->rays[index].angle;
+		float	raFix = cos(radian_limits(data()->player.angle - data()->rays[index].angle));
+		tx = data()->player.x + cos(deg) * distance * TEXTURE_SIZE / dy / raFix;
+		ty = data()->player.y - sin(deg) * distance * TEXTURE_SIZE / dy / raFix;
+	// 	y++;
+	// }
+	if (is_inside_image_limits(tx, ty, img))
+	{
+		color = *(unsigned int *)(data()->imgs[image].addr
+				+ (unsigned int)((int)ty * data()->imgs[image].line_len
+					+ tx * (data()->imgs[image].bits_per_pixel / 8))) + ALPHA;
+		my_pixel_put(img, start.x, y, color);
+	}
+	return ;
+}
+
 static void	static_walls_draw_single_vertical_line(t_img *img, t_point start,
 	t_point end, int index)
 {
@@ -113,10 +144,12 @@ static void	static_walls_draw_single_vertical_line(t_img *img, t_point start,
 	while (y < datas->window.height)
 	{
 		
-		if (FLOOR_TEXTURE_ENABLED && FLOOR_TEXTURE_HORIZONTAL)
+		if (FLOOR_TEXTURE_ENABLED && !FLOOR_TEXTURE_VERTICAL)
 			return ;
-		else if (FLOOR_TEXTURE_ENABLED)
-			static_floor(img, start, index, y);
+		else if (FLOOR_TEXTURE_ENABLED && FLOOR_TEXTURE_VERTICAL == GUIDE)
+			static_floor_guide(img, start, index, y);
+		else if (FLOOR_TEXTURE_ENABLED && FLOOR_TEXTURE_VERTICAL == VIDEO)
+			static_floor_video(img, start, index, y);
 		else
 			my_pixel_put(img, start.x, y, datas->map.floor.rgb);
 		y++;

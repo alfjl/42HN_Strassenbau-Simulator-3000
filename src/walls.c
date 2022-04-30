@@ -84,7 +84,7 @@ void	walls_draw_to_image(void)
 			data()->window.height, img);
 	if (img->ptr == NULL)
 		exit_end_program_error(MLX_IMAGE);
-	if (FLOOR_TEXTURE_ENABLED && FLOOR_TEXTURE_HORIZONTAL)
+	if (FLOOR_TEXTURE_ENABLED && !FLOOR_TEXTURE_VERTICAL)
 		ft_floor(img);
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
