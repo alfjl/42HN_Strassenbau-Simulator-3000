@@ -57,7 +57,7 @@ static void static_ceiling(t_img *img, t_point start,
 	float current_floor_x;
 	float current_floor_y;
 
-	image = FLOOR_IMG;
+	image = CEILING_IMG;
 	current_dist = - data()->window.height / (2.0 * (y - data()->player.dz) - data()->window.height);
 	weight = current_dist / data()->rays[index].dist;
 	current_floor_x = weight * (data()->rays[index].x - data()->player.x) + data()->player.x / 2;

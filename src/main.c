@@ -52,7 +52,7 @@ static void	static_data_struct_initialize(void)
 	data()->imgs[NORTH_IMG].path = data()->map.textures.north;
 	data()->imgs[EAST_IMG].path = data()->map.textures.east;
 	data()->imgs[WEST_IMG].path = data()->map.textures.west;
-	data()->imgs[FLOOR_IMG].path = "./textures/inca_stone128x128.xpm";
+	data()->imgs[FLOOR_IMG].path = "./textures/soil512x512.xpm";
 	data()->imgs[CEILING_IMG].path = "./textures/moss.xpm";
 	data()->imgs[SKY_IMG].path = "./textures/sky_tiled2048x1024.xpm";
 	data()->minimap.width = data()->map.width * MAP_GRID_SIZE;
@@ -75,10 +75,10 @@ static void	static_get_map_file_data(void)
 	// data()->map.textures.south = "./textures/stone.xpm";
 	// data()->map.textures.north = "./textures/moss.xpm";
 	// data()->map.textures.east = "./textures/magma.xpm";
-	data()->map.textures.west = "./textures/dirt_low2048x2048.xpm"; //placeholder
-	data()->map.textures.south = data()->map.textures.west; //placeholder
-	data()->map.textures.north = data()->map.textures.west; //placeholder
-	data()->map.textures.east = data()->map.textures.west; //placeholder
+	data()->map.textures.west = "./textures/soil_with_roots.xpm"; //placeholder
+	data()->map.textures.south = "./textures/soil_with_grass256x256.xpm"; //placeholder
+	data()->map.textures.north = "./textures/soil_with_dry_grass512x512.xpm"; //placeholder
+	data()->map.textures.east = "./textures/soil_with_fresh_grass256x256.xpm"; //placeholder
 	///////player
 	data()->player.status = IDLE;
 	data()->player.step_size = MOVE_STEP;

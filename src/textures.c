@@ -91,7 +91,7 @@ void	textures_load(void)
 	static_create_img_from_texture(EAST_IMG, SHADE_EAST);
 	static_create_img_from_texture(WEST_IMG, SHADE_WEST);
 	if (FLOOR_TEXTURE_ENABLED)
-		static_create_img_from_texture(FLOOR_IMG, 1.0);
+		static_create_img_from_texture(FLOOR_IMG, 0.5);
 	if (CEILING_TEXTURE_ENABLED)
 		static_create_img_from_texture(CEILING_IMG, 1.0);
 	if (SKY_ENABLED)
