@@ -45,6 +45,32 @@ static void static_walls_put_texture_color(t_img *img, t_point start,
 	}
 }
 
+static void static_ceiling(t_img *img, t_point start,
+							   int index, int y)
+{
+	int color;
+	int tx;
+	int ty;
+	int image;
+	float current_dist;
+	float weight;
+	float current_floor_x;
+	float current_floor_y;
+
+	image = FLOOR_IMG;
+	current_dist = - data()->window.height / (2.0 * (y - data()->player.dz) - data()->window.height);
+	weight = current_dist / data()->rays[index].dist;
+	current_floor_x = weight * (data()->rays[index].x - data()->player.x) + data()->player.x / 2;
+	current_floor_y = weight * (data()->rays[index].y - data()->player.y) + data()->player.y / 2;
+	tx = (current_floor_x - (int)current_floor_x) * TEXTURE_SIZE;
+	ty = (current_floor_y - (int)current_floor_y) * TEXTURE_SIZE;
+	if (is_inside_image_limits(tx, ty, img))
+	{
+		color = *(unsigned int *)(data()->imgs[image].addr + (unsigned int)((int)ty * data()->imgs[image].line_len + tx * (data()->imgs[image].bits_per_pixel / 8))) + ALPHA;
+		my_pixel_put(img, start.x, y, color);
+	}
+}
+
 static void static_floor_guide(t_img *img, t_point start,
 							   int index, int y)
 {
@@ -57,10 +83,6 @@ static void static_floor_guide(t_img *img, t_point start,
 	float current_floor_x;
 	float current_floor_y;
 
-	(void)current_dist;
-	(void)weight;
-	(void)current_floor_x;
-	(void)current_floor_y;
 	image = FLOOR_IMG;
 	current_dist = data()->window.height / (2.0 * (y - data()->player.dz) - data()->window.height);
 	weight = current_dist / data()->rays[index].dist;
@@ -120,6 +142,9 @@ static void static_walls_draw_single_vertical_line(t_img *img, t_point start,
 		y = start.y;
 	while (y < start.y)
 	{
+		if (CEILING_TEXTURE_ENABLED)
+			static_ceiling(img, start, index, y);
+		else
 		my_pixel_put(img, start.x, y, datas->map.ceiling.rgb);
 		y++;
 	}
