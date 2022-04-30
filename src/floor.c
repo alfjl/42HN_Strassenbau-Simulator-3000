@@ -7,8 +7,8 @@ void	ft_floor(t_img *img)
 	int	screenHeight = data()->window.height;
 	int	h = screenHeight; //halbe?
 	int	screenWidth = data()->window.width;
-	float	posX = data()->player.x;
-	float	posY = data()->player.y;
+	float	posX = data()->player.x / 2;
+	float	posY = data()->player.y / 2;
 	// float	dirX = data()->player.dx; // maybe without step?
 	// float	dirY = data()->player.dy;
 

@@ -62,17 +62,12 @@ static void static_floor_guide(t_img *img, t_point start,
 	(void)current_floor_x;
 	(void)current_floor_y;
 	image = FLOOR_IMG;
-	current_dist = data()->window.height / (2.0 * y - data()->window.height);
+	current_dist = data()->window.height / (2.0 * (y - data()->player.dz) - data()->window.height);
 	weight = current_dist / data()->rays[index].dist;
-	// current_floor_x = weight * data()->rays[index].x + (1.0 - weight) * data()->player.x;
-	// current_floor_y = weight * data()->rays[index].y + (1.0 - weight) * data()->player.y;
-	// tx = (int)(current_floor_x * TEXTURE_SIZE) % TEXTURE_SIZE;
-	// ty = (int)(current_floor_y * TEXTURE_SIZE) % TEXTURE_SIZE;
 	current_floor_x = weight * (data()->rays[index].x - data()->player.x) + data()->player.x / 2;
 	current_floor_y = weight * (data()->rays[index].y - data()->player.y) + data()->player.y / 2;
 	tx = (current_floor_x - (int)current_floor_x) * TEXTURE_SIZE;
 	ty = (current_floor_y - (int)current_floor_y) * TEXTURE_SIZE;
-	// printf("tx: %d, ty: %d\n", tx, ty);
 	if (is_inside_image_limits(tx, ty, img))
 	{
 		color = *(unsigned int *)(data()->imgs[image].addr + (unsigned int)((int)ty * data()->imgs[image].line_len + tx * (data()->imgs[image].bits_per_pixel / 8))) + ALPHA;
