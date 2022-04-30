@@ -92,6 +92,8 @@ static void	frame_set_up_window(void)
 		static_frame_minimap_to_window_buffer(mlx, win, imgs);
 	if (FPS_ENABLED)
 		fps_to_window_buffer(); //remove
+	// if (SKY_ENABLED)
+	// 	mlx_put_image_to_window(mlx, win, imgs[SKY_IMG].ptr, 0, 0);
 }
 
 int	frame(t_controls *controls)

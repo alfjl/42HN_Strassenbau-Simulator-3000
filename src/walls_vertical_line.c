@@ -130,6 +130,32 @@ static void static_floor_video(t_img *img, t_point start,
 	return;
 }
 
+static void static_sky(t_img *img, t_point start,
+							   int index, int y)
+{
+	int color;
+	int tx;
+	int ty;
+	int image;
+
+	(void)index;
+	image = SKY_IMG;
+	// tx = start.x;
+	tx = data()->rays[index].angle * (data()->imgs[image].width / (2 * M_PI));
+	// printf("tx: %d\n", tx);
+	// if (tx < 0)
+	// {
+	// 	tx += data()->window.width;
+	// 	tx = tx % data()->window.width;
+	// }
+	ty = y;
+	if (is_inside_image_limits(tx, ty, &data()->imgs[image]))
+	{
+		color = *(unsigned int *)(data()->imgs[image].addr + (unsigned int)((int)ty * data()->imgs[image].line_len + tx * (data()->imgs[image].bits_per_pixel / 8))) + ALPHA;
+		my_pixel_put(img, start.x, y, color);
+	}
+}
+
 static void static_walls_draw_single_vertical_line(t_img *img, t_point start,
 												   t_point end, int index)
 {
@@ -142,10 +168,12 @@ static void static_walls_draw_single_vertical_line(t_img *img, t_point start,
 		y = start.y;
 	while (y < start.y)
 	{
+		if (SKY_ENABLED)
+			static_sky(img, start, index, y);
+		else
+			my_pixel_put(img, start.x, y, datas->map.ceiling.rgb);
 		if (CEILING_TEXTURE_ENABLED)
 			static_ceiling(img, start, index, y);
-		else
-		my_pixel_put(img, start.x, y, datas->map.ceiling.rgb);
 		y++;
 	}
 	while (y < end.y)

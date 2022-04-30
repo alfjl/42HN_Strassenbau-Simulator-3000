@@ -19,7 +19,8 @@
 # define FLOOR_TEXTURE_VERTICAL GUIDE
 # define GUIDE 1
 # define VIDEO 2
-# define CEILING_TEXTURE_ENABLED 1
+# define CEILING_TEXTURE_ENABLED 0
+# define SKY_ENABLED 1
 //mlx
 # define HAS_ALPHA 0
 //Parameters
@@ -224,6 +225,7 @@ typedef enum e_img_nbr
 	WEST_IMG,
 	FLOOR_IMG,
 	CEILING_IMG,
+	SKY_IMG,
 	TMP_IMG,
 	IMG_NBR,
 }	t_img_nbr;
@@ -427,6 +429,7 @@ t_data			*data(void);
 // unsigned 	int	color_convert(long color);
 float			radian_limits(float angle);
 void			*my_new_image(void *mlx_ptr, int width, int height, t_img *img);
+void			*my_xpm_file_to_image(void *mlx_ptr, char *filename, t_img *img);
 void			my_destroy_image(void *mlx_ptr, t_img *img);
 int				my_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y);
 int				my_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);

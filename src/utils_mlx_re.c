@@ -1,5 +1,16 @@
 #include "cub3d.h"
 
+void	*my_xpm_file_to_image(void *mlx_ptr, char *filename, t_img *img)
+{
+	img->ptr = mlx_xpm_file_to_image(mlx_ptr, filename,
+			&img->width, &img->height);
+	if (img->ptr == NULL)
+		return (NULL);
+	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
+			&img->line_len, &img->endian);
+	return (img->ptr);
+}
+
 void	my_destroy_image(void *mlx_ptr, t_img *img)
 {
 	if (img->ptr != NULL)

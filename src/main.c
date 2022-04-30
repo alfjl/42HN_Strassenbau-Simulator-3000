@@ -54,6 +54,7 @@ static void	static_data_struct_initialize(void)
 	data()->imgs[WEST_IMG].path = data()->map.textures.west;
 	data()->imgs[FLOOR_IMG].path = "./textures/inca_stone128x128.xpm";
 	data()->imgs[CEILING_IMG].path = "./textures/moss.xpm";
+	data()->imgs[SKY_IMG].path = "./textures/sky.xpm";
 	data()->minimap.width = data()->map.width * MAP_GRID_SIZE;
 	data()->minimap.height = data()->map.height * MAP_GRID_SIZE;
 	data()->window.width = WINDOW_WIDTH;
