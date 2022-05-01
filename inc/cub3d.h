@@ -4,6 +4,21 @@
 # include "libft.h"
 # include <math.h>
 
+//Texture paths
+# define TEXTURE_NORTH "./textures/semi_crafted_stone_wall.xpm"
+# define TEXTURE_SOUTH "./textures/rock.xpm"
+# define TEXTURE_EAST "./textures/dirt_stone.xpm"
+# define TEXTURE_WEST "./textures/stone_wall.xpm"
+# define TEXTURE_FLOOR "./textures/dirt_02.xpm"
+# define TEXTURE_CEILING "moss.xpm"
+# define TEXTURE_SKY "./textures/sky_tiled2048x1024.xpm"
+//Environment Color Theme
+# define SHADE_NORTH 1.0
+# define SHADE_SOUTH 0.5
+# define SHADE_EAST 0.8
+# define SHADE_WEST 0.8
+# define SHADE_FLOOR 0.6
+# define SHADE_CEILING 1.0
 //Settings
 # define COLLISION_ENABLED 1
 # define MINIMAP_ENABLED 1
@@ -52,11 +67,6 @@
 # define MINIMAP_BACKGROUND_COLOR BLACK
 # define MINIMAP_PLAYER_COLOR BLACK
 # define MINIMAP_RAY_COLOR RED
-//Environment Color Theme
-# define SHADE_NORTH 1.0
-# define SHADE_SOUTH 0.5
-# define SHADE_EAST 0.8
-# define SHADE_WEST 0.8
 //Graphics
 # define TEXTURE_SIZE 512
 # define SPRITE_SIZE 512
