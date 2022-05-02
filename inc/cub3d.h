@@ -10,7 +10,7 @@
 # define TEXTURE_EAST "./textures/dirt_stone.xpm"
 # define TEXTURE_WEST "./textures/stone_wall.xpm"
 # define TEXTURE_FLOOR "./textures/dirt_02.xpm"
-# define TEXTURE_CEILING "moss.xpm"
+# define TEXTURE_CEILING "./textures/dirt_04.xpm"
 # define TEXTURE_SKY "./textures/sky_tiled2048x1024.xpm"
 //Environment Color Theme
 # define SHADE_NORTH 1.0
@@ -31,11 +31,8 @@
 # define CROUCH_ENABLED 1
 # define JUMP_ENABLED 1
 # define FLOOR_TEXTURE_ENABLED 1
-# define FLOOR_TEXTURE_VERTICAL GUIDE
-# define GUIDE 1
-# define VIDEO 2
-# define CEILING_TEXTURE_ENABLED 0
-# define SKY_ENABLED 1
+# define CEILING_TEXTURE_ENABLED 1
+# define SKY_ENABLED 0
 //mlx
 # define HAS_ALPHA 0
 //Parameters
@@ -339,6 +336,9 @@ typedef struct s_ray
 	float		line_h;
 	int			orientation;
 	float		tyoffset;
+	int			screen_x;
+	int			start_y;
+	int			end_y;
 }	t_ray;
 
 typedef struct s_frame
@@ -420,7 +420,7 @@ void			rays_iterate_grid(t_ray *ray);
 void			minimap_draw_to_image(void);
 void			walls_draw_to_image(void);
 void			walls_draw_vertical_line(t_img *img, t_point start,
-					t_point end, int i);
+					t_point end, t_ray *ray);
 void			walls_open_door(void);
 void			walls_close_door(void);
 void			player_update_position(t_controls *keys);
@@ -428,7 +428,9 @@ void			player_update_z_position(void);
 int				exit_end_program_error(int errorcode);
 int				exit_end_program_success(void);
 void			free_all(void);
-void			ft_floor(t_img *img);
+void			get_sky_color(t_img *img, t_point start, t_ray *ray, int y);
+void			get_ceiling_color(t_img *img, t_point start, t_ray *ray, int y);
+void			get_floor_color(t_img *img, t_point start, t_ray *ray, int y);
 //utils
 void			my_pixel_put(t_img *img, int x, int y, int color);
 void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
@@ -439,7 +441,7 @@ t_data			*data(void);
 // unsigned 	int	color_convert(long color);
 float			radian_limits(float angle);
 void			*my_new_image(void *mlx_ptr, int width, int height, t_img *img);
-void			*my_xpm_file_to_image(void *mlx_ptr, char *filename, t_img *img);
+void			*my_xpm_file_to_image(void *mlx_ptr, char *path, t_img *img);
 void			my_destroy_image(void *mlx_ptr, t_img *img);
 int				my_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y);
 int				my_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);

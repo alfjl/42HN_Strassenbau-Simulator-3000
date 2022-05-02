@@ -10,12 +10,12 @@ void	player_update_z_position(void)
 	else if (player->is_jumping && player->dz < JUMP_DELTA)
 		player->dz += GRAVITY;
 	else if (player->dz > 0)
- 	{
+	{
 		player->is_jumping = false;
 		player->dz -= GRAVITY;
 		if (player->dz < 0)
 			player->dz = 0;
-	 }
+	}
 }
 
 static void	static_player_set_status(t_controls *controls)

@@ -31,7 +31,8 @@ static int	static_mouse_move_hook(int x, int y, t_controls *controls)
 	delta = my_abs(x, old_x);
 	factor = MOUSE_TURN_FACTOR;
 	if (delta > MOUSE_ACCELERATION_KICK_IN)
-		factor *= MOUSE_ACCELERATION_FACTOR * delta / MOUSE_ACCELERATION_KICK_IN;
+		factor *= MOUSE_ACCELERATION_FACTOR * delta
+			/ MOUSE_ACCELERATION_KICK_IN;
 	data()->player.turn_speed = TURN_STEP * factor;
 	if (x < 0 || x > data()->window.width)
 	{

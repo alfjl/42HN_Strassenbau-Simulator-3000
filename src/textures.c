@@ -72,7 +72,7 @@ static void	static_create_img_from_texture(int image, float brightness)
 
 	tmp = &data()->imgs[TMP_IMG];
 	img = &data()->imgs[image];
-	tmp->ptr = my_xpm_file_to_image(data()->mlx, img->path ,tmp);
+	tmp->ptr = my_xpm_file_to_image(data()->mlx, img->path, tmp);
 	if (tmp->ptr == NULL)
 		exit_end_program_error(MLX_IMAGE);
 	static_textures_resize_img(tmp, img);
@@ -84,7 +84,7 @@ static void	static_create_img_from_texture(int image, float brightness)
 void	textures_load(void)
 {
 	t_img	*img;
-	
+
 	img = &data()->imgs[SKY_IMG];
 	static_create_img_from_texture(NORTH_IMG, SHADE_NORTH);
 	static_create_img_from_texture(SOUTH_IMG, SHADE_SOUTH);
@@ -96,7 +96,7 @@ void	textures_load(void)
 		static_create_img_from_texture(CEILING_IMG, SHADE_CEILING);
 	if (SKY_ENABLED)
 	{
-		img->ptr = my_xpm_file_to_image(data()->mlx, img->path ,img);
+		img->ptr = my_xpm_file_to_image(data()->mlx, img->path, img);
 		if (img->ptr == NULL)
 			exit_end_program_error(MLX_IMAGE);
 	}

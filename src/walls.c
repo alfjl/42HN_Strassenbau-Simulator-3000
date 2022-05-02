@@ -53,25 +53,25 @@ void	walls_open_door(void)
 		data()->map.grid[(int)y][(int)x] = SPACE;
 }
 
-static void	static_walls_draw_wallsegment(int index, t_img *img)
+static void	static_walls_draw_wallsegment(t_ray *ray, t_img *img)
 {
 	t_point	start;
 	t_point	end;
 	float	line_h;
 
-	line_h = data()->rays[index].line_h;
+	line_h = ray->line_h;
 	start.y = -line_h / 2 + data()->window.height / 2 + data()->player.dz;
-	data()->rays[index].tyoffset = 0;
+	ray->tyoffset = 0;
 	if (start.y < 0)
 	{
-		data()->rays[index].tyoffset = fabs((float)start.y)
+		ray->tyoffset = fabs((float)start.y)
 		/ line_h * TEXTURE_SIZE;
 		start.y = 0;
 	}
 	end.y = line_h / 2 + data()->window.height / 2 + data()->player.dz;
 	if (end.y >= data()->window.height)
 		end.y = data()->window.height - 1;
-	walls_draw_vertical_line(img, start, end, index);
+	walls_draw_vertical_line(img, start, end, ray);
 }
 
 void	walls_draw_to_image(void)
@@ -84,12 +84,10 @@ void	walls_draw_to_image(void)
 			data()->window.height, img);
 	if (img->ptr == NULL)
 		exit_end_program_error(MLX_IMAGE);
-	if (FLOOR_TEXTURE_ENABLED && !FLOOR_TEXTURE_VERTICAL)
-		ft_floor(img);
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{
-		static_walls_draw_wallsegment(i, img);
+		static_walls_draw_wallsegment(&data()->rays[i], img);
 		i++;
 	}
 }
