@@ -48,12 +48,12 @@ static int	static_keyboard_key_press_hook(int keycode, t_controls *controls)
 	if (DOORS_ENABLED && keycode == E_KEY)
 	{
 		data()->player.status = HITTING;
-		walls_close_door();
+		doors_close_door();
 	}
 	if (DOORS_ENABLED && keycode == Q_KEY)
 	{
 		data()->player.status = HITTING;
-		walls_open_door();
+		doors_open_door();
 	}
 	return (EXIT_SUCCESS);
 }

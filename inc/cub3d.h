@@ -419,18 +419,17 @@ t_ray			rays_calculate_horizontal(float angle);
 void			rays_iterate_grid(t_ray *ray);
 void			minimap_draw_to_image(void);
 void			walls_draw_to_image(void);
-void			walls_draw_vertical_line(t_img *img, t_point start,
-					t_point end, t_ray *ray);
-void			walls_open_door(void);
-void			walls_close_door(void);
+void			walls_draw_vertical_line(t_data *data, t_img *img, t_ray *ray);
+void			doors_open_door(void);
+void			doors_close_door(void);
 void			player_update_position(t_controls *keys);
 void			player_update_z_position(void);
 int				exit_end_program_error(int errorcode);
 int				exit_end_program_success(void);
 void			free_all(void);
-void			get_sky_color(t_img *img, t_point start, t_ray *ray, int y);
-void			get_ceiling_color(t_img *img, t_point start, t_ray *ray, int y);
-void			get_floor_color(t_img *img, t_point start, t_ray *ray, int y);
+void			get_sky_color(t_img *img, t_ray *ray, int y);
+void			get_color(t_img *img, t_ray *ray, int y);
+void			get_floor_color(t_img *img, t_ray *ray, int y);
 //utils
 void			my_pixel_put(t_img *img, int x, int y, int color);
 void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);

@@ -11,6 +11,7 @@ HEADER_DIR = ./inc/
 SRCS :=	main.c \
 		controls_keyboard.c \
 		controls_mouse.c \
+		doors.c \
 		exit.c \
 		floor.c \
 		frame.c \

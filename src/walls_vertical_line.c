@@ -30,8 +30,7 @@ static int	static_walls_determine_tx(int index)
 	return (tx);
 }
 
-static void	static_get_walls_color(t_img *img, t_point start,
-											t_ray *ray, int y)
+static void	static_get_walls_color(t_img *img, t_ray *ray, int y)
 {
 	int		color;
 	int		tx;
@@ -41,59 +40,54 @@ static void	static_get_walls_color(t_img *img, t_point start,
 	image = static_walls_get_texture_image_index(ray->index);
 	tx = static_walls_determine_tx(ray->index);
 	ty = ray->tyoffset
-		+ (TEXTURE_SIZE / ray->line_h) * (y - start.y);
+		+ (TEXTURE_SIZE / ray->line_h) * (y - ray->start_y);
 	if (is_inside_image_limits(tx, ty, img))
 	{
 		color = *(unsigned int *)(data()->imgs[image].addr
 				+ (unsigned int)((int)ty * data()->imgs[image].line_len
 					+ tx * (data()->imgs[image].bits_per_pixel / 8))) + ALPHA;
-		my_pixel_put(img, start.x, y, color);
+		my_pixel_put(img, ray->screen_x, y, color);
 	}
 }
 
-static void	static_walls_draw_single_vertical_line(t_img *img, t_point start,
-													t_point end, t_ray *ray)
+static void	static_walls_draw_single_vertical_line(t_data *data, t_img *img, t_ray *ray)
 {
 	int		y;
 	int		window_h;
 
-	window_h = data()->window.height;
+	window_h = data->window.height;
 	y = 0;
 	if (HAS_ALPHA)
-		y = start.y;
+		y = ray->start_y;
 	while (y < window_h)
 	{
-		if (y < start.y)
-			get_ceiling_color(img, start, ray, y);
-		else if (y < end.y)
-			static_get_walls_color(img, start, ray, y);
+		if (y < ray->start_y)
+			get_color(img, ray, y);
+		else if (y < ray->end_y)
+			static_get_walls_color(img, ray, y);
 		else if (y < window_h)
 		{
 			if (HAS_ALPHA)
 				return ;
-			get_floor_color(img, start, ray, y);
+			get_floor_color(img, ray, y);
 		}
 		y++;
 	}
 }
 
-void	walls_draw_vertical_line(t_img *img, t_point start, t_point end,
-								t_ray *ray)
+void	walls_draw_vertical_line(t_data *data, t_img *img, t_ray *ray)
 {
 	int		line_i;
-	t_data	*datas;
 
-	datas = data();
 	line_i = 0;
-	while (line_i < datas->line_w)
+	while (line_i < data->line_w)
 	{
-		start.x = datas->line_w * ray->index + line_i;
-		if (start.x < 0)
-			start.x = 0;
-		if (start.x > datas->window.width - 1)
-			start.x = datas->window.width - 1;
-		end.x = start.x;
-		static_walls_draw_single_vertical_line(img, start, end, ray);
+		ray->screen_x = data->line_w * ray->index + line_i;
+		if (ray->screen_x < 0)
+			ray->screen_x = 0;
+		if (ray->screen_x > data->window.width - 1)
+			ray->screen_x = data->window.width - 1;
+		static_walls_draw_single_vertical_line(data, img, ray);
 		line_i++;
 	}
 }

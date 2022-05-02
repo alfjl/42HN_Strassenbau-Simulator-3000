@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	get_sky_color(t_img *img, t_point start, t_ray *ray, int y)
+void	get_sky_color(t_img *img, t_ray *ray, int y)
 {
 	int	color;
 	int	tx;
@@ -15,7 +15,7 @@ void	get_sky_color(t_img *img, t_point start, t_ray *ray, int y)
 		color = *(unsigned int *)(data()->imgs[image].addr
 				+ (unsigned int)((int)ty * data()->imgs[image].line_len
 					+ tx * (data()->imgs[image].bits_per_pixel / 8))) + ALPHA;
-		my_pixel_put(img, start.x, y, color);
+		my_pixel_put(img, ray->screen_x, y, color);
 	}
 }
 
@@ -34,14 +34,12 @@ static int	static_get_texture_value(float player_value,
 	return ((current_floor_value - (int)current_floor_value) * TEXTURE_SIZE);
 }
 
-static	void	static_test(int image, t_point start, t_ray *ray, int y)
+static	void	static_test(t_img *img, int image, t_ray *ray, int y)
 {
 	int	tx;
 	int	ty;
 	int	color;
-	t_img *img;
 
-	img = &data()->imgs[WALLS_IMG];
 	tx = static_get_texture_value(data()->player.x,
 			ray->x, y, ray->dist);
 	ty = static_get_texture_value(data()->player.y,
@@ -51,31 +49,31 @@ static	void	static_test(int image, t_point start, t_ray *ray, int y)
 		color = *(unsigned int *)(data()->imgs[image].addr
 				+ (unsigned int)((int)ty * data()->imgs[image].line_len
 					+ tx * (data()->imgs[image].bits_per_pixel / 8))) + ALPHA;
-		my_pixel_put(img, start.x, y, color);
+		my_pixel_put(img, ray->screen_x, y, color);
 	}
 }
 
-void	get_ceiling_color(t_img *img, t_point start, t_ray *ray, int y)
+void	get_color(t_img *img, t_ray *ray, int y)
 {
 	if (SKY_ENABLED)
 	{
-		get_sky_color(img, start, ray, y);
+		get_sky_color(img, ray, y);
 		return ;
 	}
 	else if (!CEILING_TEXTURE_ENABLED)
 	{
-		my_pixel_put(img, start.x, y, data()->map.ceiling.rgb);
+		my_pixel_put(img, ray->screen_x, y, data()->map.ceiling.rgb);
 		return ;
 	}
-	static_test(CEILING_IMG, start, ray, y);
+	static_test(img, CEILING_IMG, ray, y);
 }
 
-void	get_floor_color(t_img *img, t_point start, t_ray *ray, int y)
+void	get_floor_color(t_img *img, t_ray *ray, int y)
 {
 	if (!FLOOR_TEXTURE_ENABLED)
 	{
-		my_pixel_put(img, start.x, y, data()->map.floor.rgb);
+		my_pixel_put(img, ray->screen_x, y, data()->map.floor.rgb);
 		return ;
 	}
-	static_test(FLOOR_IMG, start, ray, y);
+	static_test(img, FLOOR_IMG, ray, y);
 }

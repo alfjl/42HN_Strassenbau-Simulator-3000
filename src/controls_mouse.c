@@ -7,12 +7,12 @@ static int	static_mouse_click_hook(int button, int x, int y)
 	if (DOORS_ENABLED && button == LEFT_BUTTON)
 	{
 		data()->player.status = HITTING;
-		walls_open_door();
+		doors_open_door();
 	}
 	if (DOORS_ENABLED && button == RIGHT_BUTTON)
 	{
 		data()->player.status = HITTING;
-		walls_close_door();
+		doors_close_door();
 	}
 	return (EXIT_SUCCESS);
 }
