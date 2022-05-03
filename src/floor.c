@@ -4,12 +4,10 @@ int	get_sky_color(t_ray *ray, int y)
 {
 	int	tx;
 	int	ty;
-	int	image;
 
-	image = SKY_IMG;
-	tx = ray->angle * (data()->imgs[image].width / (2 * M_PI));
-	ty = y + data()->imgs[image].height / 4 - data()->player.dz;
-	return (get_pixel_color(&data()->imgs[image], tx, ty));
+	tx = ray->angle * (data()->imgs[SKY_IMG].width / (2 * M_PI));
+	ty = y + data()->imgs[SKY_IMG].height / 4 - data()->player.dz;
+	return (get_pixel_color(&data()->imgs[SKY_IMG], tx, ty));
 }
 
 static int	static_get_texture_value(float player_value,

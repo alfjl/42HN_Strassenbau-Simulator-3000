@@ -12,9 +12,7 @@ static int	static_sprites_determine_color(t_img *img, int x, int y)
 	scale_y = img->height / (float)SPRITE_SIZE;
 	tx = x * scale_x;
 	ty = y * scale_y;
-	color = *(unsigned int *)(img->addr
-			+ (unsigned int)((int)ty * img->line_len
-				+ (int)tx * (img->bits_per_pixel / 8)));
+	color = get_pixel_color(img, tx, ty);
 	return (color);
 }
 

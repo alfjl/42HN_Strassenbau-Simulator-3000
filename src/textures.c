@@ -12,9 +12,7 @@ static void	static_textures_shade_image(t_img *img, float brightness)
 		x = 0;
 		while (x < img->width)
 		{
-			color = *(unsigned int *)(img->addr
-					+ (unsigned int)((int)y * img->line_len
-						+ x * (img->bits_per_pixel / 8)));
+			color = get_pixel_color(img, x, y);
 			color = argb_shade_color(color, brightness);
 			my_pixel_put(img, x, y, color);
 			x++;
@@ -35,9 +33,7 @@ static int	static_textures_determine_color(t_img *img, int x, int y)
 	scale_y = img->height / (float)TEXTURE_SIZE;
 	tx = x * scale_x;
 	ty = y * scale_y;
-	color = *(unsigned int *)(img->addr
-			+ (unsigned int)((int)ty * img->line_len
-				+ (int)tx * (img->bits_per_pixel / 8))) + ALPHA;
+	color = get_pixel_color(img, tx, ty);
 	return (color);
 }
 

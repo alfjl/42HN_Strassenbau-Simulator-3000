@@ -40,8 +40,6 @@ static int	static_get_wall_color(t_ray *ray, int y)
 	tx = static_walls_determine_tx(ray->index);
 	ty = ray->tyoffset
 		+ (TEXTURE_SIZE / ray->line_h) * (y - ray->start_y);
-	// if (ty < 0)
-	// 	ty = 0;
 	if (ty > data()->window.height - 1)
 		ty = data()->window.height - 1;
 	return (get_pixel_color(&data()->imgs[image], tx, ty));

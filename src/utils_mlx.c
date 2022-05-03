@@ -28,9 +28,7 @@ void	image_overlay(t_img *src, t_img *dst, int dst_x, int dst_y)
 		x = 0;
 		while (x < src->width)
 		{
-			color = *(unsigned int *)(src->addr
-					+ (unsigned int)((int)y * src->line_len
-						+ x * (src->bits_per_pixel / 8))) + ALPHA;
+			color = get_pixel_color(src, x, y);
 			if (color != (int)TRANSPARENT)
 				my_pixel_put(dst, dst_x + x, dst_y + y, color);
 			x++;
@@ -54,9 +52,7 @@ t_img	*image_clone(void *mlx, t_img *src, t_img *dst)
 		x = 0;
 		while (x < dst->width)
 		{
-			color = *(unsigned int *)(src->addr
-					+ (unsigned int)((int)y * src->line_len
-						+ x * (src->bits_per_pixel / 8)));
+			color = get_pixel_color(src, x, y);
 			my_pixel_put(dst, x, y, color);
 			x++;
 		}	

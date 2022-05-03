@@ -2,6 +2,7 @@
 
 static void	static_walls_draw_wallsegment(t_data *data, t_ray *ray, t_img *img)
 {
+	(void)img;
 	float	line_h;
 
 	line_h = ray->line_h;
@@ -16,7 +17,6 @@ static void	static_walls_draw_wallsegment(t_data *data, t_ray *ray, t_img *img)
 	ray->end_y = line_h / 2 + data->window.height / 2 + data->player.dz;
 	if (ray->end_y >= data->window.height)
 		ray->end_y = data->window.height - 1;
-	walls_draw_vertical_line(data, img, ray);
 }
 
 void	walls_draw_to_image(void)
@@ -35,6 +35,7 @@ void	walls_draw_to_image(void)
 	while (i < NUMBER_OF_RAYS)
 	{
 		static_walls_draw_wallsegment(datas, &datas->rays[i], img);
+		walls_draw_vertical_line(datas, img, &datas->rays[i]);
 		i++;
 	}
 }
