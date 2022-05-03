@@ -43,6 +43,8 @@ static int	static_minimap_determine_color(float map_y, float map_x)
 	{
 		if (map->grid[(int)(map_y - epsilon)][(int)(map_x - epsilon)] == WALL)
 			color = MINIMAP_WALL_COLOR;
+		else if (map->grid[(int)(map_y - epsilon)][(int)(map_x - epsilon)] == VOID) //fix
+			color = MINIMAP_BACKGROUND_COLOR;
 		else
 			color = TRANSPARENT;
 		if (!MINIMAP_GRID_ENABLED)

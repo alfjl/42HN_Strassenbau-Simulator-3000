@@ -1,8 +1,17 @@
 #ifndef CUB3D_H
 # define CUB3D_H
+/* ------------------------------- INCLUDES -------------------------------- */
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <stdbool.h>
+# include <errno.h>
+# include <fcntl.h>
+# include <limits.h>
+# include <math.h>
 # include "mlx.h"
 # include "libft.h"
-# include <math.h>
 
 //Texture paths
 # define TEXTURE_NORTH "./textures/semi_crafted_stone_wall.xpm"
@@ -72,6 +81,7 @@
 //Calculation constants
 # define EXTRA_EDGE 0.000001
 # define ONE_DEGREE_IN_RAD 0.0174533
+# define BUFFER_SIZE_CUB3D 20480
 
 typedef enum e_defines
 {
@@ -268,9 +278,64 @@ typedef enum e_errorcodes
 	MLX = 0,
 	MLX_WIN,
 	MLX_IMAGE,
+	ARGUMENT_NR,
+	WRONG_FILETYPE,
+	FILE_NOT_OPEN,
+	PROBLEM_READING_CONFIG,
+	PROBLEM_READING_TEXTURE,
+	WRONG_CONFIG_ARGS,
+	WRONG_RGB_VALUES,
+	INVALID_MAP,
 	SYSTEM,
 	ERRORS,
 }	t_errorcodes;
+
+typedef enum e_arguments
+{
+	NO,
+	SO,
+	WE,
+	EA,
+	CEILING,
+	FLOOR
+}	t_arguments;
+
+typedef struct s_temp_buffer
+{
+	char		buffer[BUFFER_SIZE_CUB3D];
+	int			read_head;
+	int			write_head;
+}			t_temp_buffer;
+
+typedef struct s_stringbuilder
+{
+	char			*buffer;
+	int				read_head;
+	int				write_head;
+}			t_stringbuilder;
+
+typedef struct s_reader
+{
+	char			*string;
+	char			*string_end;
+	char			*current;
+}			t_reader;
+
+typedef struct s_config_file
+{
+	bool			map_reached;
+	bool			player_position;
+	char			*buffer;
+	int				read_head;
+	int				write_head;
+	int				errorcode;
+	unsigned int	north;
+	unsigned int	south;
+	unsigned int	east;
+	unsigned int	west;
+	unsigned int	ceiling;
+	unsigned int	floor;
+}			t_config_file;
 
 typedef struct s_controls
 {
@@ -356,9 +421,9 @@ typedef struct s_point
 
 typedef struct s_color
 {
-	int				r;
-	int				g;
-	int				b;
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
 	unsigned int	rgb;
 }	t_color;
 
@@ -372,14 +437,17 @@ typedef struct s_textures
 
 typedef struct s_map
 {
+	bool				empty_line_flag;
 	char				**grid;
-	int					height;
-	int					width;
-	struct s_color		floor;
+	char				walls[2];
+	char				player_pos[5];
+	unsigned int		height;
+	unsigned int		width;
+	unsigned int		spaces;
 	struct s_color		ceiling;
+	struct s_color		floor;
 	struct s_textures	textures;
-	int					errorcode;
-}	t_map;
+}				t_map;
 
 typedef struct s_fps
 {
@@ -389,6 +457,7 @@ typedef struct s_fps
 
 typedef struct s_data
 {
+	t_config_file	config_file;
 	char			*filepath; //remove
 	struct s_frame	screen;
 	struct s_map	map;
@@ -459,4 +528,117 @@ int				my_abs(int a, int b);
 void			*mlx_new_image_alpha(void *mlx_ptr, int width, int height);
 //fps
 void			fps_to_window_buffer(void); //remove
+
+
+/* ------------------------------- parsing.c ------------------------------- */
+t_data				*data(void);
+int					exit_program(int errorcode);
+
+/* ------------------------------- utils_1.c --------------------------------- */
+// unsigned int		ft_strlen(const char *str);
+// void				ft_bzero(void *s, size_t n);
+// void				*ft_calloc(size_t count, size_t size);
+// bool				ft_isdigit(int c);
+unsigned long long	ft_atoull(const char *str);
+
+/* ------------------------------- utils_2.c ------------------------------- */
+void				*ft_memset(void *b, int c, size_t len);
+char				*read_fd(char *path);
+
+/* ------------------------------- data.c ---------------------------------- */
+void				data_init(void);
+
+/* ------------------------------- data_utils_1.c ---------------------------- */
+void				config_file_destroy(t_config_file *config_file);
+void				map_destroy(t_map *map);
+void				player_set_values(t_player *player, t_map *map,
+										int x, int y);
+
+/* ------------------------------- data_utils_2.c ---------------------------- */
+void				color_init(t_color *color);
+void				textures_init(t_textures *textures);
+void				textures_destroy(t_textures *textures);
+
+/* ------------------------------- stringbuilder.c ------------------------- */
+void				stringbuilder_init(t_stringbuilder *builder);
+void				stringbuilder_destroy(t_stringbuilder *builder);
+bool				stringbuilder_append_char(t_stringbuilder *builder,
+												const char c);
+bool				stringbuilder_trim_buffer(t_stringbuilder *builder);
+
+/* ------------------------------- stringbuilder_2.c ----------------------- */
+char				*stringbuilder_return_buffer(t_stringbuilder *builder);
+int					stringbuilder_return_read_head(t_stringbuilder *builder);
+int					stringbuilder_return_write_head(t_stringbuilder *builder);
+char				*stringbuilder_trim_and_return_buffer(t_stringbuilder *builder);
+
+/* ------------------------------- reader.c -------------------------------- */
+void				reader_init(t_reader *reader, char *string);
+char				*reader_get_current(t_reader *reader);
+void				reader_increment(t_reader *reader);
+void				reader_decrement(t_reader *reader);
+void				reader_increment_stepsize(t_reader *reader,
+												unsigned int steps);
+void				reader_decrement_stepsize(t_reader *reader,
+												unsigned int steps);
+char				reader_peek_char(t_reader *reader);
+char				reader_read_char(t_reader *reader);
+bool				reader_peek_string(t_reader *reader, const char *string);
+unsigned int		reader_skip_whitespace(t_reader *reader);
+bool				reader_detect_empty_line(t_reader *reader);
+char				*reader_read_to_newline(t_reader *reader);
+void				reader_skip_newline(t_reader *reader);
+bool				reader_has_content(t_reader *reader);
+bool				reader_read_unsigned_integer(t_reader *reader,
+													unsigned int *target);
+
+/* ------------------------------- temp_buffer.c --------------------------- */
+void				temp_buffer_init(t_temp_buffer *temp);
+
+/* ------------------------------- config.c -------------------------------- */
+void				config_parse(t_config_file *config, t_map *map);
+
+/* ------------------------------- config_header_parse.c ------------------- */
+unsigned int		config_header_parse(t_config_file *config, t_map *map,
+											t_reader *reader);
+
+/* ------------------------------- config_header_validate.c ---------------- */
+void				config_header_validate(t_config_file *config, t_map *map,
+												int *errorcode);
+
+/* ------------------------------- config_map_parse_1.c -------------------- */
+void				config_map_parse(t_config_file *config, t_map *map,
+										t_reader *reader, unsigned int spaces);
+
+/* ------------------------------- config_map_parse_2.c -------------------- */
+void				config_map_parse_set_null(t_map *map, unsigned int o,
+												unsigned int *p);
+void				config_map_parse_set_char(t_map *map, unsigned int o,
+												unsigned int *p, char c);
+void				config_map_parse_set_width(t_map *map, unsigned int width);
+
+/* ------------------------------- config_map_validate_1.c ----------------- */
+void				config_map_validate(t_config_file *config, t_map *map,
+											int *errorcode);
+
+/* ------------------------------- config_map_validate_2.c ----------------- */
+bool				config_map_validate_char(t_config_file *config, t_map *map,
+								unsigned int x, unsigned int y);
+
+/* ------------------------------- config_map_validate_3.c ----------------- */
+bool				config_map_validate_char_walls(t_map *map,
+														char potential_wall);
+
+
+/* ------------------------------- validation_utils.c ---------------------- */
+bool				validation_typecheck_cub(const char *path);
+bool				validation_typecheck_xpm(const char *path);
+bool				validation_check_boolian(bool boolian, int *errorcode,
+											int code);
+unsigned int		calculate_rgb_value(unsigned int *rgb, unsigned int r,
+											unsigned int g, unsigned int b);
+
+/* ------------------------------- player.c -------------------------------- */
+float   			player_calculate_angle(char direction);
+
 #endif

@@ -1,3 +1,10 @@
+  NO ./textures/semi_crafted_stone_wall.xpm
+SO ./textures/league_wall.xpm
+WE ./textures/dirt_stone.xpm
+EA ./textures/stone_wall.xpm
+
+F 0,0,0
+C 0	      ,     255, 0    
 111111
 100101
 101001

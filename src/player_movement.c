@@ -69,7 +69,7 @@ static void	static_player_update(float *x, float dx, float *y, float dy)
 	new_y = *y + dy;
 	if (!static_player_is_wall(*y, (*x + dx)))
 	{
-		if (new_x >= 0 && new_x < map->width)
+		if (new_x >= 0 && new_x < map->width) //check for void
 			*x = new_x;
 	}
 	if (!static_player_is_wall((*y + dy), *x))

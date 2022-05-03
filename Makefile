@@ -35,7 +35,29 @@ SRCS :=	main.c \
 		utils2.c \
 		walls_vertical_line.c \
 		walls.c \
-		fps_bonus.c #remove
+		fps_bonus.c \
+		utils_1.c \
+		utils_2.c \
+		data.c \
+		data_utils_1.c \
+		data_utils_2.c \
+		stringbuilder_1.c \
+		stringbuilder_2.c \
+		reader_1.c \
+		reader_2.c \
+		reader_3.c \
+		reader_4.c \
+		temp_buffer.c \
+		config.c \
+		config_header_parse.c \
+		config_header_validate.c \
+		config_map_parse_1.c \
+		config_map_parse_2.c \
+		config_map_validate_1.c \
+		config_map_validate_2.c \
+		config_map_validate_3.c \
+		validation_utils.c \
+		player.c
 OBJS := $(patsubst %.c,$(OBJ_DIR)%.o,$(SRCS))
 HEADERS = $(wildcard $(HEADER_DIR)*.h)
 PLATFORM := $(shell uname -s)

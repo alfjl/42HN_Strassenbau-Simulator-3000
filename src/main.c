@@ -62,49 +62,79 @@ static void	static_data_struct_initialize(void)
 	data()->line_w = data()->window.width / (NUMBER_OF_RAYS - 1);
 }
 
-static void	static_get_map_file_data(void)
-{
-	///////map
-	data()->map.grid = data()->map_old; //workaround to get map into new struct
-	data()->map.height = data()->map.height; //placeholder
-	data()->map.width = data()->map.width; //placeholder
-	//colors
-	data()->map.ceiling.rgb = 0x00088FF; //placeholder
-	data()->map.floor.rgb = BROWN; //placeholder
-	//textures
-	// data()->map.textures.south = "./textures/stone.xpm";
-	// data()->map.textures.north = "./textures/moss.xpm";
-	// data()->map.textures.east = "./textures/magma.xpm";
-	data()->map.textures.north = TEXTURE_NORTH; //placeholder
-	data()->map.textures.south = TEXTURE_SOUTH; //placeholder
-	data()->map.textures.east = TEXTURE_EAST; //placeholder
-	data()->map.textures.west = TEXTURE_WEST; //placeholder
-	///////player
-	data()->player.status = IDLE;
-	data()->player.step_size = MOVE_STEP;
-	data()->player.turn_speed = TURN_STEP;
-	data()->player.x = 1.5; //placeholder
-	data()->player.y = 1.5; //placeholder
-	data()->player.dz = 0;
-	data()->player.is_jumping = false;
-	data()->player.is_crouching = false;
-	data()->player.angle = M_PI / 2; //placeholder
-	calculate_pos_delta();
-}
+// static void	static_get_map_file_data(void)
+// {
+// 	///////map
+// 	data()->map.grid = data()->map_old; //workaround to get map into new struct
+// 	data()->map.height = data()->map.height; //placeholder
+// 	data()->map.width = data()->map.width; //placeholder
+// 	//colors
+// 	data()->map.ceiling.rgb = 0x00088FF; //placeholder
+// 	data()->map.floor.rgb = BROWN; //placeholder
+// 	//textures
+// 	// data()->map.textures.south = "./textures/stone.xpm";
+// 	// data()->map.textures.north = "./textures/moss.xpm";
+// 	// data()->map.textures.east = "./textures/magma.xpm";
+// 	data()->map.textures.north = TEXTURE_NORTH; //placeholder
+// 	data()->map.textures.south = TEXTURE_SOUTH; //placeholder
+// 	data()->map.textures.east = TEXTURE_EAST; //placeholder
+// 	data()->map.textures.west = TEXTURE_WEST; //placeholder
+// 	///////player
+// 	data()->player.status = IDLE;
+// 	data()->player.step_size = MOVE_STEP;
+// 	data()->player.turn_speed = TURN_STEP;
+// 	data()->player.x = 1.5; //placeholder
+// 	data()->player.y = 1.5; //placeholder
+// 	data()->player.dz = 0;
+// 	data()->player.is_jumping = false;
+// 	data()->player.is_crouching = false;
+// 	data()->player.angle = M_PI / 2; //placeholder
+// 	calculate_pos_delta();
+// }
 
-int	main(int argc, char **argv)
+int	main(int argc, char *argv[])
 {
-	data()->mlx = NULL;
-	data()->win = NULL;
+	t_config_file	*config;
+	t_map			*map;
+
+	data_init();
 	static_images_initialize();
 	static_sprites_initialize();
 	if (argc != 2)
-	{
-		ft_printf("ERROR\n");
-		return (EXIT_FAILURE);
-	}
-	map_read(argv[1]);
-	static_get_map_file_data();
+		exit_end_program_error(ARGUMENT_NR);
+	if (validation_typecheck_cub(argv[1]) == false)
+		exit_end_program_error(WRONG_FILETYPE);
+	config = &data()->config_file;
+	map = &data()->map;
+	config->buffer = read_fd(argv[1]);
+	if (config->buffer == NULL)
+		exit_end_program_error(PROBLEM_READING_CONFIG);
+	config_parse(config, map);
+	// TPO --------------------------------------------------------------------
+	printf("############## BEGINNING of parsing test ################\n");
+	// unsigned int i = 0;
+	// while (i < map->height)
+	// {
+	// 	unsigned int j = 0;
+	// 	while (j < map->width - 1)
+	// 	{
+	// 		write(1, &map->grid[i][j], 1);
+	// 		j++;
+	// 	}
+	// 	write(1, "\n", 1);
+	// 	i++;
+	// }
+	printf("ceiling rgb = %d\n", map->ceiling.rgb);
+	printf("floor rgb = %d\n", map->floor.rgb);
+	printf("ceiling rgb = %X\n", map->ceiling.rgb);
+	printf("floor rgb = %X\n", map->floor.rgb);
+	printf("map height = %d\n", map->height);
+	printf("map width = %d\n", map->width);
+	//printf("errorcode = %d\n", config->errorcode);
+	printf("############## END of parsing test ###################\n");
+	// TPO -------------------------------------------------------------------
+	if (config->errorcode != 0)
+		exit_end_program_error(config->errorcode);
 	data()->mlx = mlx_init();
 	if (data()->mlx == NULL)
 		exit_end_program_error(MLX);
@@ -114,5 +144,6 @@ int	main(int argc, char **argv)
 	if (SPRITES_ENABLED)
 		sprites_load();
 	mlx();
-	return (EXIT_SUCCESS);
+	free_all();
+	return (0);
 }

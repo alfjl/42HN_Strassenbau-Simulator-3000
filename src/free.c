@@ -41,6 +41,8 @@ void	free_all(void)
 	void	*mlx;
 	void	*win;
 
+	config_file_destroy(&data()->config_file);
+	map_destroy(&data()->map);
 	mlx = data()->mlx;
 	if (mlx == NULL)
 		return ;
