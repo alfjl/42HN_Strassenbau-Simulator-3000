@@ -32,7 +32,7 @@
 # define JUMP_ENABLED 1
 # define FLOOR_TEXTURE_ENABLED 1
 # define CEILING_TEXTURE_ENABLED 1
-# define SKY_ENABLED 0
+# define SKY_ENABLED 1
 //mlx
 # define HAS_ALPHA 0
 //Parameters
@@ -427,9 +427,9 @@ void			player_update_z_position(void);
 int				exit_end_program_error(int errorcode);
 int				exit_end_program_success(void);
 void			free_all(void);
-void			get_sky_color(t_img *img, t_ray *ray, int y);
-void			get_color(t_img *img, t_ray *ray, int y);
-void			get_floor_color(t_img *img, t_ray *ray, int y);
+int				get_sky_color(t_img *img, t_ray *ray, int y);
+int				get_ceiling_color(t_img *img, t_ray *ray, int y);
+int				get_floor_color(t_img *img, t_ray *ray, int y);
 //utils
 void			my_pixel_put(t_img *img, int x, int y, int color);
 void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);

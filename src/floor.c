@@ -1,13 +1,15 @@
 #include "cub3d.h"
 
-void	get_sky_color(t_img *img, t_ray *ray, int y)
+int	get_sky_color(t_img *img, t_ray *ray, int y)
 {
 	int	color;
 	int	tx;
 	int	ty;
 	int	image;
 
+	(void)img;
 	image = SKY_IMG;
+	color = YELLOW;
 	tx = ray->angle * (data()->imgs[image].width / (2 * M_PI));
 	ty = y + data()->imgs[image].height / 4 - data()->player.dz;
 	if (is_inside_image_limits(tx, ty, &data()->imgs[image]))
@@ -15,8 +17,9 @@ void	get_sky_color(t_img *img, t_ray *ray, int y)
 		color = *(unsigned int *)(data()->imgs[image].addr
 				+ (unsigned int)((int)ty * data()->imgs[image].line_len
 					+ tx * (data()->imgs[image].bits_per_pixel / 8))) + ALPHA;
-		my_pixel_put(img, ray->screen_x, y, color);
+		// my_pixel_put(img, ray->screen_x, y, color);
 	}
+	return (color);
 }
 
 static int	static_get_texture_value(float player_value,
@@ -34,12 +37,13 @@ static int	static_get_texture_value(float player_value,
 	return ((current_floor_value - (int)current_floor_value) * TEXTURE_SIZE);
 }
 
-static	void	static_test(t_img *img, int image, t_ray *ray, int y)
+static int	static_get_texture_color(t_img *img, int image, t_ray *ray, int y)
 {
 	int	tx;
 	int	ty;
 	int	color;
 
+	color = MAGENTA;
 	tx = static_get_texture_value(data()->player.x,
 			ray->x, y, ray->dist);
 	ty = static_get_texture_value(data()->player.y,
@@ -49,31 +53,23 @@ static	void	static_test(t_img *img, int image, t_ray *ray, int y)
 		color = *(unsigned int *)(data()->imgs[image].addr
 				+ (unsigned int)((int)ty * data()->imgs[image].line_len
 					+ tx * (data()->imgs[image].bits_per_pixel / 8))) + ALPHA;
-		my_pixel_put(img, ray->screen_x, y, color);
+		// my_pixel_put(img, ray->screen_x, y, color);
 	}
+	return (color);
 }
 
-void	get_color(t_img *img, t_ray *ray, int y)
+int	get_ceiling_color(t_img *img, t_ray *ray, int y)
 {
 	if (SKY_ENABLED)
-	{
-		get_sky_color(img, ray, y);
-		return ;
-	}
+		return (get_sky_color(img, ray, y));
 	else if (!CEILING_TEXTURE_ENABLED)
-	{
-		my_pixel_put(img, ray->screen_x, y, data()->map.ceiling.rgb);
-		return ;
-	}
-	static_test(img, CEILING_IMG, ray, y);
+		return (data()->map.ceiling.rgb);
+	return (static_get_texture_color(img, CEILING_IMG, ray, y));
 }
 
-void	get_floor_color(t_img *img, t_ray *ray, int y)
+int	get_floor_color(t_img *img, t_ray *ray, int y)
 {
 	if (!FLOOR_TEXTURE_ENABLED)
-	{
-		my_pixel_put(img, ray->screen_x, y, data()->map.floor.rgb);
-		return ;
-	}
-	static_test(img, FLOOR_IMG, ray, y);
+		return (data()->map.floor.rgb);
+	return (static_get_texture_color(img, FLOOR_IMG, ray, y));
 }

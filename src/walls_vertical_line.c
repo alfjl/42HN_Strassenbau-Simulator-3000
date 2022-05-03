@@ -30,13 +30,14 @@ static int	static_walls_determine_tx(int index)
 	return (tx);
 }
 
-static void	static_get_walls_color(t_img *img, t_ray *ray, int y)
+static int	static_get_walls_color(t_img *img, t_ray *ray, int y)
 {
 	int		color;
 	int		tx;
 	float	ty;
 	int		image;
 
+	color = GREEN;
 	image = static_walls_get_texture_image_index(ray->index);
 	tx = static_walls_determine_tx(ray->index);
 	ty = ray->tyoffset
@@ -46,14 +47,16 @@ static void	static_get_walls_color(t_img *img, t_ray *ray, int y)
 		color = *(unsigned int *)(data()->imgs[image].addr
 				+ (unsigned int)((int)ty * data()->imgs[image].line_len
 					+ tx * (data()->imgs[image].bits_per_pixel / 8))) + ALPHA;
-		my_pixel_put(img, ray->screen_x, y, color);
+		// my_pixel_put(img, ray->screen_x, y, color);
 	}
+	return (color);
 }
 
 static void	static_walls_draw_single_vertical_line(t_data *data, t_img *img, t_ray *ray)
 {
 	int		y;
 	int		window_h;
+	int		color;
 
 	window_h = data->window.height;
 	y = 0;
@@ -62,15 +65,16 @@ static void	static_walls_draw_single_vertical_line(t_data *data, t_img *img, t_r
 	while (y < window_h)
 	{
 		if (y < ray->start_y)
-			get_color(img, ray, y);
+			color = get_ceiling_color(img, ray, y);
 		else if (y < ray->end_y)
-			static_get_walls_color(img, ray, y);
+			color = static_get_walls_color(img, ray, y);
 		else if (y < window_h)
 		{
 			if (HAS_ALPHA)
 				return ;
-			get_floor_color(img, ray, y);
+			color = get_floor_color(img, ray, y);
 		}
+		my_pixel_put(img, ray->screen_x, y, color);
 		y++;
 	}
 }
