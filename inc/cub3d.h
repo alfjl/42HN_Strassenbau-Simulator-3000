@@ -6,7 +6,7 @@
 
 //Texture paths
 # define TEXTURE_NORTH "./textures/semi_crafted_stone_wall.xpm"
-# define TEXTURE_SOUTH "./textures/rock.xpm"
+# define TEXTURE_SOUTH "./textures/league_wall.xpm"
 # define TEXTURE_EAST "./textures/dirt_stone.xpm"
 # define TEXTURE_WEST "./textures/stone_wall.xpm"
 # define TEXTURE_FLOOR "./textures/dirt_02.xpm"

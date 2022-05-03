@@ -48,6 +48,7 @@ static int	static_get_texture_color(t_img *img, int image, t_ray *ray, int y)
 			ray->x, y, ray->dist);
 	ty = static_get_texture_value(data()->player.y,
 			ray->y, y, ray->dist);
+	// printf("tx: %d, ty: %d\n", tx, ty);
 	if (is_inside_image_limits(tx, ty, img))
 	{
 		color = *(unsigned int *)(data()->imgs[image].addr

@@ -33,7 +33,7 @@ void	rays_iterate_grid(t_ray *ray)
 			ray->mini_x = ray->x;
 			ray->mini_y = ray->y;
 		}
-		if (static_rays_hits_wall(ray, map))
+		if (static_rays_hits_wall(ray, map) || (ray->x <= 0 || ray->y <= 0 || ray->x >= data()->map.width || ray->y >= data()->map.height))
 			break ;
 		else
 		{
