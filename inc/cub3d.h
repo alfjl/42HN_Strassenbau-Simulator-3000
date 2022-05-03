@@ -31,7 +31,7 @@
 # define CROUCH_ENABLED 1
 # define JUMP_ENABLED 1
 # define FLOOR_TEXTURE_ENABLED 1
-# define CEILING_TEXTURE_ENABLED 1
+# define CEILING_TEXTURE_ENABLED 0
 # define SKY_ENABLED 1
 //mlx
 # define HAS_ALPHA 0
@@ -77,7 +77,7 @@ typedef enum e_defines
 {
 	WINDOW_WIDTH = (2 * WINDOW_HEIGHT),
 	DEPTH_OF_FIELD = (2 * WINDOW_HEIGHT),
-	CROUCH_DELTA = -(WINDOW_HEIGHT / 4),
+	CROUCH_DELTA = - (WINDOW_HEIGHT / 4),
 	JUMP_DELTA = (WINDOW_HEIGHT / 3),
 	GRAVITY = JUMP_DELTA / 8,
 }	t_defines;
@@ -428,15 +428,16 @@ void			player_update_z_position(void);
 int				exit_end_program_error(int errorcode);
 int				exit_end_program_success(void);
 void			free_all(void);
-int				get_sky_color(t_img *img, t_ray *ray, int y);
-int				get_ceiling_color(t_img *img, t_ray *ray, int y);
-int				get_floor_color(t_img *img, t_ray *ray, int y);
+int				get_sky_color(t_ray *ray, int y);
+int				get_ceiling_color(t_ray *ray, int y);
+int				get_floor_color(t_ray *ray, int y);
 //utils
 void			my_pixel_put(t_img *img, int x, int y, int color);
 void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
 unsigned int	rgba_create(int r, int g, int b, int a);
 unsigned int	argb_create(int r, int g, int b, int a);
 unsigned int	argb_shade_color(int color, float brightness);
+
 t_data			*data(void);
 // unsigned 	int	color_convert(long color);
 float			radian_limits(float angle);
@@ -451,6 +452,7 @@ bool			is_inside_image_limits(int x, int y, t_img *img);
 void			image_fill(t_img *img, int color);
 t_img			*image_clone(void *mlx, t_img *src, t_img *dst);
 void			image_overlay(t_img *src, t_img *dst, int dst_x, int dst_y);
+int				get_pixel_color(t_img *img, int x, int y);
 void			calculate_pos_delta(void);
 double			pythagoras_hypotenuse(double a, double b);
 int				my_abs(int a, int b);

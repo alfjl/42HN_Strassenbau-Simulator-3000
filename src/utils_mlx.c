@@ -1,5 +1,19 @@
 #include "cub3d.h"
 
+int		get_pixel_color(t_img *img, int x, int y)
+{
+	int	color;
+
+	color = BLACK;
+	if (is_inside_image_limits(x, y, img))
+	{
+		color = *(unsigned int *)(img->addr
+				+ (unsigned int)((int)y * img->line_len
+					+ x * (img->bits_per_pixel / 8))) + ALPHA;
+	}
+	return (color);
+}
+
 void	image_overlay(t_img *src, t_img *dst, int dst_x, int dst_y)
 {
 	int		x;

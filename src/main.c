@@ -69,7 +69,7 @@ static void	static_get_map_file_data(void)
 	data()->map.height = data()->map.height; //placeholder
 	data()->map.width = data()->map.width; //placeholder
 	//colors
-	data()->map.ceiling.rgb = CYAN; //placeholder
+	data()->map.ceiling.rgb = 0x00088FF; //placeholder
 	data()->map.floor.rgb = BROWN; //placeholder
 	//textures
 	// data()->map.textures.south = "./textures/stone.xpm";

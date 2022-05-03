@@ -23,7 +23,7 @@ t_ray	rays_calculate_vertical(float angle)
 	t_ray	ray;
 	float	ntan;
 
-	ray.is_infinite = false;
+	ray.is_infinite = true;
 	ray.angle = angle;
 	ntan = -tan(ray.angle);
 	if (ray.angle > M_PI_2 && ray.angle < (3 * M_PI_2))
