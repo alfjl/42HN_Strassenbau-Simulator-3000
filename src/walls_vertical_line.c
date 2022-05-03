@@ -42,6 +42,10 @@ static int	static_get_walls_color(t_img *img, t_ray *ray, int y)
 	tx = static_walls_determine_tx(ray->index);
 	ty = ray->tyoffset
 		+ (TEXTURE_SIZE / ray->line_h) * (y - ray->start_y);
+	// if (ty < 0)
+	// 	ty = 0;
+	if (ty > data()->window.height - 1)
+		ty = data()->window.height - 1;
 	if (is_inside_image_limits(tx, ty, img))
 	{
 		color = *(unsigned int *)(data()->imgs[image].addr
@@ -49,6 +53,8 @@ static int	static_get_walls_color(t_img *img, t_ray *ray, int y)
 					+ tx * (data()->imgs[image].bits_per_pixel / 8))) + ALPHA;
 		// my_pixel_put(img, ray->screen_x, y, color);
 	}
+	if (color == GREEN)
+		printf("tx: %d, ty: %f\n", tx, ty);
 	return (color);
 }
 
@@ -66,7 +72,7 @@ static void	static_walls_draw_single_vertical_line(t_data *data, t_img *img, t_r
 	{
 		if (y < ray->start_y)
 			color = get_ceiling_color(img, ray, y);
-		else if (y < ray->end_y)
+		else if (y <= ray->end_y)
 			color = static_get_walls_color(img, ray, y);
 		else if (y < window_h)
 		{
