@@ -73,7 +73,12 @@ static void	static_walls_draw_single_vertical_line(t_data *data, t_img *img, t_r
 		if (y < ray->start_y)
 			color = get_ceiling_color(img, ray, y);
 		else if (y <= ray->end_y)
-			color = static_get_walls_color(img, ray, y);
+		{
+			if (ray->is_infinite)
+				color = get_ceiling_color(img, ray, y);
+			else
+				color = static_get_walls_color(img, ray, y);
+		}
 		else if (y < window_h)
 		{
 			if (HAS_ALPHA)

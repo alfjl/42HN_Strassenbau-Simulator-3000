@@ -33,8 +33,13 @@ void	rays_iterate_grid(t_ray *ray)
 			ray->mini_x = ray->x;
 			ray->mini_y = ray->y;
 		}
-		if (static_rays_hits_wall(ray, map) || (ray->x <= 0 || ray->y <= 0 || ray->x >= data()->map.width || ray->y >= data()->map.height))
+		if (static_rays_hits_wall(ray, map))
 			break ;
+		else if (ray->x <= 0 || ray->y <= 0 || ray->x >= data()->map.width || ray->y >= data()->map.height)
+		{
+			ray->is_infinite = true;
+			break ;
+		}
 		else
 		{
 			ray->x += ray->dx;
@@ -67,6 +72,7 @@ t_ray	rays_calculate_horizontal(float angle)
 	t_ray	ray;
 	float	atan;
 
+	ray.is_infinite = false;
 	ray.angle = angle;
 	atan = -1 / tan(ray.angle);
 	if (ray.angle > M_PI)

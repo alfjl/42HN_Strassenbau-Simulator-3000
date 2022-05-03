@@ -331,6 +331,7 @@ typedef struct s_ray
 	float		dx;
 	float		dy;
 	float		angle;
+	bool		is_infinite;
 	float		len;
 	float		dist;
 	float		line_h;
