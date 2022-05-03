@@ -420,7 +420,7 @@ t_ray			rays_calculate_horizontal(float angle);
 void			rays_iterate_grid(t_ray *ray);
 void			minimap_draw_to_image(void);
 void			walls_draw_to_image(void);
-void			walls_draw_vertical_line(t_data *data, t_img *img, t_ray *ray);
+void			walls_draw_segment(t_data *data, t_img *img, t_ray *ray);
 void			doors_open_door(void);
 void			doors_close_door(void);
 void			player_update_position(t_controls *keys);
@@ -439,7 +439,6 @@ unsigned int	argb_create(int r, int g, int b, int a);
 unsigned int	argb_shade_color(int color, float brightness);
 
 t_data			*data(void);
-// unsigned 	int	color_convert(long color);
 float			radian_limits(float angle);
 void			*my_new_image(void *mlx_ptr, int width, int height, t_img *img);
 void			*my_xpm_file_to_image(void *mlx_ptr, char *path, t_img *img);

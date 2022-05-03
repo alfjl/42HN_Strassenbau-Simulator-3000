@@ -13,7 +13,7 @@ SRCS :=	main.c \
 		controls_mouse.c \
 		doors.c \
 		exit.c \
-		floor.c \
+		floor_and_ceiling.c \
 		frame.c \
 		free.c \
 		images.c \

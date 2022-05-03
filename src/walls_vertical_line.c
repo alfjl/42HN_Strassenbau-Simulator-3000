@@ -45,7 +45,7 @@ static int	static_get_wall_color(t_ray *ray, int y)
 	return (get_pixel_color(&data()->imgs[image], tx, ty));
 }
 
-static void	static_walls_draw_single_vertical_line(t_data *data, t_img *img, t_ray *ray)
+static void	static_walls_draw_single_line(t_data *data, t_img *img, t_ray *ray)
 {
 	int		y;
 	int		color;
@@ -75,7 +75,7 @@ static void	static_walls_draw_single_vertical_line(t_data *data, t_img *img, t_r
 	}
 }
 
-void	walls_draw_vertical_line(t_data *data, t_img *img, t_ray *ray)
+void	walls_draw_segment(t_data *data, t_img *img, t_ray *ray)
 {
 	int		line_i;
 
@@ -87,7 +87,7 @@ void	walls_draw_vertical_line(t_data *data, t_img *img, t_ray *ray)
 			ray->screen_x = 0;
 		if (ray->screen_x > data->window.width - 1)
 			ray->screen_x = data->window.width - 1;
-		static_walls_draw_single_vertical_line(data, img, ray);
+		static_walls_draw_single_line(data, img, ray);
 		line_i++;
 	}
 }

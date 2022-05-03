@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int		get_pixel_color(t_img *img, int x, int y)
+int	get_pixel_color(t_img *img, int x, int y)
 {
 	int	color;
 

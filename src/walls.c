@@ -1,8 +1,7 @@
 #include "cub3d.h"
 
-static void	static_walls_draw_wallsegment(t_data *data, t_ray *ray, t_img *img)
+static void	static_walls_calculate_limits(t_data *data, t_ray *ray)
 {
-	(void)img;
 	float	line_h;
 
 	line_h = ray->line_h;
@@ -10,8 +9,7 @@ static void	static_walls_draw_wallsegment(t_data *data, t_ray *ray, t_img *img)
 	ray->tyoffset = 0;
 	if (ray->start_y < 0)
 	{
-		ray->tyoffset = fabs((float)ray->start_y)
-		/ line_h * TEXTURE_SIZE;
+		ray->tyoffset = fabs((float)ray->start_y) / line_h * TEXTURE_SIZE;
 		ray->start_y = 0;
 	}
 	ray->end_y = line_h / 2 + data->window.height / 2 + data->player.dz;
@@ -34,8 +32,8 @@ void	walls_draw_to_image(void)
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{
-		static_walls_draw_wallsegment(datas, &datas->rays[i], img);
-		walls_draw_vertical_line(datas, img, &datas->rays[i]);
+		static_walls_calculate_limits(datas, &datas->rays[i]);
+		walls_draw_segment(datas, img, &datas->rays[i]);
 		i++;
 	}
 }

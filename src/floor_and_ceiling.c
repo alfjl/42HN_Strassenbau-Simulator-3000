@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int	get_sky_color(t_ray *ray, int y)
+static int	static_get_sky_color(t_ray *ray, int y)
 {
 	int	tx;
 	int	ty;
@@ -40,7 +40,7 @@ static int	static_get_texture_color(int image, t_ray *ray, int y)
 int	get_ceiling_color(t_ray *ray, int y)
 {
 	if (SKY_ENABLED)
-		return (get_sky_color(ray, y));
+		return (static_get_sky_color(ray, y));
 	else if (!CEILING_TEXTURE_ENABLED)
 		return (data()->map.ceiling.rgb);
 	return (static_get_texture_color(CEILING_IMG, ray, y));
