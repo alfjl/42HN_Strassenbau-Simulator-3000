@@ -14,34 +14,47 @@
 # include "libft.h"
 
 //Texture paths
-# define TEXTURE_NORTH "./textures/semi_crafted_stone_wall.xpm"
-# define TEXTURE_SOUTH "./textures/league_wall.xpm"
-# define TEXTURE_EAST "./textures/dirt_stone.xpm"
-# define TEXTURE_WEST "./textures/stone_wall.xpm"
-# define TEXTURE_FLOOR "./textures/dirt_02.xpm"
+# define TEXTURE_FLOOR "./textures/soil.xpm"
 # define TEXTURE_CEILING "./textures/dirt_04.xpm"
 # define TEXTURE_SKY "./textures/sky_tiled2048x1024.xpm"
 //Environment Color Theme
-# define SHADE_NORTH 1.0
-# define SHADE_SOUTH 0.5
+# define SHADE_NORTH 0.6
+# define SHADE_SOUTH 1.0
 # define SHADE_EAST 0.8
 # define SHADE_WEST 0.8
 # define SHADE_FLOOR 0.6
 # define SHADE_CEILING 1.0
 //Settings
-# define COLLISION_ENABLED 1
-# define MINIMAP_ENABLED 1
-# define SHADING_ENABLED 1
-# define DOORS_ENABLED 1
-# define MOUSE_ENABLED 1
-# define SPRITES_ENABLED 1
-# define FPS_ENABLED 1
-# define SPRINT_ENABLED 1
-# define CROUCH_ENABLED 1
-# define JUMP_ENABLED 1
-# define FLOOR_TEXTURE_ENABLED 1
-# define CEILING_TEXTURE_ENABLED 0
-# define SKY_ENABLED 1
+# define BONUS 1
+# if BONUS
+#  define COLLISION_ENABLED 1
+#  define MINIMAP_ENABLED 1
+#  define SHADING_ENABLED 1
+#  define DOORS_ENABLED 1
+#  define MOUSE_ENABLED 1
+#  define SPRITES_ENABLED 1
+#  define FPS_ENABLED 1
+#  define SPRINT_ENABLED 1
+#  define CROUCH_ENABLED 1
+#  define JUMP_ENABLED 1
+#  define FLOOR_TEXTURE_ENABLED 1
+#  define CEILING_TEXTURE_ENABLED 0
+#  define SKY_ENABLED 1
+# else
+#  define COLLISION_ENABLED 0
+#  define MINIMAP_ENABLED 0
+#  define SHADING_ENABLED 0
+#  define DOORS_ENABLED 0
+#  define MOUSE_ENABLED 0
+#  define SPRITES_ENABLED 0
+#  define FPS_ENABLED 0
+#  define SPRINT_ENABLED 0
+#  define CROUCH_ENABLED 0
+#  define JUMP_ENABLED 0
+#  define FLOOR_TEXTURE_ENABLED 0
+#  define CEILING_TEXTURE_ENABLED 0
+#  define SKY_ENABLED 0
+# endif
 //mlx
 # define HAS_ALPHA 0
 //Parameters

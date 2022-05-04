@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static bool	static_rays_hits_wall(t_ray *ray, t_map *map)
+static bool	static_rays_hits_map_element(t_ray *ray, t_map *map, int map_element)
 {
 	float	y;
 	float	x;
@@ -13,7 +13,7 @@ static bool	static_rays_hits_wall(t_ray *ray, t_map *map)
 		x -= EXTRA_EDGE;
 	if (y >= 0 && x >= 0 && y < map->height
 		&& x < map->width
-		&& map->grid[(int)y][(int)x] == WALL)
+		&& map->grid[(int)y][(int)x] == map_element)
 		return (true);
 	else
 		return (false);
@@ -33,12 +33,12 @@ void	rays_iterate_grid(t_ray *ray)
 			ray->mini_x = ray->x;
 			ray->mini_y = ray->y;
 		}
-		if (static_rays_hits_wall(ray, map))
+		if (static_rays_hits_map_element(ray, map, WALL))
 		{
 			ray->is_infinite = false;
 			break ;
 		}
-		else if (ray->x <= 0 || ray->y <= 0 || ray->x >= map->width || ray->y >= map->height)
+		else if (BONUS && (ray->x <= 0 || ray->y <= 0 || ray->x >= map->width || ray->y >= map->height))
 			break ;
 		else
 		{

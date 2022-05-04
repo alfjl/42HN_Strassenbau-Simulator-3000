@@ -60,7 +60,7 @@ static void	static_walls_draw_single_line(t_data *data, t_img *img, t_ray *ray)
 		else if (y <= ray->end_y)
 		{
 			if (ray->is_infinite)
-				color = get_ceiling_color(ray, y);
+				color = get_sky_color(ray, y);
 			else
 				color = static_get_wall_color(ray, y);
 		}

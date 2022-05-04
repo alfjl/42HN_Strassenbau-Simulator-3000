@@ -1,10 +1,12 @@
 #include "cub3d.h"
 
-static int	static_get_sky_color(t_ray *ray, int y)
+int	get_sky_color(t_ray *ray, int y)
 {
 	int	tx;
 	int	ty;
 
+	if (!SKY_ENABLED)
+		return (data()->map.ceiling.rgb);
 	tx = ray->angle * (data()->imgs[SKY_IMG].width / (2 * M_PI));
 	ty = y + data()->imgs[SKY_IMG].height / 4 - data()->player.dz;
 	return (get_pixel_color(&data()->imgs[SKY_IMG], tx, ty));
@@ -39,16 +41,22 @@ static int	static_get_texture_color(int image, t_ray *ray, int y)
 
 int	get_ceiling_color(t_ray *ray, int y)
 {
-	if (SKY_ENABLED)
-		return (static_get_sky_color(ray, y));
-	else if (!CEILING_TEXTURE_ENABLED)
-		return (data()->map.ceiling.rgb);
-	return (static_get_texture_color(CEILING_IMG, ray, y));
+	int	image;
+	
+	image = CEILING_IMG;
+	if (CEILING_TEXTURE_ENABLED)
+		return (static_get_texture_color(image, ray, y));
+	else if (SKY_ENABLED)
+		return (get_sky_color(ray, y));
+	return (data()->map.ceiling.rgb);
 }
 
 int	get_floor_color(t_ray *ray, int y)
 {
-	if (!FLOOR_TEXTURE_ENABLED)
-		return (data()->map.floor.rgb);
-	return (static_get_texture_color(FLOOR_IMG, ray, y));
+	int	image;
+
+	image = FLOOR_IMG;
+	if (FLOOR_TEXTURE_ENABLED)
+		return (static_get_texture_color(image, ray, y));
+	return (data()->map.floor.rgb);
 }

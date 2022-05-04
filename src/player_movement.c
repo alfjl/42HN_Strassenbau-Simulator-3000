@@ -29,15 +29,13 @@ static void	static_player_set_status(t_controls *controls)
 		data()->player.status = IDLE;
 }
 
-static bool	static_player_is_wall(float y, float x)
+static bool	static_is_map_element(float y, float x, int map_element)
 {
 	float	min_y;
 	float	max_y;
 	float	min_x;
 	float	max_x;
 
-	if (!COLLISION_ENABLED)
-		return (false);
 	min_y = y - COLLISION_DISTANCE;
 	max_y = y + COLLISION_DISTANCE;
 	min_x = x - COLLISION_DISTANCE;
@@ -45,16 +43,27 @@ static bool	static_player_is_wall(float y, float x)
 	if (max_y < data()->map.height && min_y >= 0 && max_x < data()->map.width
 		&& min_x >= 0)
 	{
-		if (data()->map.grid[(int)min_y][(int)min_x] == WALL)
+		if (data()->map.grid[(int)min_y][(int)min_x] == map_element)
 			return (true);
-		if (data()->map.grid[(int)max_y][(int)max_x] == WALL)
+		if (data()->map.grid[(int)max_y][(int)max_x] == map_element)
 			return (true);
-		if (data()->map.grid[(int)min_y][(int)max_x] == WALL)
+		if (data()->map.grid[(int)min_y][(int)max_x] == map_element)
 			return (true);
-		if (data()->map.grid[(int)max_y][(int)min_x] == WALL)
+		if (data()->map.grid[(int)max_y][(int)min_x] == map_element)
 			return (true);
 		return (false);
 	}
+	return (true);
+}
+
+static bool	static_is_valid_move(float y, float x)
+{
+	if (static_is_map_element(y, x, VOID))
+		return (false);
+	if (!COLLISION_ENABLED)
+		return (true);
+	else if (static_is_map_element(y, x, WALL))
+		return (false);
 	return (true);
 }
 
@@ -67,12 +76,12 @@ static void	static_player_update(float *x, float dx, float *y, float dy)
 	map = &data()->map;
 	new_x = *x + dx;
 	new_y = *y + dy;
-	if (!static_player_is_wall(*y, (*x + dx)))
+	if (static_is_valid_move(*y, (*x + dx)))
 	{
-		if (new_x >= 0 && new_x < map->width) //check for void
+		if (new_x >= 0 && new_x < map->width)
 			*x = new_x;
 	}
-	if (!static_player_is_wall((*y + dy), *x))
+	if (static_is_valid_move((*y + dy), *x))
 	{
 		if (new_y >= 0 && new_y < map->height)
 			*y = new_y;
