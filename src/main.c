@@ -124,10 +124,10 @@ int	main(int argc, char *argv[])
 	// 	write(1, "\n", 1);
 	// 	i++;
 	// }
-	printf("ceiling rgb = %d\n", map->ceiling.rgb);
-	printf("floor rgb = %d\n", map->floor.rgb);
-	printf("ceiling rgb = %X\n", map->ceiling.rgb);
-	printf("floor rgb = %X\n", map->floor.rgb);
+	//printf("ceiling rgb = %d\n", map->ceiling.rgb);
+	//printf("floor rgb = %d\n", map->floor.rgb);
+	//printf("ceiling rgb = %X\n", map->ceiling.rgb);
+	//printf("floor rgb = %X\n", map->floor.rgb);
 	printf("map height = %d\n", map->height);
 	printf("map width = %d\n", map->width);
 	//printf("errorcode = %d\n", config->errorcode);
