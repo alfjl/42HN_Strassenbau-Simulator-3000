@@ -112,22 +112,24 @@ int	main(int argc, char *argv[])
 	config_parse(config, map);
 	// TPO --------------------------------------------------------------------
 	printf("############## BEGINNING of parsing test ################\n");
-	// unsigned int i = 0;
-	// while (i < map->height)
-	// {
-	// 	unsigned int j = 0;
-	// 	while (j < map->width - 1)
-	// 	{
-	// 		write(1, &map->grid[i][j], 1);
-	// 		j++;
-	// 	}
-	// 	write(1, "\n", 1);
-	// 	i++;
-	// }
-	//printf("ceiling rgb = %d\n", map->ceiling.rgb);
-	//printf("floor rgb = %d\n", map->floor.rgb);
-	//printf("ceiling rgb = %X\n", map->ceiling.rgb);
-	//printf("floor rgb = %X\n", map->floor.rgb);
+	 unsigned int i = 0;
+	 while (i < map->height)
+	 {
+	 	unsigned int j = 0;
+	 	while (j < map->width)
+	 	{
+			write(1, "|", 1);
+	 		write(1, &map->grid[i][j], 1);
+			write(1, "|", 1);
+	 		j++;
+	 	}
+	 	write(1, "\n", 1);
+	 	i++;
+	 }
+	printf("ceiling rgb = %d\n", map->ceiling.rgb);
+	printf("floor rgb = %d\n", map->floor.rgb);
+	printf("ceiling rgb = %X\n", map->ceiling.rgb);
+	printf("floor rgb = %X\n", map->floor.rgb);
 	printf("map height = %d\n", map->height);
 	printf("map width = %d\n", map->width);
 	//printf("errorcode = %d\n", config->errorcode);
