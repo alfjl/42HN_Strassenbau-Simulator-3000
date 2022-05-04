@@ -49,7 +49,8 @@ bool	reader_detect_empty_line(t_reader *reader)
 	return_value = false;
 	if (temp != reader->string)
 	{
-		if (*(temp - 1) == '\n' && *temp == '\n')
+		if ((*(temp - 1) == '\n' && *temp == '\n')
+				|| (*(temp - 1) == '\0' && *temp == '\n'))
 			return_value = true;
 	}
 	if (*temp == '\n')
