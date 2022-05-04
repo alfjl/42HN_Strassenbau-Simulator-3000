@@ -29,12 +29,30 @@ void	*ft_memset(void *b, int c, size_t len)
 }
 
 /* ----------------------------- FUNC 2 ------------------------------------ */
+void	read_fd_loop(int *fd, t_stringbuilder *builder, t_temp_buffer *temp)
+{
+	while (temp->write_head > 0)
+	{
+		temp->read_head = 0;
+		while (temp->read_head < temp->write_head)
+		{
+			if (stringbuilder_append_char(builder, temp->buffer[temp->read_head]) == false)
+			{
+				stringbuilder_destroy(builder);
+				close(*fd);
+			}
+			temp->read_head += 1;
+		}
+		temp->write_head = read(*fd, &temp->buffer, sizeof(temp->buffer));
+	}
+}
+
+/* ----------------------------- FUNC 3 ------------------------------------ */
 char	*read_fd(char *path)
 {
 	int				fd;
 	t_stringbuilder	builder;
 	t_temp_buffer	temp;
-	int	i;
 
 	fd = open(path, O_RDONLY);
 	stringbuilder_init(&builder);
@@ -45,20 +63,7 @@ char	*read_fd(char *path)
 	}
 	temp_buffer_init(&temp);
 	temp.write_head = read(fd, &temp.buffer, sizeof(temp.buffer));
-	i = 0;
-	while (temp.write_head > 0)
-	{
-		temp.read_head = 0;
-		while (temp.read_head < temp.write_head)
-		{
-			if (stringbuilder_append_char(&builder, temp.buffer[temp.read_head]) == false)
-				printf("here\n") ; //remove
-			temp.read_head++;
-		}
-		temp.write_head = read(fd, &temp.buffer, sizeof(temp.buffer));
-		i++;
-		// printf("head:%d i: %d\n", temp.write_head, i);
-	}
+	read_fd_loop(&fd, &builder, &temp);
 	close(fd);
 	return (stringbuilder_trim_and_return_buffer(&builder));
 }

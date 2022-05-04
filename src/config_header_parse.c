@@ -75,7 +75,7 @@ static void	static_config_header_parse_ceiling(t_config_file *config,
 	if (reader_peek_char(reader) != '\n')
 		config->errorcode = WRONG_CONFIG_ARGS;
 	calculate_rgb_value(&map->ceiling.rgb, map->ceiling.r, map->ceiling.g,
-							map->ceiling.b);
+		map->ceiling.b);
 	config->ceiling++;
 }
 
@@ -102,7 +102,7 @@ static void	static_config_header_parse_floor(t_config_file *config,
 	if (reader_peek_char(reader) != '\n')
 		config->errorcode = WRONG_CONFIG_ARGS;
 	calculate_rgb_value(&map->floor.rgb, map->floor.r, map->floor.g,
-							map->floor.b);
+		map->floor.b);
 	config->floor++;
 }
 

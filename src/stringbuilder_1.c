@@ -41,7 +41,8 @@ bool	stringbuilder_append_char(t_stringbuilder *builder, const char c)
 
 	if (builder->read_head >= builder->write_head)
 	{
-		temp = (char *)ft_calloc(builder->read_head + BUFFER_SIZE_CUB3D, sizeof(char));
+		temp = (char *)ft_calloc(builder->read_head + BUFFER_SIZE_CUB3D,
+				sizeof(char));
 		if (temp == NULL)
 			return (false);
 		else

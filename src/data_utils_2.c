@@ -73,5 +73,4 @@ void	player_set_values(t_player *player, t_map *map, int x, int y)
 	player->y = (float)x + 0.5;
 	calculate_pos_delta();
 	player->angle = player_calculate_angle(map->grid[x][y]);
-	printf("x: %f, y: %f\n",player->x, player->y);
 }

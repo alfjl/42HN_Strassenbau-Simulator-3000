@@ -33,7 +33,6 @@ void	config_map_parse_set_char(t_map *map, unsigned int o, unsigned int *p,
 /* ----------------------------- FUNC 3 ------------------------------------ */
 void	config_map_parse_set_width(t_map *map, unsigned int width)
 {
-		if (width > map->width)
-			map->width = width;
+	if (width > map->width)
+		map->width = width;
 }
-

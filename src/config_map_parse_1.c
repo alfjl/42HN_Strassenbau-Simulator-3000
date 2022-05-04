@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-	
+
 /* ----------------------------- FUNC 1 ------------------------------------ */
 void	config_map_parse_fill_spaces(t_config_file *config,
-					t_stringbuilder *builder, unsigned int spaces, unsigned *i)
+					t_stringbuilder *builder, unsigned int spaces,
+					unsigned int *i)
 {
 	while (*i < spaces)
 	{
@@ -48,8 +49,6 @@ void	config_map_parse_fill_string(t_config_file *config, t_map *map,
 			config->errorcode = SYSTEM;
 		width++;
 		config_map_parse_set_width(map, width);
-		//if (width > map->width)
-			//map->width = width;
 		width = 0;
 		map->height++;
 	}
@@ -60,7 +59,7 @@ void	config_map_parse_fill_string(t_config_file *config, t_map *map,
 /* ----------------------------- FUNC 3 ------------------------------------ */
 void	config_map_parse_built_grid(t_config_file *config, t_map *map)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = 0;
 	map->grid = ft_calloc(map->height, sizeof(char *));
