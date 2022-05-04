@@ -135,6 +135,7 @@ void	config_map_parse(t_config_file *config, t_map *map, t_reader *reader,
 	if (config->errorcode != 0)
 		return ;
 	config_map_parse_read_string_to_grid(config, map, temp_string);
+	map->width -= 1;
 	temp_string = NULL;
 	stringbuilder_destroy(&builder);
 }
