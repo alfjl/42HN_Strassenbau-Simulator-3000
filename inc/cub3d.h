@@ -488,70 +488,69 @@ typedef struct s_data
 	struct s_ray	rays[NUMBER_OF_RAYS];
 }	t_data;
 
-void			map_read(char *filepath);
-void			images_create(void);
-void			mlx(void);
-void			controls_mouse(t_controls *controls);
-void			controls_keyboard(t_controls *controls);
-int				frame(t_controls *keys);
-void			textures_load(void);
-void			sprites_load(void);
-void			rays_create(void);
-t_ray			rays_calculate_vertical(float angle);
-t_ray			rays_calculate_horizontal(float angle);
-void			rays_iterate_grid(t_ray *ray);
-void			minimap_draw_to_image(void);
-void			walls_draw_to_image(void);
-void			walls_draw_segment(t_data *data, t_img *img, t_ray *ray);
-void			doors_open_door(void);
-void			doors_close_door(void);
-void			player_update_position(t_controls *keys);
-void			player_update_z_position(void);
-int				exit_end_program_error(int errorcode);
-int				exit_end_program_success(void);
-void			free_all(void);
-int				get_sky_color(t_ray *ray, int y);
-int				get_ceiling_color(t_ray *ray, int y);
-int				get_floor_color(t_ray *ray, int y);
+void				map_read(char *filepath);
+void				images_create(void);
+void				mlx(void);
+void				controls_mouse(t_controls *controls);
+void				controls_keyboard(t_controls *controls);
+int					frame(t_controls *keys);
+void				textures_load(void);
+void				sprites_load(void);
+void				rays_create(void);
+t_ray				rays_calculate_vertical(float angle);
+t_ray				rays_calculate_horizontal(float angle);
+void				rays_iterate_grid(t_ray *ray);
+void				minimap_draw_to_image(void);
+void				walls_draw_to_image(void);
+void				walls_draw_segment(t_data *data, t_img *img, t_ray *ray);
+void				doors_open_door(void);
+void				doors_close_door(void);
+void				player_update_position(t_controls *keys);
+void				player_update_z_position(void);
+int					exit_end_program_error(int errorcode);
+int					exit_end_program_success(void);
+void				free_all(void);
+int					get_sky_color(t_ray *ray, int y);
+int					get_ceiling_color(t_ray *ray, int y);
+int					get_floor_color(t_ray *ray, int y);
 //utils
-void			my_pixel_put(t_img *img, int x, int y, int color);
-void			draw_line_a_to_b(t_img *img, t_point a, t_point b, int color);
-unsigned int	rgba_create(int r, int g, int b, int a);
-unsigned int	argb_create(int r, int g, int b, int a);
-unsigned int	argb_shade_color(int color, float brightness);
+void				my_pixel_put(t_img *img, int x, int y, int color);
+void				draw_line_a_to_b(t_img *img, t_point a, t_point b,
+						int color);
+unsigned int		rgba_create(int r, int g, int b, int a);
+unsigned int		argb_create(int r, int g, int b, int a);
+unsigned int		argb_shade_color(int color, float brightness);
 
-t_data			*data(void);
-float			radian_limits(float angle);
-void			*my_new_image(void *mlx_ptr, int width, int height, t_img *img);
-void			*my_xpm_file_to_image(void *mlx_ptr, char *path, t_img *img);
-void			my_destroy_image(void *mlx_ptr, t_img *img);
-int				my_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y);
-int				my_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
-int				my_mouse_hide(void *mlx_ptr, void *win_ptr);
-int				my_mouse_show(void *mlx_ptr, void *win_ptr);
-bool			is_inside_image_limits(int x, int y, t_img *img);
-void			image_fill(t_img *img, int color);
-t_img			*image_clone(void *mlx, t_img *src, t_img *dst);
-void			image_overlay(t_img *src, t_img *dst, int dst_x, int dst_y);
-int				get_pixel_color(t_img *img, int x, int y);
-void			calculate_pos_delta(void);
-double			pythagoras_hypotenuse(double a, double b);
-int				my_abs(int a, int b);
+t_data				*data(void);
+float				radian_limits(float angle);
+void				*my_new_image(void *mlx_ptr, int width, int height,
+						t_img *img);
+void				*my_xpm_file_to_image(void *mlx_ptr, char *path,
+						t_img *img);
+void				my_destroy_image(void *mlx_ptr, t_img *img);
+int					my_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x,
+						int *y);
+int					my_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
+int					my_mouse_hide(void *mlx_ptr, void *win_ptr);
+int					my_mouse_show(void *mlx_ptr, void *win_ptr);
+bool				is_inside_image_limits(int x, int y, t_img *img);
+void				image_fill(t_img *img, int color);
+t_img				*image_clone(void *mlx, t_img *src, t_img *dst);
+void				image_overlay(t_img *src, t_img *dst, int dst_x, int dst_y);
+int					get_pixel_color(t_img *img, int x, int y);
+void				calculate_pos_delta(void);
+double				pythagoras_hypotenuse(double a, double b);
+int					my_abs(int a, int b);
 //mlx
-void			*mlx_new_image_alpha(void *mlx_ptr, int width, int height);
+void				*mlx_new_image_alpha(void *mlx_ptr, int width, int height);
 //fps
-void			fps_to_window_buffer(void); //remove
-
+void				fps_to_window_buffer(void); //remove
 
 /* ------------------------------- parsing.c ------------------------------- */
 t_data				*data(void);
 int					exit_program(int errorcode);
 
-/* ------------------------------- utils_1.c --------------------------------- */
-// unsigned int		ft_strlen(const char *str);
-// void				ft_bzero(void *s, size_t n);
-// void				*ft_calloc(size_t count, size_t size);
-// bool				ft_isdigit(int c);
+/* ------------------------------- utils_1.c ------------------------------- */
 unsigned long long	ft_atoull(const char *str);
 
 /* ------------------------------- utils_2.c ------------------------------- */
@@ -561,13 +560,13 @@ char				*read_fd(char *path);
 /* ------------------------------- data.c ---------------------------------- */
 void				data_init(void);
 
-/* ------------------------------- data_utils_1.c ---------------------------- */
+/* ------------------------------- data_utils_1.c -------------------------- */
 void				config_file_destroy(t_config_file *config_file);
 void				map_destroy(t_map *map);
 void				player_set_values(t_player *player, t_map *map,
-										int x, int y);
+						int x, int y);
 
-/* ------------------------------- data_utils_2.c ---------------------------- */
+/* ------------------------------- data_utils_2.c -------------------------- */
 void				color_init(t_color *color);
 void				textures_init(t_textures *textures);
 void				textures_destroy(t_textures *textures);
@@ -576,14 +575,15 @@ void				textures_destroy(t_textures *textures);
 void				stringbuilder_init(t_stringbuilder *builder);
 void				stringbuilder_destroy(t_stringbuilder *builder);
 bool				stringbuilder_append_char(t_stringbuilder *builder,
-												const char c);
+						const char c);
 bool				stringbuilder_trim_buffer(t_stringbuilder *builder);
 
 /* ------------------------------- stringbuilder_2.c ----------------------- */
 char				*stringbuilder_return_buffer(t_stringbuilder *builder);
 int					stringbuilder_return_read_head(t_stringbuilder *builder);
 int					stringbuilder_return_write_head(t_stringbuilder *builder);
-char				*stringbuilder_trim_and_return_buffer(t_stringbuilder *builder);
+char				*stringbuilder_trim_and_return_buffer(
+						t_stringbuilder *builder);
 
 /* ------------------------------- reader.c -------------------------------- */
 void				reader_init(t_reader *reader, char *string);
@@ -591,9 +591,9 @@ char				*reader_get_current(t_reader *reader);
 void				reader_increment(t_reader *reader);
 void				reader_decrement(t_reader *reader);
 void				reader_increment_stepsize(t_reader *reader,
-												unsigned int steps);
+						unsigned int steps);
 void				reader_decrement_stepsize(t_reader *reader,
-												unsigned int steps);
+						unsigned int steps);
 char				reader_peek_char(t_reader *reader);
 char				reader_read_char(t_reader *reader);
 bool				reader_peek_string(t_reader *reader, const char *string);
@@ -603,7 +603,7 @@ char				*reader_read_to_newline(t_reader *reader);
 void				reader_skip_newline(t_reader *reader);
 bool				reader_has_content(t_reader *reader);
 bool				reader_read_unsigned_integer(t_reader *reader,
-													unsigned int *target);
+						unsigned int *target);
 
 /* ------------------------------- temp_buffer.c --------------------------- */
 void				temp_buffer_init(t_temp_buffer *temp);
@@ -613,45 +613,50 @@ void				config_parse(t_config_file *config, t_map *map);
 
 /* ------------------------------- config_header_parse.c ------------------- */
 unsigned int		config_header_parse(t_config_file *config, t_map *map,
-											t_reader *reader);
+						t_reader *reader);
 
 /* ------------------------------- config_header_validate.c ---------------- */
 void				config_header_validate(t_config_file *config, t_map *map,
-												int *errorcode);
+						int *errorcode);
 
 /* ------------------------------- config_map_parse_1.c -------------------- */
 void				config_map_parse(t_config_file *config, t_map *map,
-										t_reader *reader, unsigned int spaces);
+						t_reader *reader, unsigned int spaces);
 
 /* ------------------------------- config_map_parse_2.c -------------------- */
 void				config_map_parse_set_null(t_map *map, unsigned int o,
-												unsigned int *p);
+						unsigned int *p);
 void				config_map_parse_set_char(t_map *map, unsigned int o,
-												unsigned int *p, char c);
+						unsigned int *p, char c);
 void				config_map_parse_set_width(t_map *map, unsigned int width);
 
 /* ------------------------------- config_map_validate_1.c ----------------- */
 void				config_map_validate(t_config_file *config, t_map *map,
-											int *errorcode);
+						int *errorcode);
 
 /* ------------------------------- config_map_validate_2.c ----------------- */
 bool				config_map_validate_char(t_config_file *config, t_map *map,
-								unsigned int x, unsigned int y);
+						unsigned int x, unsigned int y);
 
 /* ------------------------------- config_map_validate_3.c ----------------- */
 bool				config_map_validate_char_walls(t_map *map,
-														char potential_wall);
-
+						char potential_wall);
+bool				config_map_validate_char_playerpositions(t_map *map,
+						char position);
+bool				config_map_validate_char_space_neighbours(t_map *map,
+						char neighbour);
+bool				config_map_validate_char_player_neighbours(t_map *map,
+						unsigned int x, unsigned int y);
 
 /* ------------------------------- validation_utils.c ---------------------- */
 bool				validation_typecheck_cub(const char *path);
 bool				validation_typecheck_xpm(const char *path);
 bool				validation_check_boolian(bool boolian, int *errorcode,
-											int code);
+						int code);
 unsigned int		calculate_rgb_value(unsigned int *rgb, unsigned int r,
-											unsigned int g, unsigned int b);
+						unsigned int g, unsigned int b);
 
 /* ------------------------------- player.c -------------------------------- */
-float   			player_calculate_angle(char direction);
+float				player_calculate_angle(char direction);
 
 #endif
