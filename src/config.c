@@ -13,6 +13,17 @@
 #include "cub3d.h"
 
 /* ----------------------------- FUNC 1 ----------------------------------- */
+static void	static_config_parse_fill_datastruct(void)
+{
+	data()->imgs[SOUTH_IMG].path = data()->map.textures.south;
+	data()->imgs[NORTH_IMG].path = data()->map.textures.north;
+	data()->imgs[EAST_IMG].path = data()->map.textures.east;
+	data()->imgs[WEST_IMG].path = data()->map.textures.west;
+	data()->minimap.width = data()->map.width * MAP_GRID_SIZE;
+	data()->minimap.height = data()->map.height * MAP_GRID_SIZE;
+}
+
+/* ----------------------------- FUNC 2 ----------------------------------- */
 void	config_parse(t_config_file *config, t_map *map)
 {
 	t_reader		reader;
@@ -33,4 +44,5 @@ void	config_parse(t_config_file *config, t_map *map)
 	if (config->errorcode != 0)
 		return ;
 	config_map_validate(config, map, &config->errorcode);
+	static_config_parse_fill_datastruct();
 }

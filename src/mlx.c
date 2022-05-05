@@ -1,12 +1,21 @@
 #include "cub3d.h"
 
+
 void	mlx(void)
 {
+	// still too long
 	static t_controls	controls;
 	void				*mlx;
 	void				*win;
 	t_frame				*window;
 
+	data()->mlx = mlx_init();
+	if (data()->mlx == NULL)
+		exit_end_program_error(MLX);
+	images_create();
+	textures_load();
+	if (SPRITES_ENABLED)
+		sprites_load();
 	mlx = data()->mlx;
 	window = &data()->window;
 	win = mlx_new_window(mlx, window->width, window->height, "cub3D");
