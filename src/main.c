@@ -4,12 +4,10 @@
 void	debug_print(void)
 {
 	t_map			*map;
-	t_config_file	*config;
 	unsigned int	i;
 	unsigned int	j;
 
 	map = &data()->map;
-	config = &data()->config_file;
 	printf("############## BEGINNING of test print ################\n");
 	i = 0;
 	while (i < map->height)
