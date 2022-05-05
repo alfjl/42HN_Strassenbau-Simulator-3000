@@ -15,7 +15,7 @@
 /* ----------------------------- FUNC 1 ------------------------------------ */
 void	config_map_parse_set_null(t_map *map, unsigned int o, unsigned int *p)
 {
-	while (*p < map->width)
+	while (*p < map->width - 1)
 		*p += 1;
 	map->grid[o][*p] = '\0';
 }			
