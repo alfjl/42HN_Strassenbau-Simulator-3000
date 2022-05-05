@@ -25,7 +25,7 @@
 # define SHADE_FLOOR 0.6
 # define SHADE_CEILING 1.0
 //Settings
-# define BONUS 1
+# define BONUS 0
 # if BONUS
 #  define COLLISION_ENABLED 1
 #  define MINIMAP_ENABLED 1
