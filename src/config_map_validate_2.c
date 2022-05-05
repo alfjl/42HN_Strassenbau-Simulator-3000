@@ -13,63 +13,35 @@
 #include "cub3d.h"
 
 /* ----------------------------- FUNC 1 ----------------------------------- */
-static bool	static_config_map_validate_char_playerpositions(t_map *map,
-																char position)
-{
-	bool	return_value;
-	int		i;
-
-	i = 0;
-	return_value = false;
-	while (map->player_pos[i])
-	{
-		if (map->player_pos[i] == position)
-			return_value = true;
-		i++;
-	}
-	return (return_value);
-}
-
-/* ----------------------------- FUNC 2 ----------------------------------- */
-static bool	static_config_map_validate_char_space_neighbours(t_map *map,
-															char neighbour)
-{
-	if (neighbour == SPACE
-		|| config_map_validate_char_walls(map, neighbour) == true
-		|| static_config_map_validate_char_playerpositions(map,
-			neighbour) == true)
-		return (true);
-	return (false);
-}
-
-/* ----------------------------- FUNC 3 ----------------------------------- */
 static bool	static_config_map_validate_char_space(t_map *map,
 											unsigned int x, unsigned int y)
 {
-	if (x == 0 || x == map->height - 1)
+	if (x == 0 || x == map->height - 1
+		|| y == 0 || y == map->width - 1)
 		return (false);
 	if (
-		static_config_map_validate_char_space_neighbours(map,
+		config_map_validate_char_space_neighbours(map,
 			map->grid[x][y - 1]) != true
-		|| static_config_map_validate_char_space_neighbours(map,
+		|| config_map_validate_char_space_neighbours(map,
 			map->grid[x][y + 1]) != true
-		|| static_config_map_validate_char_space_neighbours(map,
+		|| config_map_validate_char_space_neighbours(map,
 			map->grid[x - 1][y]) != true
-		|| static_config_map_validate_char_space_neighbours(map,
+		|| config_map_validate_char_space_neighbours(map,
 			map->grid[x + 1][y]) != true
 		)
 		return (false);
 	return (true);
 }
 
-/* ----------------------------- FUNC 4 ----------------------------------- */
+/* ----------------------------- FUNC 2 ----------------------------------- */
 static bool	static_config_map_validate_char_player(t_config_file *config,
 								t_map *map, unsigned int x, unsigned int y)
 {
 	t_player	*player;
 
 	player = &data()->player;
-	if (config->player_position == true)
+	if (config->player_position == true
+		|| config_map_validate_char_player_neighbours(map, x, y) == false)
 		return (false);
 	else
 	{
@@ -80,7 +52,7 @@ static bool	static_config_map_validate_char_player(t_config_file *config,
 	return (true);
 }
 
-/* ----------------------------- FUNC 5 ----------------------------------- */
+/* ----------------------------- FUNC 3 ----------------------------------- */
 bool	config_map_validate_char(t_config_file *config, t_map *map,
 								unsigned int x, unsigned int y)
 {
@@ -89,8 +61,7 @@ bool	config_map_validate_char(t_config_file *config, t_map *map,
 		if (static_config_map_validate_char_space(map, x, y) == false)
 			return (false);
 	}
-	else if (static_config_map_validate_char_playerpositions(map,
-			map->grid[x][y]))
+	else if (config_map_validate_char_playerpositions(map, map->grid[x][y]))
 	{
 		if (static_config_map_validate_char_player(config, map, x, y) == false)
 			return (false);
