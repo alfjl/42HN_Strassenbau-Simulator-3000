@@ -75,7 +75,8 @@ char	*reader_read_to_newline(t_reader *reader)
 		if (stringbuilder_append_char(&builder, c) == false)
 			return (NULL);
 	}
-	stringbuilder_trim_buffer(&builder);
+	if (stringbuilder_trim_buffer(&builder) == false)
+		stringbuilder_destroy(&builder);
 	return_string = stringbuilder_return_buffer(&builder);
 	return (return_string);
 }

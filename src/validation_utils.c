@@ -17,6 +17,8 @@ bool	validation_typecheck_cub(const char *path)
 {
 	unsigned int	length;
 
+	if (path == NULL)
+		return (false);
 	length = ft_strlen(path);
 	if (
 		length < 5
@@ -35,6 +37,8 @@ bool	validation_typecheck_xpm(const char *path)
 {
 	unsigned int	length;
 
+	if (path == NULL)
+		return (false);
 	length = ft_strlen(path);
 	if (
 		length < 5
