@@ -36,7 +36,8 @@ void	read_fd_loop(int *fd, t_stringbuilder *builder, t_temp_buffer *temp)
 		temp->read_head = 0;
 		while (temp->read_head < temp->write_head)
 		{
-			if (stringbuilder_append_char(builder, temp->buffer[temp->read_head]) == false)
+			if (stringbuilder_append_char(builder,
+					temp->buffer[temp->read_head]) == false)
 			{
 				stringbuilder_destroy(builder);
 				close(*fd);
