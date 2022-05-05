@@ -94,6 +94,6 @@ void	minimap_draw_to_image(void)
 	if (img->ptr == NULL)
 		exit_end_program_error(MLX_IMAGE);
 	image_fill(img, MINIMAP_SPACE_COLOR);
-	static_minimap_draw_map(img);
 	static_minimap_draw_rays(img);
+	static_minimap_draw_map(img);
 }
