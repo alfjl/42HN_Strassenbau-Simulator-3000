@@ -81,15 +81,14 @@ static int	static_get_texture(t_ray *ray, int y)
 
 	map_x = static_get_floor_value(data()->player.x,
 			ray->x, y, ray->dist);
-	if (map_x >= (int)data()->map.width)
-		map_x = data()->map.width - 1;
 	map_y = static_get_floor_value(data()->player.y,
 			ray->y, y, ray->dist);
-	if (map_y >= (int)data()->map.height)
-		map_y = data()->map.height - 1;
-	if (data()->map.grid[map_y][map_x] == VOID)
+	if (map_x < 0 || map_x >= (int)data()->map.width
+		|| map_y < 0 || map_y >= (int)data()->map.height)
 		return (SKY_IMG);
-	return (FLOOR_IMG);
+	if (data()->map.grid[map_y][map_x] == SPACE)
+		return (FLOOR_IMG);
+	return (SKY_IMG);
 }
 
 int	get_floor_color(t_ray *ray, int y)
@@ -97,7 +96,7 @@ int	get_floor_color(t_ray *ray, int y)
 	int	image;
 
 	image = static_get_texture(ray, y);
-	if (image == SKY_IMG) //better solution
+	if (image == SKY_IMG)
 		return (get_sky_color(ray, y));
 	if (FLOOR_TEXTURE_ENABLED)
 		return (static_get_texture_color(image, ray, y));
