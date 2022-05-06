@@ -14,7 +14,10 @@ void	*my_xpm_file_to_image(void *mlx_ptr, char *filename, t_img *img)
 void	my_destroy_image(void *mlx_ptr, t_img *img)
 {
 	if (img->ptr != NULL)
-		mlx_destroy_image(mlx_ptr, img->ptr);
+	{
+		int x = mlx_destroy_image(mlx_ptr, img->ptr);
+		printf("ERROR %d\n", x); //remove
+	}
 	img->ptr = NULL;
 }
 

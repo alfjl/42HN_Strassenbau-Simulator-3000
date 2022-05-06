@@ -1,45 +1,5 @@
 #include "cub3d.h"
 
-static int	static_sprites_determine_color(t_img *img, int x, int y)
-{
-	int		color;
-	float	scale_x;
-	float	scale_y;
-	float	tx;
-	float	ty;
-
-	scale_x = img->width / (float)SPRITE_SIZE;
-	scale_y = img->height / (float)SPRITE_SIZE;
-	tx = x * scale_x;
-	ty = y * scale_y;
-	color = get_pixel_color(img, tx, ty) - ALPHA;
-	return (color);
-}
-
-static void	static_sprites_resize_img(t_img *tmp, t_img *img)
-{
-	int		y;
-	int		x;
-	int		color;
-
-	img->ptr = my_new_image(data()->mlx, SPRITE_SIZE,
-			SPRITE_SIZE, img);
-	if (img->ptr == NULL)
-		exit_end_program_error(MLX_IMAGE);
-	y = 0;
-	while (y < img->height)
-	{
-		x = 0;
-		while (x < img->width)
-		{
-			color = static_sprites_determine_color(tmp, x, y);
-			my_pixel_put(img, x, y, color);
-			x++;
-		}	
-		y++;
-	}
-}
-
 static void	static_create_img_from_sprite(int spritenbr)
 {
 	t_img		*tmp;
@@ -59,8 +19,8 @@ static void	static_create_img_from_sprite(int spritenbr)
 			exit_end_program_error(MLX_IMAGE);
 		tmp->addr = mlx_get_data_addr(tmp->ptr, &tmp->bits_per_pixel,
 				&tmp->line_len, &tmp->endian);
-		static_sprites_resize_img(tmp, img);
-		my_destroy_image(data()->mlx, tmp);
+		textures_resize_img(tmp, img, SPRITE_SIZE);
+		my_destroy_image(data()->mlx, tmp); //this fails!
 		i++;
 	}
 }

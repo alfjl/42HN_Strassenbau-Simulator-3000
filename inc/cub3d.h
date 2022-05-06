@@ -494,6 +494,8 @@ void				controls_mouse(t_controls *controls);
 void				controls_keyboard(t_controls *controls);
 int					frame(t_controls *keys);
 void				textures_load(void);
+void				textures_resize_img(t_img *tmp, t_img *img, int size);
+int					textures_determine_color(t_img *img, int x, int y, int s);
 void				sprites_load(void);
 void				rays_create(void);
 t_ray				rays_calculate_vertical(float angle);

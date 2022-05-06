@@ -13,8 +13,6 @@ static void	static_images_create_environment_img(void)
 
 static void	static_images_create_player_img(void)
 {
-	int		x;
-	int		y;
 	t_img	*img;
 
 	img = &data()->imgs[PLAYER_IMG];
@@ -22,17 +20,7 @@ static void	static_images_create_player_img(void)
 			MINIMAP_PLAYER_SIZE, MINIMAP_PLAYER_SIZE, img);
 	if (img->ptr == NULL)
 		exit_end_program_error(MLX_IMAGE);
-	y = 0;
-	while (y < MINIMAP_PLAYER_SIZE)
-	{
-		x = 0;
-		while (x < MINIMAP_PLAYER_SIZE)
-		{
-			my_pixel_put(img, x, y, MINIMAP_PLAYER_COLOR);
-			x++;
-		}
-		y++;
-	}
+	image_fill(img, MINIMAP_PLAYER_COLOR);
 }
 
 static void	static_images_create_minimap_img(void)
