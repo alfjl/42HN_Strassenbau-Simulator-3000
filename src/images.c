@@ -21,6 +21,7 @@ static void	static_images_create_player_img(void)
 	if (img->ptr == NULL)
 		exit_end_program_error(MLX_IMAGE);
 	image_fill(img, MINIMAP_PLAYER_COLOR);
+	my_destroy_image(data()->mlx, img);
 }
 
 static void	static_images_create_minimap_img(void)

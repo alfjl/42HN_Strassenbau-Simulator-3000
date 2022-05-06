@@ -13,6 +13,11 @@ static void	static_exit_destroy_images(void *mlx)
 			my_destroy_image(mlx, &imgs[i]);
 		i++;
 	}
+	// (void)mlx;
+	// // my_destroy_image(data()->mlx, &data()->imgs[PLAYER_IMG]);
+	// mlx_destroy_image(data()->mlx, data()->imgs[PLAYER_IMG].ptr);
+	// my_destroy_image(data()->mlx, &data()->imgs[MINIMAP_IMG]);
+	// my_destroy_image(data()->mlx, &data()->imgs[ENV_IMG]);
 }
 
 static void	static_exit_destroy_sprites(void *mlx)
@@ -51,5 +56,7 @@ void	free_all(void)
 	win = data()->win;
 	if (win != NULL)
 		mlx_destroy_window(mlx, win);
+	mlx_destroy_display(mlx);
+	free(mlx);
 	return ;
 }
