@@ -25,7 +25,7 @@
 # define SHADE_FLOOR 0.6
 # define SHADE_CEILING 1.0
 //Settings
-# define BONUS 0
+# define BONUS 1
 # if BONUS
 #  define COLLISION_ENABLED 1
 #  define MINIMAP_ENABLED 1
@@ -173,7 +173,7 @@ typedef enum e_argb_colorcode_linux
 	DARK_GREY = COLOR_DARK_GREY + ALPHA,
 	SILVER = COLOR_SILVER + ALPHA,
 	BROWN = COLOR_BROWN + ALPHA,
-	TRANSPARENT = COLOR_TRANSPARENT + ALPHA,
+	TRANSPARENT = 0,
 }	t_argb_colorcode_linux;
 # else
 #  define LINUX 0

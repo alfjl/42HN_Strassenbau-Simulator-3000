@@ -9,7 +9,7 @@ int	get_pixel_color(t_img *img, int x, int y)
 	{
 		color = *(unsigned int *)(img->addr
 				+ (unsigned int)((int)y * img->line_len
-					+ x * (img->bits_per_pixel / 8))) + ALPHA;
+					+ x * (img->bits_per_pixel / 8)));
 	}
 	return (color);
 }
