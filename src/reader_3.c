@@ -50,7 +50,7 @@ bool	reader_detect_empty_line(t_reader *reader)
 	if (temp != reader->string)
 	{
 		if ((*(temp - 1) == '\n' && *temp == '\n')
-				|| (*(temp - 1) == '\0' && *temp == '\n'))
+			|| (*(temp - 1) == '\0' && *temp == '\n'))
 			return_value = true;
 	}
 	if (*temp == '\n')
@@ -73,9 +73,13 @@ char	*reader_read_to_newline(t_reader *reader)
 	{
 		c = reader_read_char(reader);
 		if (stringbuilder_append_char(&builder, c) == false)
+		{
+			stringbuilder_destroy(&builder);
 			return (NULL);
+		}
 	}
-	stringbuilder_trim_buffer(&builder);
+	if (stringbuilder_trim_buffer(&builder) == false)
+		stringbuilder_destroy(&builder);
 	return_string = stringbuilder_return_buffer(&builder);
 	return (return_string);
 }

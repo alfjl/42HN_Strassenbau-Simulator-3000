@@ -129,13 +129,15 @@ void	config_map_parse(t_config_file *config, t_map *map, t_reader *reader,
 	config_map_parse_fill_spaces(config, &builder, spaces, &i);
 	config_map_parse_fill_string(config, map, reader, &builder);
 	temp_string = stringbuilder_return_buffer(&builder);
-	if (config->errorcode != 0 || temp_string == NULL)
-		return ;
-	config_map_parse_built_grid(config, map);
-	if (config->errorcode != 0)
-		return ;
-	config_map_parse_read_string_to_grid(config, map, temp_string);
-	map->width -= 1;
+	if (config->errorcode == 0 && temp_string != NULL)
+	{
+		config_map_parse_built_grid(config, map);
+		if (config->errorcode == 0)
+		{
+			config_map_parse_read_string_to_grid(config, map, temp_string);
+			map->width -= 1;
+		}
+	}
 	temp_string = NULL;
 	stringbuilder_destroy(&builder);
 }

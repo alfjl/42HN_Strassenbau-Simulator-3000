@@ -35,7 +35,11 @@ char	*stringbuilder_trim_and_return_buffer(t_stringbuilder *builder)
 {
 	char	*return_string;
 
-	stringbuilder_trim_buffer(builder);
+	if (stringbuilder_trim_buffer(builder) == false)
+	{
+		free(builder->buffer);
+		builder->buffer = NULL;
+	}
 	return_string = stringbuilder_return_buffer(builder);
 	return (return_string);
 }

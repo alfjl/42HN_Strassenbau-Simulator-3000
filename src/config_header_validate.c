@@ -32,6 +32,8 @@ bool	config_header_validate_texture_file(const char *path)
 	int		fd;
 
 	return_value = true;
+	if (path == NULL)
+		return (false);
 	if (validation_typecheck_xpm(path) == false)
 		return_value = false;
 	fd = open(path, O_RDONLY);

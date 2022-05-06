@@ -173,7 +173,7 @@ typedef enum e_argb_colorcode_linux
 	DARK_GREY = COLOR_DARK_GREY + ALPHA,
 	SILVER = COLOR_SILVER + ALPHA,
 	BROWN = COLOR_BROWN + ALPHA,
-	TRANSPARENT = COLOR_TRANSPARENT + ALPHA,
+	TRANSPARENT = 0,
 }	t_argb_colorcode_linux;
 # else
 #  define LINUX 0
