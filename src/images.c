@@ -4,7 +4,7 @@ static void	static_images_create_environment_img(void)
 {
 	t_img	*img;
 
-	img = &data()->imgs[WALLS_IMG];
+	img = &data()->imgs[ENV_IMG];
 	img->ptr = my_new_image(data()->mlx, data()->window.width,
 			data()->window.height, img);
 	if (img->ptr == NULL)

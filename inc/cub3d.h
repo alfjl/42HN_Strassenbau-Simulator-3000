@@ -247,7 +247,7 @@ typedef enum e_img_nbr
 {
 	PLAYER_IMG,
 	MINIMAP_IMG,
-	WALLS_IMG,
+	ENV_IMG,
 	NORTH_IMG,
 	SOUTH_IMG,
 	EAST_IMG,

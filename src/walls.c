@@ -24,7 +24,7 @@ void	walls_draw_to_image(void)
 	t_data	*datas;
 
 	datas = data();
-	img = &datas->imgs[WALLS_IMG];
+	img = &datas->imgs[ENV_IMG];
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{
