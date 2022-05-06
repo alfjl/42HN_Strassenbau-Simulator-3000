@@ -20,7 +20,7 @@ static void	static_create_img_from_sprite(int spritenbr)
 		tmp->addr = mlx_get_data_addr(tmp->ptr, &tmp->bits_per_pixel,
 				&tmp->line_len, &tmp->endian);
 		textures_resize_img(tmp, img, SPRITE_SIZE);
-		my_destroy_image(data()->mlx, tmp); //this fails!
+		my_destroy_image(data()->mlx, tmp);
 		i++;
 	}
 }
@@ -32,7 +32,6 @@ void	sprites_load(void)
 	sprites = data()->sprites;
 	sprites[SHOVEL_SPRITE].sequence[0].path = "./sprites/shovel_idle0.xpm";
 	sprites[SHOVEL_SPRITE].count = 1;
-	sprites[SHOVEL_SPRITE].counter = 0;
 	static_create_img_from_sprite(SHOVEL_SPRITE);
 	sprites[SHOVEL_WALK_SPRITE].sequence[0].path = "./sprites/shovel0.xpm";
 	sprites[SHOVEL_WALK_SPRITE].sequence[1].path = "./sprites/shovel1.xpm";

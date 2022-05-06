@@ -10,9 +10,7 @@ void	mlx(void)
 	data()->mlx = mlx_init();
 	if (data()->mlx == NULL)
 		exit_end_program_error(MLX);
-	// mlx_loop(data()->mlx);
 	images_create();
-	exit_end_program_error(MLX); //remove
 	textures_load();
 	if (SPRITES_ENABLED)
 		sprites_load();

@@ -72,7 +72,7 @@ static void	static_create_img_from_texture(int image, float brightness)
 	if (tmp->ptr == NULL)
 		exit_end_program_error(MLX_IMAGE);
 	textures_resize_img(tmp, img, TEXTURE_SIZE);
-	my_destroy_image(data()->mlx, tmp); //this fails!
+	my_destroy_image(data()->mlx, tmp);
 	if (SHADING_ENABLED)
 		static_textures_shade_image(img, brightness);
 }

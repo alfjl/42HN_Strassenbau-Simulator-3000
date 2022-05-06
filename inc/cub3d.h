@@ -470,11 +470,8 @@ typedef struct s_fps
 typedef struct s_data
 {
 	t_config_file	config_file;
-	char			*filepath; //remove
 	struct s_frame	screen;
 	struct s_map	map;
-	char			**map_old; //remove
-	struct s_frame	grid; //remove
 	void			*mlx;
 	void			*win;
 	struct s_frame	minimap;

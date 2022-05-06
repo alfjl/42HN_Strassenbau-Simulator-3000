@@ -21,14 +21,12 @@ static void	static_images_create_player_img(void)
 	if (img->ptr == NULL)
 		exit_end_program_error(MLX_IMAGE);
 	image_fill(img, MINIMAP_PLAYER_COLOR);
-	my_destroy_image(data()->mlx, img);
 }
 
 static void	static_images_create_minimap_img(void)
 {
 	t_img	*img;
 
-	static_images_create_player_img();
 	img = &data()->imgs[MINIMAP_IMG];
 	img->ptr = my_new_image(data()->mlx, MINIMAP_RADIUS * 2 * MAP_GRID_SIZE,
 			MINIMAP_RADIUS * 2 * MAP_GRID_SIZE, img);
