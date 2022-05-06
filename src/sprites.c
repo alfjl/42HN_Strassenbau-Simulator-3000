@@ -12,7 +12,7 @@ static int	static_sprites_determine_color(t_img *img, int x, int y)
 	scale_y = img->height / (float)SPRITE_SIZE;
 	tx = x * scale_x;
 	ty = y * scale_y;
-	color = get_pixel_color(img, tx, ty);
+	color = get_pixel_color(img, tx, ty) - ALPHA;
 	return (color);
 }
 
@@ -33,8 +33,6 @@ static void	static_sprites_resize_img(t_img *tmp, t_img *img)
 		while (x < img->width)
 		{
 			color = static_sprites_determine_color(tmp, x, y);
-			if (x == 0 && y == 0) //remove
-				printf("color:\t\t%x\ntransparent:\t%x\nstandard:\t%x\n", color, TRANSPARENT, COLOR_TRANSPARENT); //remove
 			my_pixel_put(img, x, y, color);
 			x++;
 		}	
