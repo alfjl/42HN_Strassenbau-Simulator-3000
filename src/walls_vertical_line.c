@@ -57,7 +57,7 @@ static void	static_walls_draw_single_line(t_data *data, t_img *img, t_ray *ray)
 	{
 		if (y < ray->start_y)
 			color = get_ceiling_color(ray, y);
-		else if (y <= ray->end_y)
+		else if (y <= ray->end_y + 1)
 		{
 			if (ray->is_infinite)
 				color = get_sky_color(ray, y);
