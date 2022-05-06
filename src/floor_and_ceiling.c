@@ -24,7 +24,6 @@ static float	static_get_floor_value(float player_value,
 	weight = current_dist / wall_dist;
 	current_floor_value = weight * (ray_value - player_value) * 2
 		+ player_value;
-	// return ((current_floor_value - (int)current_floor_value) * TEXTURE_SIZE);
 	return (current_floor_value);
 }
 
@@ -47,7 +46,7 @@ static int	static_get_texture_color(int image, t_ray *ray, int y)
 int	get_ceiling_color(t_ray *ray, int y)
 {
 	int	image;
-	
+
 	image = CEILING_IMG;
 	if (CEILING_TEXTURE_ENABLED)
 		return (static_get_texture_color(image, ray, y));
@@ -82,12 +81,12 @@ static int	static_get_texture(t_ray *ray, int y)
 
 	map_x = static_get_floor_value(data()->player.x,
 			ray->x, y, ray->dist);
+	if (map_x >= (int)data()->map.width)
+		map_x = data()->map.width - 1;
 	map_y = static_get_floor_value(data()->player.y,
 			ray->y, y, ray->dist);
-	if (map_x >= (int)data()->map.width || map_y >= (int)data()->map.height) //better check
-		return (FLOOR_IMG);
-	// if (ray->index == 59) //remove
-	// 	printf("ray%d rx: %f ry: %f infinite: %d map_x: %d, map_y: %d c: %c\n", ray->index, ray->x, ray->y, ray->is_infinite, map_x, map_y, data()->map.grid[map_y][map_x]); //remove
+	if (map_y >= (int)data()->map.height)
+		map_y = data()->map.height - 1;
 	if (data()->map.grid[map_y][map_x] == VOID)
 		return (SKY_IMG);
 	return (FLOOR_IMG);

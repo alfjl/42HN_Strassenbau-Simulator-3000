@@ -11,7 +11,6 @@ static void	static_images_create_environment_img(void)
 		exit_end_program_error(MLX_IMAGE);
 }
 
-
 static void	static_images_create_player_img(void)
 {
 	int		x;
@@ -43,7 +42,7 @@ static void	static_images_create_minimap_img(void)
 	static_images_create_player_img();
 	img = &data()->imgs[MINIMAP_IMG];
 	img->ptr = my_new_image(data()->mlx, MINIMAP_RADIUS * 2 * MAP_GRID_SIZE,
-		MINIMAP_RADIUS * 2 * MAP_GRID_SIZE, img);
+			MINIMAP_RADIUS * 2 * MAP_GRID_SIZE, img);
 	if (img->ptr == NULL)
 		exit_end_program_error(MLX_IMAGE);
 }

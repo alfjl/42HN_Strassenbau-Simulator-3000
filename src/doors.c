@@ -30,7 +30,8 @@ void	doors_close_door(void) //check for void
 		x -= EXTRA_EDGE;
 	if (x < 0 || x >= data()->map.width || y < 0 || y >= data()->map.height)
 		return ;
-	if (static_doors_is_map_element(y, x, SPACE) && ray->len > pythagoras_hypotenuse(dx, dy))
+	if (static_doors_is_map_element(y, x, SPACE)
+		&& ray->len > pythagoras_hypotenuse(dx, dy))
 		data()->map.grid[(int)y][(int)x] = WALL;
 }
 
