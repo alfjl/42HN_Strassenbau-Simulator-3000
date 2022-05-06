@@ -1,9 +1,7 @@
 #include "cub3d.h"
 
-
 void	mlx(void)
 {
-	// still too long
 	static t_controls	controls;
 	void				*mlx;
 	void				*win;

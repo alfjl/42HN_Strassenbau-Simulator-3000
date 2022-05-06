@@ -1,6 +1,7 @@
 #include "cub3d.h"
 
-static bool	static_rays_hits_map_element(t_ray *ray, t_map *map, int map_element)
+static bool	static_rays_hits_map_element(t_ray *ray, t_map *map,
+	int map_element)
 {
 	float	y;
 	float	x;
@@ -38,7 +39,8 @@ void	rays_iterate_grid(t_ray *ray)
 			ray->is_infinite = false;
 			break ;
 		}
-		else if (BONUS && (ray->x <= 0 || ray->y <= 0 || ray->x >= map->width || ray->y >= map->height))
+		else if (BONUS && (ray->x <= 0 || ray->y <= 0
+				|| ray->x >= map->width || ray->y >= map->height))
 			break ;
 		else
 		{

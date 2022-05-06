@@ -1,31 +1,16 @@
 #include "cub3d.h"
 
-static void	static_images_create_background_img(void)
+static void	static_images_create_environment_img(void)
 {
-	int		x;
-	int		y;
 	t_img	*img;
 
-	img = &data()->imgs[BACKGROUND_IMG];
+	img = &data()->imgs[WALLS_IMG];
 	img->ptr = my_new_image(data()->mlx, data()->window.width,
 			data()->window.height, img);
 	if (img->ptr == NULL)
 		exit_end_program_error(MLX_IMAGE);
-	y = 0;
-	while (y < data()->window.height)
-	{
-		x = 0;
-		while (x < data()->window.width)
-		{
-			if (y < data()->window.height / 2)
-				my_pixel_put(img, x, y, data()->map.ceiling.rgb);
-			else
-				my_pixel_put(img, x, y, data()->map.floor.rgb);
-			x++;
-		}
-		y++;
-	}
 }
+
 
 static void	static_images_create_player_img(void)
 {
@@ -51,9 +36,21 @@ static void	static_images_create_player_img(void)
 	}
 }
 
+static void	static_images_create_minimap_img(void)
+{
+	t_img	*img;
+
+	static_images_create_player_img();
+	img = &data()->imgs[MINIMAP_IMG];
+	img->ptr = my_new_image(data()->mlx, MINIMAP_RADIUS * 2 * MAP_GRID_SIZE,
+		MINIMAP_RADIUS * 2 * MAP_GRID_SIZE, img);
+	if (img->ptr == NULL)
+		exit_end_program_error(MLX_IMAGE);
+}
+
 void	images_create(void)
 {
-	if (HAS_ALPHA)
-		static_images_create_background_img();
 	static_images_create_player_img();
+	static_images_create_environment_img();
+	static_images_create_minimap_img();
 }

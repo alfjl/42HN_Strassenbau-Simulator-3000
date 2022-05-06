@@ -10,8 +10,6 @@ static void	static_frame_minimap_to_window_buffer(void *mlx,
 	mlx_put_image_to_window(mlx, win, imgs[MINIMAP_IMG].ptr, MINIMAP_OFFSET,
 		MINIMAP_OFFSET);
 	mlx_put_image_to_window(mlx, win, imgs[PLAYER_IMG].ptr, origin, origin);
-	my_destroy_image(mlx, &imgs[MINIMAP_IMG]);
-	imgs[MINIMAP_IMG].ptr = NULL;
 }
 
 // static void	static_sprites_to_window_buffer(void)
@@ -70,12 +68,10 @@ static void	static_frame_player_sprite_to_window_buffer(void)
 static void	static_frame_environment_to_window_buffer(void *mlx, void *win,
 	t_img *imgs)
 {
-	if (HAS_ALPHA)
-		mlx_put_image_to_window(mlx, win, imgs[BACKGROUND_IMG].ptr, 0, 0);
 	if (SPRITES_ENABLED)
 		static_frame_player_sprite_to_window_buffer();
 	mlx_put_image_to_window(mlx, win, imgs[WALLS_IMG].ptr, 0, 0);
-	my_destroy_image(mlx, &imgs[WALLS_IMG]);
+	// my_destroy_image(mlx, &imgs[WALLS_IMG]);
 }
 
 static void	frame_set_up_window(void)

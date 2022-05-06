@@ -89,10 +89,6 @@ void	minimap_draw_to_image(void)
 	t_img	*img;
 
 	img = &data()->imgs[MINIMAP_IMG];
-	img->ptr = my_new_image(data()->mlx, MINIMAP_RADIUS * 2 * MAP_GRID_SIZE,
-			MINIMAP_RADIUS * 2 * MAP_GRID_SIZE, img);
-	if (img->ptr == NULL)
-		exit_end_program_error(MLX_IMAGE);
 	image_fill(img, MINIMAP_SPACE_COLOR);
 	static_minimap_draw_rays(img);
 	static_minimap_draw_map(img);
