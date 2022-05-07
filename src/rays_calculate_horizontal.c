@@ -9,9 +9,15 @@ static bool	static_rays_hits_map_element(t_ray *ray, t_map *map,
 	y = ray->y;
 	x = ray->x;
 	if (ray->orientation == NORTH)
-		y -= EXTRA_EDGE;
+	{
+		x = (int)x;
+		y--;
+	}
 	if (ray->orientation == WEST)
-		x -= EXTRA_EDGE;
+	{
+		x--;
+		y = (int)y;
+	}
 	if (y >= 0 && x >= 0 && y < map->height
 		&& x < map->width
 		&& map->grid[(int)y][(int)x] == map_element)

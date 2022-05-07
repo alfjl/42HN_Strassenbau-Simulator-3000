@@ -45,9 +45,15 @@ void	doors_open_door(void)
 	x = ray->x;
 	y = ray->y;
 	if (ray->orientation == NORTH)
-		y -= EXTRA_EDGE;
+	{
+		x = (int)x;
+		y--;
+	}
 	if (ray->orientation == WEST)
-		x -= EXTRA_EDGE;
+	{
+		x--;
+		y = (int)y;
+	}
 	if (ray->len > PLAYER_HIT_RANGE)
 		return ;
 	if (static_doors_is_map_element(y, x, WALL))
