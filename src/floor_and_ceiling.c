@@ -86,7 +86,8 @@ static int	static_get_texture(t_ray *ray, int y)
 	if (map_x < 0 || map_x >= (int)data()->map.width
 		|| map_y < 0 || map_y >= (int)data()->map.height)
 		return (SKY_IMG);
-	if (data()->map.grid[map_y][map_x] == SPACE)
+	if (data()->map.grid[map_y][map_x] == SPACE
+		|| data()->map.grid[map_y][map_x] == WALL)
 		return (FLOOR_IMG);
 	return (SKY_IMG);
 }
