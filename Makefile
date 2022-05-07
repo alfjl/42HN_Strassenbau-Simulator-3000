@@ -30,13 +30,13 @@ SRCS :=	main.c \
 		utils_mlx_platform2.c \
 		utils_mlx_re.c \
 		utils_mlx.c \
-		utils1.c \
-		utils2.c \
 		walls_vertical_line.c \
 		walls.c \
 		fps_bonus.c \
 		utils_1.c \
 		utils_2.c \
+		utils_3.c \
+		utils_4.c \
 		data.c \
 		data_utils_1.c \
 		data_utils_2.c \

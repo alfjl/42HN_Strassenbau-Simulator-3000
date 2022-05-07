@@ -13,12 +13,9 @@ static void	static_create_img_from_sprite(int spritenbr)
 	while (i < sprite->count)
 	{
 		img = &sprite->sequence[i];
-		tmp->ptr = mlx_xpm_file_to_image(data()->mlx, img->path,
-				&tmp->width, &tmp->height);
+		tmp->ptr = my_xpm_file_to_image(data()->mlx, img->path, tmp);
 		if (tmp->ptr == NULL)
 			exit_end_program_error(MLX_IMAGE);
-		tmp->addr = mlx_get_data_addr(tmp->ptr, &tmp->bits_per_pixel,
-				&tmp->line_len, &tmp->endian);
 		textures_resize_img(tmp, img, SPRITE_SIZE);
 		my_destroy_image(data()->mlx, tmp);
 		i++;
