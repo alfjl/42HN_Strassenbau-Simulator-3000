@@ -13,6 +13,7 @@
 # include "mlx.h"
 # include "libft.h"
 # include "stringbuilder.h"
+# include "reader.h"
 
 //Texture paths
 # define TEXTURE_FLOOR "./textures/soil.xpm"
@@ -320,13 +321,6 @@ typedef struct s_temp_buffer
 	int			write_head;
 }			t_temp_buffer;
 
-typedef struct s_reader
-{
-	char			*string;
-	char			*string_end;
-	char			*current;
-}			t_reader;
-
 typedef struct s_config_file
 {
 	bool			map_reached;
@@ -562,26 +556,6 @@ void				player_set_values(t_player *player, t_map *map,
 void				color_init(t_color *color);
 void				textures_init(t_textures *textures);
 void				textures_destroy(t_textures *textures);
-
-/* ------------------------------- reader.c -------------------------------- */
-void				reader_init(t_reader *reader, char *string);
-char				*reader_get_current(t_reader *reader);
-void				reader_increment(t_reader *reader);
-void				reader_decrement(t_reader *reader);
-void				reader_increment_stepsize(t_reader *reader,
-						unsigned int steps);
-void				reader_decrement_stepsize(t_reader *reader,
-						unsigned int steps);
-char				reader_peek_char(t_reader *reader);
-char				reader_read_char(t_reader *reader);
-bool				reader_peek_string(t_reader *reader, const char *string);
-unsigned int		reader_skip_whitespace(t_reader *reader);
-bool				reader_detect_empty_line(t_reader *reader);
-char				*reader_read_to_newline(t_reader *reader);
-void				reader_skip_newline(t_reader *reader);
-bool				reader_has_content(t_reader *reader);
-bool				reader_read_unsigned_integer(t_reader *reader,
-						unsigned int *target);
 
 /* ------------------------------- temp_buffer.c --------------------------- */
 void				temp_buffer_init(t_temp_buffer *temp);
