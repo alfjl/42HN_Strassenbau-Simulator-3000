@@ -12,6 +12,7 @@
 # include <math.h>
 # include "mlx.h"
 # include "libft.h"
+# include "stringbuilder.h"
 
 //Texture paths
 # define TEXTURE_FLOOR "./textures/soil.xpm"
@@ -94,7 +95,7 @@
 //Calculation constants
 # define EXTRA_EDGE 0.000001
 # define ONE_DEGREE_IN_RAD 0.0174533
-# define BUFFER_SIZE_CUB3D 20480
+# define BUFFER_SIZE_TEMP 20480
 
 typedef enum e_defines
 {
@@ -314,17 +315,10 @@ typedef enum e_arguments
 
 typedef struct s_temp_buffer
 {
-	char		buffer[BUFFER_SIZE_CUB3D];
+	char		buffer[BUFFER_SIZE_TEMP];
 	int			read_head;
 	int			write_head;
 }			t_temp_buffer;
-
-typedef struct s_stringbuilder
-{
-	char			*buffer;
-	int				read_head;
-	int				write_head;
-}			t_stringbuilder;
 
 typedef struct s_reader
 {
@@ -568,20 +562,6 @@ void				player_set_values(t_player *player, t_map *map,
 void				color_init(t_color *color);
 void				textures_init(t_textures *textures);
 void				textures_destroy(t_textures *textures);
-
-/* ------------------------------- stringbuilder.c ------------------------- */
-void				stringbuilder_init(t_stringbuilder *builder);
-void				stringbuilder_destroy(t_stringbuilder *builder);
-bool				stringbuilder_append_char(t_stringbuilder *builder,
-						const char c);
-bool				stringbuilder_trim_buffer(t_stringbuilder *builder);
-
-/* ------------------------------- stringbuilder_2.c ----------------------- */
-char				*stringbuilder_return_buffer(t_stringbuilder *builder);
-int					stringbuilder_return_read_head(t_stringbuilder *builder);
-int					stringbuilder_return_write_head(t_stringbuilder *builder);
-char				*stringbuilder_trim_and_return_buffer(
-						t_stringbuilder *builder);
 
 /* ------------------------------- reader.c -------------------------------- */
 void				reader_init(t_reader *reader, char *string);

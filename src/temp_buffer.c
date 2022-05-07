@@ -14,7 +14,7 @@
 
 void	temp_buffer_init(t_temp_buffer *temp)
 {
-	ft_bzero(temp->buffer, BUFFER_SIZE_CUB3D);
+	ft_bzero(temp->buffer, BUFFER_SIZE_TEMP);
 	temp->read_head = 0;
 	temp->write_head = 0;
 }

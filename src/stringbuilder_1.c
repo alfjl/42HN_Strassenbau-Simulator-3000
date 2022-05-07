@@ -15,11 +15,11 @@
 /* ----------------------------- FUNC 1 ------------------------------------ */
 void	stringbuilder_init(t_stringbuilder *builder)
 {
-	builder->buffer = ft_calloc(BUFFER_SIZE_CUB3D, sizeof(char));
+	builder->buffer = ft_calloc(BUFFER_SIZE_BUILDER, sizeof(char));
 	if (builder->buffer == NULL)
 		builder->write_head = 0;
 	else
-		builder->write_head = BUFFER_SIZE_CUB3D;
+		builder->write_head = BUFFER_SIZE_BUILDER;
 	builder->read_head = 0;
 }
 
@@ -41,7 +41,7 @@ bool	stringbuilder_append_char(t_stringbuilder *builder, const char c)
 
 	if (builder->read_head >= builder->write_head)
 	{
-		temp = (char *)ft_calloc(builder->read_head + BUFFER_SIZE_CUB3D,
+		temp = (char *)ft_calloc(builder->read_head + BUFFER_SIZE_BUILDER,
 				sizeof(char));
 		if (temp == NULL)
 			return (false);
@@ -56,7 +56,7 @@ bool	stringbuilder_append_char(t_stringbuilder *builder, const char c)
 			free(builder->buffer);
 			builder->buffer = NULL;
 			builder->buffer = temp;
-			builder->write_head = builder->read_head + BUFFER_SIZE_CUB3D;
+			builder->write_head = builder->read_head + BUFFER_SIZE_BUILDER;
 		}
 	}
 	builder->buffer[builder->read_head++] = c;
