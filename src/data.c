@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alanghan <alanghan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 10:07:37 by alanghan          #+#    #+#             */
-/*   Updated: 2022/04/30 18:23:21 by alanghan         ###   ########.fr       */
+/*   Updated: 2022/05/06 18:25:56 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void	static_sprites_init(void)
 	t_sprite	*sprite;
 
 	nbr = 0;
-	i = 0;
 	while (nbr < SPRITE_NBR)
 	{
 		sprite = &data()->sprites[nbr];
@@ -60,7 +59,8 @@ static void	static_sprites_init(void)
 		sprite->counter = 0;
 		sprite->speed = 1;
 		sprite->sign = 1;
-		while (i <= sprite->count)
+		i = 0;
+		while (i < sprite->count)
 		{
 			sprite->sequence[i].ptr = NULL;
 			i++;

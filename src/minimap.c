@@ -33,24 +33,24 @@ static int	static_minimap_determine_color(float map_y, float map_x)
 {
 	int		color;
 	t_map	*map;
-	float	epsilon;
+	float	eps;
 
-	epsilon = (1.0 / MAP_GRID_SIZE);
+	eps = (1.0 / MAP_GRID_SIZE);
 	map = &data()->map;
 	color = MINIMAP_BACKGROUND_COLOR;
 	if (map_y < map->height && map_y >= 0
 		&& map_x < map->width && map_x >= 0)
 	{
-		if (map->grid[(int)(map_y - epsilon)][(int)(map_x - epsilon)] == WALL)
+		if (map->grid[(int)(map_y - eps)][(int)(map_x - eps)] == WALL)
 			color = MINIMAP_WALL_COLOR;
-		else if (map->grid[(int)(map_y - epsilon)][(int)(map_x - epsilon)] == VOID) //fix
+		else if (map->grid[(int)(map_y - eps)][(int)(map_x - eps)] == VOID)
 			color = MINIMAP_BACKGROUND_COLOR;
 		else
 			color = TRANSPARENT;
 		if (!MINIMAP_GRID_ENABLED)
 			return (color);
-		if ((map_y > (int)map_y - epsilon && map_y < (int)map_y + epsilon)
-			|| (map_x > (int)map_x - epsilon && map_x < (int)map_x + epsilon))
+		if ((map_y > (int)map_y - eps && map_y < (int)map_y + eps)
+			|| (map_x > (int)map_x - eps && map_x < (int)map_x + eps))
 			color = MINIMAP_GRID_COLOR;
 	}
 	return (color);
@@ -89,11 +89,7 @@ void	minimap_draw_to_image(void)
 	t_img	*img;
 
 	img = &data()->imgs[MINIMAP_IMG];
-	img->ptr = my_new_image(data()->mlx, MINIMAP_RADIUS * 2 * MAP_GRID_SIZE,
-			MINIMAP_RADIUS * 2 * MAP_GRID_SIZE, img);
-	if (img->ptr == NULL)
-		exit_end_program_error(MLX_IMAGE);
 	image_fill(img, MINIMAP_SPACE_COLOR);
-	static_minimap_draw_rays(img);
 	static_minimap_draw_map(img);
+	static_minimap_draw_rays(img);
 }

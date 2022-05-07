@@ -82,7 +82,7 @@
 # define MINIMAP_SPACE_COLOR WHITE
 # define MINIMAP_WALL_COLOR GREY
 # define MINIMAP_GRID_COLOR BLACK
-# define MINIMAP_GRID_ENABLED 1
+# define MINIMAP_GRID_ENABLED 0
 # define MINIMAP_BACKGROUND_COLOR BLACK
 # define MINIMAP_PLAYER_COLOR BLACK
 # define MINIMAP_RAY_COLOR RED
@@ -173,7 +173,7 @@ typedef enum e_argb_colorcode_linux
 	DARK_GREY = COLOR_DARK_GREY + ALPHA,
 	SILVER = COLOR_SILVER + ALPHA,
 	BROWN = COLOR_BROWN + ALPHA,
-	TRANSPARENT = COLOR_TRANSPARENT + ALPHA,
+	TRANSPARENT = 0,
 }	t_argb_colorcode_linux;
 # else
 #  define LINUX 0
@@ -247,8 +247,7 @@ typedef enum e_img_nbr
 {
 	PLAYER_IMG,
 	MINIMAP_IMG,
-	BACKGROUND_IMG,
-	WALLS_IMG,
+	ENV_IMG,
 	NORTH_IMG,
 	SOUTH_IMG,
 	EAST_IMG,
@@ -471,11 +470,8 @@ typedef struct s_fps
 typedef struct s_data
 {
 	t_config_file	config_file;
-	char			*filepath; //remove
 	struct s_frame	screen;
 	struct s_map	map;
-	char			**map_old; //remove
-	struct s_frame	grid; //remove
 	void			*mlx;
 	void			*win;
 	struct s_frame	minimap;
@@ -495,6 +491,8 @@ void				controls_mouse(t_controls *controls);
 void				controls_keyboard(t_controls *controls);
 int					frame(t_controls *keys);
 void				textures_load(void);
+void				textures_resize_img(t_img *tmp, t_img *img, int size);
+int					textures_determine_color(t_img *img, int x, int y, int s);
 void				sprites_load(void);
 void				rays_create(void);
 t_ray				rays_calculate_vertical(float angle);

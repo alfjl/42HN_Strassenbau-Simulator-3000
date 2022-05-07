@@ -24,11 +24,7 @@ void	walls_draw_to_image(void)
 	t_data	*datas;
 
 	datas = data();
-	img = &datas->imgs[WALLS_IMG];
-	img->ptr = my_new_image(datas->mlx, datas->window.width,
-			datas->window.height, img);
-	if (img->ptr == NULL)
-		exit_end_program_error(MLX_IMAGE);
+	img = &datas->imgs[ENV_IMG];
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{

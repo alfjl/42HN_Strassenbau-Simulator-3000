@@ -51,13 +51,11 @@ static void	static_walls_draw_single_line(t_data *data, t_img *img, t_ray *ray)
 	int		color;
 
 	y = 0;
-	if (HAS_ALPHA)
-		y = ray->start_y;
 	while (y < data->window.height)
 	{
 		if (y < ray->start_y)
 			color = get_ceiling_color(ray, y);
-		else if (y <= ray->end_y)
+		else if (y <= ray->end_y + 1)
 		{
 			if (ray->is_infinite)
 				color = get_sky_color(ray, y);
@@ -65,11 +63,7 @@ static void	static_walls_draw_single_line(t_data *data, t_img *img, t_ray *ray)
 				color = static_get_wall_color(ray, y);
 		}
 		else if (y < data->window.height)
-		{
-			if (HAS_ALPHA)
-				return ;
 			color = get_floor_color(ray, y);
-		}
 		my_pixel_put(img, ray->screen_x, y, color);
 		y++;
 	}

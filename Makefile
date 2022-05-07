@@ -61,11 +61,11 @@ OBJS := $(patsubst %.c,$(OBJ_DIR)%.o,$(SRCS))
 HEADERS = $(wildcard $(HEADER_DIR)*.h)
 PLATFORM := $(shell uname -s)
 CC := gcc
-#CFLAGS := -g -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 ifeq ($(DEBUG),1)
-CFLAGS := -g -Wall -Wextra -Werror -D DEBUG=1
+CFLAGS += -D DEBUG=1
 else
-CFLAGS := -g -Wall -Wextra -Werror -D DEBUG=0
+CFLAGS += -D DEBUG=0
 endif
 RED := \033[0;31m
 GREEN := \033[0;32m

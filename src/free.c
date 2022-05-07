@@ -13,6 +13,11 @@ static void	static_exit_destroy_images(void *mlx)
 			my_destroy_image(mlx, &imgs[i]);
 		i++;
 	}
+	// (void)mlx;
+	// // my_destroy_image(data()->mlx, &data()->imgs[PLAYER_IMG]);
+	// mlx_destroy_image(data()->mlx, data()->imgs[PLAYER_IMG].ptr);
+	// my_destroy_image(data()->mlx, &data()->imgs[MINIMAP_IMG]);
+	// my_destroy_image(data()->mlx, &data()->imgs[ENV_IMG]);
 }
 
 static void	static_exit_destroy_sprites(void *mlx)
@@ -22,11 +27,11 @@ static void	static_exit_destroy_sprites(void *mlx)
 	t_sprite	*sprite;
 
 	nbr = 0;
-	i = 0;
 	while (nbr < SPRITE_NBR)
 	{
 		sprite = &data()->sprites[nbr];
-		while (i <= sprite->count)
+		i = 0;
+		while (i < sprite->count)
 		{
 			if (sprite->sequence[i].ptr != NULL)
 				my_destroy_image(mlx, &sprite->sequence[i]);
