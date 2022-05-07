@@ -25,7 +25,8 @@ void	mlx(void)
 	mlx_hook(win, DestroyNotify,
 		StructureNotifyMask, exit_end_program_success, NULL);
 	mlx_do_key_autorepeatoff(mlx);
-	my_mouse_hide(mlx, win);
+	//my_mouse_hide(mlx, win);
+	//mlx_mouse_show(mlx, win);
 	controls_keyboard(&controls);
 	if (MOUSE_ENABLED)
 		controls_mouse(&controls);

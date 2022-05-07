@@ -17,7 +17,6 @@ SRCS :=	main.c \
 		frame.c \
 		free.c \
 		images.c \
-		map.c \
 		minimap.c \
 		mlx.c \
 		player_movement.c \

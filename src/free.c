@@ -51,5 +51,7 @@ void	free_all(void)
 	win = data()->win;
 	if (win != NULL)
 		mlx_destroy_window(mlx, win);
+	mlx_destroy_display(mlx);
+	free(mlx);
 	return ;
 }
