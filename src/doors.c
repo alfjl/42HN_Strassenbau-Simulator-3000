@@ -11,7 +11,7 @@ static bool	static_doors_is_map_element(float y, float x, int map_element)
 	return (false);
 }
 
-void	doors_close_door(void) //check for void
+void	doors_close_door(void)
 {
 	float	x;
 	float	y;
