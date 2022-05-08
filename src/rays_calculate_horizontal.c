@@ -8,16 +8,34 @@ static bool	static_rays_hits_map_element(t_ray *ray, t_map *map,
 
 	y = ray->y;
 	x = ray->x;
-	if (ray->orientation == NORTH)
-	{
-		x = (int)x;
-		y--;
-	}
-	if (ray->orientation == WEST)
-	{
-		x--;
-		y = (int)y;
-	}
+	if (ray->angle > M_PI_2 && ray->angle < (3 * M_PI_2))
+		x = (int)(x - EXTRA_EDGE);
+	// else
+	// 	x += EXTRA_EDGE;
+	if (ray->angle > M_PI)
+		y = (int)(y - EXTRA_EDGE);
+	// else
+	// 	y += EXTRA_EDGE;
+
+
+	// if (ray->orientation == NORTH)
+	// {
+	// 	x = (int)(x - EXTRA_EDGE);
+	// 	// x = (int)x;
+	// 	// if (x == ray->x)
+	// 	// 	x--;
+	// 	y--;
+	// }
+	// if (ray->orientation == WEST)
+	// {
+	// 	x--;
+	// 	y = (int)(y - EXTRA_EDGE);
+	// 	// y = (int)y;
+	// 	// if (y == ray->y)
+	// 	// 	y--;
+	// }
+	// if (ray->orientation == EAST)
+	// 	y = (int)(y - EXTRA_EDGE);
 	if (y >= 0 && x >= 0 && y < map->height
 		&& x < map->width
 		&& map->grid[(int)y][(int)x] == map_element)
@@ -69,7 +87,11 @@ static void	static_rays_set_parameters_north(t_ray *ray, float atan)
 static void	static_rays_set_parameters_south(t_ray *ray, float atan)
 {
 	ray->orientation = SOUTH;
+	// printf("player_x: %f, player_y: %f\n", data()->player.x, data()->player.y); //remove
+	// printf("player_x: %lf, player_y: %lf\n", data()->player.x, data()->player.y); //remove
 	ray->y = ceil(data()->player.y);
+	// printf("ray_y: %f\n", ray->y); //remove
+	// printf("ray_y: %lf\n", ray->y); //remove
 	ray->x = (data()->player.y - ray->y) * atan + data()->player.x;
 	ray->dy = 1;
 	ray->dx = -ray->dy * atan;

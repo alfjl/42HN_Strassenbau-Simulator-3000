@@ -13,20 +13,29 @@ static void	static_minimap_draw_single_ray(t_img *img, int i)
 	ray_p.y = (rays[i].mini_y - player->y + MINIMAP_RADIUS) * MAP_GRID_SIZE;
 	player_p.x = MINIMAP_RADIUS * MAP_GRID_SIZE;
 	player_p.y = MINIMAP_RADIUS * MAP_GRID_SIZE;
-	draw_line_a_to_b(img, player_p, ray_p, MINIMAP_RAY_COLOR);
+	// if (i == 274) //remove
+	// 	draw_line_a_to_b(img, player_p, ray_p, GREEN); //remove
+	// else
+		draw_line_a_to_b(img, player_p, ray_p, MINIMAP_RAY_COLOR);
 }
 
 static void	static_minimap_draw_rays(t_img *img)
 {
 	int		i;
+			// static int boo = 0; //remove
 
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{
 		if (!(i % MINIMAP_RAY_DENSITY_FACTOR))
+		// {
+		// 	if (i > boo) //remove
+		// 		boo = i; //remove
 			static_minimap_draw_single_ray(img, i);
+		// }
 		i++;
 	}
+	// printf("max: %d index: %d\n", i, boo); //remove
 }
 
 static int	static_minimap_determine_color(float map_y, float map_x)
