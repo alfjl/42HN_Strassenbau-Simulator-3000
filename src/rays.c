@@ -21,9 +21,6 @@ static void	static_ray_fill_struct(float angle, int i)
 
 	ray = data()->rays;
 	window = &data()->window;
-	// if (i == 750) //remove
-	// if (i == 274) //remove
-	// 	printf("player_x: %f, player_y: %f\n", data()->player.x, data()->player.y); //remove
 	ray[i] = static_ray_get(angle);
 	ray[i].index = i;
 	delta = radian_limits(data()->player.angle - ray[i].angle);
@@ -41,12 +38,9 @@ void	rays_create(void)
 	angle = radian_limits(data()->player.angle
 			- ANGLE_OF_VIEW / 2 * ONE_DEGREE_IN_RAD);
 	i = 0;
-	printf("player.x: %f player.y: %f player.a: %f\n", data()->player.x, data()->player.y, data()->player.angle); //remove
 	while (i < NUMBER_OF_RAYS)
 	{
-		// if ( i == 750) //remove
-		// if ( i == 274) //remove
-			static_ray_fill_struct(angle, i);
+		static_ray_fill_struct(angle, i);
 		angle = radian_limits(angle
 				+ ANGLE_OF_VIEW * ONE_DEGREE_IN_RAD / NUMBER_OF_RAYS);
 		i++;

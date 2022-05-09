@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 10:07:17 by alanghan          #+#    #+#             */
-/*   Updated: 2022/05/08 11:18:32 by coder            ###   ########.fr       */
+/*   Updated: 2022/05/09 11:21:19 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,8 @@ void	player_init(t_player *player)
 /* ----------------------------- FUNC 4 ------------------------------------ */
 void	player_set_values(t_player *player, t_map *map, int x, int y)
 {
-	// player->x = (float)y + 0.5;
-	// player->y = (float)x + 0.5 + 2 * MOVE_STEP; //remove MOVE_STEP
-	(void)x;//remove
-	(void)y;//remove
-	(void)map;//remove
-	player->x = 6.482517; //remove
-	player->y = 4248.413574; //remove
+	player->x = (float)y + 0.5;
+	player->y = (float)x + 0.5;
 	calculate_pos_delta();
-	// player->angle = player_calculate_angle(map->grid[x][y]);
-	player->angle = 1.330000; //remove
+	player->angle = player_calculate_angle(map->grid[x][y]);
 }
