@@ -71,7 +71,6 @@ static void	static_frame_environment_to_window_buffer(void *mlx, void *win,
 	if (SPRITES_ENABLED)
 		static_frame_player_sprite_to_window_buffer();
 	mlx_put_image_to_window(mlx, win, imgs[ENV_IMG].ptr, 0, 0);
-	// my_destroy_image(mlx, &imgs[ENV_IMG]);
 }
 
 static void	frame_set_up_window(void)
@@ -88,8 +87,6 @@ static void	frame_set_up_window(void)
 		static_frame_minimap_to_window_buffer(mlx, win, imgs);
 	if (FPS_ENABLED)
 		fps_to_window_buffer(); //remove
-	// if (SKY_ENABLED)
-	// 	mlx_put_image_to_window(mlx, win, imgs[SKY_IMG].ptr, 0, 0);
 }
 
 int	frame(t_controls *controls)

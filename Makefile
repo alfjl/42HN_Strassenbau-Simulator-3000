@@ -8,56 +8,56 @@ HEADER_DIR = ./inc/
 
 # $(NAME): HEADER_DIR = ./inc/
 # bonus: HEADER_DIR = ./inc/bonus/
-SRCS :=	main.c \
-		controls_keyboard.c \
-		controls_mouse.c \
-		doors.c \
-		exit.c \
-		floor_and_ceiling.c \
-		frame.c \
-		free.c \
-		images.c \
-		minimap.c \
-		mlx.c \
-		player_movement.c \
-		rays_calculate_horizontal.c \
-		rays_calculate_vertical.c \
-		rays.c \
-		sprites.c \
-		textures.c \
-		utils_colors.c \
-		utils_mlx_platform1.c \
-		utils_mlx_platform2.c \
-		utils_mlx_re.c \
-		utils_mlx.c \
-		walls_vertical_line.c \
-		walls.c \
-		fps_bonus.c \
-		utils_1.c \
-		utils_2.c \
-		utils_3.c \
-		utils_4.c \
-		data.c \
-		data_utils_1.c \
-		data_utils_2.c \
-		stringbuilder_1.c \
-		stringbuilder_2.c \
-		reader_1.c \
-		reader_2.c \
-		reader_3.c \
-		reader_4.c \
-		sky.c \
-		temp_buffer.c \
-		config.c \
-		config_header_parse.c \
+SRCS :=	config_header_parse.c \
 		config_header_validate.c \
 		config_map_parse_1.c \
 		config_map_parse_2.c \
 		config_map_validate_1.c \
 		config_map_validate_2.c \
 		config_map_validate_3.c \
+		config.c \
+		controls_keyboard.c \
+		controls_mouse.c \
+		data_utils_1.c \
+		data_utils_2.c \
+		data.c \
+		doors.c \
+		exit.c \
+		floor_and_ceiling.c \
+		fps_bonus.c \
+		frame.c \
+		free.c \
+		images.c \
+		main.c \
+		minimap.c \
+		mlx.c \
+		player_movement.c \
+		player.c \
+		rays_calculate_horizontal.c \
+		rays_calculate_vertical.c \
+		rays.c \
+		reader_1.c \
+		reader_2.c \
+		reader_3.c \
+		reader_4.c \
+		sky.c \
+		sprites.c \
+		stringbuilder_1.c \
+		stringbuilder_2.c \
+		temp_buffer.c \
+		textures.c \
+		utils_1.c \
+		utils_2.c \
+		utils_3.c \
+		utils_4.c \
+		utils_colors.c \
+		utils_mlx_platform_1.c \
+		utils_mlx_platform_2.c \
+		utils_mlx_re.c \
+		utils_mlx.c \
 		validation_utils.c \
-		player.c
+		walls_vertical_line.c \
+		walls.c
 OBJS := $(patsubst %.c,$(OBJ_DIR)%.o,$(SRCS))
 HEADERS = $(wildcard $(HEADER_DIR)*.h)
 PLATFORM := $(shell uname -s)
