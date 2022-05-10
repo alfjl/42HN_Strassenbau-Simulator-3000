@@ -479,15 +479,16 @@ typedef struct s_data
 }	t_data;
 
 void				map_read(char *filepath);
-void				images_create(void* mlx);
+void				images_create(void *mlx);
 void				mlx_start(void);
 void				controls_mouse(t_controls *controls);
 void				controls_keyboard(t_controls *controls);
 int					frame(t_controls *keys);
-void				textures_convert_to_image(void* mlx);
-void				textures_resize_img(void* mlx, t_img *tmp, t_img *img, int size);
+void				textures_convert_to_image(void *mlx);
+void				textures_resize_img(void *mlx,
+						t_img *tmp, t_img *img, int size);
 int					textures_determine_color(t_img *img, int x, int y, int s);
-void				sprites_convert_to_image(void* mlx);
+void				sprites_convert_to_image(void *mlx);
 void				rays_create(void);
 t_ray				rays_calculate_vertical(float angle);
 t_ray				rays_calculate_horizontal(float angle);

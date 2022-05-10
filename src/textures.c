@@ -37,7 +37,7 @@ int	textures_determine_color(t_img *img, int x, int y, int size)
 	return (color);
 }
 
-void	textures_resize_img(void* mlx, t_img *tmp, t_img *img, int size)
+void	textures_resize_img(void *mlx, t_img *tmp, t_img *img, int size)
 {
 	int		y;
 	int		x;
@@ -61,7 +61,8 @@ void	textures_resize_img(void* mlx, t_img *tmp, t_img *img, int size)
 	}
 }
 
-static void	static_create_img_from_texture(void* mlx, int image, float brightness)
+static void	static_create_img_from_texture(void *mlx,
+	int image, float brightness)
 {
 	t_img	*tmp;
 	t_img	*img;
@@ -77,7 +78,7 @@ static void	static_create_img_from_texture(void* mlx, int image, float brightnes
 		static_textures_shade_image(img, brightness);
 }
 
-void	textures_convert_to_image(void* mlx)
+void	textures_convert_to_image(void *mlx)
 {
 	t_img	*img;
 

@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void static_mlx_create_images(void* mlx)
+static void	static_mlx_create_images(void *mlx)
 {
 	images_create(mlx);
 	textures_convert_to_image(mlx);

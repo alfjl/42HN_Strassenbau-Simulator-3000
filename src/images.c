@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void	static_images_create_environment_img(void* mlx, t_img *img)
+static void	static_images_create_environment_img(void *mlx, t_img *img)
 {
 	img->ptr = my_new_image(mlx, data()->window.width,
 			data()->window.height, img);
@@ -8,7 +8,7 @@ static void	static_images_create_environment_img(void* mlx, t_img *img)
 		exit_end_program_error(MLX_IMAGE);
 }
 
-static void	static_images_create_player_img(void* mlx, t_img *img)
+static void	static_images_create_player_img(void *mlx, t_img *img)
 {
 	img->ptr = my_new_image(mlx,
 			MINIMAP_PLAYER_SIZE, MINIMAP_PLAYER_SIZE, img);
@@ -17,7 +17,7 @@ static void	static_images_create_player_img(void* mlx, t_img *img)
 	image_fill(img, MINIMAP_PLAYER_COLOR);
 }
 
-static void	static_images_create_minimap_img(void* mlx, t_img *img)
+static void	static_images_create_minimap_img(void *mlx, t_img *img)
 {
 	img->ptr = my_new_image(mlx, MINIMAP_RADIUS * 2 * MAP_GRID_SIZE,
 			MINIMAP_RADIUS * 2 * MAP_GRID_SIZE, img);
@@ -25,7 +25,7 @@ static void	static_images_create_minimap_img(void* mlx, t_img *img)
 		exit_end_program_error(MLX_IMAGE);
 }
 
-void	images_create(void* mlx)
+void	images_create(void *mlx)
 {
 	t_img	*imgs;
 

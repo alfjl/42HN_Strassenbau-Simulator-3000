@@ -22,7 +22,7 @@ static void	static_create_img_from_sprite(void *mlx, int spritenbr)
 	}
 }
 
-void	sprites_convert_to_image(void* mlx)
+void	sprites_convert_to_image(void *mlx)
 {
 	t_sprite	*sprites;
 
