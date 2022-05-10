@@ -96,7 +96,6 @@
 //Calculation constants
 # define EXTRA_EDGE 0.000001
 # define ONE_DEGREE_IN_RAD 0.0174533
-# define BUFFER_SIZE_TEMP 20480
 
 typedef enum e_defines
 {
@@ -322,7 +321,7 @@ typedef enum e_arguments
 
 typedef struct s_temp_buffer
 {
-	char		buffer[BUFFER_SIZE_TEMP];
+	char		buffer[BUFFER_SIZE_BUILDER];
 	int			read_head;
 	int			write_head;
 }			t_temp_buffer;
