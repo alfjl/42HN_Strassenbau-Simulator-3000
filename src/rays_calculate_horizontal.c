@@ -39,7 +39,7 @@ void	rays_iterate_grid(t_ray *ray)
 			ray->is_infinite = false;
 			break ;
 		}
-		else if (BONUS && (ray->x <= 0 || ray->y <= 0
+		else if ((ray->x <= 0 || ray->y <= 0
 				|| ray->x >= map->width || ray->y >= map->height))
 			break ;
 		else
