@@ -498,7 +498,7 @@ void				walls_draw_segment(t_data *data, t_img *img, t_ray *ray);
 void				doors_interact(int keycode);
 void				doors_open_door(void);
 void				doors_close_door(void);
-void				player_update_position(t_controls *keys);
+void				player_move(t_controls *keys);
 void				player_update_z_position(void);
 int					exit_end_program_error(int errorcode);
 int					exit_end_program_success(void);

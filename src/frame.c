@@ -95,7 +95,7 @@ static void	frame_set_up_window(void)
 int	frame(t_controls *controls)
 {
 	player_update_z_position();
-	player_update_position(controls);
+	player_move(controls);
 	controls->mouse_left = false;
 	controls->mouse_right = false;
 	data()->player.turn_speed = TURN_STEP;

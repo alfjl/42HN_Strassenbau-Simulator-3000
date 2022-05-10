@@ -42,11 +42,8 @@ void	rays_iterate_grid(t_ray *ray)
 		else if ((ray->x <= 0 || ray->y <= 0
 				|| ray->x >= map->width || ray->y >= map->height))
 			break ;
-		else
-		{
-			ray->x += ray->dx;
-			ray->y += ray->dy;
-		}
+		ray->x += ray->dx;
+		ray->y += ray->dy;
 		i++;
 	}
 }

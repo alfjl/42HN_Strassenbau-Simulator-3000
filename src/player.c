@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alanghan <alanghan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 10:08:00 by alanghan          #+#    #+#             */
-/*   Updated: 2022/04/30 18:30:50 by alanghan         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:13:59 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,23 @@ float	player_calculate_angle(char direction)
 	else
 		angle = -1.0;
 	return (angle);
+}
+
+/* ----------------------------- FUNC 2 ------------------------------------ */
+void	player_update_z_position(void)
+{
+	t_player	*player;
+
+	player = &data()->player;
+	if (player->is_jumping && player->dz < 0)
+		player->dz = 0;
+	else if (player->is_jumping && player->dz < JUMP_DELTA)
+		player->dz += GRAVITY;
+	else if (player->dz > 0)
+	{
+		player->is_jumping = false;
+		player->dz -= GRAVITY;
+		if (player->dz < 0)
+			player->dz = 0;
+	}
 }

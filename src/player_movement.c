@@ -1,23 +1,5 @@
 #include "cub3d.h"
 
-void	player_update_z_position(void)
-{
-	t_player	*player;
-
-	player = &data()->player;
-	if (player->is_jumping && player->dz < 0)
-		player->dz = 0;
-	else if (player->is_jumping && player->dz < JUMP_DELTA)
-		player->dz += GRAVITY;
-	else if (player->dz > 0)
-	{
-		player->is_jumping = false;
-		player->dz -= GRAVITY;
-		if (player->dz < 0)
-			player->dz = 0;
-	}
-}
-
 static void	static_player_set_status(t_controls *controls)
 {
 	if (data()->player.status == HITTING)
@@ -67,7 +49,7 @@ static bool	static_is_valid_move(float y, float x)
 	return (true);
 }
 
-static void	static_player_update(float *x, float dx, float *y, float dy)
+static void	static_player_update_pos(float *x, float dx, float *y, float dy)
 {
 	float	new_x;
 	float	new_y;
@@ -88,7 +70,7 @@ static void	static_player_update(float *x, float dx, float *y, float dy)
 	}
 }
 
-void	player_update_position(t_controls *controls)
+void	player_move(t_controls *controls)
 {
 	t_player	*player;
 	float		*x;
@@ -103,13 +85,13 @@ void	player_update_position(t_controls *controls)
 	dx = player->dx;
 	dy = player->dy;
 	if (controls->forwards)
-		static_player_update(x, dx, y, dy);
+		static_player_update_pos(x, dx, y, dy);
 	if (controls->backwards)
-		static_player_update(x, -dx, y, -dy);
+		static_player_update_pos(x, -dx, y, -dy);
 	if (controls->leftwards)
-		static_player_update(x, dy, y, -dx);
+		static_player_update_pos(x, dy, y, -dx);
 	if (controls->rightwards)
-		static_player_update(x, -dy, y, dx);
+		static_player_update_pos(x, -dy, y, dx);
 	if (controls->turnleft || controls->mouse_left)
 		player->angle = radian_limits(player->angle - player->turn_speed);
 	if (controls->turnright || controls->mouse_right)
