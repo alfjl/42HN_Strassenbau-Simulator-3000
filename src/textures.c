@@ -37,13 +37,13 @@ int	textures_determine_color(t_img *img, int x, int y, int size)
 	return (color);
 }
 
-void	textures_resize_img(t_img *tmp, t_img *img, int size)
+void	textures_resize_img(void* mlx, t_img *tmp, t_img *img, int size)
 {
 	int		y;
 	int		x;
 	int		color;
 
-	img->ptr = my_new_image(data()->mlx, size,
+	img->ptr = my_new_image(mlx, size,
 			size, img);
 	if (img->ptr == NULL)
 		exit_end_program_error(MLX_IMAGE);
@@ -61,38 +61,38 @@ void	textures_resize_img(t_img *tmp, t_img *img, int size)
 	}
 }
 
-static void	static_create_img_from_texture(int image, float brightness)
+static void	static_create_img_from_texture(void* mlx, int image, float brightness)
 {
 	t_img	*tmp;
 	t_img	*img;
 
 	tmp = &data()->imgs[TMP_IMG];
 	img = &data()->imgs[image];
-	tmp->ptr = my_xpm_file_to_image(data()->mlx, img->path, tmp);
+	tmp->ptr = my_xpm_file_to_image(mlx, img->path, tmp);
 	if (tmp->ptr == NULL)
 		exit_end_program_error(MLX_IMAGE);
-	textures_resize_img(tmp, img, TEXTURE_SIZE);
-	my_destroy_image(data()->mlx, tmp);
+	textures_resize_img(mlx, tmp, img, TEXTURE_SIZE);
+	my_destroy_image(mlx, tmp);
 	if (SHADING_ENABLED)
 		static_textures_shade_image(img, brightness);
 }
 
-void	textures_load(void)
+void	textures_convert_to_image(void* mlx)
 {
 	t_img	*img;
 
 	img = &data()->imgs[SKY_IMG];
-	static_create_img_from_texture(NORTH_IMG, SHADE_NORTH);
-	static_create_img_from_texture(SOUTH_IMG, SHADE_SOUTH);
-	static_create_img_from_texture(EAST_IMG, SHADE_EAST);
-	static_create_img_from_texture(WEST_IMG, SHADE_WEST);
+	static_create_img_from_texture(mlx, NORTH_IMG, SHADE_NORTH);
+	static_create_img_from_texture(mlx, SOUTH_IMG, SHADE_SOUTH);
+	static_create_img_from_texture(mlx, EAST_IMG, SHADE_EAST);
+	static_create_img_from_texture(mlx, WEST_IMG, SHADE_WEST);
 	if (FLOOR_TEXTURE_ENABLED)
-		static_create_img_from_texture(FLOOR_IMG, SHADE_FLOOR);
+		static_create_img_from_texture(mlx, FLOOR_IMG, SHADE_FLOOR);
 	if (CEILING_TEXTURE_ENABLED)
-		static_create_img_from_texture(CEILING_IMG, SHADE_CEILING);
+		static_create_img_from_texture(mlx, CEILING_IMG, SHADE_CEILING);
 	if (SKY_ENABLED)
 	{
-		img->ptr = my_xpm_file_to_image(data()->mlx, img->path, img);
+		img->ptr = my_xpm_file_to_image(mlx, img->path, img);
 		if (img->ptr == NULL)
 			exit_end_program_error(MLX_IMAGE);
 	}

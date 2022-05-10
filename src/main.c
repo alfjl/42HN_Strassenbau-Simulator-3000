@@ -49,7 +49,7 @@ int	main(int argc, char *argv[])
 		exit_end_program_error(config->errorcode);
 	if (DEBUG == 1)
 		debug_print();
-	mlx();
+	mlx_start();
 	free_all();
 	return (0);
 }
