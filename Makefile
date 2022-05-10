@@ -46,6 +46,7 @@ SRCS :=	main.c \
 		reader_2.c \
 		reader_3.c \
 		reader_4.c \
+		sky.c \
 		temp_buffer.c \
 		config.c \
 		config_header_parse.c \
