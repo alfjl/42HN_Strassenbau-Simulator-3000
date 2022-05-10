@@ -41,20 +41,10 @@ static int	static_keyboard_key_press_hook(int keycode, t_controls *controls)
 		data()->player.dz = 0;
 	if (JUMP_ENABLED && keycode == SPACE_KEY && !(data()->player.dz > 0))
 		data()->player.is_jumping = true;
-	// else if (JUMP_ENABLED && keycode == SPACE_KEY && data()->player.dz > 0)
-	// 	data()->player.dz -= GRAVITY;
 	if (SPRINT_ENABLED && keycode == SHIFT_KEY)
 		data()->player.step_size = MOVE_STEP * PLAYER_SPRINT_FACTOR;
-	if (DOORS_ENABLED && keycode == E_KEY)
-	{
-		data()->player.status = HITTING;
-		doors_close_door();
-	}
-	if (DOORS_ENABLED && keycode == Q_KEY)
-	{
-		data()->player.status = HITTING;
-		doors_open_door();
-	}
+	if (DOORS_ENABLED)
+		doors_interact(keycode);
 	return (EXIT_SUCCESS);
 }
 

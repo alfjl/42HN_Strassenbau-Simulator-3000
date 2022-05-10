@@ -107,12 +107,6 @@ typedef enum e_defines
 	GRAVITY = JUMP_DELTA / 8,
 }	t_defines;
 
-typedef enum e_buttons
-{
-	LEFT_BUTTON = 1,
-	RIGHT_BUTTON,
-}	t_buttons;
-
 typedef enum e_argb_colorcode
 {
 	COLOR_RED = 0x00FF0000,
@@ -157,6 +151,12 @@ typedef enum e_keycode_linux
 	SPACE_KEY = 32,
 }	t_keycode_linux;
 
+typedef enum e_buttons_linux
+{
+	LEFT_BUTTON = 1,
+	RIGHT_BUTTON = 3,
+}	t_buttons_linux;
+
 typedef enum e_argb_colorcode_linux
 {
 	RED = COLOR_RED + ALPHA,
@@ -198,6 +198,12 @@ typedef enum e_keycode_mac
 	SHIFT_KEY,
 	SPACE_KEY = 49,
 }	t_keycode_mac;
+
+typedef enum e_buttons_mac
+{
+	LEFT_BUTTON = 1,
+	RIGHT_BUTTON,
+}	t_buttons_mac;
 
 typedef enum e_argb_colorcode_mac
 {
@@ -489,6 +495,7 @@ void				rays_iterate_grid(t_ray *ray);
 void				minimap_draw_to_image(void);
 void				walls_draw_to_image(void);
 void				walls_draw_segment(t_data *data, t_img *img, t_ray *ray);
+void				doors_interact(int keycode);
 void				doors_open_door(void);
 void				doors_close_door(void);
 void				player_update_position(t_controls *keys);

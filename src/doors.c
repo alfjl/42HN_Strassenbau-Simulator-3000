@@ -59,3 +59,17 @@ void	doors_open_door(void)
 	if (static_doors_is_map_element(y, x, WALL))
 		data()->map.grid[(int)y][(int)x] = SPACE;
 }
+
+void	doors_interact(int keycode)
+{
+	if (keycode == E_KEY)
+	{
+		data()->player.status = HITTING;
+		doors_close_door();
+	}
+	if (keycode == Q_KEY)
+	{
+		data()->player.status = HITTING;
+		doors_open_door();
+	}
+}
