@@ -1,20 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_colors.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/10 11:54:43 by coder             #+#    #+#             */
+/*   Updated: 2022/05/10 11:54:52 by coder            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
-
-// unsigned int	color_convert(long color)
-// {
-// 	int	a;
-// 	int	r;
-// 	int	g;
-// 	int	b;
-
-// 	// a = ((color >> 48) & 0xFFFF) / 0xFF;
-// 	a = 0;
-// 	r = ((color >> 32) & 0xFFFF) / 0xFF;
-// 	g = ((color >> 16) & 0xFFFF) / 0xFF;
-// 	b = ((color) & 0xFFFF) / 0xFF;
-// 	printf("a %d r %d g %d b %d\n", a, r, g, b);
-// 	return (argb_create(r, g, b, a));
-// }
 
 unsigned int	argb_shade_color(int color, float brightness)
 {
