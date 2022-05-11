@@ -533,6 +533,7 @@ void				*my_new_image(void *mlx_ptr, int width, int height,
 void				*my_xpm_file_to_image(void *mlx_ptr, char *path,
 						t_img *img);
 void				my_destroy_image(void *mlx_ptr, t_img *img);
+int					my_destroy_display(void *mlx_ptr);
 int					my_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x,
 						int *y);
 int					my_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);

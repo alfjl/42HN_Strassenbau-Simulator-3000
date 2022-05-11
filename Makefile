@@ -53,6 +53,7 @@ SRCS :=	config_header_parse.c \
 		utils_colors.c \
 		utils_mlx_platform_1.c \
 		utils_mlx_platform_2.c \
+		utils_mlx_platform_3.c \
 		utils_mlx_re.c \
 		utils_mlx.c \
 		validation_utils.c \
