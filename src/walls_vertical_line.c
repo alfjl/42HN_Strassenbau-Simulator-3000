@@ -6,30 +6,28 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:55:14 by coder             #+#    #+#             */
-/*   Updated: 2022/05/10 11:55:15 by coder            ###   ########.fr       */
+/*   Updated: 2022/05/16 09:45:07 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	static_walls_get_texture_image_index(int index)
+static int	static_walls_determine_texture_image(t_ray *ray)
 {
-	if (data()->rays[index].orientation == NORTH)
+	if (ray->orientation == NORTH)
 		return (NORTH_IMG);
-	else if (data()->rays[index].orientation == SOUTH)
+	else if (ray->orientation == SOUTH)
 		return (SOUTH_IMG);
-	else if (data()->rays[index].orientation == EAST)
+	else if (ray->orientation == EAST)
 		return (EAST_IMG);
 	else
 		return (WEST_IMG);
 }
 
-static int	static_walls_determine_tx(int index)
+static int	static_walls_determine_tx(t_ray *ray)
 {
 	int		tx;
-	t_ray	*ray;
 
-	ray = &data()->rays[index];
 	if (ray->orientation == NORTH || ray->orientation == SOUTH)
 		tx = (ray->x - (int)ray->x) * TEXTURE_SIZE;
 	else
@@ -48,8 +46,8 @@ static int	static_get_wall_color(t_ray *ray, int y)
 	float	ty;
 	int		image;
 
-	image = static_walls_get_texture_image_index(ray->index);
-	tx = static_walls_determine_tx(ray->index);
+	image = static_walls_determine_texture_image(ray);
+	tx = static_walls_determine_tx(ray);
 	ty = ray->tyoffset
 		+ (TEXTURE_SIZE / ray->line_h) * (y - ray->start_y);
 	if (ty > data()->window.height - 1)

@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:54:02 by coder             #+#    #+#             */
-/*   Updated: 2022/05/10 11:54:03 by coder            ###   ########.fr       */
+/*   Updated: 2022/05/16 10:03:07 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,38 +60,42 @@ void	rays_iterate_grid(t_ray *ray)
 	}
 }
 
-static void	static_rays_set_parameters_north(t_ray *ray, float atan)
+static void	static_rays_set_parameters_north(t_ray *ray, float atan,
+	t_player *player)
 {
 	ray->orientation = NORTH;
-	ray->y = trunc(data()->player.y);
-	ray->x = (data()->player.y - ray->y) * atan + data()->player.x;
+	ray->y = trunc(player->y);
+	ray->x = (player->y - ray->y) * atan + player->x;
 	ray->dy = -1;
 	ray->dx = -ray->dy * atan;
 }
 
-static void	static_rays_set_parameters_south(t_ray *ray, float atan)
+static void	static_rays_set_parameters_south(t_ray *ray, float atan,
+	t_player *player)
 {
 	ray->orientation = SOUTH;
-	ray->y = ceil(data()->player.y);
-	ray->x = (data()->player.y - ray->y) * atan + data()->player.x;
+	ray->y = ceil(player->y);
+	ray->x = (player->y - ray->y) * atan + player->x;
 	ray->dy = 1;
 	ray->dx = -ray->dy * atan;
 }
 
 t_ray	rays_calculate_horizontal(float angle)
 {
-	t_ray	ray;
-	float	atan;
+	t_ray		ray;
+	float		atan;
+	t_player	*player;
 
+	player = &data()->player;
 	ray.is_infinite = true;
 	ray.angle = angle;
 	atan = -1 / tan(ray.angle);
 	if (ray.angle > M_PI)
-		static_rays_set_parameters_north(&ray, atan);
+		static_rays_set_parameters_north(&ray, atan, player);
 	else if (ray.angle < M_PI)
-		static_rays_set_parameters_south(&ray, atan);
+		static_rays_set_parameters_south(&ray, atan, player);
 	rays_iterate_grid(&ray);
-	ray.len = pythagoras_hypotenuse((ray.x - data()->player.x),
-			(ray.y - data()->player.y));
+	ray.len = pythagoras_hypotenuse((ray.x - player->x),
+			(ray.y - player->y));
 	return (ray);
 }

@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:53:14 by coder             #+#    #+#             */
-/*   Updated: 2022/05/10 11:53:15 by coder            ###   ########.fr       */
+/*   Updated: 2022/05/16 09:48:42 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 static bool	static_doors_is_map_element(float y, float x, int map_element)
 {
-	if (y < data()->map.height && y >= 0 && x < data()->map.width
+	t_map	*map;
+
+	map = &data()->map;
+	if (y < map->height && y >= 0 && x < map->width
 		&& x >= 0)
 	{
-		if (data()->map.grid[(int)y][(int)x] == map_element)
+		if (map->grid[(int)y][(int)x] == map_element)
 			return (true);
 	}
 	return (false);

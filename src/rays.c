@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:54:14 by coder             #+#    #+#             */
-/*   Updated: 2022/05/10 11:54:15 by coder            ###   ########.fr       */
+/*   Updated: 2022/05/16 10:06:35 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,17 @@ static t_ray	static_ray_get(float angle)
 		return (ray_vertical);
 }
 
-static void	static_ray_fill_struct(float angle, int i)
+static void	static_ray_fill_struct(t_ray *rays, float angle, int i)
 {
 	float	delta;
-	t_ray	*ray;
 	t_frame	*window;
 
-	ray = data()->rays;
 	window = &data()->window;
-	ray[i] = static_ray_get(angle);
-	ray[i].index = i;
-	delta = radian_limits(data()->player.angle - ray[i].angle);
-	ray[i].dist = ray[i].len * cos(delta);
-	ray[i].line_h = (window->height / ray[i].dist) * window->width
+	rays[i] = static_ray_get(angle);
+	rays[i].index = i;
+	delta = radian_limits(data()->player.angle - rays[i].angle);
+	rays[i].dist = rays[i].len * cos(delta);
+	rays[i].line_h = (window->height / rays[i].dist) * window->width
 		/ window->height * ANGLE_OF_VIEW_CONST / ANGLE_OF_VIEW
 		* WALL_HEIGHT_RATIO;
 }
@@ -46,13 +44,15 @@ void	rays_create(void)
 {
 	int		i;
 	float	angle;
+	t_ray	*rays;
 
+	rays = data()->rays;
 	angle = radian_limits(data()->player.angle
 			- ANGLE_OF_VIEW / 2 * ONE_DEGREE_IN_RAD);
 	i = 0;
 	while (i < NUMBER_OF_RAYS)
 	{
-		static_ray_fill_struct(angle, i);
+		static_ray_fill_struct(rays, angle, i);
 		angle = radian_limits(angle
 				+ ANGLE_OF_VIEW * ONE_DEGREE_IN_RAD / NUMBER_OF_RAYS);
 		i++;

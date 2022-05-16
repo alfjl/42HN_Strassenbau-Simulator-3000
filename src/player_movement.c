@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:53:57 by coder             #+#    #+#             */
-/*   Updated: 2022/05/10 11:53:58 by coder            ###   ########.fr       */
+/*   Updated: 2022/05/16 09:59:39 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 
 static void	static_player_set_status(t_controls *controls)
 {
-	if (data()->player.status == HITTING)
+	t_player	*player;	
+
+	player = &data()->player;
+	if (player->status == HITTING)
 		return ;
 	else if (controls->forwards || controls->backwards || controls->leftwards
 		|| controls->rightwards)
-		data()->player.status = WALKING;
+		player->status = WALKING;
 	else
-		data()->player.status = IDLE;
+		player->status = IDLE;
 }
 
 static bool	static_is_map_element(float y, float x, int map_element)
@@ -29,21 +32,23 @@ static bool	static_is_map_element(float y, float x, int map_element)
 	float	max_y;
 	float	min_x;
 	float	max_x;
+	t_map	*map;
 
+	map = &data()->map;
 	min_y = y - COLLISION_DISTANCE;
 	max_y = y + COLLISION_DISTANCE;
 	min_x = x - COLLISION_DISTANCE;
 	max_x = x + COLLISION_DISTANCE;
-	if (max_y < data()->map.height && min_y >= 0 && max_x < data()->map.width
+	if (max_y < map->height && min_y >= 0 && max_x < map->width
 		&& min_x >= 0)
 	{
-		if (data()->map.grid[(int)min_y][(int)min_x] == map_element)
+		if (map->grid[(int)min_y][(int)min_x] == map_element)
 			return (true);
-		if (data()->map.grid[(int)max_y][(int)max_x] == map_element)
+		if (map->grid[(int)max_y][(int)max_x] == map_element)
 			return (true);
-		if (data()->map.grid[(int)min_y][(int)max_x] == map_element)
+		if (map->grid[(int)min_y][(int)max_x] == map_element)
 			return (true);
-		if (data()->map.grid[(int)max_y][(int)min_x] == map_element)
+		if (map->grid[(int)max_y][(int)min_x] == map_element)
 			return (true);
 		return (false);
 	}

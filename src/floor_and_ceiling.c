@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:53:24 by coder             #+#    #+#             */
-/*   Updated: 2022/05/10 11:53:25 by coder            ###   ########.fr       */
+/*   Updated: 2022/05/16 10:08:40 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ static float	static_get_floor_value(float player_value,
 	float	current_dist;
 	float	weight;
 	float	current_floor_value;
+	t_frame	*window;
 
-	current_dist = fabs(data()->window.height / (2.0 * (y - data()->player.dz)
-				- data()->window.height - 1));
+	window = &data()->window;
+	current_dist = fabs(window->height / (2.0 * (y - data()->player.dz)
+				- window->height - 1));
 	weight = current_dist / wall_dist;
 	current_floor_value = weight * (ray_value - player_value) * 2
 		+ player_value;
@@ -29,14 +31,16 @@ static float	static_get_floor_value(float player_value,
 
 static int	static_get_texture_color(int image, t_ray *ray, int y)
 {
-	float	map_x;
-	float	map_y;
-	int		tx;
-	int		ty;
+	float		map_x;
+	float		map_y;
+	int			tx;
+	int			ty;
+	t_player	*player;
 
-	map_x = static_get_floor_value(data()->player.x,
+	player = &data()->player;
+	map_x = static_get_floor_value(player->x,
 			ray->x, y, ray->dist);
-	map_y = static_get_floor_value(data()->player.y,
+	map_y = static_get_floor_value(player->y,
 			ray->y, y, ray->dist);
 	tx = (map_x - (int)map_x) * TEXTURE_SIZE;
 	ty = (map_y - (int)map_y) * TEXTURE_SIZE;
@@ -76,18 +80,22 @@ int	get_ceiling_color(t_ray *ray, int y)
 
 static int	static_get_texture(t_ray *ray, int y)
 {
-	int	map_x;
-	int	map_y;
+	int			map_x;
+	int			map_y;
+	t_map		*map;
+	t_player	*player;
 
-	map_x = static_get_floor_value(data()->player.x,
+	map = &data()->map;
+	player = &data()->player;
+	map_x = static_get_floor_value(player->x,
 			ray->x, y, ray->dist);
-	map_y = static_get_floor_value(data()->player.y,
+	map_y = static_get_floor_value(player->y,
 			ray->y, y, ray->dist);
-	if (map_x < 0 || map_x >= (int)data()->map.width
-		|| map_y < 0 || map_y >= (int)data()->map.height)
+	if (map_x < 0 || map_x >= (int)map->width
+		|| map_y < 0 || map_y >= (int)map->height)
 		return (SKY_IMG);
-	if (data()->map.grid[map_y][map_x] == SPACE
-		|| data()->map.grid[map_y][map_x] == WALL)
+	if (map->grid[map_y][map_x] == SPACE
+		|| map->grid[map_y][map_x] == WALL)
 		return (FLOOR_IMG);
 	return (SKY_IMG);
 }

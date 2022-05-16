@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:53:03 by coder             #+#    #+#             */
-/*   Updated: 2022/05/10 11:53:04 by coder            ###   ########.fr       */
+/*   Updated: 2022/05/16 09:46:24 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int	static_mouse_click_hook(int button, int x, int y)
 {
 	(void)x;
 	(void)y;
-	printf("%d\n", button);
 	if (DOORS_ENABLED && button == LEFT_BUTTON)
 	{
 		data()->player.status = HITTING;
