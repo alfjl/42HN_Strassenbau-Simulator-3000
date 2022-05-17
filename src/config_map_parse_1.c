@@ -97,7 +97,7 @@ void	config_map_parse_read_string_to_grid(t_config_file *config, t_map *map,
 		return ;
 	}
 	o = 0;
-	while (reader_has_content(&temp_reader))
+	while (reader_has_content(&temp_reader) && map->width > 0)
 	{
 		p = 0;
 		while (p < map->width && reader_has_content(&temp_reader))
