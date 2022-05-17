@@ -2,12 +2,6 @@ NAME := cub3d
 SRC_DIR := ./src/
 OBJ_DIR := ./obj/
 HEADER_DIR = ./inc/
-# ifdef BONUS
-# HEADER_DIR = ./inc/bonus/
-# endif
-
-# $(NAME): HEADER_DIR = ./inc/
-# bonus: HEADER_DIR = ./inc/bonus/
 SRCS :=	config_header_parse.c \
 		config_header_validate.c \
 		config_map_parse_1.c \
@@ -100,8 +94,6 @@ $(NAME): $(OBJ_DIR) $(OBJS) $(DEPS)
 	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $@
 	@echo "\n$(GREEN)$(NAME) created$(NC)"
 	@echo "$(YELLOW)SUCCESFULLY COMPILED!$(NC)"
-#	@echo name: $(DEPS)
-#	@echo name: $(INCLUDES)
 
 $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
@@ -109,16 +101,6 @@ $(OBJ_DIR):
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(DEPS) ofilemessage
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	@echo ".\c"
-
-# bonus: set all
-# 	@echo bonus: $(DEPS)
-
-# bonus:
-# 	@make BONUS=1
-
-# set:
-# 	@touch $(HEADERS)
-# 	$(eval HEADER_DIR = ./inc/bonus/)
 
 ofilemessage:
 	@echo "compiling $(NAME)-object-files: \c"

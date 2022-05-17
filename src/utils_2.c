@@ -60,6 +60,7 @@ char	*read_fd(char *path)
 	if (builder.buffer == NULL || fd < 0)
 	{
 		close(fd);
+		stringbuilder_destroy(&builder);
 		return (NULL);
 	}
 	temp_buffer_init(&temp);

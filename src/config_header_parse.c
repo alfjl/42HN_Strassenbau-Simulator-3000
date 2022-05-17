@@ -30,22 +30,22 @@ static void	static_config_header_parse_texture(t_config_file *config,
 {
 	reader_increment_stepsize(reader, 2);
 	reader_skip_whitespace(reader);
-	if (argument == NO)
+	if (argument == NO && config->north == 0)
 	{
 		map->textures.north = reader_read_to_newline(reader);
 		config->north++;
 	}
-	else if (argument == SO)
+	else if (argument == SO && config->south == 0)
 	{
 		map->textures.south = reader_read_to_newline(reader);
 		config->south++;
 	}
-	else if (argument == WE)
+	else if (argument == WE && config->west == 0)
 	{
 		map->textures.west = reader_read_to_newline(reader);
 		config->west++;
 	}
-	else if (argument == EA)
+	else if (argument == EA && config->east == 0)
 	{
 		map->textures.east = reader_read_to_newline(reader);
 		config->east++;
