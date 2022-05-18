@@ -39,14 +39,14 @@ xxx
 
 ## Prerequisites
 ###### <p align="right">Next: [How to launch](#how-to-launch)&emsp;Previous: [Approach](#approach)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
-###Linux (tested on Ubuntu 20.04.3 LTS)
+### Linux (tested on Ubuntu 20.04.3 LTS)
 * gcc (```sudo apt-get install gcc```)
 * make (```sudo apt-get install make```)
 * X11 include files (```sudo apt-get install xorg```)
 * XShm extension must be present (```sudo apt-get install libxext-dev```)
 * Utility functions from BSD systems - development files (```sudo apt-get install libbsd-dev```)
 
-###MacOS (tested on macOS Catalina 10.15.7)
+### MacOS (tested on macOS Catalina 10.15.7)
 * gcc (```sudo apt-get install gcc```)
 * make (```sudo apt-get install make```)
 
