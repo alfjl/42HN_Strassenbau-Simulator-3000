@@ -24,7 +24,7 @@ int	my_destroy_display(void *mlx_ptr)
 
 int	my_destroy_display(void *mlx_ptr)
 {
-	free(mlx_ptr);
+	(void)mlx_ptr;
 	return (0);
 }
 #endif
