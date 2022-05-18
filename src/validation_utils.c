@@ -13,19 +13,17 @@
 #include "cub3d.h"
 
 /* ----------------------------- FUNC 1 ------------------------------------ */
-bool	validation_typecheck_cub(const char *path)
+bool	validation_typecheck_cub_extension(unsigned int length,
+											char **sections, int i)
 {
-	unsigned int	length;
-
-	if (path == NULL)
-		return (false);
-	length = ft_strlen(path);
+	if (i > 0)
+		i -= 1;
 	if (
 		length < 5
-		|| path[length - 4] != '.'
-		|| path[length - 3] != 'c'
-		|| path[length - 2] != 'u'
-		|| path[length - 1] != 'b'
+		|| sections[i][length - 4] != '.'
+		|| sections[i][length - 3] != 'c'
+		|| sections[i][length - 2] != 'u'
+		|| sections[i][length - 1] != 'b'
 	)
 		return (false);
 	else
@@ -33,6 +31,35 @@ bool	validation_typecheck_cub(const char *path)
 }
 
 /* ----------------------------- FUNC 2 ------------------------------------ */
+bool	validation_typecheck_cub(const char *path)
+{
+	bool			return_value;
+	int				i;
+	unsigned int	length;
+	char			**sections;
+
+	if (path == NULL)
+		return (false);
+	sections = ft_split(path, '/');
+	if (sections == NULL)
+		return (false);
+	i = 0;
+	while (sections[i])
+	{
+		length = ft_strlen(sections[i]);
+		i++;
+	}
+	return_value = validation_typecheck_cub_extension(length, sections, i);
+	while (i >= 0)
+	{
+		free(sections[i]);
+		i--;
+	}
+	free(sections);
+	return (return_value);
+}
+
+/* ----------------------------- FUNC 3 ------------------------------------ */
 bool	validation_typecheck_xpm(const char *path)
 {
 	unsigned int	length;
@@ -52,7 +79,7 @@ bool	validation_typecheck_xpm(const char *path)
 		return (true);
 }
 
-/* ------------------------------ FUNC 3 ----------------------------------- */
+/* ------------------------------ FUNC 4 ----------------------------------- */
 bool	validation_check_boolian(bool boolian, int *errorcode, int code)
 {
 	if (boolian == true)
@@ -61,7 +88,7 @@ bool	validation_check_boolian(bool boolian, int *errorcode, int code)
 	return (false);
 }
 
-/* ------------------------------ FUNC 4 ----------------------------------- */
+/* ------------------------------ FUNC 5 ----------------------------------- */
 unsigned int	calculate_rgb_value(unsigned int *rgb, unsigned int r,
 										unsigned int g, unsigned int b)
 {
