@@ -24,7 +24,7 @@ xxx
 Aditionally all functions of the [MinilibX](https://github.com/42Paris/minilibx-linux) can be used.
 
 ### Description
-The aim of the exercise is to create a small 2D game in which the player has to collect some loot on a map, before leaving it.
+This project is inspired by the world-famous Wolfenstein 3D game, which was the first FPS ever. It will enable you to explore ray-casting. Your goal will be to make a dynamic view inside a maze, in which you’ll have to find your way. (May 2022).
 
 ### General rules
 * xxx [config-file](#config-file)
