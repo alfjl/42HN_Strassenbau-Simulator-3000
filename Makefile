@@ -1,4 +1,4 @@
-NAME := cub3d
+NAME := cub3D
 SRC_DIR := ./src/
 OBJ_DIR := ./obj/
 HEADER_DIR = ./inc/
