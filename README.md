@@ -81,7 +81,7 @@ xxx. You can create your own map, by creating a [config-file](#config-file).
 
 ```SPACEBAR``` - Jump
 
-```CONTROL``` - Toggle rouch
+```CONTROL``` - Toggle crouch
 
 ```SHIFT``` - Sprint
 
