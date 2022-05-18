@@ -62,20 +62,39 @@ For the required config-file format see: [Config-file](#config-file)
 ###### <p align="right">Next: [Example](#example)&emsp;Previous: [How to launch](#how-to-launch)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
 xxx. You can create your own map, by creating a [config-file](#config-file).
 
-### Keys
-```W``` / ```ARROW-UP``` - Move upwards
+### Keyboard
+```W``` - Move forwards
 
-```A``` / ```ARROW-LEFT``` - Move left
+```A``` - Move left
 
-```S``` / ```ARROW-DOWN``` - Move downwards
+```S``` - Move backwards
 
-```D``` / ```ARROW-RIGHT``` - Move right
+```D``` - Move right
+
+```ARROW-LEFT``` - Turn left
+
+```ARROW-RIGHT``` - Turn right
+
+```SPACEBAR``` - Jump
+
+```CONTROL``` - Toggle rouch
+
+```SHIFT``` - Sprint
+
+```E``` - Build wall
+
+```Q``` - Destroy wall
 
 ```ESC``` - Exit game
 
+### Mouse
+```LEFT``` - Destroy wall
+
+```RIGHT``` - Build wall
+
 ## Example
 ###### <p align="right">Next: [Resources](#resources)&emsp;Previous: [How to play](#how-to-play)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
-_Sample of a game on the map "example_small.ber"_
+_Sample of a game on the map "example.cub"_
 
 xxx
 
