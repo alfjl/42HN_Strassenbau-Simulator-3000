@@ -21,7 +21,7 @@ This project is inspired by the world-famous Wolfenstein 3D game, which was the 
 ### Allowed functions
 open, close, read, write, printf, malloc, free, perror, strerror, exit
 
-All functions of the math library
+All functions of the math library.
 
 Aditionally all functions of the [MinilibX](https://github.com/42Paris/minilibx-linux) can be used.
 
