@@ -6,7 +6,7 @@
 /*   By: alanghan <alanghan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 18:17:17 by alanghan          #+#    #+#             */
-/*   Updated: 2022/05/18 15:55:20 by alanghan         ###   ########.fr       */
+/*   Updated: 2022/06/01 09:55:56 by alanghan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,6 @@ bool	validation_typecheck_cub(const char *path)
 	}
 	free(sections);
 	return (return_value);
-}
-
-bool	validation_typecheck_cub(const char *path)
-{
-	unsigned int	length;
-
-	if (path == NULL)
-		return (false);
-	length = ft_strlen(path);
-	if (
-		length < 5
-		|| path[length - 4] != '.'
-		|| path[length - 3] != 'c'
-		|| path[length - 2] != 'u'
-		|| path[length - 1] != 'b'
-	)
-		return (false);
-	else
-		return (true);
 }
 
 /* ----------------------------- FUNC 3 ------------------------------------ */

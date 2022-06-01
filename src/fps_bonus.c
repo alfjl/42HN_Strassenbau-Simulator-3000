@@ -18,7 +18,7 @@ static long	static_fps_get_current_time(void)
 	long			current_time;
 	struct timeval	timeval;
 
-	gettimeofday(&timeval, NULL); //delete c file
+	gettimeofday(&timeval, NULL);
 	current_time = timeval.tv_sec * 1000 + timeval.tv_usec / 1000;
 	return (current_time);
 }

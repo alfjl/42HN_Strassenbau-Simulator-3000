@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:55:50 by coder             #+#    #+#             */
-/*   Updated: 2022/05/10 11:55:51 by coder            ###   ########.fr       */
+/*   Updated: 2022/05/30 14:39:05 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 #  define DOORS_ENABLED 1
 #  define MOUSE_ENABLED 1
 #  define SPRITES_ENABLED 1
-#  define FPS_ENABLED 1
+#  define FPS_ENABLED 0
 #  define SPRINT_ENABLED 1
 #  define CROUCH_ENABLED 1
 #  define JUMP_ENABLED 1
@@ -88,7 +88,7 @@
 # define PLAYER_SPRINT_FACTOR 2.0
 //Minimap Parameters
 # define MAP_GRID_SIZE 16
-# define MINIMAP_RADIUS 8
+# define MINIMAP_RADIUS 4
 # define MINIMAP_OFFSET 10
 # define MINIMAP_RAY_DENSITY_FACTOR 1
 # define MINIMAP_PLAYER_SIZE 4

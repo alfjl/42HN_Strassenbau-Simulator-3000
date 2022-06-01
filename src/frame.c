@@ -98,7 +98,7 @@ static void	frame_set_up_window(void)
 	if (MINIMAP_ENABLED)
 		static_frame_minimap_to_window_buffer(mlx, win, imgs);
 	if (FPS_ENABLED)
-		fps_to_window_buffer(); //remove
+		fps_to_window_buffer();
 }
 
 int	frame(t_controls *controls)
