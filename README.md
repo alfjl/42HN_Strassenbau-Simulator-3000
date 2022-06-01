@@ -40,15 +40,15 @@ This project is inspired by the world-famous Wolfenstein 3D game, which was the 
 * Except for the map, each type of information from an element can be separated by one or more space(s).
 * The map must be parsed as it looks in the file. Spaces are a valid part of the map and are up to you to handle. You must be able to parse any kind of map, as long as it respects the rules of the map.
 * The elements to configure your game are:
-  * NO = NORTH texture
-  * SO = SOUTH texture
-  * WE = WEST testure
-  * EA = EAST texture
-  * F = FLOOR colour (RGB values)
-  * C = CEILING colour (RGB values)
+  * ```NO``` = NORTH texture
+  * ```SO``` = SOUTH texture
+  * ```WE``` = WEST testure
+  * ```EA``` = EAST texture
+  * ```F``` = FLOOR colour (RGB values)
+  * ```C``` = CEILING colour (RGB values)
 * Each element (except the map) firsts information is the type identifier (composed by one or two character(s)), followed by all specific informations for each object in a strict order such as:
-  * NO ./path_to_the_north_texture
-  * F 220,100,0
+  * ```NO ./path_to_the_north_texture```
+  * ```F 220,100,0```
 
 ## Approach
 ###### <p align="right">Next: [Prerequisites](#prerequisites)&emsp;Previous: [Introduction](#introduction)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
