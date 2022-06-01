@@ -19,7 +19,9 @@ This project is inspired by the world-famous Wolfenstein 3D game, which was the 
 ## Introduction
 ###### <p align="right">Next: [Approach](#approach)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
 ### Allowed functions
-xxx
+open, close, read, write, printf, malloc, free, perror, strerror, exit
+
+All functions of the math library
 
 Aditionally all functions of the [MinilibX](https://github.com/42Paris/minilibx-linux) can be used.
 
