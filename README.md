@@ -29,14 +29,18 @@ Aditionally all functions of the [MinilibX](https://github.com/42Paris/minilibx-
 This project is inspired by the world-famous Wolfenstein 3D game, which was the first FPS ever. It will enable you to explore ray-casting. Your goal will be to make a dynamic view inside a maze, in which you’ll have to find your way.
 
 ### General rules
-* xxx [config-file](#config-file)
+* As a first argument, the program takes a [config-file](#config-file).
+* The management of the window (changing to another window, minimizing, etc.) must remain smooth.
+* Depending on which geographic direction a wall is facing (N, S, E, W), it must display a diffeen wall texture.
+* The program must be able to set the colour of the floor and the ceiling to two different colours.
+* Pressing ESC or clicking on the red cross on the window's frame must close the window and quit the program cleanly.
 
 ### Config-file
-* Your program must take as a first argument a scene description file with the ```.cub``` extension.
+* The config file depicts a scene description for the game and must end with the ```.cub``` extension.
 * The map must be composed of only 6 possible characters: ```0``` for an empty space, ```1``` for a wall, and ```N```,```S```,```E``` or ```W``` for the player’s start position and spawning orientation.
 * The map must be surrounded by walls.
 * Except for the map content, each type of element can be separated by one or more empty line(s).
-* Except for the map content which always has to be the last, each type of element can be set in any order in the file.
+* Except for the map content, which always has to be the last, each type of element can be set in any order in the file.
 * Except for the map, each type of information from an element can be separated by one or more space(s).
 * The map must be parsed as it looks in the file. Spaces are a valid part of the map and are up to you to handle. You must be able to parse any kind of map, as long as it respects the rules of the map.
 * The elements to configure your game are:
@@ -46,7 +50,7 @@ This project is inspired by the world-famous Wolfenstein 3D game, which was the 
   * ```EA``` = EAST texture
   * ```F``` = FLOOR colour (RGB values)
   * ```C``` = CEILING colour (RGB values)
-* Each element (except the map) firsts information is the type identifier (composed by one or two character(s)), followed by all specific informations for each object in a strict order such as:
+* Each elements (except the map) first information is the type identifier (composed by one or two character(s)), followed by all specific informations for each object in a strict order such as:
   * ```NO ./path_to_the_north_texture```
   * ```F 220,100,0```
 
