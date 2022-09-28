@@ -42,7 +42,7 @@ static void	static_mlx_setup_hooks(void *mlx, void *win)
 	if (BONUS)
 		my_mouse_hide(mlx, win);
 	controls_keyboard(&controls);
-	if (MOUSE_ENABLED)
+	if (MOUSE_ENABLED && LINUX == 0)
 		controls_mouse(&controls);
 	mlx_loop_hook(mlx, frame, &controls);
 }
