@@ -85,7 +85,7 @@ For the required config-file format see: [Config-file](#config-file)
 
 ## How to play
 ###### <p align="right">Next: [Example](#example)&emsp;Previous: [How to launch](#how-to-launch)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
-You can walk around the map, building and destroying wall blocks with your shovle. You can create your own map, by creating a [config-file](#config-file).
+You are a road worker, walking around a map, building and destroying wall blocks with your shovle. You can create your own map, by creating a [config-file](#config-file).
 
 ### Keyboard
 ```W``` - Move forwards
