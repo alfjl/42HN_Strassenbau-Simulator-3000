@@ -56,7 +56,7 @@ The goal of this project is to display a dynamic first-person view of a player, 
 
 ## Approach
 ###### <p align="right">Next: [Prerequisites](#prerequisites)&emsp;Previous: [Introduction](#introduction)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
-In this chapter we will explain our approach e took, to solve the task.
+In this chapter we will explain the approach we took, to solve the task.
 
 ## Prerequisites
 ###### <p align="right">Next: [How to launch](#how-to-launch)&emsp;Previous: [Approach](#approach)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
