@@ -96,9 +96,9 @@ You are a road worker, walking around a map, building and destroying wall blocks
 
 ```D``` - Move right
 
-```ARROW-LEFT``` - Turn left
+```ARROW LEFT``` - Turn left
 
-```ARROW-RIGHT``` - Turn right
+```ARROW RIGHT``` - Turn right
 
 ```SPACEBAR``` - Jump
 
@@ -112,10 +112,11 @@ You are a road worker, walking around a map, building and destroying wall blocks
 
 ```ESC``` - Exit game
 
-### Mouse
-```LEFT``` - Destroy wall
+### Mouse (macOS only)
+Move mouse left and right to look around.<br/><br/>
+```LEFT BUTTON``` - Destroy wall
 
-```RIGHT``` - Build wall
+```RIGHT BUTTON``` - Build wall
 
 ## Examples
 ###### <p align="right">Next: [Resources](#resources)&emsp;Previous: [How to play](#how-to-play)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
