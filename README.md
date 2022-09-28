@@ -1,5 +1,5 @@
-# cub3D
-This project is inspired by the world-famous Wolfenstein 3D game, which was the first FPS ever. It will enable you to explore ray-casting. Your goal will be to make a dynamic view inside a maze, in which you’ll have to find your way (May 2022).
+# Strassenbau-Simulator-3000
+A small 3D game to learn about ray-casting, a method that was used in the world-famous game Wolfenstein 3D (which was the first first-person shooter ever made). Inspired by the "42 Coding School" exercise "cub3D" (May 2022).
 
 ## Table of contents
 * [Introduction](#introduction)
@@ -26,7 +26,7 @@ All functions of the math library.
 Aditionally all functions of the [MinilibX](https://github.com/42Paris/minilibx-linux) can be used.
 
 ### Description
-This project is inspired by the world-famous Wolfenstein 3D game, which was the first FPS ever. It will enable you to explore ray-casting. Your goal will be to make a dynamic view inside a maze, in which you’ll have to find your way.
+The goal of this project is to display a dynamic first-person view of a player, moving on a (maze-like) map.
 
 ### General rules
 * As a first argument, the program takes a [config-file](#config-file).
@@ -56,8 +56,7 @@ This project is inspired by the world-famous Wolfenstein 3D game, which was the 
 
 ## Approach
 ###### <p align="right">Next: [Prerequisites](#prerequisites)&emsp;Previous: [Introduction](#introduction)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
-
-xxx
+In this chapter we will explain our approach e took, to solve the task.
 
 ## Prerequisites
 ###### <p align="right">Next: [How to launch](#how-to-launch)&emsp;Previous: [Approach](#approach)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
@@ -86,7 +85,7 @@ For the required config-file format see: [Config-file](#config-file)
 
 ## How to play
 ###### <p align="right">Next: [Example](#example)&emsp;Previous: [How to launch](#how-to-launch)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
-xxx. You can create your own map, by creating a [config-file](#config-file).
+You can walk around the map, building and destroying wall blocks with your shovle. You can create your own map, by creating a [config-file](#config-file).
 
 ### Keyboard
 ```W``` - Move forwards
@@ -128,10 +127,12 @@ _Sample_
 
 ## Resources
 ###### <p align="right">Next: [Notes](#notes)&emsp;Previous: [Example](#example)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
-[MiniLibX documentation](https://harm-smits.github.io/42docs/libs/minilibx) made by [hsmits](https://github.com/harm-smits) and @jvan-sni.
+[MiniLibX documentation](https://harm-smits.github.io/42docs/libs/minilibx) made by [hsmits](https://github.com/harm-smits) and jvan-sni.
+
+[3DSage's videos "Make Your Own Raycaster" Part 1-3](https://www.youtube.com/watch?v=gYRrGTC7GtA)
 
 Images used from https://opengameart.org/ and https://www.seekpng.com/.
 
 ## Notes
 ###### <p align="right">Previous: [Resources](#resources)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
-xxx
+This project was made in cooperation with [alfjl](https://github.com/alfjl).
