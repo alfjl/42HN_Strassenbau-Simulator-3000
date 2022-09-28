@@ -136,4 +136,4 @@ Images used from https://opengameart.org/ and https://www.seekpng.com/.
 
 ## Notes
 ###### <p align="right">Previous: [Resources](#resources)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
-This project was made in cooperation with [alfjl](https://github.com/alfjl).
+This project was made in cooperation of [alfjl](https://github.com/alfjl) and [aenglert42](https://github.com/aenglert42).
