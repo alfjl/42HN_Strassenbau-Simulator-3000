@@ -1,7 +1,7 @@
-NO ./textures/semi_crafted_stone_wall.xpm
-SO ./textures/league_wall.xpm
-WE ./textures/dirt_stone.xpm
-EA ./textures/stone_wall.xpm
+NO ./textures/soil_with_grass256x256.xpm
+SO ./textures/soil_with_grass256x256.xpm
+WE ./textures/soil_with_grass256x256.xpm
+EA ./textures/soil_with_grass256x256.xpm
 
 F 220,100,0
 C 225,30,0
