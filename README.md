@@ -1,6 +1,9 @@
 # Strassenbau-Simulator-3000
 A small 3D game to learn about ray-casting, a method that was used in the world-famous game Wolfenstein 3D (which was the first first-person shooter ever made). Inspired by the "42 Coding School" exercise "cub3D" (May 2022).
 
+_Sample_
+![cub3D](https://user-images.githubusercontent.com/80413516/171029219-92c13978-71cd-4cff-9a73-c07e66f62c53.gif)
+
 ## Table of contents
 * [Introduction](#introduction)
   * [Allowed functions](#allowed-functions)
@@ -122,9 +125,6 @@ Move mouse left and right to look around.<br/><br/>
 ###### <p align="right">Next: [Resources](#resources)&emsp;Previous: [How to play](#how-to-play)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
 _Screenshot_
 ![screenshot](https://user-images.githubusercontent.com/80413516/171029396-45dc5b35-ee36-4ccf-a399-0f3a0195d7a1.JPG)
-
-_Sample_
-![cub3D](https://user-images.githubusercontent.com/80413516/171029219-92c13978-71cd-4cff-9a73-c07e66f62c53.gif)
 
 ## Resources
 ###### <p align="right">Next: [Notes](#notes)&emsp;Previous: [Example](#example)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
