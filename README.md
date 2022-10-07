@@ -133,7 +133,10 @@ To get started with ray-casting you cound watch [3DSage](https://www.youtube.com
 
 For linux the [modified MinilibX Linux](https://github.com/Rush-iam/nGragasstein3D-cub3D/tree/master/minilibx_linux), where some issues with transperancy got fixed by [Rush-iam](https://github.com/Rush-iam) is used. 
 
-Images used from https://opengameart.org/ and https://www.seekpng.com/.
+Textures and Images:<br/>
+https://www.pexels.com<br/>
+https://www.deviantart.com<br/>
+http://clipart-library.com
 
 ## Notes
 ###### <p align="right">Previous: [Resources](#resources)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
