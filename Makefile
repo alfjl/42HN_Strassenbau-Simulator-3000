@@ -86,6 +86,9 @@ MAKEFLAGS += --no-print-directory
 
 all: extern $(NAME)
 
+run: all
+	./$(NAME) maps/example.cub
+
 extern:
 	@make -C $(LIBFT_DIR)
 	@make -C $(MLX_DIR)
