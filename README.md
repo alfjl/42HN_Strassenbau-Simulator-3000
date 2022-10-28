@@ -75,12 +75,12 @@ In this chapter we will explain the approach we took, to solve the task.
 
 ## How to launch
 ###### <p align="right">Next: [How to play](#how-to-play)&emsp;Previous: [Prerequisites](#prerequisites)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
-Compile the program via the Makefile by using ```$ make``` in the root directory of the repository.
+Compile the program via the Makefile by using ```make``` in the root directory of the repository.
 
 Run it by giving it the path to the config-file as argument (in this case the file "example.cub" within the directory "maps"):
 
 ```
-$ ./cub3D maps/example.cub
+./cub3D maps/example.cub
 ```
 
 For the required config-file format see: [Config-file](#config-file)
